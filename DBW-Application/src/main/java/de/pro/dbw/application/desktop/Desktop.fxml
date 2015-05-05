@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue;;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.application.desktop.DesktopPresenter">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" spacing="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <children>
+                <MenuBar fx:id="mbDesktop">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Files">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewDream" text="Dream" />
+                                <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewFastDream" text="Fast Dream" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Exercises">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Action 1" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Configuration">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#onActionShowExtendedSliderEditorDialog" text="Extended Sliders" />
+                                <MenuItem mnemonicParsing="false" onAction="#onActionShowTipOfTheNightEditor" text="Tip of the Night" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" text="Testdata" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#onActionShowHelp" text="Help" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" onAction="#onActionShowTipOfTheNightWindow" text="Tip of the Night" />
+                                <MenuItem mnemonicParsing="false" onAction="#onActionShowHelpWelcome" text="Welcome" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" onAction="#onActionShowHelpAbout" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <HBox>
+                    <children>
+                        <ToolBar fx:id="tbDesktop" layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <SplitPane fx:id="spDesktop" dividerPositions="0.25, 0.8" layoutX="48.0" layoutY="74.0" VBox.vgrow="ALWAYS">
+                    <items>
+                        <BorderPane fx:id="bpNavigationLeft">
+                            <center>
+                                <TabPane fx:id="tpNavigationLeft" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                        <BorderPane>
+                            <center>
+                                <TabPane fx:id="tpEditor" tabMaxWidth="200.0" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                        <BorderPane fx:id="bpNavigationRight" layoutX="10.0" layoutY="10.0">
+                            <center>
+                                <TabPane fx:id="tpNavigationRight" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                    </items>
+                </SplitPane>
+            </children>
+        </VBox>
+        <StackPane fx:id="spDialogLayer" style="-fx-background-color: rgba(0,0,0,0.25);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <StackPane fx:id="spDialogLayer2" style="-fx-background-color: rgba(0,0,0,0.20);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    </children>
+</AnchorPane>

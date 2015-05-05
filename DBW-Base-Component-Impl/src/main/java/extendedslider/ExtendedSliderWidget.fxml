@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.components.extendedsliderwidget.ExtendedSliderWidgetPresenter">
+    <children>
+        <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="-24.0" text="&lt;extended slider title&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox spacing="5.0">
+                    <children>
+                        <HBox alignment="TOP_CENTER">
+                            <children>
+                                <Label fx:id="lSelection" text="&lt;selected value&gt;" />
+                            </children>
+                        </HBox>
+                        <Slider fx:id="sValues" blockIncrement="1.0" majorTickUnit="3.0" max="9.0" minHeight="30.0" minorTickCount="2" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                        <TextArea fx:id="taDescription" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                        <HBox alignment="TOP_RIGHT">
+                           <children>
+                              <Hyperlink text="read more..." />
+                           </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+            <graphic>
+                <Button fx:id="bEdit" mnemonicParsing="false" onAction="#onActionEdit" text="E" />
+            </graphic>
+        </TitledPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.dream.impl.dream.DreamPresenter">
+   <children>
+      <VBox layoutX="114.0" layoutY="14.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox>
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                    <items>
+                      <Button fx:id="bSave" mnemonicParsing="false" onAction="#onActionSave" prefWidth="64.0" text="Save" />
+                        <Button fx:id="bDelete" mnemonicParsing="false" onAction="#onActionDelete" prefWidth="64.0" text="Delete" />
+                    </items>
+                  </ToolBar>
+                  <ToolBar prefHeight="40.0">
+                    <items>
+                      <Button mnemonicParsing="false" onAction="#onActionShowExtendedSliderDialog" text="Edit ES" />
+                    </items>
+                  </ToolBar>
+               </children>
+            </HBox>
+            <VBox>
+               <children>
+                  <Label text="Title" />
+                  <TextField fx:id="tfTitle" />
+               </children>
+            </VBox>
+            <HBox spacing="10.0">
+               <children>
+                  <VBox prefWidth="100.0">
+                     <children>
+                        <Label text="Date" />
+                        <TextField fx:id="tfDate" alignment="CENTER" promptText="MM-dd-yyyy" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="BOTTOM_LEFT">
+                     <children>
+                        <CheckBox fx:id="cbTime" minHeight="25.0" mnemonicParsing="false" />
+                        <VBox prefWidth="100.0">
+                           <children>
+                              <Label text="Time" />
+                              <TextField fx:id="tfTime" alignment="CENTER" promptText="HH:mm:ss" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <VBox>
+               <children>
+                  <Label text="Description" />
+                  <TextArea fx:id="taDescription" prefHeight="85.0" wrapText="true" />
+               </children>
+            </VBox>
+            <VBox VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Dream" />
+                  <TextArea fx:id="taDream" wrapText="true" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="196.0" prefWidth="233.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.dream.impl.daydreaminspirationwindow.DaydreamInspirationWindowPresenter">
+   <children>
+      <TabPane layoutX="7.0" layoutY="-18.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <tabs>
+          <Tab fx:id="tSearch" closable="false" disable="true" text="Search" />
+          <Tab fx:id="tTopicFocus" closable="false" text="Topic / Focus" />
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

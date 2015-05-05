@@ -1,0 +1,106 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package de.pro.dbw.navigation.provider;
+
+import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
+import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.scene.control.TabPane;
+import javafx.util.Duration;
+
+/**
+ *
+ * @author PRo
+ */
+public class NavigationProvider implements INavigationConfiguration {
+    
+    private static NavigationProvider instance = null;
+    
+    public static NavigationProvider getDefault() {
+        if (instance == null) {
+            instance = new NavigationProvider();
+        }
+        
+        return instance;
+    }
+    
+    private NavigationProvider() {
+        this.initialize();
+    }
+    
+    private void initialize() {
+        
+    }
+    
+//    public DreamBookProvider getDreamBookProvider() {
+//        return DreamBookProvider.getDefault();
+//    }
+    
+    public void register(TabPane tpNavigationLeft, TabPane tbEditor, TabPane tpNavigationRight) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register navigation");
+        
+        this.registerNavigationLeft(tpNavigationLeft, tbEditor);
+        this.registerNavigationRight(tpNavigationRight);
+    }
+    
+    private void registerNavigationLeft(TabPane tpNavigationLeft, TabPane tbEditor) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes for navigation-left and editor");
+        
+        DreamBookProvider.getDefault().register(tpNavigationLeft);
+        SearchProvider.getDefault().register(tpNavigationLeft, tbEditor);
+        
+        final PauseTransition pauseTransitionLeft = new PauseTransition();
+        pauseTransitionLeft.setDuration(Duration.millis(NAVIGATION__PREVIOUS_TAB_SELECTION__DURATION));
+        pauseTransitionLeft.setOnFinished((ActionEvent event) -> {
+            this.selectPreviousTabSelection(
+                    tpNavigationLeft, NAVIGATION__PREVIOUS_TAB_SELECTION__LEFT,
+                    NAVIGATION__PREVIOUS_TAB_SELECTION__LEFT__DEFAULT_VALUE);
+        });
+        pauseTransitionLeft.playFromStart();
+    }
+    
+    private void registerNavigationRight(TabPane tpNavigationRight) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register navigation right");
+        
+        HistoryProvider.getDefault().register(tpNavigationRight);
+        
+        final PauseTransition pauseTransitionRight = new PauseTransition();
+        pauseTransitionRight.setDuration(Duration.millis(NAVIGATION__PREVIOUS_TAB_SELECTION__DURATION));
+        pauseTransitionRight.setOnFinished((ActionEvent event) -> {
+            this.selectPreviousTabSelection(
+                    tpNavigationRight, NAVIGATION__PREVIOUS_TAB_SELECTION__RIGHT,
+                    NAVIGATION__PREVIOUS_TAB_SELECTION__RIGHT__DEFAULT_VALUE);
+        });
+        pauseTransitionRight.playFromStart();
+    }
+
+    private void selectPreviousTabSelection(final TabPane tpNavigation, final String key, Integer value) {
+        LoggerFacade.getDefault().info(this.getClass(), "Select previous tab for: " + key);
+        
+        Platform.runLater(() -> {
+            final Integer previousTab = PreferencesFacade.getDefault().getInt(
+                    this.getClass(), key, value);
+            tpNavigation.getSelectionModel().select(previousTab);
+            
+            tpNavigation.getSelectionModel().selectedIndexProperty().addListener(
+                    new ChangeListener<Number>()
+            {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    PreferencesFacade.getDefault().putInt(this.getClass(), key,
+                            tpNavigation.getSelectionModel().getSelectedIndex());
+                }
+            });
+        });
+    }
+    
+    
+}

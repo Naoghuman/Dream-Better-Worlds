@@ -1,0 +1,101 @@
+/*
+ * Copyright (C) 2015 Dream Better Worlds
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package de.pro.dbw.navigation.provider;
+
+import de.pro.dbw.base.component.api.ExtendedTabModel;
+import de.pro.dbw.base.component.impl.extendedtab.ExtendedTab;
+import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.base.provider.BaseProvider;
+import de.pro.dbw.navigation.search.impl.searchnavigation.SearchNavigationView;
+import de.pro.lib.action.api.ActionFacade;
+import de.pro.lib.action.api.ActionTransferModel;
+import de.pro.lib.logger.api.LoggerFacade;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+
+/**
+ *
+ * @author PRo
+ */
+public class SearchProvider implements IActionConfiguration {
+    
+    private static SearchProvider instance = null;
+    
+    public static SearchProvider getDefault() {
+        if (instance == null) {
+            instance = new SearchProvider();
+        }
+        
+        return instance;
+    }
+    
+    private TabPane tbEditor = null;
+    
+    private SearchNavigationView searchNavigationView = null;
+    
+    private SearchProvider() {
+        this.initialize();
+    }
+    
+    private void initialize() {
+        this.registerOnActionSearchInDreams();
+        this.registerOnActionSearchInTipsOfTheNight();
+    }
+
+    public void register(TabPane tpNavigationLeft, TabPane tbEditor) {
+        this.tbEditor = tbEditor;
+        
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes for navigation-left and editor");
+        
+        System.out.println(" XXX load title Search from properties");
+        final Tab tab = new Tab("Search");
+        tab.setClosable(false);
+        searchNavigationView = new SearchNavigationView();
+        tab.setContent(searchNavigationView.getView());
+        
+        tpNavigationLeft.getTabs().add(tab);
+        tpNavigationLeft.getSelectionModel().select(tab);
+    }
+    
+    private void registerOnActionSearchInDreams() {
+        ActionFacade.getDefault().register(
+                ACTION__SEARCH_IN__DREAMS,
+                (ActionEvent ae) -> {
+                    final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
+                    final ExtendedTabModel model = (ExtendedTabModel) transferModel.getObject();
+                    final ExtendedTab tab = BaseProvider.getDefault().getComponentProvider().getTab(model);
+                    
+                    tbEditor.getTabs().add(tab);
+                    tbEditor.getSelectionModel().select(tab);
+                });
+    }
+    
+    private void registerOnActionSearchInTipsOfTheNight() {
+        ActionFacade.getDefault().register(
+                ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT,
+                (ActionEvent ae) -> {
+                    final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
+                    final ExtendedTabModel model = (ExtendedTabModel) transferModel.getObject();
+                    final ExtendedTab tab = BaseProvider.getDefault().getComponentProvider().getTab(model);
+                    
+                    tbEditor.getTabs().add(tab);
+                    tbEditor.getSelectionModel().select(tab);
+                });
+    }
+    
+}

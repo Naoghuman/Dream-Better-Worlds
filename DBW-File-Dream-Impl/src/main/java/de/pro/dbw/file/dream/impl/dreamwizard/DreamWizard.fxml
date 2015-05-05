@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardPresenter">
+   <children>
+      <TitledPane animated="false" collapsible="false" layoutX="55.0" layoutY="20.0" text="Fast Dream Wizard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <VBox spacing="10.0">
+               <children>
+                  <HBox spacing="10.0">
+                     <children>
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Title" />
+                              <TextField fx:id="tfTitle" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Notes" />
+                              <TextArea fx:id="taDescription" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                        <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0" spacing="5.0">
+                           <children>
+                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0">
+                                 <children>
+                                    <Label text="Date" />
+                                    <TextField fx:id="tfDate" alignment="CENTER" promptText="MM-dd-yyyy" />
+                                 </children>
+                              </VBox>
+                              <HBox minWidth="-Infinity" prefWidth="100.0">
+                                 <children>
+                                    <CheckBox fx:id="cbTime" mnemonicParsing="false">
+                                       <HBox.margin>
+                                          <Insets top="20.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                    <VBox prefWidth="100.0">
+                                       <children>
+                                          <Label text="Time" />
+                                          <TextField fx:id="tfTime" alignment="CENTER" promptText="HH:mm:ss" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onActionReset" text="Reset" />
+                              <Button fx:id="bSave" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onActionSave" text="Save" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onActionClose" text="Close">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </TitledPane>
+      <StackPane fx:id="spProgress" style="-fx-background-color: rgba(0,0,0,0.2);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ProgressIndicator fx:id="piSave" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" progress="0.0" />
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

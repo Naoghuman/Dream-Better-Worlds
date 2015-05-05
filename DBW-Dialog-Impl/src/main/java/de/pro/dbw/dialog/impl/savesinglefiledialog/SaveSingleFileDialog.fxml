@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.dialog.impl.savesinglefiledialog.SaveSingleFileDialogPresenter">
+    <children>
+        <TitledPane animated="false" collapsible="false" layoutX="27.0" layoutY="-14.0" text="Save" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox spacing="10.0">
+                    <children>
+                        <VBox VBox.vgrow="ALWAYS">
+                            <children>
+                                <Label text="There are unsaved changes in this file." />
+                                <Label text="Save them?" />
+                            </children>
+                        </VBox>
+                        <HBox alignment="TOP_RIGHT" spacing="10.0">
+                            <children>
+                                <Button fx:id="bYes" mnemonicParsing="false" prefWidth="64.0" text="Yes" />
+                                <Button fx:id="bNo" mnemonicParsing="false" prefWidth="64.0" text="No" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </TitledPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,7 @@
+/target/
+
+/DBW-Application/database/
+/DBW-Application/intern/
+/DBW-Application/log/
+/DBW-Application/resources/
+/DBW-Application/Preferences.properties
