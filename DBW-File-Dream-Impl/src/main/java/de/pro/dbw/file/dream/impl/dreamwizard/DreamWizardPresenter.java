@@ -51,7 +51,7 @@ import javafx.util.Duration;
  */
 public class DreamWizardPresenter implements Initializable, IActionConfiguration, IDateConverter, IUtilConfiguration {
     
-    @FXML private Button bSave;
+    @FXML private Button bCreateDream;
     @FXML private CheckBox cbTime;
     @FXML private ProgressIndicator piSave;
     @FXML private StackPane spProgress;
@@ -68,16 +68,16 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize FastDreamFileWizardPresenter"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize DreamWizardPresenter"); // NOI18N
     
-        assert (bSave != null)         : "fx:id=\"bSave\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
-        assert (cbTime != null)        : "fx:id=\"cbTime\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
-        assert (piSave != null)        : "fx:id=\"piSave\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
-        assert (spProgress != null)    : "fx:id=\"apProgress\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
-        assert (taDescription != null) : "fx:id=\"taDescription\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
-        assert (tfDate != null)        : "fx:id=\"tfDate\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
-        assert (tfTime != null)        : "fx:id=\"tfTime\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
-        assert (tfTitle != null)       : "fx:id=\"tfTitle\" was not injected: check your FXML file 'FastDreamFileWizard.fxml'."; // NOI18N
+        assert (bCreateDream != null)  : "fx:id=\"bCreateDream\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (cbTime != null)        : "fx:id=\"cbTime\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (piSave != null)        : "fx:id=\"piSave\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (spProgress != null)    : "fx:id=\"apProgress\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (taDescription != null) : "fx:id=\"taDescription\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (tfDate != null)        : "fx:id=\"tfDate\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (tfTime != null)        : "fx:id=\"tfTime\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (tfTitle != null)       : "fx:id=\"tfTitle\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         
         this.initializeDescription();
         this.initializeBindings();
@@ -111,13 +111,13 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
             }
         };
         
-        bSave.disableProperty().bind(disableBinding);
+        bCreateDream.disableProperty().bind(disableBinding);
     }
     
     private void initializeDescription() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize description"); // NOI18N
         
-        taDescription.setText(
+        taDescription.setText( // XXX Test
                 "Categories:\n" // NOI18N
                 + " - ...\n" // NOI18N
                 + "Tags:\n" // NOI18N
@@ -177,7 +177,7 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
         DialogProvider.getDefault().hide();
     }
     
-    public void onActionSave() {
+    public void onActionCreate() {
         final SequentialTransition st = new SequentialTransition();
         final PauseTransition pt1 = new PauseTransition(Duration.ZERO);
         pt1.setOnFinished((ActionEvent event) -> {
@@ -187,12 +187,12 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
             piSave.setManaged(Boolean.TRUE);
         });
         
-        final PauseTransition pt2 = new PauseTransition(Duration.millis(125.0d));
+        final PauseTransition pt2 = new PauseTransition(Duration.millis(125.0d));// XXX add duration to configuration
         pt2.setOnFinished((ActionEvent event) -> {
             this.save();
         });
         
-        final PauseTransition pt3 = new PauseTransition(Duration.millis(250.0d));
+        final PauseTransition pt3 = new PauseTransition(Duration.millis(250.0d));// XXX add duration to configuration
         pt3.setOnFinished((ActionEvent event) -> {
             piSave.setVisible(Boolean.FALSE);
             piSave.setManaged(Boolean.FALSE);
@@ -205,7 +205,7 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
     }
     
     private void save() {
-        LoggerFacade.getDefault().info(this.getClass(), "Save new fast dream to database"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Save new dream to database"); // NOI18N
         
         // Catch data
         final DreamModel model = new DreamModel();

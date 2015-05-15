@@ -212,7 +212,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     public void showDreamWizard() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show DreamWizard"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Show Dream Wizard"); // NOI18N
         
         final DreamWizardView view = new DreamWizardView();
         final Parent dialog = view.getView();
