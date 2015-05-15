@@ -180,6 +180,8 @@
         <module>DBW-File-Dream-Api</module>
         <module>DBW-File-Dream-Impl</module>
         <module>DBW-File-Provider</module>
+        <module>DBW-File-Reflection-Api</module>
+        <module>DBW-File-Reflection-Impl</module>
         <module>DBW-File-TipOfTheNight-Api</module>
         <module>DBW-File-TipOfTheNight-Impl</module>
         <module>DBW-Navigation-DreamBook-Api</module>
