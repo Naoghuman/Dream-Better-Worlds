@@ -213,6 +213,10 @@ public class DesktopPresenter implements Initializable, IActionConfiguration, ID
     public void onActionCreateNewFastDream() {
         ActionFacade.getDefault().handle(ACTION__CREATE_NEW_FAST_DREAM);
     }
+    
+    public void onActionCreateNewFileReflection() {
+        ActionFacade.getDefault().handle(ACTION__CREATE_NEW_FILE__REFLECTION);
+    }
 
     public void onActionSaveMultiFiles() {
         ActionFacade.getDefault().handle(ACTION__SAVE_ALL_CHANGED_FILES);

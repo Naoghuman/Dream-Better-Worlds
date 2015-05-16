@@ -16,6 +16,7 @@
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewDream" text="Dream" />
                                 <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewFastDream" text="Fast Dream" />
+                        <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewFileReflection" text="Reflection" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Exercises">
