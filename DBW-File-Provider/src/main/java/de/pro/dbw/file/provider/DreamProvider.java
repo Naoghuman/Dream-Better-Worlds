@@ -19,6 +19,7 @@ package de.pro.dbw.file.provider;
 import de.jensd.fx.glyphs.weathericons.WeatherIcon;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
@@ -44,7 +45,9 @@ import javafx.scene.layout.HBox;
  *
  * @author PRo
  */
-public final class DreamProvider implements IActionConfiguration, IDefaultIdConfiguration, IUtilConfiguration {
+public final class DreamProvider implements 
+        IActionConfiguration, IDefaultIdConfiguration, IUtilConfiguration,
+        IRegisterActions {
     
     private static DreamProvider instance = null;
     
@@ -63,6 +66,14 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     private void initialize() {
+    }
+    
+    public void register(TabPane tpEditor) {
+        this.tpEditor = tpEditor;
+    }
+
+    @Override
+    public void registerActions() {
         this.registerOnActionCreateNewDream();
         this.registerOnActionCreateNewFastDream();
         this.registerOnActionOpenDreamFromNavigation();
@@ -190,7 +201,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     private void showDreamSaveDialog(
             DreamPresenter dreamPresenter, Long idToRemove
     ) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show DreamSaveDialog"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Show Save Dream Dialog"); // NOI18N
         
         final ActionTransferModel transferModel = new ActionTransferModel();
         transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
@@ -217,9 +228,5 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
         final DreamWizardView view = new DreamWizardView();
         final Parent dialog = view.getView();
         DialogProvider.getDefault().show(dialog);
-    }
-    
-    public void register(TabPane tpEditor) {
-        this.tpEditor = tpEditor;
     }
 }
