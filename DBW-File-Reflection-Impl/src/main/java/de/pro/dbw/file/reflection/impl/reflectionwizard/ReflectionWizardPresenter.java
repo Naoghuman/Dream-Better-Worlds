@@ -57,14 +57,14 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     @FXML private CheckBox cbTime;
     @FXML private ProgressIndicator piSave;
     @FXML private StackPane spProgress;
-    @FXML private TextArea taDescription;
-    @FXML private TextField tfAutor;
+    @FXML private TextArea taText;
     @FXML private TextField tfDate;
+    @FXML private TextField tfSource;
     @FXML private TextField tfTime;
     @FXML private TextField tfTitle;
     
     private BooleanBinding disableBinding = null;
-    private BooleanBinding descriptionBinding = null;
+    private BooleanBinding textBinding = null;
     private BooleanBinding titleBinding = null;
     private BooleanProperty dateProperty = null;
     private BooleanProperty timeProperty = null;
@@ -77,9 +77,9 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         assert (cbTime != null)        : "fx:id=\"cbTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (piSave != null)        : "fx:id=\"piSave\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (spProgress != null)    : "fx:id=\"apProgress\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (taDescription != null) : "fx:id=\"taDescription\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (tfAutor != null)       : "fx:id=\"tfAutor\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (taText != null)        : "fx:id=\"taText\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (tfDate != null)        : "fx:id=\"tfDate\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (tfSource != null)      : "fx:id=\"tfSource\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (tfTime != null)        : "fx:id=\"tfTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (tfTitle != null)       : "fx:id=\"tfTitle\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         
@@ -93,11 +93,11 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         dateProperty = new SimpleBooleanProperty(Boolean.TRUE);
         timeProperty = new SimpleBooleanProperty(Boolean.TRUE);
         titleBinding = tfTitle.textProperty().isEmpty();
-        descriptionBinding = taDescription.textProperty().isEmpty();
+        textBinding = taText.textProperty().isEmpty();
         disableBinding = new BooleanBinding() {
             {
                 super.bind(
-                        descriptionBinding, titleBinding,
+                        textBinding, titleBinding,
                         dateProperty,timeProperty);
             }
 
@@ -111,7 +111,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
                     return Boolean.TRUE;
                 }
                 
-                return titleBinding.getValue() || descriptionBinding.getValue();
+                return titleBinding.getValue() || textBinding.getValue();
             }
         };
         
@@ -162,7 +162,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     
     public void onActionReset() {
         tfTitle.setText(null);
-        taDescription.setText(null);
+        taText.setText(null);
         
         final Long now = System.currentTimeMillis();
         tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, PATTERN__DATE));
