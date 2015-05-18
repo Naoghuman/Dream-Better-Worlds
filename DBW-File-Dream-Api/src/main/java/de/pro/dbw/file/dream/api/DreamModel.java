@@ -46,7 +46,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = "DreamFileModel")
+@Table(name = "DreamModel")
 @NamedQueries({
     @NamedQuery(
             name = IDreamConfiguration.DREAM_MODEL__FIND_ALL,
@@ -72,7 +72,6 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
         
         return copy;
     }
-    
     
     public DreamModel() {
         this.initialize();
