@@ -53,7 +53,9 @@ import javafx.util.Duration;
 public class ReflectionWizardPresenter implements Initializable, IActionConfiguration,
         IDateConverter, IFileConfiguration, IUtilConfiguration {
     
-    @FXML private Button bCreateReflection;
+    @FXML private Button bCreate;
+    @FXML private Button bEdit;
+    @FXML private Button bReset;
     @FXML private CheckBox cbTime;
     @FXML private ProgressIndicator piSave;
     @FXML private StackPane spProgress;
@@ -69,19 +71,43 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     private BooleanProperty dateProperty = null;
     private BooleanProperty timeProperty = null;
     
+    private ReflectionModel model = null;
+    
+    public void configureWizardForCreateMode() {
+        LoggerFacade.getDefault().info(this.getClass(), "Configure Reflection Wizard for CREATE mode."); // NOI18N
+    
+        bEdit.setVisible(Boolean.FALSE);
+        bEdit.setManaged(Boolean.FALSE);
+        
+        this.show(new ReflectionModel());
+    }
+    
+    public void configureWizardForEditMode(ReflectionModel model) {
+        LoggerFacade.getDefault().info(this.getClass(), "Configure Reflection Wizard for EDIT mode."); // NOI18N
+    
+        bCreate.setVisible(Boolean.FALSE);
+        bCreate.setManaged(Boolean.FALSE);
+        bReset.setVisible(Boolean.FALSE);
+        bReset.setManaged(Boolean.FALSE);
+        
+        this.show(model);
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionWizardPresenter"); // NOI18N
     
-        assert (bCreateReflection != null)  : "fx:id=\"bCreateReflection\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (cbTime != null)        : "fx:id=\"cbTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (piSave != null)        : "fx:id=\"piSave\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (spProgress != null)    : "fx:id=\"apProgress\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (taText != null)        : "fx:id=\"taText\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (tfDate != null)        : "fx:id=\"tfDate\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (tfSource != null)      : "fx:id=\"tfSource\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (tfTime != null)        : "fx:id=\"tfTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
-        assert (tfTitle != null)       : "fx:id=\"tfTitle\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (bCreate != null)    : "fx:id=\"bCreate\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (bEdit != null)      : "fx:id=\"bEdit\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (bReset != null)     : "fx:id=\"bReset\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (cbTime != null)     : "fx:id=\"cbTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (piSave != null)     : "fx:id=\"piSave\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (spProgress != null) : "fx:id=\"apProgress\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (taText != null)     : "fx:id=\"taText\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (tfDate != null)     : "fx:id=\"tfDate\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (tfSource != null)   : "fx:id=\"tfSource\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (tfTime != null)     : "fx:id=\"tfTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (tfTitle != null)    : "fx:id=\"tfTitle\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         
         this.initializeText();
         this.initializeBindings();
@@ -115,7 +141,8 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
             }
         };
         
-        bCreateReflection.disableProperty().bind(disableBinding);
+        bCreate.disableProperty().bind(disableBinding);
+        bEdit.disableProperty().bind(disableBinding);
     }
     
     private void initializeText() {
@@ -201,6 +228,10 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         st.playFromStart();
     }
     
+    public void onActionEdit() {
+        
+    }
+    
     private void save() {
         LoggerFacade.getDefault().info(this.getClass(), "Save new Reflection file to database"); // NOI18N
         
@@ -223,4 +254,16 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
 //        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
 //        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__HISTORY);
     }
+    
+    private void show(ReflectionModel model) {
+        LoggerFacade.getDefault().info(this.getClass(), "Show ReflectionModel"); // NOI18N
+        
+        this.model = model;
+        
+        /*
+        TODO add data from the model to the gui elements.
+        TODO init listeners, bindings... (remove from initialize)
+        */
+    }
+    
 }

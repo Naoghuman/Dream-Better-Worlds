@@ -25,6 +25,7 @@ public interface IActionConfiguration {
     public static final String ACTION__CREATE_NEW_DREAM = "ACTION__CREATE_NEW_DREAM"; // NOI18N
     public static final String ACTION__CREATE_NEW_FAST_DREAM = "ACTION__CREATE_NEW_FAST_DREAM"; // NOI18N
     public static final String ACTION__CREATE_NEW_FILE__REFLECTION = "ACTION__CREATE_NEW_FILE__REFLECTION"; // NOI18N
+    public static final String ACTION__EDIT_FILE__REFLECTION = "ACTION__EDIT_FILE__REFLECTION"; // NOI18N
     
     public static final String ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK = "ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK";  // NOI18N
     public static final String ACTION__JOB_CHECK_NAVIGATION__HISTORY = "ACTION__JOB_CHECK_NAVIGATION__HISTORY";  // NOI18N

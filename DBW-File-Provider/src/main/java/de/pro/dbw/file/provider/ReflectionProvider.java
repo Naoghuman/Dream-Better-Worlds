@@ -19,6 +19,8 @@ package de.pro.dbw.file.provider;
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.dialog.provider.DialogProvider;
+import de.pro.dbw.file.reflection.api.ReflectionModel;
+import de.pro.dbw.file.reflection.impl.reflectionwizard.ReflectionWizardPresenter;
 import de.pro.dbw.file.reflection.impl.reflectionwizard.ReflectionWizardView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -59,15 +61,35 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     @Override
     public void registerActions() {
         this.registerOnActionCreateNewFileReflection();
+        this.registerOnActionEditFileReflection();
     }
 
     private void registerOnActionCreateNewFileReflection() {
         ActionFacade.getDefault().register(
                 ACTION__CREATE_NEW_FILE__REFLECTION,
                 (ActionEvent ae) -> {
-                    LoggerFacade.getDefault().debug(this.getClass(), "Show Reflection Wizard"); // NOI18N
+                    LoggerFacade.getDefault().debug(this.getClass(), "Show Reflection Wizard in CREATE mode."); // NOI18N
 
                     final ReflectionWizardView view = new ReflectionWizardView();
+                    final ReflectionWizardPresenter presenter = view.getRealPresenter();
+                    presenter.configureWizardForCreateMode();
+                            
+                    final Parent dialog = view.getView();
+                    DialogProvider.getDefault().show(dialog);
+                });
+    }
+
+    private void registerOnActionEditFileReflection() {
+        ActionFacade.getDefault().register(
+                ACTION__EDIT_FILE__REFLECTION,
+                (ActionEvent ae) -> {
+                    LoggerFacade.getDefault().debug(this.getClass(), "Show Reflection Wizard in EDIT mode."); // NOI18N
+
+                    final ReflectionWizardView view = new ReflectionWizardView();
+                    final ReflectionWizardPresenter presenter = view.getRealPresenter();
+                    // TODO catch the ReflectionModel from ae.getSource()
+                    presenter.configureWizardForEditMode(new ReflectionModel());
+                            
                     final Parent dialog = view.getView();
                     DialogProvider.getDefault().show(dialog);
                 });
