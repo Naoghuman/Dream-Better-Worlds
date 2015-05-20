@@ -1,0 +1,1 @@
+comparewindow between the main-reflection-file and own-reflection-files.
