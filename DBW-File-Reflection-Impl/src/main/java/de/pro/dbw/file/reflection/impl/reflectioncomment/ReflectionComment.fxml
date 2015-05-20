@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="231.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.reflection.impl.reflectioncomment.ReflectionCommentPresenter">
+    <children>
+        <VBox layoutX="38.0" layoutY="-31.0" spacing="5.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <children>
+                <HBox>
+                    <children>
+                        <Label text="Comment at ..." />
+                        <HBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionDelete" prefWidth="64.0" text="Delete" />
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+                <TextArea VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
