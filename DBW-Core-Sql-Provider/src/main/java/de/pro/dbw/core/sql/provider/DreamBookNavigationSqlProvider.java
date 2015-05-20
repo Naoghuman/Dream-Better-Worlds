@@ -17,16 +17,17 @@
 package de.pro.dbw.core.sql.provider;
 
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
+import de.pro.dbw.core.configuration.api.file.reflection.IReflectionConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
+import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.lib.database.api.DatabaseFacade;
-import java.util.Collections;
 import java.util.List;
 
 /**
  *
  * @author PRo
  */
-public class DreamBookNavigationSqlProvider implements IDreamConfiguration {
+public class DreamBookNavigationSqlProvider implements IDreamConfiguration, IReflectionConfiguration {
     
     private static DreamBookNavigationSqlProvider instance = null;
     
@@ -40,12 +41,18 @@ public class DreamBookNavigationSqlProvider implements IDreamConfiguration {
     
     private DreamBookNavigationSqlProvider() {}
     
-    
-    public List<DreamModel> findAll() {
-        final List<DreamModel> dreams = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(DreamModel.class, DREAM_MODEL__FIND_ALL);
-        Collections.sort(dreams);
+    public List<DreamModel> findAllDreams() {
+        final List<DreamModel> dreams = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
+                DreamModel.class, DREAM_MODEL__FIND_ALL);
             
         return dreams;
+    }
+    
+    public List<ReflectionModel> findAllReflections() {
+        final List<ReflectionModel> reflections = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
+                ReflectionModel.class, REFLECTION_MODEL__FIND_ALL);
+            
+        return reflections;
     }
     
 }
