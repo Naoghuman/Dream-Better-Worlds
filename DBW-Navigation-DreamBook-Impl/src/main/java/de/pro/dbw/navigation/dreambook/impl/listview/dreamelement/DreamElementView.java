@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.navigation.dreambook.impl.listview.childdreamelement;
+package de.pro.dbw.navigation.dreambook.impl.listview.dreamelement;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,10 +22,10 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class ChildDreamElementView extends FXMLView {
+public class DreamElementView extends FXMLView {
 
-    public ChildDreamElementPresenter getRealPresenter() {
-        return (ChildDreamElementPresenter) super.getPresenter();
+    public DreamElementPresenter getRealPresenter() {
+        return (DreamElementPresenter) super.getPresenter();
     }
     
 }
