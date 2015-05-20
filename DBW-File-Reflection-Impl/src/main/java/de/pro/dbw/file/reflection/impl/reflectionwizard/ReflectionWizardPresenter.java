@@ -248,7 +248,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         this.model.setText(taText.getText());
         
         // Save the reflection
-        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model, FILE__REFLECTION___DEFAULT_ID);
+        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model, FILE__REFLECTION__DEFAULT_ID);
 
         // Update gui
         ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);

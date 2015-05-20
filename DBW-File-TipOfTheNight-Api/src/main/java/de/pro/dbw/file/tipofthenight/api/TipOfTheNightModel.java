@@ -58,7 +58,7 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
 
     // START  ID ---------------------------------------------------------------
     private LongProperty idProperty;
-    private long _id = FILE__TIP_OF_THE_NIGHT___DEFAULT_ID;
+    private long _id = FILE__TIP_OF_THE_NIGHT__DEFAULT_ID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

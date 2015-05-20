@@ -48,7 +48,7 @@ public final class TipOfTheNightModelOld implements Comparable<TipOfTheNightMode
     
     private void initialize() {
         markAsChangedProperty = new SimpleBooleanProperty(Boolean.FALSE);
-        idProperty = new SimpleLongProperty(FILE__TIP_OF_THE_NIGHT___DEFAULT_ID);
+        idProperty = new SimpleLongProperty(FILE__TIP_OF_THE_NIGHT__DEFAULT_ID);
         textProperty = new SimpleStringProperty(SIGN__EMPTY);
         titleProperty = new SimpleStringProperty(TIP_OF_THE_NIGHT__DEFAULT_TITLE);
         titleForListViewProperty = new SimpleStringProperty(titleProperty.getValue());

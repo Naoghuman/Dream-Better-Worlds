@@ -168,7 +168,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         LoggerFacade.getDefault().debug(this.getClass(), "On action delete TipsOfTheNight"); // NOI18N
         
         final TipOfTheNightModel model = (TipOfTheNightModel) lvTipsOfTheNight.getSelectionModel().getSelectedItem();
-        if (Objects.equals(model.getId(), FILE__TIP_OF_THE_NIGHT___DEFAULT_ID)) {
+        if (Objects.equals(model.getId(), FILE__TIP_OF_THE_NIGHT__DEFAULT_ID)) {
             this.onActionRefresh();
             
             return;
@@ -194,7 +194,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         allTipsOfTheNight.addAll(lvTipsOfTheNight.getItems());
         
         for (TipOfTheNightModel model : allTipsOfTheNight) {
-            if (Objects.equals(model.getId(), FILE__TIP_OF_THE_NIGHT___DEFAULT_ID)) {
+            if (Objects.equals(model.getId(), FILE__TIP_OF_THE_NIGHT__DEFAULT_ID)) {
                 Platform.runLater(() -> {
                     lvTipsOfTheNight.getSelectionModel().select(model);
                     lvTipsOfTheNight.scrollTo(model);
@@ -207,7 +207,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         // Create new one
         final TipOfTheNightModel model = new TipOfTheNightModel();
         model.setGenerationTime(System.currentTimeMillis());
-        model.setId(FILE__TIP_OF_THE_NIGHT___DEFAULT_ID);
+        model.setId(FILE__TIP_OF_THE_NIGHT__DEFAULT_ID);
         model.setText(""); // XXX properties
         model.setTitle("New"); // XXX properties
 
@@ -252,7 +252,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         model.setTitle(tfTitle.getText());
         model.setText(taTip.getText());
         
-        SqlProvider.getDefault().getTipOfTheNightProvider().createOrUpdate(model, FILE__TIP_OF_THE_NIGHT___DEFAULT_ID);
+        SqlProvider.getDefault().getTipOfTheNightProvider().createOrUpdate(model, FILE__TIP_OF_THE_NIGHT__DEFAULT_ID);
         
         // Update gui
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();

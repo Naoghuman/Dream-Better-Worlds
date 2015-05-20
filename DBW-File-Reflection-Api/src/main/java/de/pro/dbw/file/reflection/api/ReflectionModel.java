@@ -70,7 +70,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     // START  ID ---------------------------------------------------------------
     private LongProperty idProperty;
-    private long _id = FILE__REFLECTION___DEFAULT_ID;
+    private long _id = FILE__REFLECTION__DEFAULT_ID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
