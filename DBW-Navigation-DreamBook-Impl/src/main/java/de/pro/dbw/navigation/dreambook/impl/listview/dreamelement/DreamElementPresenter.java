@@ -39,18 +39,18 @@ public class DreamElementPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize ChildDreamElementPresenter"); // NOI18N
-        System.out.println(" XXX ChildDreamElementPresenter -> log with trace(...)");
+        LoggerFacade.getDefault().debug(this.getClass(), "Initialize DreamElementPresenter"); // NOI18N
+        System.out.println(" XXX DreamElementPresenter -> log with trace(...)");
         
-        assert (lDream != null)          : "fx:id=\"lDream\" was not injected: check your FXML file 'ChildDreamElement.fxml'."; // NOI18N
-        assert (lGenerationTime != null) : "fx:id=\"lGenerationTime\" was not injected: check your FXML file 'ChildDreamElement.fxml'."; // NOI18N
-        assert (lPrefix != null)         : "fx:id=\"lPrefix\" was not injected: check your FXML file 'ChildDreamElement.fxml'."; // NOI18N
+        assert (lDream != null)          : "fx:id=\"lDream\" was not injected: check your FXML file 'DreamElement.fxml'."; // NOI18N
+        assert (lGenerationTime != null) : "fx:id=\"lGenerationTime\" was not injected: check your FXML file 'DreamElement.fxml'."; // NOI18N
+        assert (lPrefix != null)         : "fx:id=\"lPrefix\" was not injected: check your FXML file 'DreamElement.fxml'."; // NOI18N
     }
     
     public void configure(Boolean hasPrefixNew, Long generationTime, String title) {//, Long idToOpen) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Configure ChildDreamElementPresenter"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Configure DreamElementPresenter"); // NOI18N
         
-        System.out.println(" XXX ChildDreamElementPresenter -> log with trace(...)");
+        System.out.println(" XXX DreamElementPresenter -> log with trace(...)");
 
         lPrefix.setVisible(hasPrefixNew);
         lPrefix.setManaged(hasPrefixNew);
