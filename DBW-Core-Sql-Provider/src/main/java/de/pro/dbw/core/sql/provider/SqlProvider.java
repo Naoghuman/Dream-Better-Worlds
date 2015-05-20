@@ -46,6 +46,10 @@ public class SqlProvider {
         return HistoryNavigationSqlProvider.getDefault();
     }
     
+    public ReflectionSqlProvider getReflectionSqlProvider() {
+        return ReflectionSqlProvider.getDefault();
+    }
+    
     public TipOfTheNightSqlProvider getTipOfTheNightProvider() {
         return TipOfTheNightSqlProvider.getDefault();
     }

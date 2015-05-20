@@ -17,6 +17,7 @@
 package de.pro.dbw.file.reflection.impl.reflectionwizard;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.configuration.api.file.IFileConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
@@ -51,7 +52,7 @@ import javafx.util.Duration;
  * @author PRo
  */
 public class ReflectionWizardPresenter implements Initializable, IActionConfiguration,
-        IDateConverter, IFileConfiguration, IUtilConfiguration {
+        IDateConverter, IDefaultIdConfiguration, IFileConfiguration, IUtilConfiguration {
     
     @FXML private Button bCreate;
     @FXML private Button bEdit;
@@ -109,10 +110,10 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         assert (tfTime != null)     : "fx:id=\"tfTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (tfTitle != null)    : "fx:id=\"tfTitle\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         
-        this.initializeText();
+//        this.initializeText();
         this.initializeBindings();
         this.initializeSaveProgress();
-        this.initializeTime();
+        this.initializeTimeComponents();
     }
     
     private void initializeBindings() {
@@ -145,10 +146,10 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         bEdit.disableProperty().bind(disableBinding);
     }
     
-    private void initializeText() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize text"); // NOI18N
-        
-    }
+//    private void initializeText() {
+//        LoggerFacade.getDefault().info(this.getClass(), "Initialize text"); // NOI18N
+//        
+//    }
     
     private void initializeSaveProgress() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize save progress"); // NOI18N
@@ -161,7 +162,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         spProgress.setManaged(Boolean.FALSE);
     }
     
-    private void initializeTime() {
+    private void initializeTimeComponents() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize Time component"); // NOI18N
         
         final Long now = System.currentTimeMillis();
@@ -229,41 +230,48 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionEdit() {
-        
+        this.onActionCreate();
     }
     
     private void save() {
         LoggerFacade.getDefault().info(this.getClass(), "Save new Reflection file to database"); // NOI18N
         
         // Catch data
-        final ReflectionModel model = new ReflectionModel();
-//        model.setId(System.currentTimeMillis());
-//        model.setTitle(tfTitle.getText());
-//        model.setDescription(taDescription.getText());
-//        
-//        final String time = (tfTime.getText() != null) ? tfTime.getText()
-//                : PATTERN__TIME_IS_EMPTY;
-//        model.setGenerationTime(UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(
-//                tfDate.getText() + SIGN__SPACE + time,
-//                PATTERN__DATETIME));
-//        
-//        // Save the dream
-//        SqlProvider.getDefault().getDreamFileSqlProvider().create(model);
-//        
-//        // Update gui
-//        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-//        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__HISTORY);
+        this.model.setTitle(tfTitle.getText());
+        this.model.setSource(tfSource.getText());
+
+        final String time = (tfTime.getText() != null) ? tfTime.getText() : PATTERN__TIME_IS_EMPTY;
+        model.setGenerationTime(UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(
+                tfDate.getText() + SIGN__SPACE + time,
+                PATTERN__DATETIME));
+        
+        this.model.setText(taText.getText());
+        
+        // Save the reflection
+        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model, FILE__REFLECTION___DEFAULT_ID);
+
+        // Update gui
+        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__HISTORY);
     }
     
     private void show(ReflectionModel model) {
         LoggerFacade.getDefault().info(this.getClass(), "Show ReflectionModel"); // NOI18N
         
         this.model = model;
+
+        // Set data
+        tfTitle.setText(this.model.getTitle());
+        tfSource.setText(this.model.getSource());
         
-        /*
-        TODO add data from the model to the gui elements.
-        TODO init listeners, bindings... (remove from initialize)
-        */
+        final Long generationTime = this.model.getGenerationTime();
+        tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(generationTime, PATTERN__DATE));
+        
+        final String time = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(generationTime, PATTERN__TIME);
+        cbTime.setSelected(!time.equals(PATTERN__TIME_IS_EMPTY));
+        tfTime.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(generationTime, PATTERN__TIME));
+        
+        taText.setText(this.model.getText());
     }
     
 }
