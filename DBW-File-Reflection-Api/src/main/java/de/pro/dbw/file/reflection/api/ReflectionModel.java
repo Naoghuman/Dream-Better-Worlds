@@ -50,10 +50,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = IReflectionConfiguration.REFLECTION_MODEL__FIND_ALL,
-            query = "SELECT R FROM ReflectionModel R"),
+            query = "SELECT r FROM ReflectionModel r"),
     @NamedQuery(
             name = IReflectionConfiguration.REFLECTION_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY,
-            query = "SELECT R FROM ReflectionModel R WHERE R.generationTime > :generationTime")
+            query = "SELECT r FROM ReflectionModel r WHERE r.generationTime > :generationTime")
 })
 public class ReflectionModel implements Comparable<ReflectionModel>, Externalizable, 
         IDefaultIdConfiguration, IUtilConfiguration {
@@ -127,6 +127,35 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
         return generationTimeProperty;
     }
     // END  GENERATIONTIME -----------------------------------------------------
+    
+    // START  SOURCE -----------------------------------------------------------
+    private StringProperty sourceProperty = null;
+    private String _source = SIGN__EMPTY;
+    
+    @Column(name = "source")
+    public String getSource() {
+        if (this.sourceProperty == null) {
+            return _source;
+        } else {
+            return sourceProperty.get();
+        }
+    }
+    
+    public void setSource(String source) {
+        if (this.sourceProperty == null) {
+            _source = source;
+        } else {
+            this.sourceProperty.set(source);
+        }
+    }
+    
+    public StringProperty sourceProperty() {
+        if (sourceProperty == null) {
+            sourceProperty = new SimpleStringProperty(this, "source", _source);
+        }
+        return sourceProperty;
+    }
+    // END  SOURCE -------------------------------------------------------------
     
     // START  TEXT -------------------------------------------------------------
     private StringProperty textProperty = null;
@@ -253,6 +282,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeLong(this.getId());
         out.writeLong(this.getGenerationTime());
+        out.writeObject(this.getSource());
         out.writeObject(this.getText());
         out.writeObject(this.getTitle());
     }
@@ -261,6 +291,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         this.setId(in.readLong());
         this.setGenerationTime(in.readLong());
+        this.setSource(String.valueOf(in.readObject()));
         this.setText(String.valueOf(in.readObject()));
         this.setTitle(String.valueOf(in.readObject()));
     }
