@@ -17,14 +17,27 @@
 package de.pro.dbw.file.reflection.impl.reflection;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
+import de.pro.dbw.core.sql.provider.SqlProvider;
+import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.util.api.IDateConverter;
+import static de.pro.dbw.util.api.IDateConverter.PATTERN__TIME;
+import static de.pro.dbw.util.api.IDateConverter.PATTERN__TIME_IS_EMPTY;
+import de.pro.dbw.util.provider.UtilProvider;
+import de.pro.lib.action.api.ActionFacade;
+import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.binding.BooleanBinding;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
@@ -36,8 +49,11 @@ import javafx.scene.layout.VBox;
  *
  * @author PRo
  */
-public class ReflectionPresenter implements Initializable, IActionConfiguration, IDateConverter, IUtilConfiguration {
+public class ReflectionPresenter implements Initializable, IActionConfiguration, 
+        IDateConverter, IDefaultIdConfiguration, IUtilConfiguration {
     
+    @FXML private Button bDelete;
+    @FXML private Button bSave;
     @FXML private CheckBox cbTime;
     @FXML private ScrollPane spComments;
     @FXML private SplitPane spReflection;
@@ -49,22 +65,146 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     @FXML private VBox vbReflection;
     @FXML private VBox vbComments;
     
+    private ReflectionModel model = null;
+    private ReflectionModel oldModel = null;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionPresenter"); // NOI18N
     
-        assert (cbTime != null)        : "fx:id=\"cbTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (taText != null)        : "fx:id=\"taText\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfDate != null)        : "fx:id=\"tfDate\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfSource != null)      : "fx:id=\"tfSource\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfTime != null)        : "fx:id=\"tfTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfTitle != null)       : "fx:id=\"tfTitle\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (bDelete != null)    : "fx:id=\"bDelete\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (bSave != null)      : "fx:id=\"bSave\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (cbTime != null)     : "fx:id=\"cbTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (taText != null)     : "fx:id=\"taText\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfDate != null)     : "fx:id=\"tfDate\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfSource != null)   : "fx:id=\"tfSource\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfTime != null)     : "fx:id=\"tfTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfTitle != null)    : "fx:id=\"tfTitle\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         
-//        this.initializeDescription();
+        this.initializeSplitPane();
+    }
+    
+    private void initializeSplitPane() {
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize SplitPane in ReflectionPresenter"); // NOI18N
+    
+        SplitPane.setResizableWithParent(vbReflection, Boolean.FALSE);
+    }
+    
+    public Boolean isMarkAsChanged() {
+        return model.isMarkAsChanged();
+    }
+    
+    public void onActionDelete() {
+        LoggerFacade.getDefault().info(this.getClass(), "On action delete"); // NOI18N
+
+        DialogProvider.getDefault().showDeleteSingleFileDialog(
+                (ActionEvent ae) -> { // Yes
+                    SqlProvider.getDefault().getReflectionSqlProvider().delete(model.getId());
+                    
+                    DialogProvider.getDefault().hide();
+                    this.onActionDeleteHandleCompletingActions();
+                },
+                (ActionEvent ae) -> { // No
+                    DialogProvider.getDefault().hide();
+                });
+    }
+    
+    private void onActionDeleteHandleCompletingActions() {
+        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
+        ActionTransferModel transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
+        transferModel.setLong(model.getId());
+        transferModels.add(transferModel);
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        transferModels.add(transferModel);
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
+        transferModels.add(transferModel);
+        
+        ActionFacade.getDefault().handle(transferModels);
+    }
+
+    public void onActionRefresh() {
+        LoggerFacade.getDefault().info(this.getClass(), "On action refresh"); // NOI18N
+        
+        if (oldModel == null) {
+            return;
+        }
+        
+        this.show(oldModel);
+    }
+
+    public void onActionSave() {
+        LoggerFacade.getDefault().info(this.getClass(), "On action save"); // NOI18N
+        
+        this.onActionSave(Boolean.TRUE);
+    }
+    
+    public void onActionSave(Boolean updateGui) {
+        
     }
     
     public void show(ReflectionModel model) {
         
+        LoggerFacade.getDefault().info(this.getClass(), "Show reflection: " + model.getTitle()); // NOI18N
+        System.out.println(" XXX ReflectionPresenter.show() validation date + time");
+        
+        this.model = model;
+        this.model.setMarkAsChanged(this.model.getId() == FILE__REFLECTION__DEFAULT_ID.longValue());
+        
+        this.oldModel = ReflectionModel.copy(model);
+        
+        // ToolBar
+        bDelete.disableProperty().unbind();
+        bDelete.setDisable(this.model.getId() == FILE__REFLECTION__DEFAULT_ID.longValue());
+        bDelete.disableProperty().bind(BooleanBinding.booleanExpression(
+                this.model.idProperty().isEqualTo(FILE__REFLECTION__DEFAULT_ID)));
+        
+        bSave.disableProperty().unbind();
+        bSave.setDisable(!this.model.isMarkAsChanged());
+        bSave.disableProperty().bind(this.model.markAsChangedProperty().not());
+        
+        // Title
+        this.model.titleProperty().unbind();
+//        tfTitle.textProperty().removeListener(stringChangeListener);// XXX
+        tfTitle.setText(this.model.getTitle());
+//        tfTitle.textProperty().addListener(stringChangeListener);// XXX
+        this.model.titleProperty().bind(tfTitle.textProperty());
+        
+        // Source
+        this.model.textProperty().unbind();
+//        tfSource.textProperty().removeListener(stringChangeListener);
+        tfSource.setText(this.model.getSource());
+//        tfSource.textProperty().addListener(stringChangeListener);
+        this.model.sourceProperty().bind(tfSource.textProperty());
+        
+        // Date
+//        tfDate.textProperty().removeListener(stringChangeListener);
+        tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
+                this.model.getGenerationTime(), PATTERN__DATE));
+//        tfDate.textProperty().addListener(stringChangeListener);
+        
+        // Time
+//        tfTime.textProperty().removeListener(stringChangeListener);
+//        cbTime.selectedProperty().removeListener(booleanChangeListener);
+        final String time = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
+                this.model.getGenerationTime(), PATTERN__TIME);
+        cbTime.setSelected(!time.equals(PATTERN__TIME_IS_EMPTY));
+//        cbTime.selectedProperty().addListener(booleanChangeListener);
+        if (!time.equals(PATTERN__TIME_IS_EMPTY)) {
+            tfTime.setText(time);
+        }
+//        tfTime.textProperty().addListener(stringChangeListener);
+        
+        // Text
+        this.model.textProperty().unbind();
+//        taText.textProperty().removeListener(stringChangeListener);
+        taText.setText(this.model.getText());
+//        taText.textProperty().addListener(stringChangeListener);
+        this.model.textProperty().bind(taText.textProperty());
     }
     
 }

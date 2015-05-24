@@ -50,6 +50,7 @@ public class ReflectionSqlProvider {
     
     public void delete(Long idToDelete) {
         DatabaseFacade.getDefault().getCrudService().delete(ReflectionModel.class, idToDelete);
+        // TODO need also delete all comments from this idToDelete
     }
     
     public ReflectionModel findById(Long reflectionId) {

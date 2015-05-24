@@ -107,10 +107,10 @@ public final class DreamProvider implements
     public void saveAll() {
         for (Tab tab : tpEditor.getTabs()) {
             if (tab.getUserData() instanceof DreamPresenter) {
-                final DreamPresenter dreamPresenter = (DreamPresenter) tab.getUserData();
-                if (dreamPresenter.isMarkAsChanged()) {
+                final DreamPresenter presenter = (DreamPresenter) tab.getUserData();
+                if (presenter.isMarkAsChanged()) {
                     final Boolean updateGui = Boolean.FALSE;
-                    dreamPresenter.onActionSave(updateGui);
+                    presenter.onActionSave(updateGui);
                 }
             }
         }
@@ -150,9 +150,9 @@ public final class DreamProvider implements
     }
     
     private void show(DreamModel model) {
-        final DreamView dreamView = new DreamView();
-        final DreamPresenter dreamPresenter = (DreamPresenter) dreamView.getPresenter();
-        dreamPresenter.show(model);
+        final DreamView view = new DreamView();
+        final DreamPresenter presenter = view.getRealPresenter();
+        presenter.show(model);
         
         final Tab tab = new Tab();
         final HBox hBox = new HBox();
@@ -183,16 +183,16 @@ public final class DreamProvider implements
         hBox.getChildren().add(lText);
         tab.setGraphic(hBox);
         
-        tab.setContent(dreamView.getView());
+        tab.setContent(view.getView());
         tab.setId(String.valueOf(model.getId()));
         tab.idProperty().bind(StringBinding.stringExpression(model.idProperty()));
         tab.setOnCloseRequest((Event event) -> {
             if (model.isMarkAsChanged()) {
                 event.consume();
-                this.showDreamSaveDialog(dreamPresenter, model.getId());
+                this.showDreamSaveDialog(presenter, model.getId());
             }
         });
-        tab.setUserData(dreamPresenter);
+        tab.setUserData(presenter);
         
         tpEditor.getTabs().add(tab);
         tpEditor.getSelectionModel().select(tab);

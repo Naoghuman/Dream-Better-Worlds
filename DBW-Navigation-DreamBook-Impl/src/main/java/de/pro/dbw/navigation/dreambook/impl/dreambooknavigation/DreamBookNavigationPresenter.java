@@ -20,14 +20,18 @@ import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.dreambook.api.DreamBookNavigationModel;
-import de.pro.dbw.navigation.dreambook.impl.listview.childdreamelement.ChildDreamElementPresenter;
-import de.pro.dbw.navigation.dreambook.impl.listview.childdreamelement.ChildDreamElementView;
+import de.pro.dbw.navigation.dreambook.impl.listview.dreamelement.DreamElementPresenter;
+import de.pro.dbw.navigation.dreambook.impl.listview.dreamelement.DreamElementView;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.core.sql.provider.SqlProvider;
+import de.pro.dbw.file.reflection.api.ReflectionModel;
+import de.pro.dbw.navigation.dreambook.impl.listview.reflectionelement.ReflectionElementPresenter;
+import de.pro.dbw.navigation.dreambook.impl.listview.reflectionelement.ReflectionElementView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
@@ -132,21 +136,38 @@ public class DreamBookNavigationPresenter
         Platform.runLater(() -> {
             LoggerFacade.getDefault().info(this.getClass(), "Load navigation for DreamBook"); // NOI18N
 
-            final List<DreamModel> dreams = SqlProvider.getDefault().getDreamBookNavigationSqlProvider().findAll();
             final List<DreamBookNavigationModel> models = FXCollections.observableArrayList();
+            final List<DreamModel> dreams = SqlProvider.getDefault().getDreamBookNavigationSqlProvider().findAllDreams();
             for (DreamModel dream : dreams) {
                 final DreamBookNavigationModel model = new DreamBookNavigationModel();
                 model.setActionKey(ACTION__OPEN_DREAM__FROM_NAVIGATION);
                 model.setIdToOpen(dream.getId());
                 model.setGenerationTime(dream.getGenerationTime());
                 
-                final ChildDreamElementView view = new ChildDreamElementView();
-                final ChildDreamElementPresenter presenter = view.getRealPresenter();
+                final DreamElementView view = new DreamElementView();
+                final DreamElementPresenter presenter = view.getRealPresenter();
                 presenter.configure(model.hasPrefixNew(), dream.getGenerationTime(), dream.getTitle());
                 model.setView(view.getView());
                 
                 models.add(model);
             }
+            
+            final List<ReflectionModel> reflections = SqlProvider.getDefault().getDreamBookNavigationSqlProvider().findAllReflections();
+            for (ReflectionModel reflection : reflections) {
+                final DreamBookNavigationModel model = new DreamBookNavigationModel();
+                model.setActionKey(ACTION__OPEN_REFLECTION__FROM_NAVIGATION);
+                model.setIdToOpen(reflection.getId());
+                model.setGenerationTime(reflection.getGenerationTime());
+                
+                final ReflectionElementView view = new ReflectionElementView();
+                final ReflectionElementPresenter presenter = view.getRealPresenter();
+                presenter.configure(model.hasPrefixNew(), reflection.getGenerationTime(), reflection.getTitle());
+                model.setView(view.getView());
+                
+                models.add(model);
+            }
+            
+            Collections.sort(models);
             
             lvNavigation.getItems().clear();
             lvNavigation.getItems().addAll(models);

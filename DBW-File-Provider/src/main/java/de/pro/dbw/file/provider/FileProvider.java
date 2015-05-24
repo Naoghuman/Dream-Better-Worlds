@@ -105,6 +105,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
                 ACTION__SAVE_ALL_CHANGED_FILES,
                 (ActionEvent ae) -> {
                     DreamProvider.getDefault().saveAll();
+                    ReflectionProvider.getDefault().saveAll();
                     TipOfTheNightProvider.getDefault().saveAll();
                 });
     }

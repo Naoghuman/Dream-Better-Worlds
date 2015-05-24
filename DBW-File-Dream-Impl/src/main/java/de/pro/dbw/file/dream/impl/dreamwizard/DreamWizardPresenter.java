@@ -46,6 +46,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
+ * TODO add checkbox in create mode -> open dream in editor
  *
  * @author PRo
  */

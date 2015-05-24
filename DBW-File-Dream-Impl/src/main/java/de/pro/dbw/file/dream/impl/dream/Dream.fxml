@@ -13,7 +13,7 @@
          <children>
             <HBox>
                <children>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                  <ToolBar prefHeight="40.0" HBox.hgrow="ALWAYS">
                     <items>
                       <Button fx:id="bSave" mnemonicParsing="false" onAction="#onActionSave" prefWidth="64.0" text="Save" />
                         <Button fx:id="bDelete" mnemonicParsing="false" onAction="#onActionDelete" prefWidth="64.0" text="Delete" />

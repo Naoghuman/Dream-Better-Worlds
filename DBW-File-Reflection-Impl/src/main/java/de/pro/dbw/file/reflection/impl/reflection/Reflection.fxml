@@ -7,9 +7,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.reflection.impl.reflection.ReflectionPresenter">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.reflection.impl.reflection.ReflectionPresenter">
    <children>
-      <SplitPane fx:id="spReflection" dividerPositions="0.5" layoutX="31.0" layoutY="31.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <ToolBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <items>
+          <Button fx:id="bSave" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionSave" prefWidth="64.0" text="Save" />
+            <Button fx:id="bDelete" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionDelete" prefWidth="64.0" text="Delete" />
+        </items>
+      </ToolBar>
+      <SplitPane fx:id="spReflection" dividerPositions="0.5" layoutX="31.0" layoutY="31.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="68.0">
          <items>
             <VBox fx:id="vbReflection" spacing="10.0">
                <children>

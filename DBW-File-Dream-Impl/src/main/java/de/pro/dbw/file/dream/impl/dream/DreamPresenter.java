@@ -108,7 +108,6 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
                     SqlProvider.getDefault().getDreamFileSqlProvider().delete(model.getId());
                     
                     DialogProvider.getDefault().hide();
-                    
                     this.onActionDeleteHandleCompletingActions();
                 },
                 (ActionEvent ae) -> { // No
@@ -208,7 +207,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
     
     public void show(DreamModel model) {
         LoggerFacade.getDefault().info(this.getClass(), "Show dream: " + model.getTitle()); // NOI18N
-        System.out.println(" XXX DreamFilePresenter.show() validation date + time");
+        System.out.println(" XXX DreamPresenter.show() validation date + time");
         
         this.model = model;
         this.model.setMarkAsChanged(this.model.getId() == FILE__DREAM__DEFAULT_ID.longValue());

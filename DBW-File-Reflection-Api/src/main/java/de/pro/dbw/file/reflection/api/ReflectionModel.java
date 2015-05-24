@@ -60,6 +60,18 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
 
     private static final long serialVersionUID = 1L;
     
+    public static ReflectionModel copy(ReflectionModel toCopy) {
+        final ReflectionModel copy = new ReflectionModel();
+        copy.setGenerationTime(toCopy.getGenerationTime());
+        copy.setId(toCopy.getId());
+        copy.setMarkAsChanged(Boolean.FALSE);
+        copy.setSource(toCopy.getSource());
+        copy.setText(toCopy.getText());
+        copy.setTitle(toCopy.getTitle());
+        
+        return copy;
+    }
+    
     public ReflectionModel() {
         this.initialize();
     }
