@@ -14,7 +14,7 @@
     <children>
         <HBox alignment="CENTER_LEFT" layoutX="28.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <WeatherIcon glyphName="ALIEN" size="22" />
+                <WeatherIcon glyphName="ALIEN" size="22" wrappingWidth="28.0693359375" />
                 <VBox>
                     <children>
                         <HBox spacing="5.0">
