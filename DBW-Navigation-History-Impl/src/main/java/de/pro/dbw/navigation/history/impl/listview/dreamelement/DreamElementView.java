@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.navigation.history.impl.listview.childdreamelement;
+package de.pro.dbw.navigation.history.impl.listview.dreamelement;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,14 +22,14 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class ChildDreamElementView extends FXMLView implements Comparable<ChildDreamElementView> {
+public class DreamElementView extends FXMLView implements Comparable<DreamElementView> {
 
-    public ChildDreamElementPresenter getRealPresenter() {
-        return (ChildDreamElementPresenter) super.getPresenter();
+    public DreamElementPresenter getRealPresenter() {
+        return (DreamElementPresenter) super.getPresenter();
     }
 
     @Override
-    public int compareTo(ChildDreamElementView other) {
+    public int compareTo(DreamElementView other) {
         return Long.compare(other.getRealPresenter().getGenerationTime(), this.getRealPresenter().getGenerationTime());
     }
     

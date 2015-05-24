@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.navigation.history.impl.listview.childdreamelement;
+package de.pro.dbw.navigation.history.impl.listview.dreamelement;
 
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
@@ -29,7 +29,7 @@ import javafx.scene.control.Label;
  *
  * @author PRo
  */
-public class ChildDreamElementPresenter implements Initializable {
+public class DreamElementPresenter implements Initializable {
     
     @FXML private Label lDream;
     @FXML private Label lGenerationTime;

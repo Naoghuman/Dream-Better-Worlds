@@ -20,8 +20,8 @@ import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.history.api.HistoryNavigationModel;
-import de.pro.dbw.navigation.history.impl.listview.childdreamelement.ChildDreamElementPresenter;
-import de.pro.dbw.navigation.history.impl.listview.childdreamelement.ChildDreamElementView;
+import de.pro.dbw.navigation.history.impl.listview.dreamelement.DreamElementPresenter;
+import de.pro.dbw.navigation.history.impl.listview.dreamelement.DreamElementView;
 import de.pro.dbw.navigation.history.impl.listview.parentelement.ParentElementPresenter;
 import de.pro.dbw.navigation.history.impl.listview.parentelement.ParentElementView;
 import de.pro.dbw.file.dream.api.DreamModel;
@@ -132,10 +132,10 @@ public class HistoryNavigationPresenter
         }
 
         // Create for every dream a view
-        final List<ChildDreamElementView> cdeViews = FXCollections.observableArrayList();
+        final List<DreamElementView> cdeViews = FXCollections.observableArrayList();
         for (DreamModel dream : dreams) {
-            final ChildDreamElementView cdeView = new ChildDreamElementView();
-            final ChildDreamElementPresenter cdePresenter = cdeView.getRealPresenter();
+            final DreamElementView cdeView = new DreamElementView();
+            final DreamElementPresenter cdePresenter = cdeView.getRealPresenter();
             cdePresenter.configure(dream.getGenerationTime(), dream.getTitle(), dream.getId());
 
             cdeViews.add(cdeView);
@@ -144,7 +144,7 @@ public class HistoryNavigationPresenter
 
         // Create a day entry
         final List<ParentElementView> peViews = FXCollections.observableArrayList();
-        for (ChildDreamElementView cdeView : cdeViews) {
+        for (DreamElementView cdeView : cdeViews) {
             if (peViews.isEmpty()) {
                 final ParentElementView peView = new ParentElementView();
                 final ParentElementPresenter pePresenter = peView.getRealPresenter();
@@ -175,10 +175,10 @@ public class HistoryNavigationPresenter
         Collections.sort(peViews);
         
         // Create mapping
-        final Map<ParentElementView, List<ChildDreamElementView>> mappedElements = FXCollections.observableHashMap();
+        final Map<ParentElementView, List<DreamElementView>> mappedElements = FXCollections.observableHashMap();
         for (ParentElementView peView : peViews) {
-            final List<ChildDreamElementView> mappedChildDreamViews = FXCollections.observableArrayList();
-            for (ChildDreamElementView cdeView : cdeViews) {
+            final List<DreamElementView> mappedChildDreamViews = FXCollections.observableArrayList();
+            for (DreamElementView cdeView : cdeViews) {
                 if (peView.getRealPresenter().getDate().equals(cdeView.getRealPresenter().getDate())) {
                     mappedChildDreamViews.add(cdeView);
                 }
@@ -196,8 +196,8 @@ public class HistoryNavigationPresenter
             hnParentModel.setView(peView.getView());
             lvNavigation.getItems().add(hnParentModel);
 
-            final List<ChildDreamElementView> mappedChildDreamViews = mappedElements.get(peView);
-            for (ChildDreamElementView mappedChildDreamView : mappedChildDreamViews) {
+            final List<DreamElementView> mappedChildDreamViews = mappedElements.get(peView);
+            for (DreamElementView mappedChildDreamView : mappedChildDreamViews) {
                 final HistoryNavigationModel hnChildModel = new HistoryNavigationModel();
                 hnChildModel.setActionKey(ACTION__OPEN_DREAM__FROM_NAVIGATION);
                 hnChildModel.setGenerationTime(mappedChildDreamView.getRealPresenter().getGenerationTime());
@@ -212,6 +212,7 @@ public class HistoryNavigationPresenter
     }
     
     private void refreshInfoLabel(int dreamSize) {
+        // TODO show new info with more data and animation
         String dreamCount = "zero"; // NOI18N
         String dreamSuffix = "s"; // NOI18N
         if (dreamSize == 1) {
@@ -226,7 +227,8 @@ public class HistoryNavigationPresenter
     }
 
     private void registerOnActionUpdateNavigationHistory() {
-        ActionFacade.getDefault().register(ACTION__REFRESH_NAVIGATION__HISTORY,
+        ActionFacade.getDefault().register(
+                ACTION__REFRESH_NAVIGATION__HISTORY,
                 (ActionEvent ae) -> {
                     this.refresh();
                 });
