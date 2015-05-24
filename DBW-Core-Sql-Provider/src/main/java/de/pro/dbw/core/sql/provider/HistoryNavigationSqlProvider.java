@@ -17,7 +17,9 @@
 package de.pro.dbw.core.sql.provider;
 
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
+import de.pro.dbw.core.configuration.api.file.reflection.IReflectionConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
+import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.util.provider.UtilProvider;
 import de.pro.lib.database.api.DatabaseFacade;
 import java.util.Collections;
@@ -29,7 +31,7 @@ import javafx.collections.FXCollections;
  *
  * @author PRo
  */
-public class HistoryNavigationSqlProvider implements IDreamConfiguration {
+public class HistoryNavigationSqlProvider implements IDreamConfiguration, IReflectionConfiguration {
     
     private static HistoryNavigationSqlProvider instance = null;
     
@@ -43,15 +45,26 @@ public class HistoryNavigationSqlProvider implements IDreamConfiguration {
     
     private HistoryNavigationSqlProvider() {}
     
-    public List<DreamModel> findAll(int addDays) {
+    public List<DreamModel> findAllDreams(int addDays) {
         final Map<String, Object> parameters = FXCollections.observableHashMap();
-        parameters.put(
-                PARA__DREAM_FILE_MODEL__GENERATIONTIME,
+        parameters.put(PARA__DREAM_MODEL__GENERATIONTIME,
                 UtilProvider.getDefault().getDateConverter().addDays(addDays));
-        final List<DreamModel> dreams = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(DreamModel.class, DREAM_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY, parameters);
+        final List<DreamModel> dreams = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
+                DreamModel.class, DREAM_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY, parameters);
         Collections.sort(dreams);
         
         return dreams;
+    }
+    
+    public List<ReflectionModel> findAllReflections(int addDays) {
+        final Map<String, Object> parameters = FXCollections.observableHashMap();
+        parameters.put(PARA__REFLECTION_MODEL__GENERATIONTIME,
+                UtilProvider.getDefault().getDateConverter().addDays(addDays));
+        final List<ReflectionModel> reflections = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
+                ReflectionModel.class, REFLECTION_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY, parameters);
+        Collections.sort(reflections);
+        
+        return reflections;
     }
     
 }

@@ -26,13 +26,17 @@ import de.pro.dbw.navigation.history.impl.listview.parentelement.ParentElementPr
 import de.pro.dbw.navigation.history.impl.listview.parentelement.ParentElementView;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.core.sql.provider.SqlProvider;
+import de.pro.dbw.file.reflection.api.ReflectionModel;
+import de.pro.dbw.navigation.history.impl.listview.childelement.ChildElementPresenter;
+import de.pro.dbw.navigation.history.impl.listview.childelement.ChildElementView;
+import de.pro.dbw.navigation.history.impl.listview.reflectionelement.ReflectionElementPresenter;
+import de.pro.dbw.navigation.history.impl.listview.reflectionelement.ReflectionElementView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
@@ -48,6 +52,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
+ * TODO the prefix (if show) shouldn't resize.
+ * TODO show corret info (xy dreams, ry reflections... and add animation
  *
  * @author PRo
  */
@@ -111,6 +117,83 @@ public class HistoryNavigationPresenter
         });
     }
     
+    private List<ChildElementView> createChildElements(List<DreamModel> dreamModels, List<ReflectionModel> reflectionModels) {
+        final List<ChildElementView> childElementViews = FXCollections.observableArrayList();
+        for (DreamModel dreamModel : dreamModels) {
+            final ChildElementView childElementView = new ChildElementView();
+            final ChildElementPresenter childElementPresenter = childElementView.getRealPresenter();
+            
+            final DreamElementView dreamElementView = new DreamElementView();
+            final DreamElementPresenter dreamElementPresenter = dreamElementView.getRealPresenter();
+            dreamElementPresenter.configure(dreamModel.getGenerationTime(), dreamModel.getTitle(), dreamModel.getId());
+            
+            childElementPresenter.configure(
+                    dreamElementView.getView(), dreamModel.getTitle(),
+                    dreamModel.getGenerationTime(), dreamModel.getId(),
+                    ACTION__OPEN_DREAM__FROM_NAVIGATION);
+            childElementViews.add(childElementView);
+        }
+        
+        for (ReflectionModel reflectionModel : reflectionModels) {
+            final ChildElementView childElementView = new ChildElementView();
+            final ChildElementPresenter childElementPresenter = childElementView.getRealPresenter();
+            
+            final ReflectionElementView reflectionElementView = new ReflectionElementView();
+            final ReflectionElementPresenter reflectionElementPresenter = reflectionElementView.getRealPresenter();
+            reflectionElementPresenter.configure(reflectionModel.getGenerationTime(), reflectionModel.getTitle(), reflectionModel.getId());
+            
+            childElementPresenter.configure(
+                    reflectionElementView.getView(), reflectionModel.getTitle(),
+                    reflectionModel.getGenerationTime(), reflectionModel.getId(),
+                    ACTION__OPEN_REFLECTION__FROM_NAVIGATION);
+            childElementViews.add(childElementView);
+        }
+        
+        Collections.sort(childElementViews);
+        
+        return childElementViews;
+    }
+    
+    private List<ParentElementView> createParentElements(List<ChildElementView> childElementViews){
+        final List<ParentElementView> parentElementViews = FXCollections.observableArrayList();
+        for (ChildElementView childElementView : childElementViews) {
+            if (parentElementViews.isEmpty()) {
+                final ParentElementView parentElementView = new ParentElementView();
+                final ParentElementPresenter parentElementPresenter = parentElementView.getRealPresenter();
+                final Long minGenerationTime = Math.min(parentElementPresenter.getGenerationTime(), childElementView.getRealPresenter().getGenerationTime());
+                parentElementPresenter.configure(minGenerationTime, childElementView.getRealPresenter().getDate());
+                
+                parentElementViews.add(parentElementView);
+                continue;
+            }
+            
+            boolean isDateAdded = Boolean.FALSE;
+            for (ParentElementView parentElementView : parentElementViews) {
+                if (parentElementView.getRealPresenter().getDate().equals(childElementView.getRealPresenter().getDate())) {
+                    isDateAdded = Boolean.TRUE;
+                    break;
+                }
+            }
+
+            if (!isDateAdded) {
+                final ParentElementView parentElementView = new ParentElementView();
+                final ParentElementPresenter parentElementPresenter = parentElementView.getRealPresenter();
+                final Long minGenerationTime = Math.min(parentElementPresenter.getGenerationTime(), childElementView.getRealPresenter().getGenerationTime());
+                parentElementPresenter.configure(minGenerationTime, childElementView.getRealPresenter().getDate());
+
+                parentElementViews.add(parentElementView);
+            }
+        }
+        
+        Collections.sort(parentElementViews);
+        
+        return parentElementViews;
+    }
+    
+    public ObservableList<HistoryNavigationModel> getItems() {
+        return lvNavigation.getItems();
+    }
+    
     private void refreshHistory() {
         final PauseTransition pt = new PauseTransition();
         pt.setDuration(REFRESH_AFTER_100_MILLIS);
@@ -123,96 +206,28 @@ public class HistoryNavigationPresenter
     
     public void refresh() {
         LoggerFacade.getDefault().info(this.getClass(), "Refresh History-Navigation");
-
-        // Load all dreams
-        final List<DreamModel> dreams = SqlProvider.getDefault().getHistoryNavigationSqlProvider().findAll(-30);
-        if (dreams.isEmpty()) {
+        
+        // Load data from db
+        final List<DreamModel> dreamModels = SqlProvider.getDefault().getHistoryNavigationSqlProvider().findAllDreams(-30);
+        final List<ReflectionModel> reflectionModels = SqlProvider.getDefault().getHistoryNavigationSqlProvider().findAllReflections(-30);
+        if (
+                dreamModels.isEmpty()
+                && reflectionModels.isEmpty()
+        ) {
             lvNavigation.getItems().clear();
             return;
         }
-
-        // Create for every dream a view
-        final List<DreamElementView> dreamElementViews = FXCollections.observableArrayList();
-        for (DreamModel model : dreams) {
-            final DreamElementView dreamElementView = new DreamElementView();
-            final DreamElementPresenter dreamElementPresenter = dreamElementView.getRealPresenter();
-            dreamElementPresenter.configure(model.getGenerationTime(), model.getTitle(), model.getId());
-
-            dreamElementViews.add(dreamElementView);
-        }
-        Collections.sort(dreamElementViews);
-
-        // Create a day entry
-        final List<ParentElementView> parentElementViews = FXCollections.observableArrayList();
-        for (DreamElementView dreamElementView : dreamElementViews) {
-            if (parentElementViews.isEmpty()) {
-                final ParentElementView parentElementView = new ParentElementView();
-                final ParentElementPresenter parentElementPresenter = parentElementView.getRealPresenter();
-                final Long minGenerationTime = Math.min(parentElementPresenter.getGenerationTime(), dreamElementView.getRealPresenter().getGenerationTime());
-                parentElementPresenter.configure(minGenerationTime, dreamElementView.getRealPresenter().getDate());
-                
-                parentElementViews.add(parentElementView);
-                continue;
-            }
-            
-            boolean isDateAdded = Boolean.FALSE;
-            for (ParentElementView parentElementView : parentElementViews) {
-                if (parentElementView.getRealPresenter().getDate().equals(dreamElementView.getRealPresenter().getDate())) {
-                    isDateAdded = Boolean.TRUE;
-                    break;
-                }
-            }
-
-            if (!isDateAdded) {
-                final ParentElementView parentElementView = new ParentElementView();
-                final ParentElementPresenter parentElementPresenter = parentElementView.getRealPresenter();
-                final Long minGenerationTime = Math.min(parentElementPresenter.getGenerationTime(), dreamElementView.getRealPresenter().getGenerationTime());
-                parentElementPresenter.configure(minGenerationTime, dreamElementView.getRealPresenter().getDate());
-
-                parentElementViews.add(parentElementView);
-            }
-        }
-        Collections.sort(parentElementViews);
         
-        // Create mapping
-        final Map<ParentElementView, List<DreamElementView>> mappedElements = FXCollections.observableHashMap();
-        for (ParentElementView parentElementView : parentElementViews) {
-            final List<DreamElementView> mappedChildDreamViews = FXCollections.observableArrayList();
-            for (DreamElementView dreamElementView : dreamElementViews) {
-                if (parentElementView.getRealPresenter().getDate().equals(dreamElementView.getRealPresenter().getDate())) {
-                    mappedChildDreamViews.add(dreamElementView);
-                }
-            }
-
-            parentElementView.getRealPresenter().setSize(mappedChildDreamViews.size());
-            mappedElements.put(parentElementView, mappedChildDreamViews);
-        }
-          
-        // Refresh history
-        lvNavigation.getItems().clear();
+        // Create child and parent elements
+        final List<ChildElementView> childElementViews = this.createChildElements(dreamModels, reflectionModels);
+        final List<ParentElementView> parentElementViews = this.createParentElements(childElementViews);
+        this.showElementsInListView(parentElementViews, childElementViews);
         
-        for (ParentElementView parentElementView : parentElementViews) {
-            final HistoryNavigationModel model = new HistoryNavigationModel();
-            model.setView(parentElementView.getView());
-            lvNavigation.getItems().add(model);
-
-            final List<DreamElementView> childDreamElementViews = mappedElements.get(parentElementView);
-            for (DreamElementView dreamElementView : childDreamElementViews) {
-                final HistoryNavigationModel childModel = new HistoryNavigationModel();
-                childModel.setActionKey(ACTION__OPEN_DREAM__FROM_NAVIGATION);
-                childModel.setGenerationTime(dreamElementView.getRealPresenter().getGenerationTime());
-                childModel.setIdToOpen(dreamElementView.getRealPresenter().getIdToOpen());
-                childModel.setView(dreamElementView.getView());
-                lvNavigation.getItems().add(childModel);
-            }
-        }
-
-        // Refresh info label
-        this.refreshInfoLabel(dreams.size());
+        // Refresh info
+        this.refreshInfoLabel(-1);//dreams.size());
     }
     
     private void refreshInfoLabel(int dreamSize) {
-        // TODO show new info with more data and animation
         String dreamCount = "zero"; // NOI18N
         String dreamSuffix = "s"; // NOI18N
         if (dreamSize == 1) {
@@ -234,8 +249,33 @@ public class HistoryNavigationPresenter
                 });
     }
     
-    public ObservableList<HistoryNavigationModel> getItems() {
-        return lvNavigation.getItems();
+    private void showElementsInListView(List<ParentElementView> parentElementViews, List<ChildElementView> childElementViews) {
+        lvNavigation.getItems().clear();
+        
+        for (ParentElementView parentElementView : parentElementViews) {
+            final HistoryNavigationModel parentHistoryNavigationModel = new HistoryNavigationModel();
+            parentHistoryNavigationModel.setView(parentElementView.getView());
+            lvNavigation.getItems().add(parentHistoryNavigationModel);
+
+            int size = 0;
+            for (ChildElementView childElementView : childElementViews) {
+                if (!parentElementView.getRealPresenter().getDate().equals(childElementView.getRealPresenter().getDate())) {
+                    continue;
+                }
+                
+                final HistoryNavigationModel childHistoryNavigationModel = new HistoryNavigationModel();
+                childHistoryNavigationModel.setActionKey(childElementView.getRealPresenter().getActionKey());
+                childHistoryNavigationModel.setGenerationTime(childElementView.getRealPresenter().getGenerationTime());
+                childHistoryNavigationModel.setIdToOpen(childElementView.getRealPresenter().getIdToOpen());
+                childHistoryNavigationModel.setView(childElementView.getView());
+                
+                lvNavigation.getItems().add(childHistoryNavigationModel);
+                ++size;
+            }
+            
+            final ParentElementPresenter parentElementPresenter = parentElementView.getRealPresenter();
+            parentElementPresenter.setSize(size);
+        }
     }
     
 }

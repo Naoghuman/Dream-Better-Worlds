@@ -25,6 +25,6 @@ public interface IDreamConfiguration {
     public static final String DREAM_MODEL__FIND_ALL = "DreamModel.findAll"; // NOI18N
     public static final String DREAM_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY = "DreamModel.findAllForNavigationHistory"; // NOI18N
     
-    public static final String PARA__DREAM_FILE_MODEL__GENERATIONTIME = "generationTime"; // NOI18N
+    public static final String PARA__DREAM_MODEL__GENERATIONTIME = "generationTime"; // NOI18N
     
 }

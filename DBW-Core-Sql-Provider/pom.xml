@@ -19,8 +19,18 @@
         </dependency>
 		
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Core-Configuration-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>de.pro</groupId>
             <artifactId>DBW-File-Dream-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-File-Reflection-Api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -31,16 +41,6 @@
         <dependency>
             <groupId>de.pro</groupId>
             <artifactId>DBW-Util-Provider</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-Core-Configuration-Api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-File-Reflection-Api</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

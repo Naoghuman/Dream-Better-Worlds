@@ -48,6 +48,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
+ * TODO the prefix (if show) shouldn't resize.
  *
  * @author PRo
  */

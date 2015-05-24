@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Dream Better Worlds
+ * Copyright (C) 2014 Dream Better Worlds
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,16 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.core.configuration.api.file.reflection;
+package de.pro.dbw.navigation.history.impl.listview.reflectionelement;
+
+import com.airhacks.afterburner.views.FXMLView;
 
 /**
  *
  * @author PRo
  */
-public interface IReflectionConfiguration {
+public class ReflectionElementView extends FXMLView implements Comparable<ReflectionElementView> {
+
+    public ReflectionElementPresenter getRealPresenter() {
+        return (ReflectionElementPresenter) super.getPresenter();
+    }
+
+    @Override
+    public int compareTo(ReflectionElementView other) {
+        return Long.compare(other.getRealPresenter().getGenerationTime(), this.getRealPresenter().getGenerationTime());
+    }
     
-    public static final String REFLECTION_MODEL__FIND_ALL = "ReflectionModel.findAll"; // NOI18N
-    public static final String REFLECTION_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY = "ReflectionModel.findAllForNavigationHistory"; // NOI18N
-    
-    public static final String PARA__REFLECTION_MODEL__GENERATIONTIME = "generationTime"; // NOI18N
 }

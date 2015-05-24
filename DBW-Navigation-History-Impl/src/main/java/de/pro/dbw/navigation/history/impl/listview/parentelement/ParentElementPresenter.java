@@ -40,7 +40,7 @@ public class ParentElementPresenter implements Initializable {
         LoggerFacade.getDefault().debug(this.getClass(), "Initialize ParentElementPresenter");
         System.out.println(" XXX ParentElementPresenter -> log with trace(...)");
         
-        assert (lDay != null) : "fx:id=\"lDay\" was not injected: check your FXML file 'History.fxml'."; // NOI18N
+        assert (lDay != null) : "fx:id=\"lDay\" was not injected: check your FXML file 'ParentElement.fxml'."; // NOI18N
         
     }
 
