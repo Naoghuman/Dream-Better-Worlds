@@ -33,10 +33,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
@@ -68,6 +71,9 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     private ReflectionModel model = null;
     private ReflectionModel oldModel = null;
     
+    private BooleanChangeListener booleanChangeListener = null;
+    private StringChangeListener stringChangeListener = null;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionPresenter"); // NOI18N
@@ -82,6 +88,14 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         assert (tfTitle != null)    : "fx:id=\"tfTitle\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         
         this.initializeSplitPane();
+        this.initializeListeners();
+    }
+    
+    private void initializeListeners() {
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize listeners in ReflectionPresenter"); // NOI18N
+        
+        booleanChangeListener = new BooleanChangeListener();
+        stringChangeListener = new StringChangeListener();
     }
     
     private void initializeSplitPane() {
@@ -148,7 +162,6 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void show(ReflectionModel model) {
-        
         LoggerFacade.getDefault().info(this.getClass(), "Show reflection: " + model.getTitle()); // NOI18N
         System.out.println(" XXX ReflectionPresenter.show() validation date + time");
         
@@ -169,42 +182,65 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         
         // Title
         this.model.titleProperty().unbind();
-//        tfTitle.textProperty().removeListener(stringChangeListener);// XXX
+        tfTitle.textProperty().removeListener(stringChangeListener);
         tfTitle.setText(this.model.getTitle());
-//        tfTitle.textProperty().addListener(stringChangeListener);// XXX
+        tfTitle.textProperty().addListener(stringChangeListener);
         this.model.titleProperty().bind(tfTitle.textProperty());
         
         // Source
         this.model.textProperty().unbind();
-//        tfSource.textProperty().removeListener(stringChangeListener);
+        tfSource.textProperty().removeListener(stringChangeListener);
         tfSource.setText(this.model.getSource());
-//        tfSource.textProperty().addListener(stringChangeListener);
+        tfSource.textProperty().addListener(stringChangeListener);
         this.model.sourceProperty().bind(tfSource.textProperty());
         
         // Date
-//        tfDate.textProperty().removeListener(stringChangeListener);
+        tfDate.textProperty().removeListener(stringChangeListener);
         tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
                 this.model.getGenerationTime(), PATTERN__DATE));
-//        tfDate.textProperty().addListener(stringChangeListener);
+        tfDate.textProperty().addListener(stringChangeListener);
         
         // Time
-//        tfTime.textProperty().removeListener(stringChangeListener);
-//        cbTime.selectedProperty().removeListener(booleanChangeListener);
+        tfTime.textProperty().removeListener(stringChangeListener);
+        cbTime.selectedProperty().removeListener(booleanChangeListener);
         final String time = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
                 this.model.getGenerationTime(), PATTERN__TIME);
         cbTime.setSelected(!time.equals(PATTERN__TIME_IS_EMPTY));
-//        cbTime.selectedProperty().addListener(booleanChangeListener);
+        cbTime.selectedProperty().addListener(booleanChangeListener);
         if (!time.equals(PATTERN__TIME_IS_EMPTY)) {
             tfTime.setText(time);
         }
-//        tfTime.textProperty().addListener(stringChangeListener);
+        tfTime.textProperty().addListener(stringChangeListener);
         
         // Text
         this.model.textProperty().unbind();
-//        taText.textProperty().removeListener(stringChangeListener);
+        taText.textProperty().removeListener(stringChangeListener);
         taText.setText(this.model.getText());
-//        taText.textProperty().addListener(stringChangeListener);
+        taText.textProperty().addListener(stringChangeListener);
         this.model.textProperty().bind(taText.textProperty());
+    }
+    
+    private class BooleanChangeListener implements ChangeListener<Boolean> {
+
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+            tfTime.setCursor(!newValue ? Cursor.DEFAULT : Cursor.TEXT);
+            tfTime.setText(!newValue ? null : UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
+                    model.getGenerationTime(), PATTERN__TIME));
+        }
+    }
+    
+    private class StringChangeListener implements ChangeListener<String> {
+
+        @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            if (
+                    model != null
+                    && !model.isMarkAsChanged()
+            ) { 
+                model.setMarkAsChanged(Boolean.TRUE);
+            }
+        }
     }
     
 }
