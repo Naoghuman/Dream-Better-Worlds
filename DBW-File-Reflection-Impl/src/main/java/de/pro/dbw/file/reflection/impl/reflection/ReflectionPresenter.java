@@ -116,29 +116,11 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
                     SqlProvider.getDefault().getReflectionSqlProvider().delete(model.getId());
                     
                     DialogProvider.getDefault().hide();
-                    this.onActionDeleteHandleCompletingActions();
+                    this.onActionUpdateGuiAfterDeleting();
                 },
                 (ActionEvent ae) -> { // No
                     DialogProvider.getDefault().hide();
                 });
-    }
-    
-    private void onActionDeleteHandleCompletingActions() {
-        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
-        ActionTransferModel transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
-        transferModel.setLong(model.getId());
-        transferModels.add(transferModel);
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-        transferModels.add(transferModel);
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
-        transferModels.add(transferModel);
-        
-        ActionFacade.getDefault().handle(transferModels);
     }
 
     public void onActionRefresh() {
@@ -159,6 +141,24 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     
     public void onActionSave(Boolean updateGui) {
         
+    }
+    
+    private void onActionUpdateGuiAfterDeleting() {
+        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
+        ActionTransferModel transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
+        transferModel.setLong(model.getId());
+        transferModels.add(transferModel);
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        transferModels.add(transferModel);
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
+        transferModels.add(transferModel);
+        
+        ActionFacade.getDefault().handle(transferModels);
     }
     
     public void show(ReflectionModel model) {
