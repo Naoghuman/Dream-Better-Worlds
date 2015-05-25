@@ -64,8 +64,14 @@ public class ReflectionSqlProvider implements IReflectionConfiguration {
         }
     }
     
-    public void delete(Class clazz, Long idToDelete) {
-        DatabaseFacade.getDefault().getCrudService().delete(clazz, idToDelete);
+    public void deleteReflectionWithAllComments(Long idToDelete) {
+        DatabaseFacade.getDefault().getCrudService().delete(ReflectionModel.class, idToDelete);
+        
+        // TODO need also delete all comments from this idToDelete (delete all where parentId=idToDelete
+    }
+    
+    public void deleteComment(Long idToDelete) {
+        DatabaseFacade.getDefault().getCrudService().delete(ReflectionCommentModel.class, idToDelete);
         
         // TODO need also delete all comments from this idToDelete (delete all where parentId=idToDelete
     }

@@ -113,8 +113,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
 
         DialogProvider.getDefault().showDeleteSingleFileDialog(
                 (ActionEvent ae) -> { // Yes
-                    SqlProvider.getDefault().getReflectionSqlProvider().delete(
-                            ReflectionModel.class, model.getId());
+                    SqlProvider.getDefault().getReflectionSqlProvider().deleteReflectionWithAllComments(model.getId());
                     
                     DialogProvider.getDefault().hide();
                     
