@@ -22,10 +22,12 @@ import de.pro.dbw.util.api.IDateConverter;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -33,6 +35,7 @@ import javafx.scene.control.TextArea;
  */
 public class ReflectionCommentPresenter implements Initializable, IActionConfiguration, IDateConverter, IUtilConfiguration {
     
+    @FXML private AnchorPane apComment;
     @FXML private Label lComment;
     @FXML private TextArea taComment;
     
@@ -40,6 +43,7 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionCommentPresenter"); // NOI18N
     
+        assert (apComment != null) : "fx:id=\"apComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
         assert (lComment != null)  : "fx:id=\"lComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
         assert (taComment != null) : "fx:id=\"taComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
         
@@ -50,6 +54,8 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         // TODO delete this comment in db, refresh parent gui
     }
     
-    
+    public StringProperty textProperty() {
+        return taComment.textProperty();
+    }
     
 }

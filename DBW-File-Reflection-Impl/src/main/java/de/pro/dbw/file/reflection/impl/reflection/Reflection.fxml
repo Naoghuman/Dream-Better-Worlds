@@ -8,67 +8,66 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.reflection.impl.reflection.ReflectionPresenter">
-   <children>
-      <ToolBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-        <items>
-          <Button fx:id="bSave" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionSave" prefWidth="64.0" text="Save" />
-            <Button fx:id="bDelete" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionDelete" prefWidth="64.0" text="Delete" />
-        </items>
-      </ToolBar>
-      <SplitPane fx:id="spReflection" dividerPositions="0.5" layoutX="31.0" layoutY="31.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="68.0">
-         <items>
-            <VBox fx:id="vbReflection" spacing="10.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <Label text="Title" />
-                        <TextField fx:id="tfTitle" />
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <Label text="Source" />
-                        <TextField fx:id="tfSource" />
-                     </children>
-                  </VBox>
-                  <HBox spacing="10.0">
-                     <children>
-                        <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0">
-                           <children>
-                              <Label text="Date" />
-                              <TextField fx:id="tfDate" alignment="CENTER" promptText="MM-dd-yyyy" />
-                           </children>
+    <children>
+        <ToolBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <items>
+                <Button fx:id="bSave" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionSave" prefWidth="64.0" text="Save" />
+                <Button fx:id="bDelete" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionDelete" prefWidth="64.0" text="Delete" />
+                <Separator orientation="VERTICAL" />
+                <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionAddComment" prefWidth="64.0" text="Add" />
+            </items>
+        </ToolBar>
+      <HBox spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="68.0">
+         <children>
+                <VBox fx:id="vbReflection" spacing="10.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <VBox>
+                            <children>
+                                <Label text="Title" />
+                                <TextField fx:id="tfTitle" />
+                            </children>
                         </VBox>
-                        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0">
-                           <children>
-                              <CheckBox fx:id="cbTime" mnemonicParsing="false">
-                                 <HBox.margin>
-                                    <Insets top="20.0" />
-                                 </HBox.margin>
-                              </CheckBox>
-                              <VBox prefWidth="100.0">
-                                 <children>
-                                    <Label text="Time" />
-                                    <TextField fx:id="tfTime" alignment="CENTER" promptText="HH:mm:ss" />
-                                 </children>
-                              </VBox>
-                           </children>
+                        <VBox>
+                            <children>
+                                <Label text="Source" />
+                                <TextField fx:id="tfSource" />
+                            </children>
+                        </VBox>
+                        <HBox spacing="10.0">
+                            <children>
+                                <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0">
+                                    <children>
+                                        <Label text="Date" />
+                                        <TextField fx:id="tfDate" alignment="CENTER" promptText="MM-dd-yyyy" />
+                                    </children>
+                                </VBox>
+                                <HBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="110.0">
+                                    <children>
+                                        <CheckBox fx:id="cbTime" mnemonicParsing="false">
+                                            <HBox.margin>
+                                                <Insets top="20.0" />
+                                            </HBox.margin>
+                                        </CheckBox>
+                                        <VBox prefWidth="100.0">
+                                            <children>
+                                                <Label text="Time" />
+                                                <TextField fx:id="tfTime" alignment="CENTER" promptText="HH:mm:ss" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
                         </HBox>
-                     </children>
-                  </HBox>
-                  <VBox VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label text="Text" />
-                        <TextArea fx:id="taText" wrapText="true" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
-               </children></VBox>
-            <ScrollPane fx:id="spComments">
-               <content>
-                  <VBox fx:id="vbComments" />
-               </content>
-            </ScrollPane>
-         </items>
-      </SplitPane>
-   </children>
+                        <VBox VBox.vgrow="ALWAYS">
+                            <children>
+                                <Label text="Text" />
+                                <TextArea fx:id="taText" wrapText="true" VBox.vgrow="ALWAYS" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            <ListView fx:id="lvComments" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
+         </children>
+      </HBox>
+    </children>
 </AnchorPane>

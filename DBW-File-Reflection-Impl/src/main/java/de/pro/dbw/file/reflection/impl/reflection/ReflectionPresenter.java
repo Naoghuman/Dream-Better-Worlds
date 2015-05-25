@@ -22,9 +22,9 @@ import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
+import de.pro.dbw.file.reflection.impl.reflectioncomment.ReflectionCommentPresenter;
+import de.pro.dbw.file.reflection.impl.reflectioncomment.ReflectionCommentView;
 import de.pro.dbw.util.api.IDateConverter;
-import static de.pro.dbw.util.api.IDateConverter.PATTERN__TIME;
-import static de.pro.dbw.util.api.IDateConverter.PATTERN__TIME_IS_EMPTY;
 import de.pro.dbw.util.provider.UtilProvider;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
@@ -42,11 +42,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 /**
  *
@@ -58,15 +60,14 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     @FXML private Button bDelete;
     @FXML private Button bSave;
     @FXML private CheckBox cbTime;
-    @FXML private ScrollPane spComments;
-    @FXML private SplitPane spReflection;
+//    @FXML private ScrollPane spComments;
     @FXML private TextArea taText;
     @FXML private TextField tfDate;
     @FXML private TextField tfSource;
     @FXML private TextField tfTime;
     @FXML private TextField tfTitle;
     @FXML private VBox vbReflection;
-    @FXML private VBox vbComments;
+    @FXML private ListView lvComments;
     
     private ReflectionModel model = null;
     private ReflectionModel oldModel = null;
@@ -78,16 +79,19 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionPresenter"); // NOI18N
     
-        assert (bDelete != null)    : "fx:id=\"bDelete\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (bSave != null)      : "fx:id=\"bSave\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (cbTime != null)     : "fx:id=\"cbTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (taText != null)     : "fx:id=\"taText\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfDate != null)     : "fx:id=\"tfDate\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfSource != null)   : "fx:id=\"tfSource\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfTime != null)     : "fx:id=\"tfTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-        assert (tfTitle != null)    : "fx:id=\"tfTitle\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (bDelete != null)      : "fx:id=\"bDelete\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (bSave != null)        : "fx:id=\"bSave\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (cbTime != null)       : "fx:id=\"cbTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+//        assert (spComments != null)   : "fx:id=\"spComments\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (taText != null)       : "fx:id=\"taText\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfDate != null)       : "fx:id=\"tfDate\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfSource != null)     : "fx:id=\"tfSource\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfTime != null)       : "fx:id=\"tfTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (tfTitle != null)      : "fx:id=\"tfTitle\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (vbReflection != null) : "fx:id=\"vbReflection\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (lvComments != null)   : "fx:id=\"lvComments\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         
-        this.initializeSplitPane();
+        this.initializeCommentArea();
         this.initializeListeners();
     }
     
@@ -98,14 +102,42 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         stringChangeListener = new StringChangeListener();
     }
     
-    private void initializeSplitPane() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize SplitPane in ReflectionPresenter"); // NOI18N
+    private void initializeCommentArea() {
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize Comment area in ReflectionPresenter"); // NOI18N
     
-        SplitPane.setResizableWithParent(vbReflection, Boolean.FALSE);
+//      // lvComments
+        lvComments.getStylesheets().addAll(this.getClass().getResource("Reflection.css").toExternalForm()); // NOI18N
+        lvComments.getItems().clear();
+        lvComments.setCellFactory(new Callback<ListView<ReflectionCommentView>, ListCell<ReflectionCommentView>>() {
+
+            @Override
+            public ListCell<ReflectionCommentView> call(ListView<ReflectionCommentView> param) {
+                return new ListCell<ReflectionCommentView>() {
+                    @Override
+                    public void updateItem(ReflectionCommentView item, boolean empty) {
+                        super.updateItem(item, empty);
+                        
+                        if (item != null) {
+                            this.setGraphic(item.getView());
+                        } else {
+                            this.setGraphic(null);
+                        }
+                    }
+                };
+            }
+        });
     }
     
     public Boolean isMarkAsChanged() {
         return model.isMarkAsChanged();
+    }
+    
+    public void onActionAddComment() {
+        final ReflectionCommentView view = new ReflectionCommentView();
+        final ReflectionCommentPresenter presenter = view.getRealPresenter();
+        presenter.textProperty().addListener(stringChangeListener);
+        
+        lvComments.getItems().add(0, view);
     }
     
     public void onActionDelete() {
