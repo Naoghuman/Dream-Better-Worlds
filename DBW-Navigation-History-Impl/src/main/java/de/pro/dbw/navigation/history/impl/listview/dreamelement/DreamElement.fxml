@@ -18,7 +18,7 @@
                     <children>
                         <HBox spacing="5.0">
                             <children>
-                                <Label fx:id="lPrefix" text="Label" textFill="RED">
+                                <Label fx:id="lPrefix" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" text="New" textFill="RED" HBox.hgrow="NEVER">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
