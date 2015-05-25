@@ -38,8 +38,8 @@ public class SqlProvider {
         return DreamBookNavigationSqlProvider.getDefault();
     }
     
-    public DreamFileSqlProvider getDreamFileSqlProvider() {
-        return DreamFileSqlProvider.getDefault();
+    public DreamSqlProvider getDreamSqlProvider() {
+        return DreamSqlProvider.getDefault();
     }
     
     public HistoryNavigationSqlProvider getHistoryNavigationSqlProvider() {
