@@ -141,7 +141,7 @@ public final class DreamProvider implements
         }
         
         // Load content and show it
-        final DreamModel model = SqlProvider.getDefault().getDreamFileSqlProvider().findById(dreamId);
+        final DreamModel model = SqlProvider.getDefault().getDreamSqlProvider().findById(dreamId);
         if (model == null) {
             return;
         }

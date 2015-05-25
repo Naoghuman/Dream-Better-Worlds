@@ -105,32 +105,16 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
 
         DialogProvider.getDefault().showDeleteSingleFileDialog(
                 (ActionEvent ae) -> { // Yes
-                    SqlProvider.getDefault().getDreamFileSqlProvider().delete(model.getId());
+                    SqlProvider.getDefault().getDreamSqlProvider().delete(model.getId());
                     
                     DialogProvider.getDefault().hide();
-                    this.onActionDeleteHandleCompletingActions();
+                    
+                    final Boolean removeFile = Boolean.TRUE;
+                    this.onActionUpdateGui(removeFile);
                 },
                 (ActionEvent ae) -> { // No
                     DialogProvider.getDefault().hide();
                 });
-    }
-    
-    private void onActionDeleteHandleCompletingActions() {
-        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
-        ActionTransferModel transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
-        transferModel.setLong(model.getId());
-        transferModels.add(transferModel);
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-        transferModels.add(transferModel);
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
-        transferModels.add(transferModel);
-        
-        ActionFacade.getDefault().handle(transferModels);
     }
     
     public void onActionRefresh() {
@@ -152,7 +136,12 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
     public void onActionSave(Boolean updateGui) {
         LoggerFacade.getDefault().info(this.getClass(), "Save dream to database"); // NOI18N
         
-        System.out.println(" XXX DreamFilePresenter.onActionSave() add validation for input");
+        System.out.println(" XXX DreamPresenter.onActionSave() add validation for input");
+        
+        // Unbind
+        model.titleProperty().unbind();
+        model.descriptionProperty().unbind();
+        model.textProperty().unbind();
         
         // Convert date + time
         final String time = (tfTime.getText() != null) ? tfTime.getText()
@@ -161,13 +150,8 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
                 tfDate.getText() + SIGN__SPACE + time,
                 PATTERN__DATETIME));
         
-        // Unbind
-        model.titleProperty().unbind();
-        model.descriptionProperty().unbind();
-        model.textProperty().unbind();
-        
         // Save the dream
-        SqlProvider.getDefault().getDreamFileSqlProvider().createOrUpdate(model, FILE__DREAM__DEFAULT_ID);
+        SqlProvider.getDefault().getDreamSqlProvider().createOrUpdate(model, FILE__DREAM__DEFAULT_ID);
         oldModel = DreamModel.copy(model);
         
         if (!updateGui) {
@@ -182,8 +166,8 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
         // Update gui
         model.setMarkAsChanged(Boolean.FALSE);
         
-        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__HISTORY);
+        final Boolean removeFile = Boolean.FALSE;
+        this.onActionUpdateGui(removeFile);
     }
     
     public void onActionShowExtendedSliderDialog() {
@@ -203,6 +187,26 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
         
         LoggerFacade.getDefault().error(this.getClass(), "showExtendedSliderDialog"); // NOI18N
 //        DialogProvider1.getDefault().showExtendedSliderDialog(actionKey);
+    }
+    
+    private void onActionUpdateGui(Boolean removeFile) {
+        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
+        ActionTransferModel transferModel = new ActionTransferModel();
+        if (removeFile) {
+            transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
+            transferModel.setLong(model.getId());
+            transferModels.add(transferModel);
+        }
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        transferModels.add(transferModel);
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
+        transferModels.add(transferModel);
+        
+        ActionFacade.getDefault().handle(transferModels);
     }
     
     public void show(DreamModel model) {
