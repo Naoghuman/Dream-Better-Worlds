@@ -221,7 +221,7 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
                 PATTERN__DATETIME));
         
         // Save the dream
-        SqlProvider.getDefault().getDreamFileSqlProvider().create(model);
+        SqlProvider.getDefault().getDreamSqlProvider().create(model);
         
         // Update gui
         ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
