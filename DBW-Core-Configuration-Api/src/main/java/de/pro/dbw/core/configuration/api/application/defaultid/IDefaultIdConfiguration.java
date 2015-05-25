@@ -22,13 +22,14 @@ package de.pro.dbw.core.configuration.api.application.defaultid;
  */
 public interface IDefaultIdConfiguration {
     
-    public static final Long FILE__DREAM__DEFAULT_ID = -28_07_1967_0000L;
-//    public static final Long DREAM_MAP_DEFAULT_ID = -28_07_1967_0100L;
-    public static final Long FILE__EXERCISE__DEFAULT_ID = -28_07_1967_0200L;
-    public static final Long FILE__REFLECTION__DEFAULT_ID = -28_07_1967_0300L;
-    public static final Long FILE__TIP_OF_THE_NIGHT__DEFAULT_ID = -28_07_1967_0400L;
-    public static final Long FILE__WELCOME__DEFAULT_ID = -28_07_1967_0500L;
+    public static final Long FILE__DREAM__DEFAULT_ID                = -28_07_1967_0000L;
+//    public static final Long DREAM_MAP_DEFAULT_ID                   = -28_07_1967_0100L;
+    public static final Long FILE__EXERCISE__DEFAULT_ID             = -28_07_1967_0200L;
+    public static final Long FILE__REFLECTION__DEFAULT_ID           = -28_07_1967_0300L;
+    public static final Long FILE__REFLECTION_COMMENT__DEFAULT_ID   = -28_07_1967_0400L;
+    public static final Long FILE__TIP_OF_THE_NIGHT__DEFAULT_ID     = -28_07_1967_0500L;
+    public static final Long FILE__WELCOME__DEFAULT_ID              = -28_07_1967_0600L;
     
-    public static final Long SEARCH__DREAM__DEFAULT_ID = -28_07_1967_1000L;
+    public static final Long SEARCH__DREAM__DEFAULT_ID              = -28_07_1967_1000L;
     
 }

@@ -16,15 +16,21 @@
  */
 package de.pro.dbw.core.sql.provider;
 
+import de.pro.dbw.core.configuration.api.file.reflection.IReflectionConfiguration;
+import de.pro.dbw.file.reflection.api.ReflectionCommentModel;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.lib.database.api.DatabaseFacade;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import javafx.collections.FXCollections;
 
 /**
  *
  * @author PRo
  */
-public class ReflectionSqlProvider {
+public class ReflectionSqlProvider implements IReflectionConfiguration {
     
     private static ReflectionSqlProvider instance = null;
     
@@ -38,6 +44,16 @@ public class ReflectionSqlProvider {
     
     private ReflectionSqlProvider() {}
     
+    public void createOrUpdate(ReflectionCommentModel model, Long defaultId) {
+        if (Objects.equals(model.getId(), defaultId)) {
+            model.setId(System.currentTimeMillis());
+            DatabaseFacade.getDefault().getCrudService().create(model);
+        }
+        else {
+            DatabaseFacade.getDefault().getCrudService().update(model);
+        }
+    }
+    
     public void createOrUpdate(ReflectionModel model, Long defaultId) {
         if (Objects.equals(model.getId(), defaultId)) {
             model.setId(System.currentTimeMillis());
@@ -48,9 +64,23 @@ public class ReflectionSqlProvider {
         }
     }
     
-    public void delete(Long idToDelete) {
-        DatabaseFacade.getDefault().getCrudService().delete(ReflectionModel.class, idToDelete);
-        // TODO need also delete all comments from this idToDelete
+    public void delete(Class clazz, Long idToDelete) {
+        DatabaseFacade.getDefault().getCrudService().delete(clazz, idToDelete);
+        
+        // TODO need also delete all comments from this idToDelete (delete all where parentId=idToDelete
+    }
+    
+    public List<ReflectionCommentModel> findAllComments(Long parentId) {
+        final Map<String, Object> parameters = FXCollections.observableHashMap();
+        parameters.put(PARA__REFLECTION_MODEL__PARENTID, parentId);
+        
+        final List<ReflectionCommentModel> reflectionCommentModels = 
+                DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
+                        ReflectionCommentModel.class, REFLECTION_COMMENT_MODEL__FIND_ALL_COMMENTS, 
+                        parameters);
+        Collections.sort(reflectionCommentModels);
+        
+        return reflectionCommentModels;
     }
     
     public ReflectionModel findById(Long reflectionId) {
@@ -59,4 +89,5 @@ public class ReflectionSqlProvider {
         
         return model;
     }
+    
 }

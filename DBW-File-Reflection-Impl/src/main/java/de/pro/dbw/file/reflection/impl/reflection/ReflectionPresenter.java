@@ -113,10 +113,13 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
 
         DialogProvider.getDefault().showDeleteSingleFileDialog(
                 (ActionEvent ae) -> { // Yes
-                    SqlProvider.getDefault().getReflectionSqlProvider().delete(model.getId());
+                    SqlProvider.getDefault().getReflectionSqlProvider().delete(
+                            ReflectionModel.class, model.getId());
                     
                     DialogProvider.getDefault().hide();
-                    this.onActionUpdateGuiAfterDeleting();
+                    
+                    final Boolean removeFile = Boolean.TRUE;
+                    this.onActionUpdateGui(removeFile);
                 },
                 (ActionEvent ae) -> { // No
                     DialogProvider.getDefault().hide();
@@ -136,19 +139,55 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     public void onActionSave() {
         LoggerFacade.getDefault().info(this.getClass(), "On action save"); // NOI18N
         
-        this.onActionSave(Boolean.TRUE);
+        final Boolean updateGui = Boolean.TRUE;
+        this.onActionSave(updateGui);
     }
     
     public void onActionSave(Boolean updateGui) {
+        LoggerFacade.getDefault().info(this.getClass(), "Save dream to database"); // NOI18N
         
+        System.out.println(" XXX ReflectionPresenter.onActionSave(boolean) add validation for input");
+        
+        // Unbind
+        model.titleProperty().unbind();
+        model.sourceProperty().unbind();
+        model.textProperty().unbind();
+        
+        // Convert date + time
+        final String time = (tfTime.getText() != null) ? tfTime.getText()
+                : PATTERN__TIME_IS_EMPTY;
+        model.setGenerationTime(UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(
+                tfDate.getText() + SIGN__SPACE + time,
+                PATTERN__DATETIME));
+        
+        // Save the dream
+        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model, FILE__DREAM__DEFAULT_ID);
+        oldModel = ReflectionModel.copy(model);
+        
+        if (!updateGui) {
+            return;
+        }
+        
+        // Bind
+        model.titleProperty().bind(tfTitle.textProperty());
+        model.sourceProperty().bind(tfSource.textProperty());
+        model.textProperty().bind(taText.textProperty());
+        
+        // Update gui
+        model.setMarkAsChanged(Boolean.FALSE);
+        
+        final Boolean removeFile = Boolean.FALSE;
+        this.onActionUpdateGui(removeFile);
     }
     
-    private void onActionUpdateGuiAfterDeleting() {
+    private void onActionUpdateGui(Boolean removeFile) {
         final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
         ActionTransferModel transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
-        transferModel.setLong(model.getId());
-        transferModels.add(transferModel);
+        if (removeFile) {
+            transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
+            transferModel.setLong(model.getId());
+            transferModels.add(transferModel);
+        }
         
         transferModel = new ActionTransferModel();
         transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
@@ -218,6 +257,8 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         taText.setText(this.model.getText());
         taText.textProperty().addListener(stringChangeListener);
         this.model.textProperty().bind(taText.textProperty());
+        
+        // TODO load all comments here
     }
     
     private class BooleanChangeListener implements ChangeListener<Boolean> {
