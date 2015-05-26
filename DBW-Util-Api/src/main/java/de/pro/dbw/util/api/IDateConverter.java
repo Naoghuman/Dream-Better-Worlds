@@ -23,7 +23,8 @@ package de.pro.dbw.util.api;
 public interface IDateConverter {
     
     public static final String PATTERN__DATE = "MM-dd-yyyy"; // NOI18N
-    public static final String PATTERN__DATE__HISTORY = "EEEE, MMM d. yyyy"; // NOI18N
+    public static final String PATTERN__DATE__COMMENT = "EEEE, MMM d.yyyy"; // NOI18N
+    public static final String PATTERN__DATE__HISTORY = "EEEE, MMM d.yyyy"; // NOI18N
     public static final String PATTERN__DATETIME = "MM-dd-yyyy HH:mm:ss"; // NOI18N
     public static final String PATTERN__GENERATIONTIME = "MM-dd-yyyy  HH:mm:ss"; // NOI18N
     public static final String PATTERN__TIME = "HH:mm:ss"; // NOI18N

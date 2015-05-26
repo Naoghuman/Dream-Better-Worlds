@@ -21,6 +21,7 @@ import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfigu
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.dbw.dialog.provider.DialogProvider;
+import de.pro.dbw.file.reflection.api.ReflectionCommentModel;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.file.reflection.impl.reflectioncomment.ReflectionCommentPresenter;
 import de.pro.dbw.file.reflection.impl.reflectioncomment.ReflectionCommentView;
@@ -44,7 +45,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -74,6 +74,8 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     
     private BooleanChangeListener booleanChangeListener = null;
     private StringChangeListener stringChangeListener = null;
+    
+//    private final List<ReflectionCommentModel> reflectionCommentModels = FXCollections.observableArrayList();
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -127,6 +129,29 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
             }
         });
     }
+
+    private String createOnActionDeleteComment() {
+        final String actionKeyForDeleting = ACTION__DELETE_ + System.currentTimeMillis();
+        ActionFacade.getDefault().register(
+                actionKeyForDeleting,
+                (ActionEvent ae) -> {
+                    final ActionTransferModel actionTransferModel = (ActionTransferModel) ae.getSource();
+                    final ReflectionCommentModel reflectionCommentModel = (ReflectionCommentModel) actionTransferModel.getObject();
+                    /*
+                    if rcm.id=default-id
+                      - rcm ist noch nicht in der db gespeichert, so entferne einfach die
+                        komponente aus dem parent-file.
+                    else
+                     - rcm ist in der db gespeichert, so a) entferne die komponente im
+                       parent-file und b) lösche das rcm in der db.
+                    */
+                    System.out.println("reflectionCommentModel :) " + reflectionCommentModel.getId());
+                    
+                    ActionFacade.getDefault().remove(actionTransferModel.getActionKey());
+                });
+        
+        return actionKeyForDeleting;
+    }
     
     public Boolean isMarkAsChanged() {
         return model.isMarkAsChanged();
@@ -135,6 +160,8 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     public void onActionAddComment() {
         final ReflectionCommentView view = new ReflectionCommentView();
         final ReflectionCommentPresenter presenter = view.getRealPresenter();
+        final String actionKeyForDeleting = this.createOnActionDeleteComment();
+        presenter.configure(new ReflectionCommentModel(), actionKeyForDeleting);
         presenter.textProperty().addListener(stringChangeListener);
         
         lvComments.getItems().add(0, view);

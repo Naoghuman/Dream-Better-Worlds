@@ -67,13 +67,17 @@ public class ReflectionSqlProvider implements IReflectionConfiguration {
     public void deleteReflectionWithAllComments(Long idToDelete) {
         DatabaseFacade.getDefault().getCrudService().delete(ReflectionModel.class, idToDelete);
         
-        // TODO need also delete all comments from this idToDelete (delete all where parentId=idToDelete
+        final List<ReflectionCommentModel> ReflectionCommentModels = this.findAllComments(idToDelete);
+        DatabaseFacade.getDefault().getCrudService().beginTransaction();
+        for (ReflectionCommentModel reflectionCommentModel : ReflectionCommentModels) {
+            DatabaseFacade.getDefault().getCrudService().delete(
+                    ReflectionCommentModel.class, reflectionCommentModel.getId(), Boolean.FALSE);
+        }
+        DatabaseFacade.getDefault().getCrudService().commitTransaction();
     }
     
     public void deleteComment(Long idToDelete) {
         DatabaseFacade.getDefault().getCrudService().delete(ReflectionCommentModel.class, idToDelete);
-        
-        // TODO need also delete all comments from this idToDelete (delete all where parentId=idToDelete
     }
     
     public List<ReflectionCommentModel> findAllComments(Long parentId) {

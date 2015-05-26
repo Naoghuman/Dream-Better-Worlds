@@ -18,7 +18,11 @@ package de.pro.dbw.file.reflection.impl.reflectioncomment;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
+import de.pro.dbw.file.reflection.api.ReflectionCommentModel;
 import de.pro.dbw.util.api.IDateConverter;
+import de.pro.dbw.util.provider.UtilProvider;
+import de.pro.lib.action.api.ActionFacade;
+import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,6 +43,9 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
     @FXML private Label lComment;
     @FXML private TextArea taComment;
     
+    private ReflectionCommentModel reflectionCommentModel = null;
+    private String actionKeyForDeletion = null;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionCommentPresenter"); // NOI18N
@@ -48,10 +55,41 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         assert (taComment != null) : "fx:id=\"taComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
         
 //        this.initializeDescription();
+        
+        /*
+        - neuer parameter markaschanged.
+           - neuer kommentar = markaschanged=true
+           - Änderung = markaschanged=true
+           - speichern des parentfiles
+              - if markaschanged=true then speichere kommentar (create or update)
+                 - dann brauche ich für create eine methode if exists(id), 
+                   wenn nein, dann create, ansonsten update.
+        */
+    }
+
+    public void configure(ReflectionCommentModel reflectionCommentModel, String actionKeyForDeletion) {
+        LoggerFacade.getDefault().info(this.getClass(), "Configure ReflectionCommentPresenter"); // NOI18N
+    
+        this.reflectionCommentModel = reflectionCommentModel;
+        this.actionKeyForDeletion = actionKeyForDeletion;
+        
+        final String date = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
+                this.reflectionCommentModel.getGenerationTime(),
+                IDateConverter.PATTERN__DATE__COMMENT);
+        final String time = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
+                this.reflectionCommentModel.getGenerationTime(),
+                IDateConverter.PATTERN__TIME);
+        lComment.setText(date + " at " + time); // NOI18N TODO properties
+        
+        taComment.setText(this.reflectionCommentModel.getText());
     }
     
     public void onActionDelete() {
-        // TODO delete this comment in db, refresh parent gui
+        final ActionTransferModel actionTransferModel = new ActionTransferModel();
+        actionTransferModel.setActionKey(actionKeyForDeletion);
+        actionTransferModel.setObject(reflectionCommentModel);
+        
+        ActionFacade.getDefault().handle(actionTransferModel);
     }
     
     public StringProperty textProperty() {

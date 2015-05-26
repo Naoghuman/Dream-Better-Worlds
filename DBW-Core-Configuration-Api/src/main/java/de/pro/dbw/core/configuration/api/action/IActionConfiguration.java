@@ -27,6 +27,8 @@ public interface IActionConfiguration {
     public static final String ACTION__CREATE_NEW_FILE__REFLECTION = "ACTION__CREATE_NEW_FILE__REFLECTION"; // NOI18N
     public static final String ACTION__EDIT_FILE__REFLECTION = "ACTION__EDIT_FILE__REFLECTION"; // NOI18N
     
+    public static final String ACTION__DELETE_ = "ACTION__DELETE_"; // NOI18N
+    
     public static final String ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK = "ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK";  // NOI18N
     public static final String ACTION__JOB_CHECK_NAVIGATION__HISTORY = "ACTION__JOB_CHECK_NAVIGATION__HISTORY";  // NOI18N
     
@@ -44,9 +46,9 @@ public interface IActionConfiguration {
     
     public static final String ACTION__REMOVE_FILE_FROM_EDITOR = "ACTION__REMOVE_FILE_FROM_EDITOR"; // NOI18N
     
-    public static final String ACTION__SAVE_ = "ACTION__SAVE_"; // NOI18N
+//    public static final String ACTION__SAVE_ = "ACTION__SAVE_"; // NOI18N
     public static final String ACTION__SAVE_ALL_CHANGED_FILES = "ACTION__SAVE_ALL_CHANGED_FILES"; // NOI18N
-    public static final String ACTION__DONT_SAVE_ = "ACTION__DONT_SAVE_"; // NOI18N
+//    public static final String ACTION__DONT_SAVE_ = "ACTION__DONT_SAVE_"; // NOI18N
     
     public static final String ACTION__SEARCH_IN__DREAMS = "ACTION__SEARCH_IN__DREAMS"; // NOI18N
     public static final String ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT = "ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT"; // NOI18N
