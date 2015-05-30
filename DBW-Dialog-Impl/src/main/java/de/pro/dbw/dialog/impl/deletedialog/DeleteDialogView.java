@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.dialog.impl.deletesinglefiledialog;
+package de.pro.dbw.dialog.impl.deletedialog;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,10 +22,10 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class DeleteSingleFileDialogView extends FXMLView {
+public class DeleteDialogView extends FXMLView {
     
-    public DeleteSingleFileDialogPresenter getRealPresenter() {
-        return (DeleteSingleFileDialogPresenter) this.getPresenter();
+    public DeleteDialogPresenter getRealPresenter() {
+        return (DeleteDialogPresenter) this.getPresenter();
     }
     
 }

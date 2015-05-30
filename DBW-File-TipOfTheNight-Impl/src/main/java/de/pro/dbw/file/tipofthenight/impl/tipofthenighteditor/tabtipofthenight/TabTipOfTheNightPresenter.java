@@ -174,7 +174,9 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
             return;
         }
 
-        DialogProvider.getDefault().showDeleteSingleFileDialog2(
+        DialogProvider.getDefault().showDeleteDialog2(
+                // TODO properties
+                "Do you really want delete this tip of the night?",  // NOI18N
                 (ActionEvent ae) -> { // Yes
                     SqlProvider.getDefault().getTipOfTheNightProvider().delete(model.getId());
         

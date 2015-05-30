@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.dialog.impl.deletesinglefiledialog;
+package de.pro.dbw.dialog.impl.deletedialog;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -25,26 +25,29 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  *
  * @author PRo
  */
-public class DeleteSingleFileDialogPresenter implements Initializable, IActionConfiguration {
+public class DeleteDialogPresenter implements Initializable, IActionConfiguration {
     
     @FXML private Button bNo;
     @FXML private Button bYes;
-    
+    @FXML private Label lMessage;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize DeleteSingleFileDialogPresenter");
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize DeleteDialogPresenter");
         
-        assert (bNo != null)  : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteSingleFileDialog.fxml'."; // NOI18N
-        assert (bYes != null) : "fx:id=\"bYes\" was not injected: check your FXML file 'DeleteSingleFileDialog.fxml'."; // NOI18N
+        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
+        assert (bYes != null)     : "fx:id=\"bYes\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
+        assert (lMessage != null) : "fx:id=\"lMessage\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
     }
 
     public void configure(
+            String message,
             EventHandler<ActionEvent> onActionYes,
             EventHandler<ActionEvent> onActionNo
     ) {

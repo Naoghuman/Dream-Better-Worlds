@@ -103,7 +103,9 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
     public void onActionDelete() {
         LoggerFacade.getDefault().info(this.getClass(), "On action delete"); // NOI18N
 
-        DialogProvider.getDefault().showDeleteSingleFileDialog(
+        // TODO properties
+        DialogProvider.getDefault().showDeleteDialog(
+                "Do you really want delete this dream?",  // NOI18N
                 (ActionEvent ae) -> { // Yes
                     SqlProvider.getDefault().getDreamSqlProvider().delete(model.getId());
                     

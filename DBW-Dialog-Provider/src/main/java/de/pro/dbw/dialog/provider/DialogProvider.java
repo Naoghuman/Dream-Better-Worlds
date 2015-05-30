@@ -16,8 +16,8 @@
  */
 package de.pro.dbw.dialog.provider;
 
-import de.pro.dbw.dialog.impl.deletesinglefiledialog.DeleteSingleFileDialogPresenter;
-import de.pro.dbw.dialog.impl.deletesinglefiledialog.DeleteSingleFileDialogView;
+import de.pro.dbw.dialog.impl.deletedialog.DeleteDialogPresenter;
+import de.pro.dbw.dialog.impl.deletedialog.DeleteDialogView;
 import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogPresenter;
 import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogView;
 import de.pro.dbw.dialog.impl.savesinglefiledialog.SaveSingleFileDialogPresenter;
@@ -95,29 +95,31 @@ public class DialogProvider {
         spDialogLayer2.setManaged(Boolean.TRUE);
     }
     
-    public void showDeleteSingleFileDialog(
+    public void showDeleteDialog(
+            String message,
             EventHandler<ActionEvent> onActionYes,
             EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for SaveSingleFile"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for Delete"); // NOI18N
         
-        final DeleteSingleFileDialogView view = new DeleteSingleFileDialogView();
-        final DeleteSingleFileDialogPresenter presenter = view.getRealPresenter();
-        presenter.configure(onActionYes, onActionNo);
+        final DeleteDialogView view = new DeleteDialogView();
+        final DeleteDialogPresenter presenter = view.getRealPresenter();
+        presenter.configure(message, onActionYes, onActionNo);
         
         final Parent dialog = view.getView();
         this.show(dialog);
     }
     
-    public void showDeleteSingleFileDialog2(
+    public void showDeleteDialog2(
+            String message,
             EventHandler<ActionEvent> onActionYes,
             EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for SaveSingleFile"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for Delete2"); // NOI18N
         
-        final DeleteSingleFileDialogView view = new DeleteSingleFileDialogView();
-        final DeleteSingleFileDialogPresenter presenter = view.getRealPresenter();
-        presenter.configure(onActionYes, onActionNo);
+        final DeleteDialogView view = new DeleteDialogView();
+        final DeleteDialogPresenter presenter = view.getRealPresenter();
+        presenter.configure(message, onActionYes, onActionNo);
         
         final Parent dialog = view.getView();
         this.show2(dialog);

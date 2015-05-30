@@ -15,7 +15,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label text="Do you really want delete this file?" />
+                        <Label fx:id="lMessage" text="Do you really want delete this file?" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" spacing="10.0">
