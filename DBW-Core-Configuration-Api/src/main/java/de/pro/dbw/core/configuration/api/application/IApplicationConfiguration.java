@@ -33,8 +33,8 @@ public interface IApplicationConfiguration {
     public static final String DBW__DATABASE_NAME = "dbw"; // NOI18N
     public static final String DBW__GOODBYE_MSG = "  Goodbye from 'Dream Better Worlds'. Happy real life :)"; // NOI18N
     // XXX load version from pom.xml
-    public static final String DBW__TITLE__APPLICATION = "Dream Better Worlds v0.1.0-SNAPSHOT"; // NOI18N -SNAPSHOT
-    public static final String DBW__TITLE__TESTDATA = "Testdata v0.1.0-SNAPSHOT"; // NOI18N -SNAPSHOT
+    public static final String DBW__TITLE__APPLICATION = "Dream Better Worlds v0.1.0"; // NOI18N -SNAPSHOT
+    public static final String DBW__TITLE__TESTDATA = "Testdata v0.1.0"; // NOI18N -SNAPSHOT
     public static final String DBW__WELCOME_MSG = "  Welcome to 'Dream Better Worlds'. Clearly lucid dreaming :)"; // NOI18N
     
 }
