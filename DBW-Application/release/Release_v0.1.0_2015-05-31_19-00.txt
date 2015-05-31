@@ -1,0 +1,10 @@
+--------------------------------------------------------------------------------
+RELEASE v0.1.0 (2015-05-31 19:00)
+--------------------------------------------------------------------------------
+NEW
+With v0.1.0 I integrated the new file Reflection (with ReflectionComment) into 
+the program. A reflection can be a poem, a quotation, a saying or a little 
+thought during the morning. Write it down into the new Reflection file and then 
+reflecte over it (like how in a blog where you can comment the article).
+
+--------------------------------------------------------------------------------
