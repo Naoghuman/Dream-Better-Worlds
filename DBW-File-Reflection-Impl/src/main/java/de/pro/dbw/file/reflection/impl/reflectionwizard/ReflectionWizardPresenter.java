@@ -232,18 +232,19 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         LoggerFacade.getDefault().info(this.getClass(), "Save new Reflection file to database"); // NOI18N
         
         // Catch data
-        this.model.setTitle(tfTitle.getText());
-        this.model.setSource(tfSource.getText());
+        model.setTitle(tfTitle.getText());
+        model.setSource(tfSource.getText());
 
         final String time = (tfTime.getText() != null) ? tfTime.getText() : PATTERN__TIME_IS_EMPTY;
         model.setGenerationTime(UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(
                 tfDate.getText() + SIGN__SPACE + time,
                 PATTERN__DATETIME));
         
-        this.model.setText(taText.getText());
+        model.setText(taText.getText());
         
         // Save the reflection
         SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model);
+        model = new ReflectionModel();
 
         // Update gui
         ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
