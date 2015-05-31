@@ -17,7 +17,9 @@
 package de.pro.dbw.file.reflection.impl.reflectioncomment;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
+import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.reflection.api.ReflectionCommentModel;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
@@ -27,6 +29,7 @@ import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -37,7 +40,8 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author PRo
  */
-public class ReflectionCommentPresenter implements Initializable, IActionConfiguration, IDateConverter, IUtilConfiguration {
+public class ReflectionCommentPresenter implements Initializable, IActionConfiguration,
+        IDateConverter, IDefaultIdConfiguration, IUtilConfiguration {
     
     @FXML private AnchorPane apComment;
     @FXML private Label lComment;
@@ -53,18 +57,10 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         assert (apComment != null) : "fx:id=\"apComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
         assert (lComment != null)  : "fx:id=\"lComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
         assert (taComment != null) : "fx:id=\"taComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
-        
-//        this.initializeDescription();
-        
-        /*
-        - neuer parameter markaschanged.
-           - neuer kommentar = markaschanged=true
-           - Änderung = markaschanged=true
-           - speichern des parentfiles
-              - if markaschanged=true then speichere kommentar (create or update)
-                 - dann brauche ich für create eine methode if exists(id), 
-                   wenn nein, dann create, ansonsten update.
-        */
+    }
+    
+    public void bind() {
+        this.reflectionCommentModel.textProperty().bind(taComment.textProperty());
     }
 
     public void configure(ReflectionCommentModel reflectionCommentModel, String actionKeyForDeletion) {
@@ -82,6 +78,11 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         lComment.setText(date + " at " + time); // NOI18N TODO properties
         
         taComment.setText(this.reflectionCommentModel.getText());
+        this.bind();
+    }
+    
+    public ReflectionCommentModel getReflectionCommentModel() {
+        return reflectionCommentModel;
     }
     
     public void onActionDelete() {
@@ -89,7 +90,16 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         actionTransferModel.setActionKey(actionKeyForDeletion);
         actionTransferModel.setObject(reflectionCommentModel);
         
-        ActionFacade.getDefault().handle(actionTransferModel);
+        // TODO properties
+        DialogProvider.getDefault().showDeleteDialog(
+                "Do you really want delete this comment?", // NOI18N
+                (ActionEvent ae) -> { // Yes
+                    ActionFacade.getDefault().handle(actionTransferModel);
+                    DialogProvider.getDefault().hide();
+                },
+                (ActionEvent ae) -> { // No
+                    DialogProvider.getDefault().hide();
+                });
     }
     
     public StringProperty textProperty() {

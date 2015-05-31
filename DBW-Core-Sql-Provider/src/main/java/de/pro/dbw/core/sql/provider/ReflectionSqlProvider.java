@@ -16,13 +16,14 @@
  */
 package de.pro.dbw.core.sql.provider;
 
+import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.file.reflection.IReflectionConfiguration;
 import de.pro.dbw.file.reflection.api.ReflectionCommentModel;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.lib.database.api.DatabaseFacade;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import javafx.collections.FXCollections;
 
@@ -30,7 +31,7 @@ import javafx.collections.FXCollections;
  *
  * @author PRo
  */
-public class ReflectionSqlProvider implements IReflectionConfiguration {
+public class ReflectionSqlProvider implements IDefaultIdConfiguration, IReflectionConfiguration {
     
     private static ReflectionSqlProvider instance = null;
     
@@ -44,58 +45,56 @@ public class ReflectionSqlProvider implements IReflectionConfiguration {
     
     private ReflectionSqlProvider() {}
     
-    public void createOrUpdate(ReflectionCommentModel model, Long defaultId) {
-        if (Objects.equals(model.getId(), defaultId)) {
+    public void createOrUpdate(ReflectionModel model) {
+        // All in one transaction
+        DatabaseFacade.getDefault().getCrudService().beginTransaction();
+        
+        final List<ReflectionCommentModel> reflectionCommentModelsToDelete = FXCollections.observableArrayList();
+        for (Iterator iterator = model.getReflectionCommentModels().iterator(); iterator.hasNext();) {
+            final Object next = iterator.next();
+            if (!(next instanceof ReflectionCommentModel)) {
+                continue;
+            }
+            
+            final ReflectionCommentModel reflectionCommentModel = (ReflectionCommentModel) next;
+            
+            // Check if for deletion
+            if (reflectionCommentModel.isMarkAsDeleted()) {
+                reflectionCommentModelsToDelete.add(reflectionCommentModel);
+                iterator.remove();
+                continue;
+            }
+            
+            // Check if for saving
+            if (Objects.equals(reflectionCommentModel.getId(), FILE__REFLECTION_COMMENT__DEFAULT_ID)) {
+                reflectionCommentModel.setId(reflectionCommentModel.getGenerationTime());
+            }
+        }
+        
+        if (Objects.equals(model.getId(), FILE__REFLECTION__DEFAULT_ID)) {
             model.setId(System.currentTimeMillis());
-            DatabaseFacade.getDefault().getCrudService().create(model);
+            DatabaseFacade.getDefault().getCrudService().create(model, Boolean.FALSE);
         }
         else {
-            DatabaseFacade.getDefault().getCrudService().update(model);
+            DatabaseFacade.getDefault().getCrudService().update(model, Boolean.FALSE);
         }
-    }
-    
-    public void createOrUpdate(ReflectionModel model, Long defaultId) {
-        if (Objects.equals(model.getId(), defaultId)) {
-            model.setId(System.currentTimeMillis());
-            DatabaseFacade.getDefault().getCrudService().create(model);
+        
+        for (ReflectionCommentModel reflectionCommentModelToDelete : reflectionCommentModelsToDelete) {
+            DatabaseFacade.getDefault().getCrudService().delete(ReflectionCommentModel.class,
+                    reflectionCommentModelToDelete.getId(), Boolean.FALSE);
         }
-        else {
-            DatabaseFacade.getDefault().getCrudService().update(model);
-        }
+        
+        DatabaseFacade.getDefault().getCrudService().commitTransaction();
     }
     
     public void deleteReflectionWithAllComments(Long idToDelete) {
         DatabaseFacade.getDefault().getCrudService().delete(ReflectionModel.class, idToDelete);
-        
-        final List<ReflectionCommentModel> ReflectionCommentModels = this.findAllComments(idToDelete);
-        DatabaseFacade.getDefault().getCrudService().beginTransaction();
-        for (ReflectionCommentModel reflectionCommentModel : ReflectionCommentModels) {
-            DatabaseFacade.getDefault().getCrudService().delete(
-                    ReflectionCommentModel.class, reflectionCommentModel.getId(), Boolean.FALSE);
-        }
-        DatabaseFacade.getDefault().getCrudService().commitTransaction();
     }
     
-    public void deleteComment(Long idToDelete) {
-        DatabaseFacade.getDefault().getCrudService().delete(ReflectionCommentModel.class, idToDelete);
-    }
-    
-    public List<ReflectionCommentModel> findAllComments(Long parentId) {
-        final Map<String, Object> parameters = FXCollections.observableHashMap();
-        parameters.put(PARA__REFLECTION_MODEL__PARENTID, parentId);
-        
-        final List<ReflectionCommentModel> reflectionCommentModels = 
-                DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
-                        ReflectionCommentModel.class, REFLECTION_COMMENT_MODEL__FIND_ALL_COMMENTS, 
-                        parameters);
-        Collections.sort(reflectionCommentModels);
-        
-        return reflectionCommentModels;
-    }
-    
-    public ReflectionModel findById(Long reflectionId) {
-        final ReflectionModel model = DatabaseFacade.getDefault().getCrudService()
-                .findById(ReflectionModel.class, reflectionId);
+    public ReflectionModel findReflectionById(Long reflectionId) {
+        final ReflectionModel model = DatabaseFacade.getDefault().getCrudService().findById(
+                ReflectionModel.class, reflectionId);
+        Collections.sort(model.getReflectionCommentModels());
         
         return model;
     }

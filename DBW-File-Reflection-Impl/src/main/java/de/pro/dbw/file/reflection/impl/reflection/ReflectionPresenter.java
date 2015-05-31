@@ -31,7 +31,9 @@ import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
@@ -60,7 +62,6 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     @FXML private Button bDelete;
     @FXML private Button bSave;
     @FXML private CheckBox cbTime;
-//    @FXML private ScrollPane spComments;
     @FXML private TextArea taText;
     @FXML private TextField tfDate;
     @FXML private TextField tfSource;
@@ -75,8 +76,6 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     private BooleanChangeListener booleanChangeListener = null;
     private StringChangeListener stringChangeListener = null;
     
-//    private final List<ReflectionCommentModel> reflectionCommentModels = FXCollections.observableArrayList();
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionPresenter"); // NOI18N
@@ -84,7 +83,6 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         assert (bDelete != null)      : "fx:id=\"bDelete\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (bSave != null)        : "fx:id=\"bSave\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (cbTime != null)       : "fx:id=\"cbTime\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
-//        assert (spComments != null)   : "fx:id=\"spComments\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (taText != null)       : "fx:id=\"taText\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (tfDate != null)       : "fx:id=\"tfDate\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (tfSource != null)     : "fx:id=\"tfSource\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
@@ -107,7 +105,6 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     private void initializeCommentArea() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize Comment area in ReflectionPresenter"); // NOI18N
     
-//      // lvComments
         lvComments.getStylesheets().addAll(this.getClass().getResource("Reflection.css").toExternalForm()); // NOI18N
         lvComments.getItems().clear();
         lvComments.setCellFactory(new Callback<ListView<ReflectionCommentView>, ListCell<ReflectionCommentView>>() {
@@ -136,21 +133,54 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
                 actionKeyForDeleting,
                 (ActionEvent ae) -> {
                     final ActionTransferModel actionTransferModel = (ActionTransferModel) ae.getSource();
-                    final ReflectionCommentModel reflectionCommentModel = (ReflectionCommentModel) actionTransferModel.getObject();
-                    /*
-                    if rcm.id=default-id
-                      - rcm ist noch nicht in der db gespeichert, so entferne einfach die
-                        komponente aus dem parent-file.
-                    else
-                     - rcm ist in der db gespeichert, so a) entferne die komponente im
-                       parent-file und b) lösche das rcm in der db.
-                    */
-                    System.out.println("reflectionCommentModel :) " + reflectionCommentModel.getId());
-                    
                     ActionFacade.getDefault().remove(actionTransferModel.getActionKey());
+                    
+                    final ReflectionCommentModel reflectionCommentModelToDelete = (ReflectionCommentModel) actionTransferModel.getObject();
+                    final Long idToDelete = reflectionCommentModelToDelete.getId();
+                    final Long generationTime = reflectionCommentModelToDelete.getGenerationTime();
+                    for (ReflectionCommentModel reflectionCommentModel : model.getReflectionCommentModels()) {
+                        if (
+                                Objects.equals(idToDelete, reflectionCommentModel.getId())
+                                && Objects.equals(generationTime, reflectionCommentModel.getGenerationTime())
+                        ) {
+                            reflectionCommentModel.setMarkAsDeleted(Boolean.TRUE);
+                        }
+                    }
+                    
+                    if (!Objects.equals(idToDelete, FILE__REFLECTION_COMMENT__DEFAULT_ID)) {
+                        model.setMarkAsChanged(Boolean.TRUE);
+                    }
+                    
+                    this.removeCommentFromGui(generationTime, idToDelete);
                 });
         
         return actionKeyForDeleting;
+    }
+    
+    private void removeCommentFromGui(Long generationTime, Long idToCompare) {
+        for (Iterator iterator = lvComments.getItems().iterator(); iterator.hasNext();) {
+            final Object next = iterator.next();
+            final boolean isReflectionCommentView = (next instanceof ReflectionCommentView);
+            if (!isReflectionCommentView) {
+                continue;
+            }
+
+            final ReflectionCommentView view = (ReflectionCommentView) next;
+            if (view == null) {
+                continue;
+            }
+
+            final ReflectionCommentPresenter presenter = view.getRealPresenter();
+            if (
+                    Objects.equals(presenter.getReflectionCommentModel().getId(), idToCompare)
+                    && Objects.equals(presenter.getReflectionCommentModel().getGenerationTime(), generationTime)
+            ) {
+                presenter.getReflectionCommentModel().setMarkAsDeleted(Boolean.TRUE);
+                iterator.remove();
+                
+                return;
+            }
+        }
     }
     
     public Boolean isMarkAsChanged() {
@@ -164,13 +194,18 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         presenter.configure(new ReflectionCommentModel(), actionKeyForDeleting);
         presenter.textProperty().addListener(stringChangeListener);
         
+        model.getReflectionCommentModels().add(presenter.getReflectionCommentModel());
+        model.setMarkAsChanged(Boolean.TRUE);
+        
         lvComments.getItems().add(0, view);
     }
     
     public void onActionDelete() {
         LoggerFacade.getDefault().info(this.getClass(), "On action delete"); // NOI18N
 
-        DialogProvider.getDefault().showDeleteSingleFileDialog(
+        // TODO properties
+        DialogProvider.getDefault().showDeleteDialog(
+                "Do you really want delete this reflection?",  // NOI18N
                 (ActionEvent ae) -> { // Yes
                     SqlProvider.getDefault().getReflectionSqlProvider().deleteReflectionWithAllComments(model.getId());
                     
@@ -186,7 +221,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
 
     public void onActionRefresh() {
         LoggerFacade.getDefault().info(this.getClass(), "On action refresh"); // NOI18N
-        
+        // TODO not better to load the old state from db?
         if (oldModel == null) {
             return;
         }
@@ -202,7 +237,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionSave(Boolean updateGui) {
-        LoggerFacade.getDefault().info(this.getClass(), "Save dream to database"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Save Reflection and Comments to database"); // NOI18N
         
         System.out.println(" XXX ReflectionPresenter.onActionSave(boolean) add validation for input");
         
@@ -212,14 +247,13 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         model.textProperty().unbind();
         
         // Convert date + time
-        final String time = (tfTime.getText() != null) ? tfTime.getText()
-                : PATTERN__TIME_IS_EMPTY;
+        final String time = (tfTime.getText() != null) ? tfTime.getText() : PATTERN__TIME_IS_EMPTY;
         model.setGenerationTime(UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(
                 tfDate.getText() + SIGN__SPACE + time,
                 PATTERN__DATETIME));
         
-        // Save the dream
-        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model, FILE__DREAM__DEFAULT_ID);
+        // Save the Reflection file
+        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model);
         oldModel = ReflectionModel.copy(model);
         
         if (!updateGui) {
@@ -260,7 +294,6 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     
     public void show(ReflectionModel model) {
         LoggerFacade.getDefault().info(this.getClass(), "Show reflection: " + model.getTitle()); // NOI18N
-        System.out.println(" XXX ReflectionPresenter.show() validation date + time");
         
         this.model = model;
         this.model.setMarkAsChanged(this.model.getId() == FILE__REFLECTION__DEFAULT_ID.longValue());
@@ -316,7 +349,25 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         taText.textProperty().addListener(stringChangeListener);
         this.model.textProperty().bind(taText.textProperty());
         
-        // TODO load all comments here
+        // Load all comments here
+        lvComments.getItems().clear();
+        if (this.model.getReflectionCommentModels().isEmpty()) {
+            return;
+        }
+        
+        final List<ReflectionCommentView> reflectionCommentViews = FXCollections.observableArrayList();
+        for (ReflectionCommentModel reflectionCommentModel : this.model.getReflectionCommentModels()) {
+            final ReflectionCommentView reflectionCommentView = new ReflectionCommentView();
+            final ReflectionCommentPresenter presenter = reflectionCommentView.getRealPresenter();
+        
+            final String actionKeyForDeleting = this.createOnActionDeleteComment();
+            presenter.configure(reflectionCommentModel, actionKeyForDeleting);
+            presenter.textProperty().addListener(stringChangeListener);
+            
+            reflectionCommentViews.add(reflectionCommentView);
+        }
+        
+        lvComments.getItems().addAll(reflectionCommentViews);
     }
     
     private class BooleanChangeListener implements ChangeListener<Boolean> {

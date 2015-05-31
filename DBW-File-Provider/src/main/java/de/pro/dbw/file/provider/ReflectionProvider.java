@@ -132,7 +132,7 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
     
     private void show(Long reflectionId) {
-        // Check if the dream is always open
+        // Check if the Reflection file is always open
         for (Tab tab : tpEditor.getTabs()) {
             if (tab.getId().equals(String.valueOf(reflectionId))) {
                 tpEditor.getSelectionModel().select(tab);
@@ -141,7 +141,7 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
         }
         
         // Load content and show it
-        final ReflectionModel model = SqlProvider.getDefault().getReflectionSqlProvider().findById(reflectionId);
+        final ReflectionModel model = SqlProvider.getDefault().getReflectionSqlProvider().findReflectionById(reflectionId);
         if (model == null) {
             return;
         }

@@ -23,22 +23,33 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.List;
+import java.util.Objects;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.LongProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -65,6 +76,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
         copy.setGenerationTime(toCopy.getGenerationTime());
         copy.setId(toCopy.getId());
         copy.setMarkAsChanged(Boolean.FALSE);
+        copy.setReflectionCommentModels(toCopy.getReflectionCommentModels());
         copy.setSource(toCopy.getSource());
         copy.setText(toCopy.getText());
         copy.setTitle(toCopy.getTitle());
@@ -88,18 +100,18 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public long getId() {
-        if (this.idProperty == null) {
+        if (idProperty == null) {
             return _id;
         } else {
-            return idProperty.get();
+            return idProperty.getValue();
         }
     }
 
     public final void setId(long id) {
-        if (this.idProperty == null) {
+        if (idProperty == null) {
             _id = id;
         } else {
-            this.idProperty.set(id);
+            idProperty.setValue(id);
         }
     }
 
@@ -111,24 +123,59 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     }
     // END  ID -----------------------------------------------------------------
     
+    // START  REFLECTIONCOMMENT ------------------------------------------------
+    private ObjectProperty reflectionCommentModelsProperty;
+    private List<ReflectionCommentModel> _reflectionCommentModels = FXCollections.observableArrayList();
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "MappingReflectionComment",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id")
+    )
+    public List<ReflectionCommentModel> getReflectionCommentModels() {
+        if (reflectionCommentModelsProperty == null) {
+            return _reflectionCommentModels;
+        } else {
+            return (List<ReflectionCommentModel>) reflectionCommentModelsProperty.getValue();
+        }
+    }
+    
+    public void setReflectionCommentModels(List<ReflectionCommentModel> reflectionCommentModels) {
+        if (reflectionCommentModelsProperty == null) {
+            _reflectionCommentModels = reflectionCommentModels;
+        } else {
+            reflectionCommentModelsProperty.setValue(reflectionCommentModels);
+        }
+    }
+    
+    public ObjectProperty reflectionCommentModelsProperty() {
+        if (reflectionCommentModelsProperty == null) {
+            reflectionCommentModelsProperty = new SimpleObjectProperty(this, "reflectioncomment", _reflectionCommentModels);
+        }
+        
+        return reflectionCommentModelsProperty;
+    }
+    // END  REFLECTIONCOMMENT --------------------------------------------------
+    
     // START  GENERATIONTIME ---------------------------------------------------
     private LongProperty generationTimeProperty;
     private long _generationTime = System.currentTimeMillis();
 
     @Column(name = "generationtime")
     public long getGenerationTime() {
-        if (this.generationTimeProperty == null) {
+        if (generationTimeProperty == null) {
             return _generationTime;
         } else {
-            return generationTimeProperty.get();
+            return generationTimeProperty.getValue();
         }
     }
 
     public final void setGenerationTime(long generationTime) {
-        if (this.generationTimeProperty == null) {
+        if (generationTimeProperty == null) {
             _generationTime = generationTime;
         } else {
-            this.generationTimeProperty.set(generationTime);
+            generationTimeProperty.setValue(generationTime);
         }
     }
 
@@ -146,18 +193,18 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     @Column(name = "source")
     public String getSource() {
-        if (this.sourceProperty == null) {
+        if (sourceProperty == null) {
             return _source;
         } else {
-            return sourceProperty.get();
+            return sourceProperty.getValue();
         }
     }
     
     public void setSource(String source) {
-        if (this.sourceProperty == null) {
+        if (sourceProperty == null) {
             _source = source;
         } else {
-            this.sourceProperty.set(source);
+            sourceProperty.setValue(source);
         }
     }
     
@@ -175,18 +222,18 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     @Column(name = "text")
     public String getText() {
-        if (this.textProperty == null) {
+        if (textProperty == null) {
             return _text;
         } else {
-            return textProperty.get();
+            return textProperty.getValue();
         }
     }
     
     public void setText(String text) {
-        if (this.textProperty == null) {
+        if (textProperty == null) {
             _text = text;
         } else {
-            this.textProperty.set(text);
+            textProperty.setValue(text);
         }
     }
     
@@ -204,18 +251,18 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     @Column(name = "title")
     public String getTitle() {
-        if (this.titleProperty == null) {
+        if (titleProperty == null) {
             return _title;
         } else {
-            return titleProperty.get();
+            return titleProperty.getValue();
         }
     }
     
     public void setTitle(String title) {
-        if (this.titleProperty == null) {
+        if (titleProperty == null) {
             _title = title;
         } else {
-            this.titleProperty.set(title);
+            titleProperty.setValue(title);
         }
     }
     
@@ -229,6 +276,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     private transient BooleanProperty markAsChangedProperty = null;
 
+    @Transient
     public Boolean isMarkAsChanged() {
         return markAsChangedProperty.getValue();
     }
@@ -257,7 +305,11 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
             return false;
         }
         final ReflectionModel other = (ReflectionModel) obj;
-        if (this.getId() != other.getId()) {
+        if (!Objects.equals(this.getId(), other.getId())) {
+            return false;
+        }
+        
+        if (!Objects.equals(this.getGenerationTime(), other.getGenerationTime())) {
             return false;
         }
         
@@ -293,6 +345,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeLong(this.getId());
+        out.writeObject(this.getReflectionCommentModels());
         out.writeLong(this.getGenerationTime());
         out.writeObject(this.getSource());
         out.writeObject(this.getText());
@@ -302,6 +355,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         this.setId(in.readLong());
+        this.setReflectionCommentModels((List<ReflectionCommentModel>) in.readObject());
         this.setGenerationTime(in.readLong());
         this.setSource(String.valueOf(in.readObject()));
         this.setText(String.valueOf(in.readObject()));

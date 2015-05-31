@@ -22,8 +22,6 @@ package de.pro.dbw.core.configuration.api.file.reflection;
  */
 public interface IReflectionConfiguration {
     
-    public static final String REFLECTION_COMMENT_MODEL__FIND_ALL_COMMENTS = "ReflectionCommentModel.findAllComments"; // NOI18N
-    
     public static final String REFLECTION_MODEL__FIND_ALL = "ReflectionModel.findAll"; // NOI18N
     public static final String REFLECTION_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY = "ReflectionModel.findAllForNavigationHistory"; // NOI18N
     

@@ -18,7 +18,6 @@ package de.pro.dbw.file.reflection.api;
 
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
-import de.pro.dbw.core.configuration.api.file.reflection.IReflectionConfiguration;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -34,9 +33,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * TODO Extention voting the commentary
@@ -46,17 +44,16 @@ import javax.persistence.Table;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(name = "ReflectionCommentModel")
-@NamedQueries(
-    @NamedQuery(
-            name = IReflectionConfiguration.REFLECTION_COMMENT_MODEL__FIND_ALL_COMMENTS,
-            query = "SELECT r FROM ReflectionCommentModel r WHERE r.parentId = :parentId")
-)
 public class ReflectionCommentModel implements Comparable<ReflectionCommentModel>, Externalizable,
         IDefaultIdConfiguration, IUtilConfiguration {
 
     private static final long serialVersionUID = 1L;
 
     public ReflectionCommentModel() {
+        this.initialize();
+    }
+    
+    private void initialize() {
         
     }
     
@@ -68,18 +65,18 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public long getId() {
-        if (this.idProperty == null) {
+        if (idProperty == null) {
             return _id;
         } else {
-            return idProperty.get();
+            return idProperty.getValue();
         }
     }
 
     public final void setId(long id) {
-        if (this.idProperty == null) {
+        if (idProperty == null) {
             _id = id;
         } else {
-            this.idProperty.set(id);
+            idProperty.setValue(id);
         }
     }
 
@@ -90,56 +87,25 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
         return idProperty;
     }
     // END  ID -----------------------------------------------------------------
-    
-    // START  PARENT-ID --------------------------------------------------------
-    private LongProperty parentIdProperty;
-    private long _parentId = System.currentTimeMillis();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "parentId")
-    public long getParentId() {
-        if (this.parentIdProperty == null) {
-            return _parentId;
-        } else {
-            return parentIdProperty.get();
-        }
-    }
-
-    public final void setParentId(long parentId) {
-        if (this.parentIdProperty == null) {
-            _parentId = parentId;
-        } else {
-            this.parentIdProperty.set(parentId);
-        }
-    }
-
-    public LongProperty parentIdProperty() {
-        if (parentIdProperty == null) {
-            parentIdProperty = new SimpleLongProperty(this, "parentId", _parentId);
-        }
-        return parentIdProperty;
-    }
-    // END  PARENT-ID ----------------------------------------------------------
-    
     // START  GENERATIONTIME ---------------------------------------------------
     private LongProperty generationTimeProperty;
     private long _generationTime = System.currentTimeMillis();
 
     @Column(name = "generationtime")
     public long getGenerationTime() {
-        if (this.generationTimeProperty == null) {
+        if (generationTimeProperty == null) {
             return _generationTime;
         } else {
-            return generationTimeProperty.get();
+            return generationTimeProperty.getValue();
         }
     }
 
     public final void setGenerationTime(long generationTime) {
-        if (this.generationTimeProperty == null) {
+        if (generationTimeProperty == null) {
             _generationTime = generationTime;
         } else {
-            this.generationTimeProperty.set(generationTime);
+            generationTimeProperty.setValue(generationTime);
         }
     }
 
@@ -157,18 +123,18 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     
     @Column(name = "text")
     public String getText() {
-        if (this.textProperty == null) {
+        if (textProperty == null) {
             return _text;
         } else {
-            return textProperty.get();
+            return textProperty.getValue();
         }
     }
     
     public void setText(String text) {
-        if (this.textProperty == null) {
+        if (textProperty == null) {
             _text = text;
         } else {
-            this.textProperty.set(text);
+            textProperty.setValue(text);
         }
     }
     
@@ -179,6 +145,17 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
         return textProperty;
     }
     // END  TEXT ---------------------------------------------------------------
+
+    private transient Boolean markAsDeleted = Boolean.FALSE;
+
+    @Transient
+    public Boolean isMarkAsDeleted() {
+        return markAsDeleted;
+    }
+    
+    public void setMarkAsDeleted(Boolean markAsDeleted) {
+        this.markAsDeleted = markAsDeleted;
+    }
     
     @Override
     public int compareTo(ReflectionCommentModel other) {
@@ -195,7 +172,6 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
         final StringBuilder sb = new StringBuilder();
         sb.append("ReflectionComment[");
         sb.append("id=").append(this.getId());
-        sb.append(", parentId=").append(this.getParentId());
         sb.append(", generationtime=").append(this.getGenerationTime());
         sb.append("]");
         
@@ -205,7 +181,6 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeLong(this.getId());
-        out.writeLong(this.getParentId());
         out.writeLong(this.getGenerationTime());
         out.writeObject(this.getText());
     }
@@ -213,7 +188,6 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         this.setId(in.readLong());
-        this.setParentId(in.readLong());
         this.setGenerationTime(in.readLong());
         this.setText(String.valueOf(in.readObject()));
     }

@@ -48,7 +48,6 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
- * TODO add checkbox in create mode -> open reflection in editor
  *
  * @author PRo
  */
@@ -111,10 +110,10 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         assert (tfTime != null)     : "fx:id=\"tfTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (tfTitle != null)    : "fx:id=\"tfTitle\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         
-//        this.initializeText();
         this.initializeBindings();
         this.initializeSaveProgress();
         this.initializeTimeComponents();
+        // TODO add checkbox in create mode -> [v] = open reflection in editor
     }
     
     private void initializeBindings() {
@@ -146,11 +145,6 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         bCreate.disableProperty().bind(disableBinding);
         bEdit.disableProperty().bind(disableBinding);
     }
-    
-//    private void initializeText() {
-//        LoggerFacade.getDefault().info(this.getClass(), "Initialize text"); // NOI18N
-//        
-//    }
     
     private void initializeSaveProgress() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize save progress"); // NOI18N
@@ -249,7 +243,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         this.model.setText(taText.getText());
         
         // Save the reflection
-        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model, FILE__REFLECTION__DEFAULT_ID);
+        SqlProvider.getDefault().getReflectionSqlProvider().createOrUpdate(model);
 
         // Update gui
         ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
