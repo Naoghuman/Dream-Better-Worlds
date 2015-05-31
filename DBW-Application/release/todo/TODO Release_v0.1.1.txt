@@ -1,0 +1,16 @@
+--------------------------------------------------------------------------------
+RELEASE v0.1.1 (2015-MM-dd HH:mm)
+--------------------------------------------------------------------------------
+NEW
+
+ENHANCEMENT
+#4 Enhance the search functionality to search in Reflection files.
+
+BUG
+#3 Create more then one Reflection file overwrite the before created file.
+
+CHECK
+ - Check TipOfTheNight functionality
+ - Check Dream search functionality
+
+--------------------------------------------------------------------------------
