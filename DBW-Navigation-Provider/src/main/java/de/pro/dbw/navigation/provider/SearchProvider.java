@@ -24,6 +24,7 @@ import de.pro.dbw.navigation.search.impl.searchnavigation.SearchNavigationView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -54,6 +55,7 @@ public class SearchProvider implements IActionConfiguration {
     
     private void initialize() {
         this.registerOnActionSearchInDreams();
+        this.registerOnActionSearchInReflections();
         this.registerOnActionSearchInTipsOfTheNight();
     }
 
@@ -62,8 +64,7 @@ public class SearchProvider implements IActionConfiguration {
         
         LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes for navigation-left and editor");
         
-        System.out.println(" XXX load title Search from properties");
-        final Tab tab = new Tab("Search");
+        final Tab tab = new Tab("Search"); // XXX properties
         tab.setClosable(false);
         searchNavigationView = new SearchNavigationView();
         tab.setContent(searchNavigationView.getView());
@@ -77,11 +78,16 @@ public class SearchProvider implements IActionConfiguration {
                 ACTION__SEARCH_IN__DREAMS,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
-                    final ExtendedTabModel model = (ExtendedTabModel) transferModel.getObject();
-                    final ExtendedTab tab = BaseProvider.getDefault().getComponentProvider().getTab(model);
-                    
-                    tbEditor.getTabs().add(tab);
-                    tbEditor.getSelectionModel().select(tab);
+                    this.onActionSearchIn(transferModel);
+                });
+    }
+    
+    private void registerOnActionSearchInReflections() {
+        ActionFacade.getDefault().register(
+                ACTION__SEARCH_IN__REFLECTIONS,
+                (ActionEvent ae) -> {
+                    final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
+                    this.onActionSearchIn(transferModel);
                 });
     }
     
@@ -90,12 +96,18 @@ public class SearchProvider implements IActionConfiguration {
                 ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
-                    final ExtendedTabModel model = (ExtendedTabModel) transferModel.getObject();
-                    final ExtendedTab tab = BaseProvider.getDefault().getComponentProvider().getTab(model);
-                    
-                    tbEditor.getTabs().add(tab);
-                    tbEditor.getSelectionModel().select(tab);
+                    this.onActionSearchIn(transferModel);
                 });
+    }
+    
+    private void onActionSearchIn(final ActionTransferModel transferModel) {
+        Platform.runLater(() -> {
+            final ExtendedTabModel model = (ExtendedTabModel) transferModel.getObject();
+            final ExtendedTab tab = BaseProvider.getDefault().getComponentProvider().getTab(model);
+            
+            tbEditor.getTabs().add(tab);
+            tbEditor.getSelectionModel().select(tab);
+        });
     }
     
 }

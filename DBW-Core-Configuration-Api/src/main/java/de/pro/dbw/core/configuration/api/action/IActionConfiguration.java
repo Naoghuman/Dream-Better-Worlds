@@ -51,6 +51,7 @@ public interface IActionConfiguration {
 //    public static final String ACTION__DONT_SAVE_ = "ACTION__DONT_SAVE_"; // NOI18N
     
     public static final String ACTION__SEARCH_IN__DREAMS = "ACTION__SEARCH_IN__DREAMS"; // NOI18N
+    public static final String ACTION__SEARCH_IN__REFLECTIONS = "ACTION__SEARCH_IN__REFLECTIONS"; // NOI18N
     public static final String ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT = "ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT"; // NOI18N
     
     public static final String ACTION__SHOW_EXTENDED_SLIDER_DIALOG = "ACTION__SHOW_EXTENDED_SLIDER_DIALOG_"; // NOI18N
