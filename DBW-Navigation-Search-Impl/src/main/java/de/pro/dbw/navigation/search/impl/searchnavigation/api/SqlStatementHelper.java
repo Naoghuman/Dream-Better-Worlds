@@ -16,11 +16,31 @@
  */
 package de.pro.dbw.navigation.search.impl.searchnavigation.api;
 
+import de.pro.dbw.base.component.api.IExtendedTextField;
+import de.pro.dbw.base.provider.BaseProvider;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+
 /**
  *
  * @author PRo
  */
 public final class SqlStatementHelper {
+    
+    public static ObservableList<String> createSimpleSqlInfoForSearchIn(VBox vbSimpleSqlInfo) {
+        final ObservableList<String> statements = FXCollections.observableArrayList();
+        for (Node node : vbSimpleSqlInfo.getChildren()) {
+            if (node instanceof Label) {
+                final Label lbl = (Label) node;
+                statements.add(lbl.getText());
+            }
+        }
+        
+        return statements;
+    }
     
     public static String createSqlStatementForEntity(String entity) {
         final StringBuilder sb = new StringBuilder();
@@ -37,6 +57,23 @@ public final class SqlStatementHelper {
         sb.append(" LIKE '%").append(parameter).append("%'"); // NOI18N
         
         return sb.toString();
+    }
+    
+    public static void initializeSimpleSqlInfo(VBox vbSimpleSqlInfo, Boolean visibleAndManaged) {
+        vbSimpleSqlInfo.getChildren().clear();
+        vbSimpleSqlInfo.setVisible(visibleAndManaged);
+        vbSimpleSqlInfo.setManaged(visibleAndManaged);
+    }
+    
+    public static IExtendedTextField initializeTextField(
+            VBox vbSearchComponents, String title, double minWidth
+    ) {
+        final IExtendedTextField textField = BaseProvider.getDefault().getComponentProvider().getExtendedTextField();
+        textField.configure(title, minWidth);
+        
+        vbSearchComponents.getChildren().add(textField.getView());
+        
+        return textField;
     }
     
 }

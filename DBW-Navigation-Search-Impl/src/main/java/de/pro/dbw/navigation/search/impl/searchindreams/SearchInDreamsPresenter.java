@@ -60,7 +60,7 @@ public class SearchInDreamsPresenter implements
     @FXML private VBox vbSearchComponents;
     @FXML private VBox vbSimpleSqlInfo;
     
-    private IntegerProperty counterActiveProperty = null;
+    private IntegerProperty counterActiveComponentsProperty = null;
     
     private int indexSearchInDreams = 0;
     
@@ -76,21 +76,21 @@ public class SearchInDreamsPresenter implements
         assert (vbSimpleSqlInfo != null)    : "fx:id=\"vbSimpleSqlInfo\" was not injected: check your FXML file 'SearchInDreams.fxml'."; // NOI18N
     
         this.initializeScrollPane();
-        this.initializeSimpleSqlInfo(Boolean.FALSE);
+        SqlStatementHelper.initializeSimpleSqlInfo(vbSimpleSqlInfo, Boolean.FALSE);
         this.initializeSearchButton();
         
         final double minWidth = 72.0d;
-        extendedTextFieldTitle = this.initializeTextField("Title:", 0, minWidth); // NOI18N // XXX properties
-        extendedTextFieldDescription = this.initializeTextField("Description:", 1, minWidth); // NOI18N
+        extendedTextFieldTitle = SqlStatementHelper.initializeTextField(vbSearchComponents, "Title:", minWidth); // NOI18N // XXX properties
+        extendedTextFieldDescription = SqlStatementHelper.initializeTextField(vbSearchComponents, "Description:", minWidth); // NOI18N
         
         this.initializeChangeListeners();
     }
     
     private void initializeChangeListeners() {
         final ChangeListener<Boolean> listener = (ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            int counterActive = counterActiveProperty.getValue();
+            int counterActive = counterActiveComponentsProperty.getValue();
             counterActive = newValue ? ++counterActive : --counterActive;
-            counterActiveProperty.setValue(counterActive);
+            counterActiveComponentsProperty.setValue(counterActive);
             
             this.updateSimpleSqlInfo();
         };
@@ -109,35 +109,8 @@ public class SearchInDreamsPresenter implements
     private void initializeSearchButton() {
         bSearchInDreams.setDisable(Boolean.TRUE);
         
-        counterActiveProperty = new SimpleIntegerProperty(0);
-        bSearchInDreams.disableProperty().bind(counterActiveProperty.isEqualTo(0)); 
-    }
-    
-    private void initializeSimpleSqlInfo(Boolean visibleAndManaged) {
-        vbSimpleSqlInfo.getChildren().clear();
-        vbSimpleSqlInfo.setVisible(visibleAndManaged);
-        vbSimpleSqlInfo.setManaged(visibleAndManaged);
-    }
-    
-    private IExtendedTextField initializeTextField(String title, int index, double minWidth) {
-        final IExtendedTextField textField = BaseProvider.getDefault().getComponentProvider().getExtendedTextField();
-        textField.configure(title, minWidth);
-        
-        vbSearchComponents.getChildren().add(index, textField.getView());
-        
-        return textField;
-    }
-    
-    private ObservableList<String> createSimpleSqlInfoForSearchInDreams() {
-        final ObservableList<String> statements = FXCollections.observableArrayList();
-        for (Node node : vbSimpleSqlInfo.getChildren()) {
-            if (node instanceof Label) {
-                final Label lbl = (Label) node;
-                statements.add(lbl.getText());
-            }
-        }
-        
-        return statements;
+        counterActiveComponentsProperty = new SimpleIntegerProperty(0);
+        bSearchInDreams.disableProperty().bind(counterActiveComponentsProperty.isEqualTo(0)); 
     }
     
     private ObservableList<String> createSqlStatementsForSearchInDreams() {
@@ -159,7 +132,7 @@ public class SearchInDreamsPresenter implements
     
     public void onActionSearchInDreams() {
         final SearchDataModel searchDataModel = new SearchDataModel();
-        searchDataModel.setSimpleSqlInfo(this.createSimpleSqlInfoForSearchInDreams());
+        searchDataModel.setSimpleSqlInfo(SqlStatementHelper.createSimpleSqlInfoForSearchIn(vbSimpleSqlInfo));
         searchDataModel.setSqlStatements(this.createSqlStatementsForSearchInDreams());
         searchDataModel.setSuffixForManyElements(" dreams"); // NOI18N
         searchDataModel.setSuffixForOneElement(" dream"); // NOI18N
@@ -176,7 +149,7 @@ public class SearchInDreamsPresenter implements
         model.setMarkAsChanged(Boolean.FALSE);
         model.setModel(null); /* not needed */
         model.setPresenter(presenter);
-        model.setTitle("Search in Dreams #" + ++indexSearchInDreams); // NOI18N
+        model.setTitle("Search in Dreams #" + ++indexSearchInDreams); // NOI18N XXX properties
         model.setView(view.getView());
         
         final ActionTransferModel transferModel = new ActionTransferModel();
@@ -187,6 +160,7 @@ public class SearchInDreamsPresenter implements
     }
     
     private void setWidthForScrollPaneComponent() {
+        // TODO check if possible with binding
         double width = spSearchComponents.getViewportBounds().getWidth() - 5;
         width = (width < 175) ? 175 : width;
         vbSearchComponents.setMaxWidth(width);
@@ -194,14 +168,14 @@ public class SearchInDreamsPresenter implements
     }
     
     private void updateSimpleSqlInfo() {
-        final Boolean isVisibleAndManaged = counterActiveProperty.getValue() > 0;
-        this.initializeSimpleSqlInfo(isVisibleAndManaged);
+        final Boolean isVisibleAndManaged = counterActiveComponentsProperty.getValue() > 0;
+        SqlStatementHelper.initializeSimpleSqlInfo(vbSimpleSqlInfo, isVisibleAndManaged);
         if (!isVisibleAndManaged) {
             return;
         }
         
 //        vbSimpleSqlInfo.getChildren().add(new Separator());
-        vbSimpleSqlInfo.getChildren().add(new Label("SEARCH in your dreams"));
+        vbSimpleSqlInfo.getChildren().add(new Label("SEARCH in your dreams"));// XXX properties
         vbSimpleSqlInfo.getChildren().add(new Label("WHERE"));
         
         Boolean isSimpleSqlAdded = Boolean.FALSE;

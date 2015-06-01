@@ -22,6 +22,7 @@ package de.pro.dbw.core.configuration.api.application.util;
  */
 public interface IUtilConfiguration {
     
+    public static final String SIGN__DOUBLE_POINT = ":"; // NOI18N
     public static final String SIGN__EMPTY = ""; // NOI18N
     public static final String SIGN__SPACE = " "; // NOI18N
     public static final String SIGN__STAR = "*"; // NOI18N
