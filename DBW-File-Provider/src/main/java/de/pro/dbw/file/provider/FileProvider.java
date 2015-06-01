@@ -53,7 +53,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
     }
     
     public void checkShowAtStart() {
-//        TipOfTheNightProvider.getDefault().checkShowTipOfTheNightAtStart();
+        TipOfTheNightProvider.getDefault().checkShowTipOfTheNightAtStart();
 //        HelpFileProvider.getDefault().checkShowWelcomeHelpAtStart();
     }
     

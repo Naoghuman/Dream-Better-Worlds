@@ -25,6 +25,7 @@ import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEdito
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -61,12 +62,14 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     public void checkShowTipOfTheNightAtStart() {
         LoggerFacade.getDefault().info(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
     
-//        final Boolean isShowAtStart = TipOfTheNightDatabaseProvider.getDefault().isShowAtStart();
-//        if (!isShowAtStart) {
-//            return;
-//        }
-//        
-//        this.onActionShowTipOfTheNightWindow();
+        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
+                PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
+                PREF__SHOW_AT_START__TIP_OF_THE_NIGHT__DEFAULT_VALUE);
+        if (!isShowAtStart) {
+            return;
+        }
+        
+        this.onActionShowTipOfTheNightWindow();
     }
     
     private void onActionShowTipOfTheNightEditor() {
