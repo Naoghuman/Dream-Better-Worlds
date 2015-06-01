@@ -8,6 +8,6 @@ ENHANCEMENT
 BUG
 
 CHECK
- - Tags or Dreammap or SimpleExercise?
+ - Tags or Dreammap or SimpleExercise or Search?
 
 --------------------------------------------------------------------------------
