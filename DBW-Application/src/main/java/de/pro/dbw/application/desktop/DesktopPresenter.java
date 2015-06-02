@@ -21,6 +21,7 @@ import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.desktop.IDesktopConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
+import de.pro.dbw.feature.provider.FeatureProvider;
 import de.pro.dbw.file.provider.FileProvider;
 import de.pro.dbw.navigation.provider.NavigationProvider;
 import de.pro.lib.action.api.ActionFacade;
@@ -84,7 +85,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration, ID
         
         this.registerActions();
         this.registerDialogLayer();
-        this.registerTabPaneEditor();
+        this.registerEditor();
         this.registerNavigation();
         
         this.initializeToolBar();
@@ -259,9 +260,10 @@ public class DesktopPresenter implements Initializable, IActionConfiguration, ID
         DialogProvider.getDefault().register(spDialogLayer, spDialogLayer2);
     }
     
-    private void registerTabPaneEditor() {
+    private void registerEditor() {
         LoggerFacade.getDefault().info(this.getClass(), "Register TabPane for Editor"); // NOI18N
         
+        FeatureProvider.getDefault().register(tpEditor);
         FileProvider.getDefault().register(tpEditor);
     }
     
