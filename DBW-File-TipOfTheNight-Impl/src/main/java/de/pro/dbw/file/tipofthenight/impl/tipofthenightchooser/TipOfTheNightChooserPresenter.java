@@ -79,7 +79,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     
      - Default TipsOfTheNight von mir.
         - User kann die löschen, editieren?
-        - Wenn löschen, soll dann sollte im Dialog ein Hinweis stehen, dass der
+        - Wenn löschen, sollte dann im Dialog ein Hinweis stehen, dass der
           User eigene über ... generieren kann.
     
     ----------------------------------------------------------------------------
@@ -87,12 +87,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
      - model wo teilweise parameter lädt (test parameter wo weggelassen werden 
        müssen null=true sein?)
      - neue version mit lib-logger
-    
-    lib-action
-      - neue function für audioclips laden und verwalten
-      - neue version mit lib-logger
-    
-    danach dann die neue libs alle im projekt einbinden.
+
     ----------------------------------------------------------------------------
     */
     private void initialize() {
@@ -111,8 +106,10 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     private void initializeShowAtStart() {
-//        final Boolean isShowAtStart = TipOfTheNightDatabaseProvider.getDefault().isShowAtStart();
-//        cbShowAtStart.setSelected(isShowAtStart);
+        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
+                PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
+                PREF__SHOW_AT_START__TIP_OF_THE_NIGHT__DEFAULT_VALUE);
+        cbShowAtStart.setSelected(isShowAtStart);
     }
     
     public StringProperty textProperty() {
@@ -130,9 +127,10 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
         if (allTipsOfTheNight.isEmpty()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
+            PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             this.show(null);
             
-            // return; // TODO check
+            return;
         }
         
         ++index;
@@ -140,12 +138,6 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
         }
         PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
-        
-        if (allTipsOfTheNight.isEmpty()) {
-            this.show(null);
-            
-            // return; // TODO check
-        }
         
         this.show(allTipsOfTheNight.get(index));
     }
@@ -157,7 +149,10 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
         if (allTipsOfTheNight.isEmpty()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
+            PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             this.show(null);
+            
+            return;
         }
         
         if (allTipsOfTheNight.size() < 2) {
@@ -204,7 +199,6 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         lTitle.setText(model.getTitle());
         taTipOfTheNight.setText(model.getText());
         
-//        cbShowAtStart.setDisable(Boolean.FALSE);
         bNext.setDisable(Boolean.FALSE);
         bRandom.setDisable(Boolean.FALSE);
     }
@@ -215,7 +209,6 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         lTitle.setText(null);
         taTipOfTheNight.setText(null);
         
-//        cbShowAtStart.setDisable(Boolean.TRUE);
         bNext.setDisable(Boolean.TRUE);
         bRandom.setDisable(Boolean.TRUE);
     }
