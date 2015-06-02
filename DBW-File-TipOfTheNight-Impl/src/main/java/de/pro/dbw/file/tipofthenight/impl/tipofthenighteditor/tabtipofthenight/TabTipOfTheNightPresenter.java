@@ -107,7 +107,9 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     private void initializeListView() {
         LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView TipsOfTheNight"); // NOI18N
 
+        lvTipsOfTheNight.getStylesheets().addAll(this.getClass().getResource("TabTipOfTheNight.css").toExternalForm()); // NOI18N
         lvTipsOfTheNight.getItems().clear();
+        
         lvTipsOfTheNight.setCellFactory((list) -> {
             return new ListCell<TipOfTheNightModel>() {
                 @Override
