@@ -8,9 +8,15 @@ ENHANCEMENT
 BUG
 #3 Create more then one Reflection file overwrite the before created file.
 
+REFACTORING
+#7 Reorder the components in TipOfTheNightEditor.
+
 CHECK
  - Check TipOfTheNight functionality
  - Check TipOfTheNight search functionality
  - Check Dream search functionality
+
+#9 Create new module DBW-Feature-Provider
+#8 CheckBox ShowAtStart should reflect the current state in TipOfTheNightEditor. 
 
 --------------------------------------------------------------------------------

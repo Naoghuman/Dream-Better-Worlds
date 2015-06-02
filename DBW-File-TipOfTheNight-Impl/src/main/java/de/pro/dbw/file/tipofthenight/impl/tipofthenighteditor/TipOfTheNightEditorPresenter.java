@@ -29,16 +29,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 
-/*
-TODO
-    - Zeigt ein SingletonTab als Editor an.
-    - User kann vorhandene TipOfTheNights erstellen, editieren, löschen.
-    - User kann Templates erstellen, die folgende Parameter umfassen.
-        - Die Farben von Titel und Text
-        - Die Schriftarten für Titel und Text
-        - Das Backgroundimage.
-    - Wird über Menu Configuration -> TipOfTheNight geöffnet.
-*/
 /**
  *
  * @author PRo
