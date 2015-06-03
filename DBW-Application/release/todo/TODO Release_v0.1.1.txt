@@ -2,11 +2,12 @@
 RELEASE v0.1.1 (2015-MM-dd HH:mm)
 --------------------------------------------------------------------------------
 NEW
+#10 Create new module DBW-Feature-Voting(-Api, -Impl).
+#9  Create new module DBW-Feature-Provider.
 
 ENHANCEMENT
 
 FEATURE
-#9 Create new module DBW-Feature-Provider
 
 BUG
 #8 CheckBox ShowAtStart should reflect the current state in TipOfTheNightEditor.
@@ -16,5 +17,8 @@ REFACTORING
 #7 Reorder the components in TipOfTheNightEditor.
 
 CHECK
+#11 Create new module DBW-Feature-Tag(-Api, -Impl).
+#12 Create new module DBW-File-Dreammap(-Api, -Impl).
+#13 Refactore the StackPane for Dialogs to an AnchorPane.
 
 --------------------------------------------------------------------------------

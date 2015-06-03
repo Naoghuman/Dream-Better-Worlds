@@ -7,24 +7,13 @@
         <artifactId>Dream-Better-Worlds</artifactId>
         <version>0.1.1-SNAPSHOT</version>
     </parent>
-    <artifactId>DBW-Feature-Provider</artifactId>
+    <artifactId>DBW-Feature-Voting-Impl</artifactId>
     <packaging>jar</packaging>
     
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Lib-Logger</artifactId>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Feature-Voting-Api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-Feature-Voting-Impl</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -178,6 +178,8 @@
         <module>DBW-Dialog-Impl</module>
         <module>DBW-Dialog-Provider</module>
         <module>DBW-Feature-Provider</module>
+        <module>DBW-Feature-Voting-Api</module>
+        <module>DBW-Feature-Voting-Impl</module>
         <module>DBW-File-Dream-Api</module>
         <module>DBW-File-Dream-Impl</module>
         <module>DBW-File-Provider</module>

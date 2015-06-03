@@ -23,13 +23,13 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class FeatureProvider {
+public class VotingProvider {
     
-    private static FeatureProvider instance = null;
+    private static VotingProvider instance = null;
     
-    public static FeatureProvider getDefault() {
+    public static VotingProvider getDefault() {
         if (instance == null) {
-            instance = new FeatureProvider();
+            instance = new VotingProvider();
         }
         
         return instance;
@@ -37,7 +37,7 @@ public class FeatureProvider {
     
     private TabPane tpEditor = null;
     
-    private FeatureProvider() {
+    private VotingProvider() {
         this.initialize();
     }
     
@@ -45,16 +45,10 @@ public class FeatureProvider {
         
     }
     
-    public VotingProvider getVotingProvider() {
-        return VotingProvider.getDefault();
-    }
-    
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in FeatureProvider");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in VotingProvider");
         
         this.tpEditor = tpEditor;
-        
-        VotingProvider.getDefault().register(tpEditor);
     }
     
 }
