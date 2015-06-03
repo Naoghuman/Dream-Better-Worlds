@@ -19,6 +19,16 @@
         
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Feature-Tag-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Feature-Tag-Impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Feature-Voting-Api</artifactId>
             <version>${project.version}</version>
         </dependency>

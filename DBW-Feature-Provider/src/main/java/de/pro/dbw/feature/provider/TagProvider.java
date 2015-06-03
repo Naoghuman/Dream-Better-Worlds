@@ -16,49 +16,27 @@
  */
 package de.pro.dbw.feature.provider;
 
-import de.pro.lib.logger.api.LoggerFacade;
-import javafx.scene.control.TabPane;
-
 /**
  *
  * @author PRo
  */
-public class FeatureProvider {
+public class TagProvider {
     
-    private static FeatureProvider instance = null;
+    private static TagProvider instance = null;
     
-    public static FeatureProvider getDefault() {
+    public static TagProvider getDefault() {
         if (instance == null) {
-            instance = new FeatureProvider();
+            instance = new TagProvider();
         }
         
         return instance;
     }
     
-    private TabPane tpEditor = null;
-    
-    private FeatureProvider() {
+    private TagProvider() {
         this.initialize();
     }
     
     private void initialize() {
         
     }
-    
-    public TagProvider getTagProvider() {
-        return TagProvider.getDefault();
-    }
-    
-    public VotingProvider getVotingProvider() {
-        return VotingProvider.getDefault();
-    }
-    
-    public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in FeatureProvider");
-        
-        this.tpEditor = tpEditor;
-        
-        VotingProvider.getDefault().register(tpEditor);
-    }
-    
 }
