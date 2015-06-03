@@ -16,9 +16,9 @@ BUG
 #3 Create more then one Reflection file overwrite the before created file.
 
 REFACTORING
+#13 Refactore the StackPane for Dialogs to an AnchorPane.
 #7 Reorder the components in TipOfTheNightEditor.
 
 CHECK
-#13 Refactore the StackPane for Dialogs to an AnchorPane.
 
 --------------------------------------------------------------------------------
