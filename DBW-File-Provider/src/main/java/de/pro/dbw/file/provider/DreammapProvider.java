@@ -17,10 +17,12 @@
 package de.pro.dbw.file.provider;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 //import de.pro.dbw.file.dreammap.api.DreammapModel;
 //import de.pro.dbw.file.dreammap.impl.dreammap.DreammapPresenter;
 //import de.pro.dbw.file.dreammap.impl.dreammap.DreammapView;
 import de.pro.lib.action.api.ActionFacade;
+import de.pro.lib.logger.api.LoggerFacade;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -30,7 +32,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public final class DreammapProvider implements IActionConfiguration {
+public final class DreammapProvider implements IActionConfiguration, IRegisterActions {
     
     private static DreammapProvider instance = null;
     
@@ -49,29 +51,27 @@ public final class DreammapProvider implements IActionConfiguration {
     }
     
     private void init() {
-        this.registerOnActionOpenDreammapFromNavigation();
-        this.registerOnActionOpenDreammapFormWizard();
     }
     
-    public Button getToolBarButton() {
-        final Button btn = new Button();
-        btn.setText("Dreammap"); // XXX load from properties
-//        btn.setGraphic(btn); // Load icon with lib-resources.
-        btn.setOnAction((ActionEvent event) -> {
-//            DialogProvider.getDefault().showDreamMapWizard();
-        });
-        
-        return btn;
-    }
+//    public Button getToolBarButton() {
+//        final Button btn = new Button();
+//        btn.setText("Dreammap"); // XXX load from properties
+////        btn.setGraphic(btn); // Load icon with lib-resources.
+//        btn.setOnAction((ActionEvent event) -> {
+////            DialogProvider.getDefault().showDreamMapWizard();
+//        });
+//        
+//        return btn;
+//    }
     
-    private void show(Long dreamMapId) {
-        // Check if the dream is always open
-        for (Tab tab : tpEditor.getTabs()) {
-            if (tab.getId().equals(String.valueOf(dreamMapId))) {
-                tpEditor.getSelectionModel().select(tab);
-                return;
-            }
-        }
+//    private void show(Long dreamMapId) {
+//        // Check if the dream is always open
+//        for (Tab tab : tpEditor.getTabs()) {
+//            if (tab.getId().equals(String.valueOf(dreamMapId))) {
+//                tpEditor.getSelectionModel().select(tab);
+//                return;
+//            }
+//        }
         
         // Load content and show it
 //        final DreammapModel model = null; //TestDatabase.loadDreamMap(dreamMapId);
@@ -80,7 +80,7 @@ public final class DreammapProvider implements IActionConfiguration {
 //        }
 //        
 //        this.show(model);
-    }
+//    }
     
 //    public void show(DreammapModel model) {
 //        // Check if the dreammap is always open
@@ -105,25 +105,33 @@ public final class DreammapProvider implements IActionConfiguration {
 //    }
     
     public void register(TabPane tpEditor) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in DreammapProvider");
+        
         this.tpEditor = tpEditor;
     }
     
-    public void registerOnActionOpenDreammapFromNavigation() {
-        ActionFacade.getDefault().register(
-                ACTION__OPEN_DREAMMAP__FROM_NAVIGATION,
-                (ActionEvent ae) -> {
-                    final Long idToOpen = (Long) ae.getSource();
-                    this.show(idToOpen);
-                });
+    @Override
+    public void registerActions() {
+//        this.registerOnActionOpenDreammapFromNavigation();
+//        this.registerOnActionOpenDreammapFormWizard();
     }
+    
+//    public void registerOnActionOpenDreammapFromNavigation() {
+//        ActionFacade.getDefault().register(
+//                ACTION__OPEN_DREAMMAP__FROM_NAVIGATION,
+//                (ActionEvent ae) -> {
+//                    final Long idToOpen = (Long) ae.getSource();
+//                    this.show(idToOpen);
+//                });
+//    }
 
-    private void registerOnActionOpenDreammapFormWizard() {
-        ActionFacade.getDefault().register(
-                ACTION__OPEN_DREAMMAP__FROM_WIZARD,
-                (ActionEvent ae) -> {
-//                    final DreammapModel model = (DreammapModel) ae.getSource();
-//                    this.show(model);
-                });
-    }
+//    private void registerOnActionOpenDreammapFormWizard() {
+//        ActionFacade.getDefault().register(
+//                ACTION__OPEN_DREAMMAP__FROM_WIZARD,
+//                (ActionEvent ae) -> {
+////                    final DreammapModel model = (DreammapModel) ae.getSource();
+////                    this.show(model);
+//                });
+//    }
     
 }

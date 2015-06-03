@@ -71,6 +71,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
         this.tpEditor = tpEditor;
         
         DreamProvider.getDefault().register(tpEditor);
+        DreammapProvider.getDefault().register(tpEditor);
         ReflectionProvider.getDefault().register(tpEditor);
         TipOfTheNightProvider.getDefault().register(tpEditor);
     }
@@ -81,6 +82,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
         this.registerActionSaveAllChangedFiles();
         
         DreamProvider.getDefault().registerActions();
+        DreammapProvider.getDefault().registerActions();
         ReflectionProvider.getDefault().registerActions();
         TipOfTheNightProvider.getDefault().registerActions();
     }

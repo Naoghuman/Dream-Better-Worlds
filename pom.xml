@@ -184,6 +184,8 @@
         <module>DBW-Feature-Voting-Impl</module>
         <module>DBW-File-Dream-Api</module>
         <module>DBW-File-Dream-Impl</module>
+        <module>DBW-File-Dreammap-Api</module>
+        <module>DBW-File-Dreammap-Impl</module>
         <module>DBW-File-Provider</module>
         <module>DBW-File-Reflection-Api</module>
         <module>DBW-File-Reflection-Impl</module>
