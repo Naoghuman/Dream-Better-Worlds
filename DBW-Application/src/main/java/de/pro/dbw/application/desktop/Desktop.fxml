@@ -70,7 +70,7 @@
                 </SplitPane>
             </children>
         </VBox>
-        <StackPane fx:id="spDialogLayer" style="-fx-background-color: rgba(0,0,0,0.25);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <StackPane fx:id="spDialogLayer2" style="-fx-background-color: rgba(0,0,0,0.20);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="apDialogLayer" style="-fx-background-color: rgba(0,0,0,0.25);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="apDialogLayer2" style="-fx-background-color: rgba(0,0,0,0.20);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     </children>
 </AnchorPane>

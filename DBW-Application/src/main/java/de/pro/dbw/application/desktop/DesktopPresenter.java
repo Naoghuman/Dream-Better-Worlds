@@ -46,9 +46,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
@@ -57,6 +57,8 @@ import javafx.util.Duration;
  */
 public class DesktopPresenter implements Initializable, IActionConfiguration, IDesktopConfiguration, IRegisterActions, IUtilConfiguration {
     
+    @FXML private AnchorPane apDialogLayer;
+    @FXML private AnchorPane apDialogLayer2;
     @FXML private BorderPane bpNavigationLeft;
     @FXML private BorderPane bpNavigationRight;
     @FXML private MenuBar mbDesktop;
@@ -64,14 +66,14 @@ public class DesktopPresenter implements Initializable, IActionConfiguration, ID
     @FXML private TabPane tpNavigationLeft;
     @FXML private TabPane tpNavigationRight;
     @FXML private ToolBar tbDesktop;
-    @FXML private StackPane spDialogLayer;
-    @FXML private StackPane spDialogLayer2;
     @FXML private SplitPane spDesktop;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize DesktopPresenter");
         
+        assert (apDialogLayer != null)     : "fx:id=\"apDialogLayer\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
+        assert (apDialogLayer2 != null)    : "fx:id=\"apDialogLayer2\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (bpNavigationLeft != null)  : "fx:id=\"bpNavigationLeft\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (bpNavigationRight != null) : "fx:id=\"bpNavigationRight\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (mbDesktop != null)         : "fx:id=\"mbDesktop\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
@@ -79,8 +81,6 @@ public class DesktopPresenter implements Initializable, IActionConfiguration, ID
         assert (tpNavigationLeft != null)  : "fx:id=\"tpNavigationLeft\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (tpNavigationRight != null) : "fx:id=\"tpNavigationRight\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (tbDesktop != null)         : "fx:id=\"tbDesktop\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
-        assert (spDialogLayer != null)     : "fx:id=\"spDialogLayer\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
-        assert (spDialogLayer2 != null)    : "fx:id=\"spDialogLayer2\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (spDesktop != null)         : "fx:id=\"spDesktop\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         
         this.registerActions();
@@ -257,7 +257,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration, ID
     private void registerDialogLayer() {
         LoggerFacade.getDefault().info(this.getClass(), "Register Dialog layer"); // NOI18N
         
-        DialogProvider.getDefault().register(spDialogLayer, spDialogLayer2);
+        DialogProvider.getDefault().register(apDialogLayer, apDialogLayer2);
     }
     
     private void registerEditor() {

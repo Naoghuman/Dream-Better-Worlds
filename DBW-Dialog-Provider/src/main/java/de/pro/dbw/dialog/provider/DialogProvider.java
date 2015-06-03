@@ -26,7 +26,7 @@ import de.pro.lib.logger.api.LoggerFacade;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -44,8 +44,8 @@ public class DialogProvider {
         return instance;
     }
     
-    private StackPane spDialogLayer = null;
-    private StackPane spDialogLayer2 = null;
+    private AnchorPane apDialogLayer = null;
+    private AnchorPane apDialogLayer2 = null;
     
     public DialogProvider() {
         this.initialize();
@@ -58,41 +58,43 @@ public class DialogProvider {
     public void hide() {
         LoggerFacade.getDefault().debug(this.getClass(), "Hide dialoglayer");
         
-        spDialogLayer.getChildren().clear();
-        spDialogLayer.setVisible(Boolean.FALSE);
-        spDialogLayer.setManaged(Boolean.FALSE);
+        apDialogLayer.getChildren().clear();
+        apDialogLayer.setVisible(Boolean.FALSE);
+        apDialogLayer.setManaged(Boolean.FALSE);
     }
     
     public void hide2() {
         LoggerFacade.getDefault().debug(this.getClass(), "Hide dialoglayer2");
         
-        spDialogLayer2.getChildren().clear();
-        spDialogLayer2.setVisible(Boolean.FALSE);
-        spDialogLayer2.setManaged(Boolean.FALSE);
+        apDialogLayer2.getChildren().clear();
+        apDialogLayer2.setVisible(Boolean.FALSE);
+        apDialogLayer2.setManaged(Boolean.FALSE);
     }
     
-    public void register(StackPane spDialogLayer, StackPane spDialogLayer2) {
-        this.spDialogLayer = spDialogLayer;
-        this.spDialogLayer2 = spDialogLayer2;
+    public void register(AnchorPane apDialogLayer, AnchorPane apDialogLayer2) {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register AnchorPane dialoglayer and dialoglayer2");
+        
+        this.apDialogLayer = apDialogLayer;
+        this.apDialogLayer2 = apDialogLayer2;
         
         this.hide();
         this.hide2();
     }
     
     public void show(Parent dialog) {
-        LoggerFacade.getDefault().debug(this.getClass(),"Show dialoglayer");
+        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer");
         
-        spDialogLayer.getChildren().add(dialog);
-        spDialogLayer.setVisible(Boolean.TRUE);
-        spDialogLayer.setManaged(Boolean.TRUE);
+        apDialogLayer.getChildren().add(dialog);
+        apDialogLayer.setVisible(Boolean.TRUE);
+        apDialogLayer.setManaged(Boolean.TRUE);
     }
     
     public void show2(Parent dialog) {
-        LoggerFacade.getDefault().debug(this.getClass(),"Show dialoglayer2");
+        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer2");
         
-        spDialogLayer2.getChildren().add(dialog);
-        spDialogLayer2.setVisible(Boolean.TRUE);
-        spDialogLayer2.setManaged(Boolean.TRUE);
+        apDialogLayer2.getChildren().add(dialog);
+        apDialogLayer2.setVisible(Boolean.TRUE);
+        apDialogLayer2.setManaged(Boolean.TRUE);
     }
     
     public void showDeleteDialog(
