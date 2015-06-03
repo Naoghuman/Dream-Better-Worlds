@@ -13,6 +13,12 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Preferences</artifactId>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Dialog-Impl</artifactId>
             <version>${project.version}</version>
         </dependency>

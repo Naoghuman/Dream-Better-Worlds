@@ -16,6 +16,7 @@
  */
 package de.pro.dbw.dialog.provider;
 
+import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.dialog.impl.deletedialog.DeleteDialogPresenter;
 import de.pro.dbw.dialog.impl.deletedialog.DeleteDialogView;
 import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogPresenter;
@@ -23,6 +24,7 @@ import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogView;
 import de.pro.dbw.dialog.impl.savesinglefiledialog.SaveSingleFileDialogPresenter;
 import de.pro.dbw.dialog.impl.savesinglefiledialog.SaveSingleFileDialogView;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -32,7 +34,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author PRo
  */
-public class DialogProvider {
+public class DialogProvider implements IPreferencesConfiguration {
     
     private static DialogProvider instance = null;
     
@@ -81,9 +83,19 @@ public class DialogProvider {
         this.hide2();
     }
     
+    private void setPositionFromDialog(Parent dialog) {
+        final Double width = PreferencesFacade.getDefault().getDouble(
+                PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
+        final Double height = PreferencesFacade.getDefault().getDouble(
+                PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
+        dialog.setLayoutX((width / 2) - (dialog.prefWidth(Double.MAX_VALUE) / 2));
+        dialog.setLayoutY((height / 2) - (dialog.prefHeight(Double.MAX_VALUE) / 2));
+    }
+    
     public void show(Parent dialog) {
         LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer");
         
+        this.setPositionFromDialog(dialog);
         apDialogLayer.getChildren().add(dialog);
         apDialogLayer.setVisible(Boolean.TRUE);
         apDialogLayer.setManaged(Boolean.TRUE);
@@ -92,6 +104,7 @@ public class DialogProvider {
     public void show2(Parent dialog) {
         LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer2");
         
+        this.setPositionFromDialog(dialog);
         apDialogLayer2.getChildren().add(dialog);
         apDialogLayer2.setVisible(Boolean.TRUE);
         apDialogLayer2.setManaged(Boolean.TRUE);

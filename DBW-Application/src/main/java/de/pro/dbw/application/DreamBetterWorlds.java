@@ -42,13 +42,11 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
 
     @Override
     public void start(Stage stage) throws Exception {
-        // TODO load from preferences
         final Double width = PreferencesFacade.getDefault().getDouble(
                 PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
         final Double height = PreferencesFacade.getDefault().getDouble(
                 PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
-        
-        final Scene scene = new Scene(DesktopFacade.getDefault().getDesktop(), 1280.0d, 720.0d);
+        final Scene scene = new Scene(DesktopFacade.getDefault().getDesktop(), width, height);
         final String uriStylesheet = this.getClass().getResource(DBW__CSS).toExternalForm();
         scene.getStylesheets().add(uriStylesheet);
 //        scene.setOnKeyReleased(DesktopFacade.getDefault().getGlobalKeyEventHandler());
