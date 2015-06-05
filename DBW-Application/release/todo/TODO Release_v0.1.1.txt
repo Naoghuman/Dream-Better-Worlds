@@ -2,9 +2,9 @@
 RELEASE v0.1.1 (2015-MM-dd HH:mm)
 --------------------------------------------------------------------------------
 NEW
-#12 Create new module DBW-File-Dreammap(-Api, -Impl).
-#11 Create new module DBW-Feature-Tag(-Api, -Impl).
-#10 Create new module DBW-Feature-Voting(-Api, -Impl).
+#12 Create new modules DBW-File-Dreammap(-Api, -Impl).
+#11 Create new modules DBW-Feature-Tag(-Api, -Impl).
+#10 Create new modules DBW-Feature-Voting(-Api, -Impl).
 #9  Create new module DBW-Feature-Provider.
 
 ENHANCEMENT
@@ -17,8 +17,12 @@ BUG
 
 REFACTORING
 #13 Refactore the StackPane for Dialogs to an AnchorPane.
-#7 Reorder the components in TipOfTheNightEditor.
+#7  Reorder the components in TipOfTheNightEditor.
 
 CHECK
+ #14 Create new module DBW-Exercise-Provider.
+ #15 Create new modules DBW-Exercise-SimpleExercise(-Api, -Impl).
+ #16 Create new module DBW-Tool-Provider.
+ #17 Create new modules DBW-Tool-Timer(-Api, -Impl).
 
 --------------------------------------------------------------------------------
