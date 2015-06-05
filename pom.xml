@@ -198,6 +198,8 @@
         <module>DBW-Navigation-Provider</module>
         <module>DBW-Navigation-Search-Api</module>
         <module>DBW-Navigation-Search-Impl</module>
+        <module>DBW-Navigation-Voting-Api</module>
+        <module>DBW-Navigation-Voting-Impl</module>
         <module>DBW-Util-Api</module>
         <module>DBW-Util-Impl</module>
         <module>DBW-Util-Provider</module>

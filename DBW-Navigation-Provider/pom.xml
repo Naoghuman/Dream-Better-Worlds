@@ -47,6 +47,16 @@
             <artifactId>DBW-Navigation-Search-Impl</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Navigation-Voting-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Navigation-Voting-Impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     
 </project>

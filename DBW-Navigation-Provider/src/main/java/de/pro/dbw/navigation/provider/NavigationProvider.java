@@ -56,6 +56,7 @@ public class NavigationProvider implements INavigationConfiguration {
         
         DreamBookProvider.getDefault().register(tpNavigationLeft);
         SearchProvider.getDefault().register(tpNavigationLeft, tbEditor);
+        VotingProvider.getDefault().register(tpNavigationLeft);
         
         final PauseTransition pauseTransitionLeft = new PauseTransition();
         pauseTransitionLeft.setDuration(Duration.millis(NAVIGATION__PREVIOUS_TAB_SELECTION__DURATION));
