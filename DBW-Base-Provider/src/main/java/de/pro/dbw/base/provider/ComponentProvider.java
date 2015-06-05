@@ -18,8 +18,12 @@ package de.pro.dbw.base.provider;
 
 import de.pro.dbw.base.component.api.ExtendedTabModel;
 import de.pro.dbw.base.component.api.IExtendedTextField;
+import de.pro.dbw.base.component.api.VotingComponentModel;
 import de.pro.dbw.base.component.impl.extendedtab.ExtendedTab;
 import de.pro.dbw.base.component.impl.extendedtextfield.ExtendedTextFieldImpl;
+import de.pro.dbw.base.component.impl.votingcomponent.VotingComponentPresenter;
+import de.pro.dbw.base.component.impl.votingcomponent.VotingComponentView;
+import javafx.scene.Parent;
 
 /**
  *
@@ -51,6 +55,18 @@ public class ComponentProvider {
     
     public IExtendedTextField getExtendedTextField() {
         return new ExtendedTextFieldImpl();
+    }
+    
+    public Parent getVotingComponent() {
+        return this.getVotingComponent(new VotingComponentModel());
+    }
+    
+    public Parent getVotingComponent(VotingComponentModel votingComponentModel) {
+        final VotingComponentView view = new VotingComponentView();
+        final VotingComponentPresenter presenter = view.getRealPresenter();
+        presenter.configure(votingComponentModel);
+        
+        return view.getView();
     }
     
 }
