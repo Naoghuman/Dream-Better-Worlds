@@ -6,6 +6,7 @@
 package de.pro.dbw.navigation.provider;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.navigation.history.api.HistoryNavigationModel;
 import de.pro.dbw.navigation.history.impl.historynavigation.HistoryNavigationPresenter;
 import de.pro.dbw.navigation.history.impl.historynavigation.HistoryNavigationView;
@@ -21,7 +22,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class HistoryProvider implements IActionConfiguration {
+public class HistoryProvider implements IActionConfiguration, IRegisterActions {
     
     private static HistoryProvider instance = null;
     
@@ -40,20 +41,26 @@ public class HistoryProvider implements IActionConfiguration {
     }
     
     private void initialize() {
-        this.registerOnActionJobCheckHistoryNavigation();
+        
     }
 
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register navigation left");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in HistoryProvider");
         
-        System.out.println(" XXX load title History from properties");
-        final Tab tab = new Tab("History");
+        final Tab tab = new Tab("History");// XXX properties
         tab.setClosable(false);
         historyNavigationView = new HistoryNavigationView();
         tab.setContent(historyNavigationView.getView());
         tpNavigationLeft.getTabs().add(tab);
         
         tpNavigationLeft.getSelectionModel().select(tab);
+    }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in HistoryProvider");
+        
+        this.registerOnActionJobCheckHistoryNavigation();
     }
     
     private void registerOnActionJobCheckHistoryNavigation() {

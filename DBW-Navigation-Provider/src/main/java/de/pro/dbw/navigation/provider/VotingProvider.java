@@ -48,7 +48,7 @@ public class VotingProvider {
     }
     
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register navigation left");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider");
         
         final Tab tab = new Tab("Voting"); // XXX properties
         tab.setClosable(false);

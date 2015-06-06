@@ -56,8 +56,9 @@ import javafx.util.Duration;
  *
  * @author PRo
  */
-public class DesktopPresenter implements Initializable, IActionConfiguration, IDesktopConfiguration, IRegisterActions, IUtilConfiguration {
-    
+public class DesktopPresenter implements Initializable, IActionConfiguration, 
+        IDesktopConfiguration, IRegisterActions, IUtilConfiguration
+{
     @FXML private AnchorPane apDialogLayer;
     @FXML private AnchorPane apDialogLayer2;
     @FXML private BorderPane bpNavigationLeft;
@@ -250,19 +251,21 @@ public class DesktopPresenter implements Initializable, IActionConfiguration, ID
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in DesktopPresenter"); // NOI18N
         
+        ExerciseProvider.getDefault().registerActions();
         FileProvider.getDefault().registerActions();
+        NavigationProvider.getDefault().registerActions();
     }
     
     private void registerDialogLayer() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register Dialog layer"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Register Dialog layers"); // NOI18N
         
         DialogProvider.getDefault().register(apDialogLayer, apDialogLayer2);
     }
     
     private void registerEditor() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane for Editor"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpEditor in DesktopPresenter"); // NOI18N
         
         ExerciseProvider.getDefault().register(tpEditor);
         FeatureProvider.getDefault().register(tpEditor);

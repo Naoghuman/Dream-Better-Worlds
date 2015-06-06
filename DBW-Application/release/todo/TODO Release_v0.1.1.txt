@@ -20,6 +20,8 @@ REFACTORING
 #13 Refactore the StackPane for Dialogs to an AnchorPane.
 #7  Reorder the components in TipOfTheNightEditor.
 
+Refactore the logging messages in register methodes.
+
 CHECK
 #15 Create new modules DBW-Exercise-SimpleExercise(-Api, -Impl).
 #16 Create new module DBW-Tool-Provider.

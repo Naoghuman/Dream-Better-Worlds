@@ -69,11 +69,15 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
     
     public void register(TabPane tpEditor) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in ReflectionProvider"); // NOI18N
+        
         this.tpEditor = tpEditor;
     }
 
     @Override
     public void registerActions() {
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in ReflectionProvider"); // NOI18N
+        
         this.registerOnActionCreateNewFileReflection();
         this.registerOnActionEditFileReflection();
         this.registerOnActionOpenFileReflectionFromNavigation();

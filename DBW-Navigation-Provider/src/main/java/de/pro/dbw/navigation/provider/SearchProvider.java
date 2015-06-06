@@ -20,6 +20,7 @@ import de.pro.dbw.base.component.api.ExtendedTabModel;
 import de.pro.dbw.base.component.impl.extendedtab.ExtendedTab;
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.base.provider.BaseProvider;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.navigation.search.impl.searchnavigation.SearchNavigationView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
@@ -33,7 +34,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class SearchProvider implements IActionConfiguration {
+public class SearchProvider implements IActionConfiguration, IRegisterActions {
     
     private static SearchProvider instance = null;
     
@@ -54,15 +55,13 @@ public class SearchProvider implements IActionConfiguration {
     }
     
     private void initialize() {
-        this.registerOnActionSearchInDreams();
-        this.registerOnActionSearchInReflections();
-        this.registerOnActionSearchInTipsOfTheNight();
+        
     }
 
     public void register(TabPane tpNavigationLeft, TabPane tbEditor) {
-        this.tbEditor = tbEditor;
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in SearchProvider");
         
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes for navigation-left and editor");
+        this.tbEditor = tbEditor;
         
         final Tab tab = new Tab("Search"); // XXX properties
         tab.setClosable(false);
@@ -71,6 +70,15 @@ public class SearchProvider implements IActionConfiguration {
         
         tpNavigationLeft.getTabs().add(tab);
         tpNavigationLeft.getSelectionModel().select(tab);
+    }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in SearchProvider");
+        
+        this.registerOnActionSearchInDreams();
+        this.registerOnActionSearchInReflections();
+        this.registerOnActionSearchInTipsOfTheNight();
     }
     
     private void registerOnActionSearchInDreams() {

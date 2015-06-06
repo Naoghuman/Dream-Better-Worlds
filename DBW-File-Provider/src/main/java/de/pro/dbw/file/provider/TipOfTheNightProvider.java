@@ -119,11 +119,15 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     // TODO Menu Configuration -> Tip of the Nights for Editor
 
     public void register(TabPane tpEditor) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
+        
         this.tpEditor = tpEditor;
     }
     
     @Override
     public void registerActions() {
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in TipOfTheNightProvider"); // NOI18N
+        
         this.registerOnActionShowTipOfTheNightEditor();
         this.registerOnActionShowTipOfTheNightWindow();
     }

@@ -6,6 +6,7 @@
 package de.pro.dbw.navigation.provider;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.navigation.dreambook.api.DreamBookNavigationModel;
 import de.pro.dbw.navigation.dreambook.impl.dreambooknavigation.DreamBookNavigationPresenter;
 import de.pro.dbw.navigation.dreambook.impl.dreambooknavigation.DreamBookNavigationView;
@@ -21,7 +22,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class DreamBookProvider implements IActionConfiguration {
+public class DreamBookProvider implements IActionConfiguration, IRegisterActions {
     
     private static DreamBookProvider instance = null;
     
@@ -40,20 +41,26 @@ public class DreamBookProvider implements IActionConfiguration {
     }
     
     private void initialize() {
-        this.registerOnActionJobCheckDreamBookNavigation();
+        
     }
 
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register navigation left");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in DreamBookProvider");
         
-        System.out.println(" XXX load title Dreambook from properties");
-        final Tab tab = new Tab("Dreambook");
+        final Tab tab = new Tab("Dreambook"); // XXX propeties
         tab.setClosable(false);
         dreamBookNavigationView = new DreamBookNavigationView();
         tab.setContent(dreamBookNavigationView.getView());
         tpNavigationLeft.getTabs().add(tab);
         
         tpNavigationLeft.getSelectionModel().select(tab);
+    }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in DreamBookProvider");
+        
+        this.registerOnActionJobCheckDreamBookNavigation();
     }
     
     private void registerOnActionJobCheckDreamBookNavigation() {

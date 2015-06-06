@@ -5,6 +5,7 @@
  */
 package de.pro.dbw.navigation.provider;
 
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
@@ -20,7 +21,7 @@ import javafx.util.Duration;
  *
  * @author PRo
  */
-public class NavigationProvider implements INavigationConfiguration {
+public class NavigationProvider implements INavigationConfiguration, IRegisterActions {
     
     private static NavigationProvider instance = null;
     
@@ -45,14 +46,23 @@ public class NavigationProvider implements INavigationConfiguration {
 //    }
     
     public void register(TabPane tpNavigationLeft, TabPane tbEditor, TabPane tpNavigationRight) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register navigation");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor, tpNavigationRight in NavigationProvider");
         
         this.registerNavigationLeft(tpNavigationLeft, tbEditor);
         this.registerNavigationRight(tpNavigationRight);
     }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in NavigationProvider");
+        
+        DreamBookProvider.getDefault().registerActions();
+        HistoryProvider.getDefault().registerActions();
+        SearchProvider.getDefault().registerActions();
+    }
     
     private void registerNavigationLeft(TabPane tpNavigationLeft, TabPane tbEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes for navigation-left and editor");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in NavigationProvider");
         
         DreamBookProvider.getDefault().register(tpNavigationLeft);
         SearchProvider.getDefault().register(tpNavigationLeft, tbEditor);
@@ -69,7 +79,7 @@ public class NavigationProvider implements INavigationConfiguration {
     }
     
     private void registerNavigationRight(TabPane tpNavigationRight) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register navigation right");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationRight in NavigationProvider");
         
         HistoryProvider.getDefault().register(tpNavigationRight);
         
@@ -102,6 +112,5 @@ public class NavigationProvider implements INavigationConfiguration {
             });
         });
     }
-    
     
 }

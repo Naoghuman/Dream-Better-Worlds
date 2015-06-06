@@ -69,6 +69,8 @@ public final class DreamProvider implements
     }
     
     public void register(TabPane tpEditor) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in DreamProvider"); // NOI18N
+        
         this.tpEditor = tpEditor;
     }
 

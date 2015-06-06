@@ -74,7 +74,7 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     public void register(AnchorPane apDialogLayer, AnchorPane apDialogLayer2) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register AnchorPane dialoglayer and dialoglayer2");
+        LoggerFacade.getDefault().debug(this.getClass(), "Register AnchorPane apDialogLayer, apDialogLayer2 in DialogProvider");
         
         this.apDialogLayer = apDialogLayer;
         this.apDialogLayer2 = apDialogLayer2;

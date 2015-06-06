@@ -47,7 +47,7 @@ public class JobProvider implements IJobConfiguration {
     }
     
     public void start() {
-        PauseTransition ptChecker = new PauseTransition();
+        final PauseTransition ptChecker = new PauseTransition();
         ptChecker.setDuration(CHECKER_DURATION);
         ptChecker.setOnFinished((ActionEvent event) -> {
             JobCheckNavigationDreamBook.start();
