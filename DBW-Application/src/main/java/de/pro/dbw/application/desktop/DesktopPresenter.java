@@ -25,6 +25,7 @@ import de.pro.dbw.exercise.provider.ExerciseProvider;
 import de.pro.dbw.feature.provider.FeatureProvider;
 import de.pro.dbw.file.provider.FileProvider;
 import de.pro.dbw.navigation.provider.NavigationProvider;
+import de.pro.dbw.tool.provider.ToolProvider;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
@@ -256,6 +257,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         ExerciseProvider.getDefault().registerActions();
         FileProvider.getDefault().registerActions();
         NavigationProvider.getDefault().registerActions();
+        ToolProvider.getDefault().registerActions();
     }
     
     private void registerDialogLayer() {

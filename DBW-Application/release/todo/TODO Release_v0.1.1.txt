@@ -2,6 +2,7 @@
 RELEASE v0.1.1 (2015-MM-dd HH:mm)
 --------------------------------------------------------------------------------
 NEW
+#16 Create new module DBW-Tool-Provider.
 #15 Create new modules DBW-Exercise-SimpleExercise(-Api, -Impl).
 #14 Create new module DBW-Exercise-Provider.
 #12 Create new modules DBW-File-Dreammap(-Api, -Impl).
@@ -24,7 +25,6 @@ REFACTORING
 Refactore the logging messages in register methodes.
 
 CHECK
-#16 Create new module DBW-Tool-Provider.
 #17 Create new modules DBW-Tool-Timer(-Api, -Impl).
 
 --------------------------------------------------------------------------------

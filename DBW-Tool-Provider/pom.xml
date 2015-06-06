@@ -7,25 +7,14 @@
         <artifactId>Dream-Better-Worlds</artifactId>
         <version>0.1.1-SNAPSHOT</version>
     </parent>
-    <artifactId>DBW-Dialog-Impl</artifactId>
+    <artifactId>DBW-Tool-Provider</artifactId>
     <packaging>jar</packaging>
     
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Lib-Action</artifactId>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>Lib-Logger</artifactId>
             <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.airhacks</groupId>
-            <artifactId>afterburner.fx</artifactId>
-            <scope>compile</scope>
         </dependency>
         
         <dependency>
@@ -34,4 +23,5 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
+    
 </project>
