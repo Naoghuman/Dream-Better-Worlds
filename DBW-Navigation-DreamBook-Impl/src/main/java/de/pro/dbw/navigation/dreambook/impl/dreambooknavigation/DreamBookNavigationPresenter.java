@@ -65,8 +65,8 @@ public class DreamBookNavigationPresenter
         assert (lvNavigation != null) : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'DreamBookNavigation.fxml'."; // NOI18N
         
         this.initializeNavigationLeft();
-        this.registerOnActionUpdateNavigationDreamBook();
-        this.refreshDreamBook();
+        this.registerOnActionUpdateNavigationDreamBook();// XXX refactore to xyDreamBookNavigation
+        this.refreshDreamBook();// XXX refactore to refreshDreamBookNavigation
     }
     
     private void initializeNavigationLeft() {

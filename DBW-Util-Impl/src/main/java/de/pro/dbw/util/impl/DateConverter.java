@@ -44,7 +44,6 @@ public class DateConverter implements IDateConverter {
     public Long convertDateTimeToLong(String dateTime, String pattern) {
         LoggerFacade.getDefault().debug(DateConverter.class, String.format(
                     "Convert %s with %s to Long", dateTime, pattern));
-        System.out.println("XXX DateConverter.convertDateTimeToLong() -> not threadsave");
         
         try {
             final DateFormat formatter = new SimpleDateFormat(pattern);
@@ -59,7 +58,6 @@ public class DateConverter implements IDateConverter {
     }
     
     public String convertLongToDateTime(Long millis, String pattern) {
-        System.out.println("XXX DateConverter.convertLongToDateTime() -> remove jodatime");
         final MutableDateTime mdt = new MutableDateTime(millis);
         return mdt.toString(pattern);
     }
@@ -91,10 +89,11 @@ public class DateConverter implements IDateConverter {
                 LocalTime.parse(dateTime, formatter);
                 return Boolean.TRUE;
             }
-        } catch (DateTimeParseException dtpe) {
+        } catch (DateTimeParseException ex) {
             /* not needed */
         }
         
         return Boolean.FALSE;
     }
+    
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Dream Better Worlds
+ * Copyright (C) 2015 Dream Better Worlds
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,34 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.navigation.dreambook.api;
+package de.pro.dbw.navigation.voting.api;
 
-import de.pro.dbw.util.provider.UtilProvider;
 import javafx.scene.Parent;
 
 /**
- * 
+ *
  * @author PRo
  */
-public class DreamBookNavigationModel implements Comparable<DreamBookNavigationModel> {
+public class VotingNavigationModel implements Comparable<VotingNavigationModel> {
     
-    private Boolean hasPrefixNew = Boolean.FALSE;
     private Long idToOpen = null;
     private Long generationTime = null;
     private String actionKey = null;
     private Parent view = null;
     
-    public DreamBookNavigationModel() {
+    public VotingNavigationModel() {
         this.initialize();
     }
 
     private void initialize() {
         idToOpen = System.currentTimeMillis();
         actionKey = ""; // XXX sign-empty
-    }
-    
-    public Boolean hasPrefixNew() {
-        return hasPrefixNew;
     }
 
     public String getActionKey() {
@@ -66,8 +60,6 @@ public class DreamBookNavigationModel implements Comparable<DreamBookNavigationM
     
     public void setGenerationTime(Long generationTime) {
         this.generationTime = generationTime;
-        
-        hasPrefixNew = UtilProvider.getDefault().getDateConverter().isAfter(-3, generationTime);
     }
 
     public Parent getView() {
@@ -79,7 +71,7 @@ public class DreamBookNavigationModel implements Comparable<DreamBookNavigationM
     }
     
     @Override
-    public int compareTo(DreamBookNavigationModel other) {
+    public int compareTo(VotingNavigationModel other) {
         return Long.compare(other.getGenerationTime(), this.getGenerationTime());
     }
     

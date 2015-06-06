@@ -34,22 +34,22 @@
         
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-File-Dream-Api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-Navigation-DreamBook-Api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Core-Sql-Provider</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-File-Dream-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DBW-File-Reflection-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Navigation-DreamBook-Api</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

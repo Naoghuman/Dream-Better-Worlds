@@ -39,6 +39,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -288,6 +289,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     
     private transient BooleanProperty markAsChangedProperty = null;
 
+    @Transient
     public Boolean isMarkAsChanged() {
         return markAsChangedProperty.getValue();
     }

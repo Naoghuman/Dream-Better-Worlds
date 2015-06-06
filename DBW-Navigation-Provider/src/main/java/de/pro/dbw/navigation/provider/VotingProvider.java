@@ -16,6 +16,7 @@
  */
 package de.pro.dbw.navigation.provider;
 
+import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationView;
 import de.pro.lib.logger.api.LoggerFacade;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -36,7 +37,7 @@ public class VotingProvider {
         return instance;
     }
     
-//    private DreamBookNavigationView dreamBookNavigationView = null;
+    private VotingNavigationView votingNavigationView = null;
     
     private VotingProvider() {
         this.initialize();
@@ -51,8 +52,8 @@ public class VotingProvider {
         
         final Tab tab = new Tab("Voting"); // XXX properties
         tab.setClosable(false);
-//        dreamBookNavigationView = new DreamBookNavigationView();
-//        tab.setContent(dreamBookNavigationView.getView());
+        votingNavigationView = new VotingNavigationView();
+        tab.setContent(votingNavigationView.getView());
         tpNavigationLeft.getTabs().add(tab);
         
         tpNavigationLeft.getSelectionModel().select(tab);

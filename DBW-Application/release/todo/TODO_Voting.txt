@@ -1,0 +1,21 @@
+--------------------------------------------------------------------------------
+TODO VOTING
+--------------------------------------------------------------------------------
+VOTING-COMPONENT
+ - (v) Implement basic VotingComponent.
+ - (v) Implement basic VotingComponentModel.
+
+--------------------------------------------------------------------------------
+VOTING-CHOOSER
+
+--------------------------------------------------------------------------------
+VOTING-EDITOR
+
+--------------------------------------------------------------------------------
+NAVIGATION VOTING
+ - (v) Implement basic VotingNavigation.
+ - (v) Implement basic ListView in VotingNavigation.
+ - (v) Implement basic VotingNavigationModel.
+ - (v) Implement testdata for ListView in VotingNavigation.
+
+--------------------------------------------------------------------------------

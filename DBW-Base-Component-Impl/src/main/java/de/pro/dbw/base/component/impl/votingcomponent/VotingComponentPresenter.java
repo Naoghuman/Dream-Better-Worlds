@@ -36,8 +36,8 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     @FXML private Button bShow;
     @FXML private Button bVote;
     @FXML private Label lActiveDuring;
+    @FXML private Label lTitle;
     @FXML private Label lVotingChoose;
-    @FXML private Label lName;
     @FXML private Slider sVoting;
     
     private VotingComponentModel votingComponentModel;
@@ -49,8 +49,8 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
         assert (bShow != null)         : "fx:id=\"bShow\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
         assert (bVote != null)         : "fx:id=\"bVote\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
         assert (lActiveDuring != null) : "fx:id=\"lActiveDuring\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
+        assert (lTitle != null)        : "fx:id=\"lName\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
         assert (lVotingChoose != null) : "fx:id=\"lVotingChoose\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
-        assert (lName != null)         : "fx:id=\"lName\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
         assert (sVoting != null)       : "fx:id=\"sVoting\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
     
         this.initialzeComponents();
@@ -58,20 +58,29 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     
     private void initialzeComponents() {
         bVote.setDisable(Boolean.TRUE);
-        lVotingChoose.setText("0.0"); // NOI18N
-        lVotingChoose.textProperty().bind(sVoting.valueProperty().asString());
+        lVotingChoose.setText("0.0"); // XXX configuration
+        lVotingChoose.textProperty().bind(sVoting.valueProperty().asString("%.1f")); // XXX configuration
         sVoting.setDisable(Boolean.TRUE);
     }
     
     public void configure(VotingComponentModel votingComponentModel) {
-        LoggerFacade.getDefault().info(this.getClass(), "Configure VotingComponentPresenter");
+        LoggerFacade.getDefault().info(this.getClass(), "Configure VotingComponentPresenter"); // NOI18N
         
         this.votingComponentModel = votingComponentModel;
         
-//        bVote.setDisable(!this.votingComponentModel.isActive());
-//        lActiveDuring.setText(this.votingComponentModel.getActiveDuring());
-//        lName.setText(this.votingComponentModel.getName());
-//        sVoting.setValue(this.votingComponentModel.getValue());
+        bShow.setDisable(!this.votingComponentModel.hasVotedToDay());
+                
+        bVote.setDisable(this.votingComponentModel.hasVotedToDay());
+        
+// XXX job need attention to fromDate and toDate
+        lActiveDuring.setText(this.votingComponentModel.getInfoActiveDuring());
+        
+        lTitle.setText(this.votingComponentModel.getTitle());
+        
+        if (this.votingComponentModel.hasVotedToDay()) {
+            sVoting.setValue(this.votingComponentModel.getLastVote());
+        }
+        sVoting.setDisable(this.votingComponentModel.hasVotedToDay());
     }
     
     public void onActionShow() {
@@ -88,6 +97,9 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
             - Disable the button bVote then.
             - Then shows the chart for this Voting.
         */
+        
+        
+        bShow.setDisable(!this.votingComponentModel.hasVotedToDay());
     }
     
 }
