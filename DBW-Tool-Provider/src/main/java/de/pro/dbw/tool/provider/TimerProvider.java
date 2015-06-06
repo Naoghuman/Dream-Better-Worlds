@@ -16,40 +16,27 @@
  */
 package de.pro.dbw.tool.provider;
 
-import de.pro.dbw.core.configuration.api.action.IRegisterActions;
-import de.pro.lib.logger.api.LoggerFacade;
-
 /**
  *
  * @author PRo
  */
-public class ToolProvider implements IRegisterActions {
+public class TimerProvider {
     
-    private static ToolProvider instance = null;
+    private static TimerProvider instance = null;
     
-    public static ToolProvider getDefault() {
+    public static TimerProvider getDefault() {
         if (instance == null) {
-            instance = new ToolProvider();
+            instance = new TimerProvider();
         }
         
         return instance;
     }
     
-    private ToolProvider() {
+    private TimerProvider() {
         this.initialize();
     }
     
     private void initialize() {
-        
-    }
-    
-    public TimerProvider getTimerProvider() {
-        return TimerProvider.getDefault();
-    }
-
-    @Override
-    public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in ToolProvider"); // NOI18N
         
     }
     

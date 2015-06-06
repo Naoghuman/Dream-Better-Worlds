@@ -7,31 +7,13 @@
         <artifactId>Dream-Better-Worlds</artifactId>
         <version>0.1.1-SNAPSHOT</version>
     </parent>
-    <artifactId>DBW-Tool-Provider</artifactId>
+    <artifactId>DBW-Tool-Timer-Impl</artifactId>
     <packaging>jar</packaging>
-    
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Lib-Logger</artifactId>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-Core-Configuration-Api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Tool-Timer-Api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-Tool-Timer-Impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
-    
 </project>

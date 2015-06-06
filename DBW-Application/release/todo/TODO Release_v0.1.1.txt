@@ -2,6 +2,7 @@
 RELEASE v0.1.1 (2015-MM-dd HH:mm)
 --------------------------------------------------------------------------------
 NEW
+#17 Create new modules DBW-Tool-Timer(-Api, -Impl).
 #16 Create new module DBW-Tool-Provider.
 #15 Create new modules DBW-Exercise-SimpleExercise(-Api, -Impl).
 #14 Create new module DBW-Exercise-Provider.
@@ -19,12 +20,10 @@ BUG
 #3 Create more then one Reflection file overwrite the before created file.
 
 REFACTORING
+    Refactore the logging messages in register methodes.
 #13 Refactore the StackPane for Dialogs to an AnchorPane.
 #7  Reorder the components in TipOfTheNightEditor.
 
-Refactore the logging messages in register methodes.
-
 CHECK
-#17 Create new modules DBW-Tool-Timer(-Api, -Impl).
 
 --------------------------------------------------------------------------------
