@@ -124,6 +124,7 @@
             <artifactId>afterburner.fx</artifactId>
             <scope>compile</scope>
         </dependency>
+        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Base-Provider</artifactId>
@@ -132,6 +133,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Dialog-Provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Exercise-Provider</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.pro</groupId>
+        <artifactId>Dream-Better-Worlds</artifactId>
+        <version>0.1.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>DBW-Exercise-Provider</artifactId>
+    <packaging>jar</packaging>
+    
+    
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Action</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Logger</artifactId>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx</artifactId>
+            <type>jar</type>
+        </dependency>
+		
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Core-Configuration-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    
+</project>

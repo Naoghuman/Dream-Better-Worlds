@@ -66,7 +66,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in FileProvider");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in FileProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
         
