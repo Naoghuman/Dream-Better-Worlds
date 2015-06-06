@@ -34,6 +34,16 @@
             <artifactId>DBW-Core-Configuration-Api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Exercise-SimpleExercise-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Exercise-SimpleExercise-Impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     
 </project>

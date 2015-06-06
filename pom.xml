@@ -178,6 +178,8 @@
         <module>DBW-Dialog-Impl</module>
         <module>DBW-Dialog-Provider</module>
         <module>DBW-Exercise-Provider</module>
+        <module>DBW-Exercise-SimpleExercise-Api</module>
+        <module>DBW-Exercise-SimpleExercise-Impl</module>
         <module>DBW-Feature-Provider</module>
         <module>DBW-Feature-Tag-Api</module>
         <module>DBW-Feature-Tag-Impl</module>

@@ -25,13 +25,13 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class ExerciseProvider implements IActionConfiguration, IRegisterActions {
+public class SimpleExerciseProvider implements IActionConfiguration, IRegisterActions {
     
-    private static ExerciseProvider instance = null;
+    private static SimpleExerciseProvider instance = null;
     
-    public static ExerciseProvider getDefault() {
+    public static SimpleExerciseProvider getDefault() {
         if (instance == null) {
-            instance = new ExerciseProvider();
+            instance = new SimpleExerciseProvider();
         }
         
         return instance;
@@ -39,7 +39,7 @@ public class ExerciseProvider implements IActionConfiguration, IRegisterActions 
     
     private TabPane tpEditor = null;
     
-    private ExerciseProvider() {
+    private SimpleExerciseProvider() {
         this.initialize();
     }
     
@@ -47,26 +47,16 @@ public class ExerciseProvider implements IActionConfiguration, IRegisterActions 
         
     }
     
-    public SimpleExerciseProvider getSimpleExerciseProvider() {
-        return SimpleExerciseProvider.getDefault();
-    }
-    
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in ExerciseProvider"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in SimpleExerciseProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
-        
-        SimpleExerciseProvider.getDefault().register(tpEditor);
     }
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in ExerciseProvider"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Register actions in SimpleExerciseProvider"); // NOI18N
         
-//        this.registerActionRemoveFileFromEditor();
-//        this.registerActionSaveAllChangedFiles();
-        
-        SimpleExerciseProvider.getDefault().registerActions();
     }
     
 }
