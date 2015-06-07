@@ -5,7 +5,13 @@ NEW
 
 ENHANCEMENT
 
+FEATURE
+
 BUG
+
+REFACTORING
+
+ADDITIONAL
 
 CHECK
  - Tags or Dreammap or SimpleExercise or Search or Voting?

@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-RELEASE v0.1.1 (2015-MM-dd HH:mm)
+RELEASE v0.1.1 (2015-06-07 09:29)
 --------------------------------------------------------------------------------
 NEW
 #17 Create new modules DBW-Tool-Timer(-Api, -Impl).
@@ -11,10 +11,6 @@ NEW
 #10 Create new modules DBW-Feature-Voting(-Api, -Impl).
 #9  Create new module DBW-Feature-Provider.
 
-ENHANCEMENT
-
-FEATURE
-
 BUG
 #8 CheckBox ShowAtStart should reflect the current state in TipOfTheNightEditor.
 #3 Create more then one Reflection file overwrite the before created file.
@@ -24,6 +20,7 @@ REFACTORING
 #13 Refactore the StackPane for Dialogs to an AnchorPane.
 #7  Reorder the components in TipOfTheNightEditor.
 
-CHECK
+ADDITIONAL
+#19 Create new preview release v0.1.1.
 
 --------------------------------------------------------------------------------
