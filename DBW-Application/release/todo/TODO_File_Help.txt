@@ -1,0 +1,9 @@
+--------------------------------------------------------------------------------
+TODO FILE HELP
+--------------------------------------------------------------------------------
+MENUITEM HELP
+- Opens the overview from Help in NavigationRight.
+- If a helppage is open when closing the then click on Help -> Help will also
+  open the last open side.
+
+--------------------------------------------------------------------------------

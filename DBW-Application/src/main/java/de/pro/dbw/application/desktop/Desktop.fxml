@@ -29,8 +29,6 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#onActionShowHelp" text="Help" />
-                                <SeparatorMenuItem mnemonicParsing="false" />
                                 <MenuItem mnemonicParsing="false" onAction="#onActionShowTipOfTheNightWindow" text="Tip of the Night" />
                                 <MenuItem mnemonicParsing="false" onAction="#onActionShowHelpWelcome" text="Welcome" />
                                 <SeparatorMenuItem mnemonicParsing="false" />
