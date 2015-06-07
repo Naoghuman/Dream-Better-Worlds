@@ -14,5 +14,6 @@ REFACTORING
 ADDITIONAL
 
 CHECK
+#18 Enhance the dialog so that they can moved.
 
 --------------------------------------------------------------------------------
