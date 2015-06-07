@@ -66,6 +66,7 @@ public final class DreamProvider implements
     }
     
     private void initialize() {
+        
     }
     
     public void register(TabPane tpEditor) {

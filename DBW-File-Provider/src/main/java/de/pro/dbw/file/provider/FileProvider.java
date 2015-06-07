@@ -54,7 +54,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
     
     public void checkShowAtStart() {
         TipOfTheNightProvider.getDefault().checkShowTipOfTheNightAtStart();
-//        HelpFileProvider.getDefault().checkShowWelcomeHelpAtStart();
+        HelpProvider.getDefault().checkShowWelcomeHelpAtStart();
     }
     
     public DreammapProvider getDreammapProvider() {
@@ -65,13 +65,14 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
         return SpecialMomentProvider.getDefault();
     }
     
-    public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in FileProvider"); // NOI18N
+    public void register(TabPane tpEditor, TabPane tpNavigationRight) {
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in FileProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
         
         DreamProvider.getDefault().register(tpEditor);
         DreammapProvider.getDefault().register(tpEditor);
+        HelpProvider.getDefault().register(tpEditor, tpNavigationRight);
         ReflectionProvider.getDefault().register(tpEditor);
         TipOfTheNightProvider.getDefault().register(tpEditor);
     }
@@ -83,6 +84,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
         
         DreamProvider.getDefault().registerActions();
         DreammapProvider.getDefault().registerActions();
+        HelpProvider.getDefault().registerActions();
         ReflectionProvider.getDefault().registerActions();
         TipOfTheNightProvider.getDefault().registerActions();
     }

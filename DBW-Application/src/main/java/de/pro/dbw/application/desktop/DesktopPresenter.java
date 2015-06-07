@@ -88,8 +88,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         
         this.registerActions();
         this.registerDialogLayer();
-        this.registerEditor();
-        this.registerNavigation();
+        this.registerEditorAndNavigation();
         
         this.initializeToolBar();
         this.initializeMenuBar();
@@ -266,18 +265,14 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         DialogProvider.getDefault().register(apDialogLayer, apDialogLayer2);
     }
     
-    private void registerEditor() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpEditor in DesktopPresenter"); // NOI18N
+    private void registerEditorAndNavigation() {
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes tpNavigationLeft, tpEditor, tpNavigationRight in DesktopPresenter"); // NOI18N
         
         ExerciseProvider.getDefault().register(tpEditor);
         FeatureProvider.getDefault().register(tpEditor);
-        FileProvider.getDefault().register(tpEditor);
-    }
-    
-    private void registerNavigation() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes for Navigation"); // NOI18N
-        
+        FileProvider.getDefault().register(tpEditor, tpNavigationRight);
         NavigationProvider.getDefault().register(tpNavigationLeft, tpEditor, tpNavigationRight);
+   
     }
     
 }

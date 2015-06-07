@@ -2,6 +2,7 @@
 RELEASE v0.1.1 (2015-06-07 09:29)
 --------------------------------------------------------------------------------
 NEW
+#22 Create new modules DBW-File-Help(-Api, -Impl).
 
 ENHANCEMENT
 
@@ -16,7 +17,6 @@ ADDITIONAL
 CHECK
 #24 Create a singleton tab for the file Welcome.
 #23 Create new dialog About (Help).
-#22 Create new modules DBW-File-Help(-Api, -Impl).
 #18 Enhance the dialogs so that they can moved.
 
 #26 Remove in the menu Configuration the entry Testdata.
