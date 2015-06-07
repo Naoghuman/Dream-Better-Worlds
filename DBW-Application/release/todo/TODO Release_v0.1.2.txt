@@ -11,6 +11,7 @@ FEATURE
 BUG
 
 REFACTORING
+#20 Remove in the menu the entry Exercises.
 
 ADDITIONAL
 
@@ -22,6 +23,5 @@ CHECK
 #26 Remove in the menu Configuration the entry Testdata.
 #25 Remove in the menu Configuration the entry Extended Sliders.
 #21 Remove in the menu Help the entry Help.
-#20 Remove in the menu the entry Exercises.
 
 --------------------------------------------------------------------------------

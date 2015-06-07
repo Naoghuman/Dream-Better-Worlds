@@ -19,11 +19,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewFileReflection" text="Reflection" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Exercises">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                            </items>
-                        </Menu>
                         <Menu mnemonicParsing="false" text="Configuration">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#onActionShowExtendedSliderEditorDialog" text="Extended Sliders" />
