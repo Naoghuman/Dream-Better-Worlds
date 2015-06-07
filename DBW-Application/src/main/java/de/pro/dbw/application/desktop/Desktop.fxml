@@ -21,7 +21,6 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Configuration">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#onActionShowExtendedSliderEditorDialog" text="Extended Sliders" />
                                 <MenuItem mnemonicParsing="false" onAction="#onActionShowTipOfTheNightEditor" text="Tip of the Night" />
                                 <SeparatorMenuItem mnemonicParsing="false" />
                                 <MenuItem mnemonicParsing="false" text="Testdata" />
