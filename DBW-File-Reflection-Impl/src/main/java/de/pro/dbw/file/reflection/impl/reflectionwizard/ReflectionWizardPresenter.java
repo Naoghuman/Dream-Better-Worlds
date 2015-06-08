@@ -22,6 +22,7 @@ import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.configuration.api.file.IFileConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.core.sql.provider.SqlProvider;
+import de.pro.dbw.dialog.api.DialogEventHandler;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
@@ -31,6 +32,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -44,6 +46,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -54,6 +59,7 @@ import javafx.util.Duration;
 public class ReflectionWizardPresenter implements Initializable, IActionConfiguration,
         IDateConverter, IDefaultIdConfiguration, IFileConfiguration, IUtilConfiguration {
     
+    @FXML private AnchorPane apDialog;
     @FXML private Button bCreate;
     @FXML private Button bEdit;
     @FXML private Button bReset;
@@ -65,6 +71,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     @FXML private TextField tfSource;
     @FXML private TextField tfTime;
     @FXML private TextField tfTitle;
+    @FXML private TitledPane tpDialog;
     
     private BooleanBinding disableBinding = null;
     private BooleanBinding textBinding = null;
@@ -74,30 +81,11 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     
     private ReflectionModel model = null;
     
-    public void configureWizardForCreateMode() {
-        LoggerFacade.getDefault().info(this.getClass(), "Configure Reflection Wizard for CREATE mode."); // NOI18N
-    
-        bEdit.setVisible(Boolean.FALSE);
-        bEdit.setManaged(Boolean.FALSE);
-        
-        this.show(new ReflectionModel());
-    }
-    
-    public void configureWizardForEditMode(ReflectionModel model) {
-        LoggerFacade.getDefault().info(this.getClass(), "Configure Reflection Wizard for EDIT mode."); // NOI18N
-    
-        bCreate.setVisible(Boolean.FALSE);
-        bCreate.setManaged(Boolean.FALSE);
-        bReset.setVisible(Boolean.FALSE);
-        bReset.setManaged(Boolean.FALSE);
-        
-        this.show(model);
-    }
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionWizardPresenter"); // NOI18N
     
+        assert (apDialog != null)   : "fx:id=\"apDialog\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (bCreate != null)    : "fx:id=\"bCreate\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (bEdit != null)      : "fx:id=\"bEdit\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (bReset != null)     : "fx:id=\"bReset\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
@@ -109,13 +97,20 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         assert (tfSource != null)   : "fx:id=\"tfSource\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (tfTime != null)     : "fx:id=\"tfTime\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (tfTitle != null)    : "fx:id=\"tfTitle\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
+        assert (tpDialog != null)   : "fx:id=\"tpDialog\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         
         this.initializeBindings();
         this.initializeSaveProgress();
         this.initializeTimeComponents();
-        // TODO add checkbox in create mode -> [v] = open reflection in editor
+        this.initializeEventHandlers();
     }
     
+    private void initializeEventHandlers() {
+        Platform.runLater(() -> {
+            final Pane pTitledPaneHeader = (Pane) tpDialog.lookup(".title"); // NOI18N
+            DialogEventHandler.getDefault().configure(pTitledPaneHeader, apDialog);
+        });
+    }
     private void initializeBindings() {
         dateProperty = new SimpleBooleanProperty(Boolean.TRUE);
         timeProperty = new SimpleBooleanProperty(Boolean.TRUE);
@@ -181,6 +176,25 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
             tfTime.setText(time);
         }
         tfTime.disableProperty().bind(cbTime.selectedProperty().not());
+    }
+    public void configureWizardForCreateMode() {
+        LoggerFacade.getDefault().info(this.getClass(), "Configure Reflection Wizard for CREATE mode."); // NOI18N
+    
+        bEdit.setVisible(Boolean.FALSE);
+        bEdit.setManaged(Boolean.FALSE);
+        
+        this.show(new ReflectionModel());
+    }
+    
+    public void configureWizardForEditMode(ReflectionModel model) {
+        LoggerFacade.getDefault().info(this.getClass(), "Configure Reflection Wizard for EDIT mode."); // NOI18N
+    
+        bCreate.setVisible(Boolean.FALSE);
+        bCreate.setManaged(Boolean.FALSE);
+        bReset.setVisible(Boolean.FALSE);
+        bReset.setManaged(Boolean.FALSE);
+        
+        this.show(model);
     }
     
     public void onActionReset() {

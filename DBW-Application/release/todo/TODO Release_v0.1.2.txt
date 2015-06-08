@@ -5,6 +5,7 @@ NEW
 #22 Create new modules DBW-File-Help(-Api, -Impl).
 
 ENHANCEMENT
+#18 Enhance the dialogs so that they can moved.
 
 FEATURE
 
@@ -21,6 +22,5 @@ ADDITIONAL
 CHECK
 #24 Create a singleton tab for the file Welcome.
 #23 Create new dialog About (Help).
-#18 Enhance the dialogs so that they can moved.
 
 --------------------------------------------------------------------------------

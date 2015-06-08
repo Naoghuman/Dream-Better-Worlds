@@ -19,6 +19,11 @@
         
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Dialog-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Dialog-Impl</artifactId>
             <version>${project.version}</version>
         </dependency>

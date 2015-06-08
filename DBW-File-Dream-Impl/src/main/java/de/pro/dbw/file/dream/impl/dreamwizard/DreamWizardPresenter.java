@@ -21,6 +21,7 @@ import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.core.sql.provider.SqlProvider;
+import de.pro.dbw.dialog.api.DialogEventHandler;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
 import de.pro.lib.action.api.ActionFacade;
@@ -29,6 +30,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -42,6 +44,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -52,6 +57,7 @@ import javafx.util.Duration;
  */
 public class DreamWizardPresenter implements Initializable, IActionConfiguration, IDateConverter, IUtilConfiguration {
     
+    @FXML private AnchorPane apDialog;
     @FXML private Button bCreateDream;
     @FXML private CheckBox cbTime;
     @FXML private ProgressIndicator piSave;
@@ -60,6 +66,7 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
     @FXML private TextField tfDate;
     @FXML private TextField tfTime;
     @FXML private TextField tfTitle;
+    @FXML private TitledPane tpDialog;
     
     private BooleanBinding disableBinding = null;
     private BooleanBinding descriptionBinding = null;
@@ -71,6 +78,7 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize DreamWizardPresenter"); // NOI18N
     
+        assert (apDialog != null)      : "fx:id=\"apDialog\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         assert (bCreateDream != null)  : "fx:id=\"bCreateDream\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         assert (cbTime != null)        : "fx:id=\"cbTime\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         assert (piSave != null)        : "fx:id=\"piSave\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
@@ -79,11 +87,20 @@ public class DreamWizardPresenter implements Initializable, IActionConfiguration
         assert (tfDate != null)        : "fx:id=\"tfDate\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         assert (tfTime != null)        : "fx:id=\"tfTime\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         assert (tfTitle != null)       : "fx:id=\"tfTitle\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
+        assert (tpDialog != null)      : "fx:id=\"tpDialog\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         
         this.initializeDescription();
         this.initializeBindings();
         this.initializeSaveProgress();
         this.initializeTime();
+        this.initializeEventHandlers();
+    }
+    
+    private void initializeEventHandlers() {
+        Platform.runLater(() -> {
+            final Pane pTitledPaneHeader = (Pane) tpDialog.lookup(".title"); // NOI18N
+            DialogEventHandler.getDefault().configure(pTitledPaneHeader, apDialog);
+        });
     }
     
     private void initializeBindings() {

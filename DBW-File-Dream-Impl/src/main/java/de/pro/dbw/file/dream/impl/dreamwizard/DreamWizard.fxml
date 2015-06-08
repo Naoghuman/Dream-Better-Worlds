@@ -7,9 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardPresenter">
+<AnchorPane id="AnchorPane" fx:id="apDialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardPresenter">
     <children>
-        <TitledPane animated="false" collapsible="false" layoutX="55.0" layoutY="20.0" text="Dream Wizard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <TitledPane fx:id="tpDialog" animated="false" collapsible="false" layoutX="55.0" layoutY="20.0" text="Dream Wizard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
                 <VBox spacing="10.0">
                     <children>

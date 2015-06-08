@@ -175,6 +175,7 @@
         <module>DBW-Base-Provider</module>
         <module>DBW-Core-Configuration-Api</module>
         <module>DBW-Core-Sql-Provider</module>
+        <module>DBW-Dialog-Api</module>
         <module>DBW-Dialog-Impl</module>
         <module>DBW-Dialog-Provider</module>
         <module>DBW-Exercise-Provider</module>
