@@ -21,10 +21,10 @@ import de.pro.dbw.dialog.impl.deletedialogcontent.DeleteDialogContentPresenter;
 import de.pro.dbw.dialog.impl.deletedialogcontent.DeleteDialogContentView;
 import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
 import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
-import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogPresenter;
-import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogView;
-import de.pro.dbw.dialog.impl.savesinglefiledialog.SaveSingleFileDialogPresenter;
-import de.pro.dbw.dialog.impl.savesinglefiledialog.SaveSingleFileDialogView;
+import de.pro.dbw.dialog.impl.savemultifilesdialogcontent.SaveMultiFilesDialogContentPresenter;
+import de.pro.dbw.dialog.impl.savemultifilesdialogcontent.SaveMultiFilesDialogContentView;
+import de.pro.dbw.dialog.impl.savesinglefiledialogcontent.SaveSingleFileDialogContentPresenter;
+import de.pro.dbw.dialog.impl.savesinglefiledialogcontent.SaveSingleFileDialogContentView;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
 import javafx.event.ActionEvent;
@@ -138,11 +138,15 @@ public class DialogProvider implements IPreferencesConfiguration {
     ) {
         LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for Delete2"); // NOI18N
         
-        final DeleteDialogContentView view = new DeleteDialogContentView();
-        final DeleteDialogContentPresenter presenter = view.getRealPresenter();
-        presenter.configure(message, onActionYes, onActionNo);
+        final DeleteDialogContentView contentView = new DeleteDialogContentView();
+        final DeleteDialogContentPresenter contentPresenter = contentView.getRealPresenter();
+        contentPresenter.configure(message, onActionYes, onActionNo);
         
-        final Parent dialog = view.getView();
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure("Delete", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        
+        final Parent dialog = dialogView.getView();
         this.show2(dialog);
     }
     
@@ -152,11 +156,15 @@ public class DialogProvider implements IPreferencesConfiguration {
     ) {   
         LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for SaveMultiFiles"); // NOI18N
         
-        final SaveMultiFilesDialogView view = new SaveMultiFilesDialogView();
-        final SaveMultiFilesDialogPresenter presenter = view.getRealPresenter();
-        presenter.configure(onActionYes, onActionNo);
+        final SaveMultiFilesDialogContentView contentView = new SaveMultiFilesDialogContentView();
+        final SaveMultiFilesDialogContentPresenter contentPresenter = contentView.getRealPresenter();
+        contentPresenter.configure(onActionYes, onActionNo);
         
-        final Parent dialog = view.getView();
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure("Save", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        
+        final Parent dialog = dialogView.getView();
         this.show(dialog);
     }
     
@@ -166,11 +174,15 @@ public class DialogProvider implements IPreferencesConfiguration {
     ) {
         LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for SaveSingleFile"); // NOI18N
         
-        final SaveSingleFileDialogView view = new SaveSingleFileDialogView();
-        final SaveSingleFileDialogPresenter presenter = view.getRealPresenter();
-        presenter.configure(onActionYes, onActionNo);
+        final SaveSingleFileDialogContentView contentView = new SaveSingleFileDialogContentView();
+        final SaveSingleFileDialogContentPresenter contentPresenter = contentView.getRealPresenter();
+        contentPresenter.configure(onActionYes, onActionNo);
         
-        final Parent dialog = view.getView();
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure("Save", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        
+        final Parent dialog = dialogView.getView();
         this.show(dialog);
     }
     

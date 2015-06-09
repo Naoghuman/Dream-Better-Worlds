@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.dialog.impl.savemultifilesdialog;
+package de.pro.dbw.dialog.impl.savemultifilesdialogcontent;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,10 +22,10 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class SaveMultiFilesDialogView extends FXMLView {
+public class SaveMultiFilesDialogContentView extends FXMLView {
     
-    public SaveMultiFilesDialogPresenter getRealPresenter() {
-        return (SaveMultiFilesDialogPresenter) this.getPresenter();
+    public SaveMultiFilesDialogContentPresenter getRealPresenter() {
+        return (SaveMultiFilesDialogContentPresenter) this.getPresenter();
     }
     
 }

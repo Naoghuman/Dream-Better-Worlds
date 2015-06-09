@@ -16,7 +16,6 @@
  */
 package de.pro.dbw.dialog.impl.deletedialogcontent;
 
-import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.dialog.api.IDialogSize;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -34,20 +33,19 @@ import javafx.scene.control.Label;
  *
  * @author PRo
  */
-public class DeleteDialogContentPresenter implements Initializable, IActionConfiguration,
-        IDialogSize
-{
+public class DeleteDialogContentPresenter implements Initializable, IDialogSize {
+    
     @FXML private Button bNo;
     @FXML private Button bYes;
     @FXML private Label lMessage;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize DeleteDialogPresenter"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize DeleteDialogContentPresenter"); // NOI18N
         
-        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
-        assert (bYes != null)     : "fx:id=\"bYes\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
-        assert (lMessage != null) : "fx:id=\"lMessage\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
+        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteDialogContent.fxml'."; // NOI18N
+        assert (bYes != null)     : "fx:id=\"bYes\" was not injected: check your FXML file 'DeleteDialogContent.fxml'."; // NOI18N
+        assert (lMessage != null) : "fx:id=\"lMessage\" was not injected: check your FXML file 'DeleteDialogContent.fxml'."; // NOI18N
     }
     
     public void configure(

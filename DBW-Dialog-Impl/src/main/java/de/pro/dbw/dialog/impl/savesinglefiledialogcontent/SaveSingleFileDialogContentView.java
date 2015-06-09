@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.dialog.impl.savesinglefiledialog;
+package de.pro.dbw.dialog.impl.savesinglefiledialogcontent;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,10 +22,10 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class SaveSingleFileDialogView extends FXMLView {
+public class SaveSingleFileDialogContentView extends FXMLView {
     
-    public SaveSingleFileDialogPresenter getRealPresenter() {
-        return (SaveSingleFileDialogPresenter) this.getPresenter();
+    public SaveSingleFileDialogContentPresenter getRealPresenter() {
+        return (SaveSingleFileDialogContentPresenter) this.getPresenter();
     }
     
 }
