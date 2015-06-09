@@ -5,6 +5,7 @@ NEW
 #22 Create new modules DBW-File-Help(-Api, -Impl).
 
 ENHANCEMENT
+#27 Create DialogTemplate as basic for all dialogs.
 #18 Enhance the dialogs so that they can moved.
 
 FEATURE
@@ -20,6 +21,7 @@ REFACTORING
 ADDITIONAL
 
 CHECK
+#28 Implement DialogTemplate in all dialogs.
 #24 Create a singleton tab for the file Welcome.
 #23 Create new dialog About (Help).
 

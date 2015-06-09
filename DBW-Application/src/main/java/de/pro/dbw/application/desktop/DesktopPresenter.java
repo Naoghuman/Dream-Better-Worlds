@@ -234,7 +234,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionShowHelpAbout() {
-//        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__ABOUT);
+        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__ABOUT);
     }
     
     public void onActionShowHelpWelcome() {

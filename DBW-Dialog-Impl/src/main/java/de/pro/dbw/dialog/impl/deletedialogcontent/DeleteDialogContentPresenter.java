@@ -14,54 +14,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.dialog.impl.deletedialog;
+package de.pro.dbw.dialog.impl.deletedialogcontent;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
-import de.pro.dbw.dialog.api.DialogEventHandler;
+import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
+import de.pro.dbw.dialog.api.IDialogSize;
 import de.pro.lib.logger.api.LoggerFacade;
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 /**
  *
  * @author PRo
  */
-public class DeleteDialogPresenter implements Initializable, IActionConfiguration {
-    
-    @FXML private AnchorPane apDialog;
+public class DeleteDialogContentPresenter implements Initializable, IActionConfiguration,
+        IDialogSize
+{
     @FXML private Button bNo;
     @FXML private Button bYes;
     @FXML private Label lMessage;
-    @FXML private TitledPane tpDialog;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize DeleteDialogPresenter"); // NOI18N
         
-        assert (apDialog != null) : "fx:id=\"apDialog\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
         assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
         assert (bYes != null)     : "fx:id=\"bYes\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
         assert (lMessage != null) : "fx:id=\"lMessage\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
-        assert (tpDialog != null) : "fx:id=\"tpDialog\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
-    
-        this.initializeEventHandlers();
-    }
-    
-    private void initializeEventHandlers() {
-        Platform.runLater(() -> {
-            final Pane pTitledPaneHeader = (Pane) tpDialog.lookup(".title"); // NOI18N
-            DialogEventHandler.getDefault().configure(pTitledPaneHeader, apDialog);
-        });
     }
     
     public void configure(
@@ -71,6 +57,11 @@ public class DeleteDialogPresenter implements Initializable, IActionConfiguratio
     ) {
         bNo.setOnAction(onActionNo);
         bYes.setOnAction(onActionYes);
+    }
+
+    @Override
+    public Dimension getSize() {
+        return IDialogConfiguration.SIZE__W300_H200;
     }
     
 }

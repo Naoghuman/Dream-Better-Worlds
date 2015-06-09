@@ -17,8 +17,10 @@
 package de.pro.dbw.dialog.provider;
 
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
-import de.pro.dbw.dialog.impl.deletedialog.DeleteDialogPresenter;
-import de.pro.dbw.dialog.impl.deletedialog.DeleteDialogView;
+import de.pro.dbw.dialog.impl.deletedialogcontent.DeleteDialogContentPresenter;
+import de.pro.dbw.dialog.impl.deletedialogcontent.DeleteDialogContentView;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogPresenter;
 import de.pro.dbw.dialog.impl.savemultifilesdialog.SaveMultiFilesDialogView;
 import de.pro.dbw.dialog.impl.savesinglefiledialog.SaveSingleFileDialogPresenter;
@@ -102,7 +104,7 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     public void show2(Parent dialog) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer2");
+        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer2"); // NOI18N
         
         this.setPositionFromDialog(dialog);
         apDialogLayer2.getChildren().add(dialog);
@@ -117,11 +119,15 @@ public class DialogProvider implements IPreferencesConfiguration {
     ) {
         LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for Delete"); // NOI18N
         
-        final DeleteDialogView view = new DeleteDialogView();
-        final DeleteDialogPresenter presenter = view.getRealPresenter();
-        presenter.configure(message, onActionYes, onActionNo);
+        final DeleteDialogContentView contentView = new DeleteDialogContentView();
+        final DeleteDialogContentPresenter contentPresenter = contentView.getRealPresenter();
+        contentPresenter.configure(message, onActionYes, onActionNo);
         
-        final Parent dialog = view.getView();
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure("Delete", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        
+        final Parent dialog = dialogView.getView();
         this.show(dialog);
     }
     
@@ -132,8 +138,8 @@ public class DialogProvider implements IPreferencesConfiguration {
     ) {
         LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for Delete2"); // NOI18N
         
-        final DeleteDialogView view = new DeleteDialogView();
-        final DeleteDialogPresenter presenter = view.getRealPresenter();
+        final DeleteDialogContentView view = new DeleteDialogContentView();
+        final DeleteDialogContentPresenter presenter = view.getRealPresenter();
         presenter.configure(message, onActionYes, onActionNo);
         
         final Parent dialog = view.getView();
