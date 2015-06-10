@@ -25,8 +25,11 @@ import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.dream.impl.dream.DreamPresenter;
 import de.pro.dbw.file.dream.impl.dream.DreamView;
-import de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardView;
+import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentView;
 import de.pro.dbw.core.sql.provider.SqlProvider;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
+import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentPresenter;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -228,8 +231,14 @@ public final class DreamProvider implements
     public void showDreamWizard() {
         LoggerFacade.getDefault().debug(this.getClass(), "Show Dream Wizard"); // NOI18N
         
-        final DreamWizardView view = new DreamWizardView();
-        final Parent dialog = view.getView();
+        final DreamWizardContentView contentView = new DreamWizardContentView();
+        final DreamWizardContentPresenter contentPresenter = contentView.getRealPresenter();
+        
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure("Dream Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        
+        final Parent dialog = dialogView.getView();
         DialogProvider.getDefault().show(dialog);
     }
 }
