@@ -14,9 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtemplate;
+package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtemplate;
 
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight.*;
 import com.airhacks.afterburner.views.FXMLView;
 
 /**

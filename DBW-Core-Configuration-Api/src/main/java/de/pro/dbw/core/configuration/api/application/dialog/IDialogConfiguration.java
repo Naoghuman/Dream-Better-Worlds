@@ -27,5 +27,6 @@ public interface IDialogConfiguration {
     public Dimension SIZE__W300_H200 = new Dimension(300, 200);
     public Dimension SIZE__W495_H330 = new Dimension(495, 330);
     public Dimension SIZE__W495_H414 = new Dimension(495, 414);
+    public Dimension SIZE__W875_H359 = new Dimension(875, 359);
     
 }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight;
+package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,10 +22,10 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class TabTipOfTheNightView extends FXMLView {
+public class TipOfTheNightEditorContentView extends FXMLView {
     
-    public TabTipOfTheNightPresenter getRealPresenter() {
-        return (TabTipOfTheNightPresenter) super.getPresenter();
+    public TipOfTheNightEditorContentPresenter getRealPresenter() {
+        return (TipOfTheNightEditorContentPresenter) super.getPresenter();
     }
     
 }

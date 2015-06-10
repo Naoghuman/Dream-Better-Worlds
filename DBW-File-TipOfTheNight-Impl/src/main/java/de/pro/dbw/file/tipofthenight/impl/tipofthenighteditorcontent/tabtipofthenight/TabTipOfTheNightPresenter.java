@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight;
+package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofthenight;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;

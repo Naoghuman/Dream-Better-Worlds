@@ -14,57 +14,44 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor;
+package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent;
 
+import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
-import de.pro.dbw.dialog.api.DialogEventHandler;
+import de.pro.dbw.dialog.api.IDialogSize;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserPresenter;
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight.TabTipOfTheNightView;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofthenight.TabTipOfTheNightView;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserView;
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight.TabTipOfTheNightPresenter;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofthenight.TabTipOfTheNightPresenter;
 import de.pro.lib.logger.api.LoggerFacade;
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 /**
  *
  * @author PRo
  */
-public class TipOfTheNightEditorPresenter implements Initializable, IPreferencesConfiguration {
+public class TipOfTheNightEditorContentPresenter implements Initializable, 
+        IDialogSize, IPreferencesConfiguration {
 
-    @FXML private AnchorPane apDialog;
     @FXML private BorderPane bpPreview;
     @FXML private Tab tTemplate;
     @FXML private Tab tTipOfTheNight;
-    @FXML private TitledPane tpDialog;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize TipOfTheNightEditorPresenter"); // NOI18N
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize TipOfTheNightEditorContentPresenter"); // NOI18N
         
-        assert (apDialog != null)       : "fx:id=\"apDialog\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N
-        assert (bpPreview != null)      : "fx:id=\"bpPreview\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N
-        assert (tTemplate != null)      : "fx:id=\"tTemplate\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N
-        assert (tTipOfTheNight != null) : "fx:id=\"tTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N
-        assert (tpDialog != null)       : "fx:id=\"tpDialog\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N
+        assert (bpPreview != null)      : "fx:id=\"bpPreview\" was not injected: check your FXML file 'TipOfTheNightEditorContent.fxml'."; // NOI18N
+        assert (tTemplate != null)      : "fx:id=\"tTemplate\" was not injected: check your FXML file 'TipOfTheNightEditorContent.fxml'."; // NOI18N
+        assert (tTipOfTheNight != null) : "fx:id=\"tTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNightEditorContent.fxml'."; // NOI18N
         
         this.initialize();
-        this.initializeEventHandlers();
-    }
-    
-    private void initializeEventHandlers() {
-        Platform.runLater(() -> {
-            final Pane pTitledPaneHeader = (Pane) tpDialog.lookup(".title"); // NOI18N
-            DialogEventHandler.getDefault().configure(pTitledPaneHeader, apDialog);
-        });
     }
     
     private void initialize() {
@@ -79,6 +66,11 @@ public class TipOfTheNightEditorPresenter implements Initializable, IPreferences
         
         chooserPresenter.textProperty().bind(tabTipOfTheNightPresenter.textProperty());
         chooserPresenter.titleProperty().bind(tabTipOfTheNightPresenter.titleProperty());
+    }
+
+    @Override
+    public Dimension getSize() {
+        return IDialogConfiguration.SIZE__W875_H359;
     }
 
 }

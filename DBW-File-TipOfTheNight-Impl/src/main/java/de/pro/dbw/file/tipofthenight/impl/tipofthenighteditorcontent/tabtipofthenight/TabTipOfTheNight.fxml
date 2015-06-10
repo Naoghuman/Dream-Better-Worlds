@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight.TabTipOfTheNightPresenter">
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofthenight.TabTipOfTheNightPresenter">
    <children>
       <VBox layoutX="83.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
