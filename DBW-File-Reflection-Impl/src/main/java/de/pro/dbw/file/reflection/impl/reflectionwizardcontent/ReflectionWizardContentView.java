@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.file.reflection.impl.reflectionwizard;
+package de.pro.dbw.file.reflection.impl.reflectionwizardcontent;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,10 +22,10 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class ReflectionWizardView extends FXMLView {
+public class ReflectionWizardContentView extends FXMLView {
     
-    public ReflectionWizardPresenter getRealPresenter() {
-        return (ReflectionWizardPresenter) super.getPresenter();
+    public ReflectionWizardContentPresenter getRealPresenter() {
+        return (ReflectionWizardContentPresenter) super.getPresenter();
     }
     
 }
