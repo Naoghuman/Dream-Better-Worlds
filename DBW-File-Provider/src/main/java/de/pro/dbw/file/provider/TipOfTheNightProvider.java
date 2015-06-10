@@ -20,9 +20,12 @@ import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.dialog.provider.DialogProvider;
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEditorView;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.TipOfTheNightEditorContentView;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserView;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.TipOfTheNightEditorContentPresenter;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
@@ -75,28 +78,15 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     private void onActionShowTipOfTheNightEditor() {
         LoggerFacade.getDefault().info(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
         
-        final TipOfTheNightEditorView view = new TipOfTheNightEditorView();
-        final Parent dialog = view.getView();
+        final TipOfTheNightEditorContentView contentView = new TipOfTheNightEditorContentView();
+        final TipOfTheNightEditorContentPresenter contentPresenter = contentView.getRealPresenter();
+        
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure("Tip of the Night Editor", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        
+        final Parent dialog = dialogView.getView();
         DialogProvider.getDefault().show(dialog);
-    
-//        // Check if the tab for the TipOfTheNightEditor is open
-//        for (Tab tab : tpEditor.getTabs()) {
-//            if (tab.getId().equals(String.valueOf(FILE__TIP_OF_THE_NIGHT___DEFAULT_ID))) {
-//                tpEditor.getSelectionModel().select(tab);
-//                return;
-//            }
-//        }
-//        
-//        // Create new tab for the TipOfTheNightEditor
-//        final Tab tab = new Tab();
-//        tab.setText("Tip of the Night Editor"); // XXX load from properties
-//        
-//        final TipOfTheNightEditorView view = new TipOfTheNightEditorView();
-//        tab.setContent(view.getView());
-//        tab.setId(String.valueOf(FILE__TIP_OF_THE_NIGHT___DEFAULT_ID));
-//        
-//        tpEditor.getTabs().add(tab);
-//        tpEditor.getSelectionModel().select(tab);
     }
     
     private void onActionShowTipOfTheNightWindow() {
