@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.file.dream.impl.dreamwizard;
+package de.pro.dbw.file.dream.impl.dreamwizardcontent;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,6 +22,9 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class DreamWizardView extends FXMLView {
+public class DreamWizardContentView extends FXMLView {
     
+    public DreamWizardContentPresenter getRealPresenter() {
+        return (DreamWizardContentPresenter) super.getPresenter();
+    }
 }

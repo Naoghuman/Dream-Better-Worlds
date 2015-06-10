@@ -23,7 +23,8 @@ import java.awt.Dimension;
  * @author PRo
  */
 public interface IDialogConfiguration {
-    
+    // TODO all sizes are in the format 16:9
     public Dimension SIZE__W300_H200 = new Dimension(300, 200);
+    public Dimension SIZE__W495_H330 = new Dimension(495, 330);
     
 }
