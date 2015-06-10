@@ -18,7 +18,15 @@ package de.pro.dbw.file.provider;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.action.IRegisterActions;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
+import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
+import de.pro.dbw.dialog.provider.DialogProvider;
+import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentPresenter;
+import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentView;
+import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import javafx.event.ActionEvent;
+import javafx.scene.Parent;
 import javafx.scene.control.TabPane;
 
 /**
@@ -70,6 +78,23 @@ public class HelpProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
-//        this.registerOnActionCreateNewDream();
+        this.registerOnActionShowHelpAbout();
     }
+
+    private void registerOnActionShowHelpAbout() {
+        ActionFacade.getDefault().register(
+                ACTION__SHOW_HELP__ABOUT,
+                (ActionEvent ae) -> {
+                    final AboutDialogContentView contentView = new AboutDialogContentView();
+                    final AboutDialogContentPresenter contentPresenter = contentView.getRealPresenter();
+                    
+                    final DialogTemplateView dialogView = new DialogTemplateView();
+                    final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+                    dialogPresenter.configure("About", contentView.getView(), contentPresenter.getSize()); // NOI18N
+
+                    final Parent dialog = dialogView.getView();
+                    DialogProvider.getDefault().show(dialog);
+                });
+    }
+    
 }

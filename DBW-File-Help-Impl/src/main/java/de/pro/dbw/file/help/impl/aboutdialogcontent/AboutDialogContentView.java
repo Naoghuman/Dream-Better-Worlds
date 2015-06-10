@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Dream Better Worlds
+ * Copyright (C) 2014 Dream Better Worlds
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,20 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.core.configuration.api.application.dialog;
+package de.pro.dbw.file.help.impl.aboutdialogcontent;
 
-import java.awt.Dimension;
+import com.airhacks.afterburner.views.FXMLView;
 
 /**
  *
  * @author PRo
  */
-public interface IDialogConfiguration {
-    // TODO all sizes are in the format 16:9
-    public Dimension SIZE__W300_H200 = new Dimension(300, 200);
-    public Dimension SIZE__W400_H450 = new Dimension(400, 450);
-    public Dimension SIZE__W495_H330 = new Dimension(495, 330);
-    public Dimension SIZE__W495_H414 = new Dimension(495, 414);
-    public Dimension SIZE__W875_H359 = new Dimension(875, 359);
+public class AboutDialogContentView extends FXMLView {
+    
+    public AboutDialogContentPresenter getRealPresenter() {
+        return (AboutDialogContentPresenter) this.getPresenter();
+    }
     
 }

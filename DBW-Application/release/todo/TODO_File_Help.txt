@@ -7,3 +7,12 @@ MENUITEM HELP
   open the last open side.
 
 --------------------------------------------------------------------------------
+HELP ABOUT
+Tab Program
+ - Program, Version, Copyright, Developer,
+
+Tab Libraries
+
+Tab License
+
+--------------------------------------------------------------------------------
