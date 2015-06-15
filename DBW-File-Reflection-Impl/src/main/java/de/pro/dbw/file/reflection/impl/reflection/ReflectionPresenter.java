@@ -127,7 +127,9 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         });
     }
 
-    private String createOnActionDeleteComment() {
+    private String registerOnActionDeleteComment() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register on action delete comment"); // NOI18N
+    
         final String actionKeyForDeleting = ACTION__DELETE_ + System.currentTimeMillis();
         ActionFacade.getDefault().register(
                 actionKeyForDeleting,
@@ -188,9 +190,11 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionAddComment() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action add comment"); // NOI18N
+    
         final ReflectionCommentView view = new ReflectionCommentView();
         final ReflectionCommentPresenter presenter = view.getRealPresenter();
-        final String actionKeyForDeleting = this.createOnActionDeleteComment();
+        final String actionKeyForDeleting = this.registerOnActionDeleteComment();
         presenter.configure(new ReflectionCommentModel(), actionKeyForDeleting);
         presenter.textProperty().addListener(stringChangeListener);
         
@@ -201,7 +205,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionDelete() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action delete"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action delete"); // NOI18N
 
         // TODO properties
         DialogProvider.getDefault().showDeleteDialog(
@@ -220,7 +224,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
 
     public void onActionRefresh() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action refresh"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action refresh"); // NOI18N
         // TODO not better to load the old state from db?
         if (oldModel == null) {
             return;
@@ -230,14 +234,14 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
 
     public void onActionSave() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action save"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action save"); // NOI18N
         
         final Boolean updateGui = Boolean.TRUE;
         this.onActionSave(updateGui);
     }
     
     public void onActionSave(Boolean updateGui) {
-        LoggerFacade.getDefault().info(this.getClass(), "Save Reflection and Comments to database"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Save Reflection and Comments to database"); // NOI18N
         
         System.out.println(" XXX ReflectionPresenter.onActionSave(boolean) add validation for input");
         
@@ -273,6 +277,8 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     private void onActionUpdateGui(Boolean removeFile) {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action update gui"); // NOI18N
+    
         final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
         ActionTransferModel transferModel = new ActionTransferModel();
         if (removeFile) {
@@ -360,7 +366,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
             final ReflectionCommentView reflectionCommentView = new ReflectionCommentView();
             final ReflectionCommentPresenter presenter = reflectionCommentView.getRealPresenter();
         
-            final String actionKeyForDeleting = this.createOnActionDeleteComment();
+            final String actionKeyForDeleting = this.registerOnActionDeleteComment();
             presenter.configure(reflectionCommentModel, actionKeyForDeleting);
             presenter.textProperty().addListener(stringChangeListener);
             

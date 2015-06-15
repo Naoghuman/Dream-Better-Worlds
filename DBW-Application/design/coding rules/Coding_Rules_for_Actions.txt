@@ -1,0 +1,13 @@
+--------------------------------------------------------------------------------
+CODING RULES FOR ACTIONS
+--------------------------------------------------------------------------------
+LOG EVENTS
+ - Every action method have at method start a Logger output in DEBUG mode.
+ - The log message is the same like the method name.
+ - Actions methods are: registerOnActionXy(), onActionXy().
+
+Example
+public void onActionSearchInDreams() {
+    LoggerFacade.getDefault().debug(this.getClass(), "On action search in Dreams"); // NOI18N
+
+--------------------------------------------------------------------------------

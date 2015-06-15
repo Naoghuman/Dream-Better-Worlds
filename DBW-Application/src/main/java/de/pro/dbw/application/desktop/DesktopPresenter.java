@@ -73,7 +73,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize DesktopPresenter");
+        LoggerFacade.getDefault().info(this.getClass(), "Initialize DesktopPresenter"); // NOI18N
         
         assert (apDialogLayer != null)     : "fx:id=\"apDialogLayer\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (apDialogLayer2 != null)    : "fx:id=\"apDialogLayer2\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
@@ -208,44 +208,64 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionCreateNewDream() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action create new Dream"); // NOI18N
+        
 //        ActionFacade.getDefault().handle(ACTION__CREATE_NEW_DREAM);
         
         ActionFacade.getDefault().handle(ACTION__SHOW_SEARCH_IN_DREAMS); // XXX test
     }
     
     public void onActionCreateNewFastDream() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action create new fast Dream"); // NOI18N
+        // TODO dreams can only created with the dream dialog (renname it, remove menu...)
         ActionFacade.getDefault().handle(ACTION__CREATE_NEW_FAST_DREAM);
     }
     
     public void onActionCreateNewFileReflection() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action create new file Reflection"); // NOI18N
+        
         ActionFacade.getDefault().handle(ACTION__CREATE_NEW_FILE__REFLECTION);
     }
 
     public void onActionSaveMultiFiles() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action save Multi Files"); // NOI18N
+        
         ActionFacade.getDefault().handle(ACTION__SAVE_ALL_CHANGED_FILES);
     }
     
     public void onActionShowExtendedSliderEditorDialog() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Extended Slider Editor"); // NOI18N
+        
 //        DialogProvider1.getDefault().showExtendedSliderEditorDialog();
     }
     
     public void onActionShowHelp() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Help"); // NOI18N
+        
 //        ActionFacade.getDefault().handle(ACTION__SHOW_HELP);
     }
     
     public void onActionShowHelpAbout() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Help About"); // NOI18N
+        
         ActionFacade.getDefault().handle(ACTION__SHOW_HELP__ABOUT);
     }
     
     public void onActionShowHelpWelcome() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Help Welcome"); // NOI18N
+        
 //        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
     public void onActionShowTipOfTheNightEditor() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tip of the Night Editor"); // NOI18N
+        
         ActionFacade.getDefault().handle(ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR);
     }
     
     public void onActionShowTipOfTheNightWindow() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tip of the Night Window"); // NOI18N
+        
         ActionFacade.getDefault().handle(ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW);
     }
 
@@ -272,7 +292,6 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         FeatureProvider.getDefault().register(tpEditor);
         FileProvider.getDefault().register(tpEditor, tpNavigationRight);
         NavigationProvider.getDefault().register(tpNavigationLeft, tpEditor, tpNavigationRight);
-   
     }
     
 }

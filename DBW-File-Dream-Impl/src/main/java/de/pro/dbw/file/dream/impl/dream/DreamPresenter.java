@@ -101,7 +101,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
     }
     
     public void onActionDelete() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action delete"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action delete"); // NOI18N
 
         // TODO properties
         DialogProvider.getDefault().showDeleteDialog(
@@ -120,7 +120,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
     }
     
     public void onActionRefresh() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action refresh"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action refresh"); // NOI18N
         
         if (oldModel == null) {
             return;
@@ -130,13 +130,13 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
     }
     
     public void onActionSave() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action save"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action save"); // NOI18N
         
         onActionSave(Boolean.TRUE);
     }
     
     public void onActionSave(Boolean updateGui) {
-        LoggerFacade.getDefault().info(this.getClass(), "Save dream to database"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action save"); // NOI18N
         
         System.out.println(" XXX DreamPresenter.onActionSave() add validation for input");
         
@@ -172,7 +172,9 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
         this.onActionUpdateGui(removeFile);
     }
     
-    public void onActionShowExtendedSliderDialog() {
+    public void registerOnActionShowExtendedSliderDialog() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register on action show Extended Slider Dialog"); // NOI18N
+        
         // dynamic action (with open elements (can also dreamfile-id))
         final String actionKey = ACTION__SHOW_EXTENDED_SLIDER_DIALOG + model.getId();
         ActionFacade.getDefault().register(actionKey,
@@ -186,12 +188,11 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
                     
                     DialogProvider.getDefault().hide();
                 });
-        
-        LoggerFacade.getDefault().error(this.getClass(), "showExtendedSliderDialog"); // NOI18N
-//        DialogProvider1.getDefault().showExtendedSliderDialog(actionKey);
     }
     
     private void onActionUpdateGui(Boolean removeFile) {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action update gui"); // NOI18N
+        
         final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
         ActionTransferModel transferModel = new ActionTransferModel();
         if (removeFile) {

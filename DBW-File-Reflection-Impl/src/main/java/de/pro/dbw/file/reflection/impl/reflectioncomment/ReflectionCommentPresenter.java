@@ -86,6 +86,8 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
     }
     
     public void onActionDelete() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action delete"); // NOI18N
+    
         final ActionTransferModel actionTransferModel = new ActionTransferModel();
         actionTransferModel.setActionKey(actionKeyForDeletion);
         actionTransferModel.setObject(reflectionCommentModel);

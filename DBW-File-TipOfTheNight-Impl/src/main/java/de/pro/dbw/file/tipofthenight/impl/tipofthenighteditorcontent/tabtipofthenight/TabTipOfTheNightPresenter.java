@@ -151,7 +151,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionShowCategoryChooserDialog() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show CategoryChooserDialog"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Category Chooser Dialog"); // NOI18N
         
         /*
         TODO
@@ -161,13 +161,13 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionCloseTipOfTheNightEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action close TipsOfTheNight editor"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action close Tip of the Night Editor"); // NOI18N
         
         DialogProvider.getDefault().hide();
     }
     
     public void onActionDeleteTipOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action delete TipsOfTheNight"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action delete Tip of the Night"); // NOI18N
         
         final TipOfTheNightModel model = (TipOfTheNightModel) lvTipsOfTheNight.getSelectionModel().getSelectedItem();
         if (Objects.equals(model.getId(), FILE__TIP_OF_THE_NIGHT__DEFAULT_ID)) {
@@ -191,7 +191,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionNewTipOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action new TipsOfTheNight"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action new Tip of the Night"); // NOI18N
 
         // Check if a new TipOfTheNight exists
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
@@ -245,7 +245,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionSaveTipOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action save TipOfTheNight"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action save Tip of the Night"); // NOI18N
         
         /*
         TODO
@@ -265,6 +265,8 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     private void registerOnActionRefresh() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register on action Refresh"); // NOI18N
+        
         ActionFacade.getDefault().register(
                 ACTION__REFRESH_TIP_OF_THE_NIGHT__EDITOR,
                 (ActionEvent ae) -> {

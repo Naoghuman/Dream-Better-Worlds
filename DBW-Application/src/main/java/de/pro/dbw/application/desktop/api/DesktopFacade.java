@@ -18,6 +18,7 @@ package de.pro.dbw.application.desktop.api;
 
 import de.pro.dbw.application.desktop.DesktopPresenter;
 import de.pro.dbw.application.desktop.DesktopView;
+import de.pro.lib.logger.api.LoggerFacade;
 import javafx.scene.Parent;
 
 /**
@@ -60,6 +61,8 @@ public final class DesktopFacade {
     }
 
     public void onActionSaveMultiFiles() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action save Multi Files"); // NOI18N
+        
         final DesktopPresenter presenter = view.getRealPresenter();
         presenter.onActionSaveMultiFiles();
     }

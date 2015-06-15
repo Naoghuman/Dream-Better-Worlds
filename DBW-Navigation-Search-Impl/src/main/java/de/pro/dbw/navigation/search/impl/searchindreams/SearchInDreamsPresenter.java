@@ -20,7 +20,6 @@ import de.pro.dbw.base.component.api.ExtendedTabModel;
 import de.pro.dbw.base.component.api.IExtendedTextField;
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.search.ISearchConfiguration;
-import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.navigation.search.api.SearchDataModel;
 import de.pro.dbw.navigation.search.impl.searchnavigation.api.SqlStatementHelper;
 import de.pro.dbw.navigation.search.impl.searchindreamsresult.SearchInDreamsResultPresenter;
@@ -40,7 +39,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -131,6 +129,8 @@ public class SearchInDreamsPresenter implements
     }
     
     public void onActionSearchInDreams() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action search in Dreams"); // NOI18N
+        
         final SearchDataModel searchDataModel = new SearchDataModel();
         searchDataModel.setSimpleSqlInfo(SqlStatementHelper.createSimpleSqlInfoForSearchIn(vbSimpleSqlInfo));
         searchDataModel.setSqlStatements(this.createSqlStatementsForSearchInDreams());

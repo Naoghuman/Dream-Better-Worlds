@@ -121,7 +121,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     public void onActionNext() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action Next"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action next"); // NOI18N
     
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
@@ -143,7 +143,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     public void onActionRandom() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action Random"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Random"); // NOI18N
         
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
@@ -173,7 +173,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     
     public void onActionShowAtStart() {
         LoggerFacade.getDefault().debug(this.getClass(),
-                "Show at start: " + cbShowAtStart.isSelected()); // NOI18N
+                "On action show at start: " + cbShowAtStart.isSelected()); // NOI18N
     
         PreferencesFacade.getDefault().putBoolean(
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,

@@ -190,6 +190,8 @@ public class ReflectionWizardContentPresenter implements Initializable, IActionC
     }
     
     public void onActionReset() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action reset"); // NOI18N
+    
         tfTitle.setText(null);
         taText.setText(null);
         
@@ -200,10 +202,14 @@ public class ReflectionWizardContentPresenter implements Initializable, IActionC
     }
     
     public void onActionClose() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action close"); // NOI18N
+    
         DialogProvider.getDefault().hide();
     }
     
     public void onActionCreate() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action create"); // NOI18N
+    
         final SequentialTransition st = new SequentialTransition();
         final PauseTransition pt1 = new PauseTransition(Duration.ZERO);
         pt1.setOnFinished((ActionEvent event) -> {
@@ -231,6 +237,8 @@ public class ReflectionWizardContentPresenter implements Initializable, IActionC
     }
     
     public void onActionEdit() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action edit"); // NOI18N
+    
         this.onActionCreate();
     }
     

@@ -67,6 +67,8 @@ public class SearchInTipsOfTheNightPresenter implements Initializable, IActionCo
     }
     
     public void onActionSearchInTipsOfTheNight() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action search in Tip of the Nights"); // NOI18N
+        
         /*
         TODO
          - catch data for search
