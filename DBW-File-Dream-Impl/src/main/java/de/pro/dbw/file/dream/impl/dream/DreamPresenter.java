@@ -172,23 +172,23 @@ public class DreamPresenter implements Initializable, IActionConfiguration, IDat
         this.onActionUpdateGui(removeFile);
     }
     
-    public void registerOnActionShowExtendedSliderDialog() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register on action show Extended Slider Dialog"); // NOI18N
-        
-        // dynamic action (with open elements (can also dreamfile-id))
-        final String actionKey = ACTION__SHOW_EXTENDED_SLIDER_DIALOG + model.getId();
-        ActionFacade.getDefault().register(actionKey,
-                (ActionEvent ae) -> {
-                    /*
-                    TODO
-                     - get selected elements from ae.getSource(): Object
-                     - show then
-                    */
-                    System.out.println("xxxxxxxxxxxxxxxxxxx");
-                    
-                    DialogProvider.getDefault().hide();
-                });
-    }
+//    public void registerOnActionShowExtendedSliderDialog() {
+//        LoggerFacade.getDefault().debug(this.getClass(), "Register on action show Extended Slider Dialog"); // NOI18N
+//        
+//        // dynamic action (with open elements (can also dreamfile-id))
+//        final String actionKey = ACTION__SHOW_EXTENDED_SLIDER_DIALOG + model.getId();
+//        ActionFacade.getDefault().register(actionKey,
+//                (ActionEvent ae) -> {
+//                    /*
+//                    TODO
+//                     - get selected elements from ae.getSource(): Object
+//                     - show then
+//                    */
+//                    System.out.println("xxxxxxxxxxxxxxxxxxx");
+//                    
+//                    DialogProvider.getDefault().hide();
+//                });
+//    }
     
     private void onActionUpdateGui(Boolean removeFile) {
         LoggerFacade.getDefault().debug(this.getClass(), "On action update gui"); // NOI18N
