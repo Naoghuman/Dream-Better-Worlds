@@ -17,6 +17,7 @@
 package de.pro.dbw.navigation.dreambook.impl.dreambooknavigation;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.dreambook.api.DreamBookNavigationModel;
@@ -52,9 +53,8 @@ import javafx.util.Callback;
  *
  * @author PRo
  */
-public class DreamBookNavigationPresenter 
-    implements Initializable, IActionConfiguration,
-        IDreamConfiguration, INavigationConfiguration
+public class DreamBookNavigationPresenter implements Initializable, IActionConfiguration,
+        IDreamConfiguration, INavigationConfiguration, IRegisterActions
 {
     @FXML private ListView lvNavigation;
 
@@ -65,8 +65,8 @@ public class DreamBookNavigationPresenter
         assert (lvNavigation != null) : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'DreamBookNavigation.fxml'."; // NOI18N
         
         this.initializeNavigationLeft();
-        this.registerOnActionUpdateNavigationDreamBook();// XXX refactore to xyDreamBookNavigation
-        this.refreshDreamBook();// XXX refactore to refreshDreamBookNavigation
+        
+        this.refreshDreamBook();
     }
     
     private void initializeNavigationLeft() {
@@ -175,7 +175,14 @@ public class DreamBookNavigationPresenter
         });
     }
 
-    private void registerOnActionUpdateNavigationDreamBook() {
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DreamBookNavigationPresenter"); // NOI18N
+        
+        this.registerOnActionRefreshDreamBookNavigation();
+    }
+
+    private void registerOnActionRefreshDreamBookNavigation() {
         ActionFacade.getDefault().register(
                 ACTION__REFRESH_NAVIGATION__DREAMBOOK,
                 (ActionEvent ae) -> {

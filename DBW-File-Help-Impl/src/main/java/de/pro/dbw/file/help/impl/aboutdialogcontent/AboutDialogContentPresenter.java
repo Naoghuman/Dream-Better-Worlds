@@ -45,6 +45,8 @@ public class AboutDialogContentPresenter implements Initializable, IActionConfig
     }
     
     public void onActionClose() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action close"); // NOI18N
+        
         DialogProvider.getDefault().hide();
     }
 

@@ -62,6 +62,7 @@ public class TipOfTheNightEditorContentPresenter implements Initializable,
         
         final TabTipOfTheNightView tabTipOfTheNight = new TabTipOfTheNightView();
         final TabTipOfTheNightPresenter tabTipOfTheNightPresenter = tabTipOfTheNight.getRealPresenter();
+        tabTipOfTheNightPresenter.registerActions();
         tTipOfTheNight.setContent(tabTipOfTheNight.getView());
         
         chooserPresenter.textProperty().bind(tabTipOfTheNightPresenter.textProperty());

@@ -55,8 +55,8 @@ import javafx.util.Duration;
  * @author PRo
  */
 public class ReflectionWizardContentPresenter implements Initializable, IActionConfiguration,
-        IDateConverter, IDefaultIdConfiguration, IDialogSize, IFileConfiguration, IUtilConfiguration {
-    
+        IDateConverter, IDefaultIdConfiguration, IDialogSize, IFileConfiguration, IUtilConfiguration
+{
     @FXML private Button bCreate;
     @FXML private Button bEdit;
     @FXML private Button bReset;
@@ -164,6 +164,7 @@ public class ReflectionWizardContentPresenter implements Initializable, IActionC
         }
         tfTime.disableProperty().bind(cbTime.selectedProperty().not());
     }
+    
     public void configureWizardForCreateMode() {
         LoggerFacade.getDefault().info(this.getClass(), "Configure Reflection Wizard for CREATE mode."); // NOI18N
     

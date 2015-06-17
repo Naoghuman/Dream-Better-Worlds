@@ -48,8 +48,8 @@ import javafx.scene.layout.HBox;
  * @author PRo
  */
 public class ReflectionProvider implements IActionConfiguration, IRegisterActions,
-        IUtilConfiguration {
-    
+        IUtilConfiguration
+{
     private static ReflectionProvider instance = null;
     
     public static ReflectionProvider getDefault() {
@@ -78,7 +78,7 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in ReflectionProvider"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in ReflectionProvider"); // NOI18N
         
         this.registerOnActionCreateNewFileReflection();
         this.registerOnActionEditFileReflection();

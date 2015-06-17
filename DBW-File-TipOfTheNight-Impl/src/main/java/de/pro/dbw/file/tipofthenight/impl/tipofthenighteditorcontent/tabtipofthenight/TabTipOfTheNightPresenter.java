@@ -17,6 +17,7 @@
 package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofthenight;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.core.configuration.api.file.tipofthenight.ITipOfTheNightConfiguration;
@@ -51,8 +52,10 @@ import javafx.scene.layout.FlowPane;
  * 
  * @author PRo
  */
-public class TabTipOfTheNightPresenter implements Initializable, IActionConfiguration, IDefaultIdConfiguration, IPreferencesConfiguration, ITipOfTheNightConfiguration {
-
+public class TabTipOfTheNightPresenter implements Initializable, IActionConfiguration, 
+        IDefaultIdConfiguration, IPreferencesConfiguration, ITipOfTheNightConfiguration,
+        IRegisterActions
+{
     @FXML private Button bDelete;
     @FXML private Button bNew;
     @FXML private Button bSave;
@@ -89,7 +92,6 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         this.initializeTitle();
         this.initializeText();
         
-        this.registerOnActionRefresh();
         this.onActionRefresh();
     }
     
@@ -262,6 +264,13 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
         allTipsOfTheNight.addAll(lvTipsOfTheNight.getItems());
         this.select(model, allTipsOfTheNight);
+    }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in TabTipOfTheNightPresenter"); // NOI18N
+        
+        this.registerOnActionRefresh();
     }
     
     private void registerOnActionRefresh() {

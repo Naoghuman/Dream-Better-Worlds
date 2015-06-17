@@ -17,6 +17,7 @@
 package de.pro.dbw.navigation.history.impl.historynavigation;
 
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.history.api.HistoryNavigationModel;
@@ -57,9 +58,8 @@ import javafx.util.Callback;
  *
  * @author PRo
  */
-public class HistoryNavigationPresenter 
-    implements Initializable, IActionConfiguration,
-        IDreamConfiguration, INavigationConfiguration
+public class HistoryNavigationPresenter implements Initializable, IActionConfiguration,
+        IDreamConfiguration, INavigationConfiguration, IRegisterActions
 {
     @FXML private Label lDreamCount;
     @FXML private ListView lvNavigation;
@@ -72,7 +72,7 @@ public class HistoryNavigationPresenter
         assert (lvNavigation != null)      : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'HistoryNavigation.fxml'."; // NOI18N
         
         this.initializeHistoryListView();
-        this.registerOnActionUpdateNavigationHistory();
+        
         this.refreshHistory();
     }
     
@@ -241,7 +241,14 @@ public class HistoryNavigationPresenter
         lDreamCount.setText(dreamCount + " dream" + dreamSuffix); // NOI18N
     }
 
-    private void registerOnActionUpdateNavigationHistory() {
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in HistoryNavigationPresenter"); // NOI18N
+        
+        this.registerOnActionRefreshHistoryNavigation();
+    }
+
+    private void registerOnActionRefreshHistoryNavigation() {
         ActionFacade.getDefault().register(
                 ACTION__REFRESH_NAVIGATION__HISTORY,
                 (ActionEvent ae) -> {

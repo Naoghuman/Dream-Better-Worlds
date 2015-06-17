@@ -55,7 +55,7 @@ public class SimpleExerciseProvider implements IActionConfiguration, IRegisterAc
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in SimpleExerciseProvider"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in SimpleExerciseProvider"); // NOI18N
         
     }
     

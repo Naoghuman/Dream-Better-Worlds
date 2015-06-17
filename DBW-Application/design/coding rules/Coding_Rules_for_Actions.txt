@@ -3,17 +3,26 @@ CODING RULES FOR ACTIONS
 --------------------------------------------------------------------------------
 TODO
  - REGISTER at program start all action methods in a class with the interface 
-   IRegisterActions.
+   IRegisterActions. Exception are dynamic actions which aren't registered in 
+   the overriden method.
  - REGISTER an action method in a class with the library Lib_Actions.
 
 --------------------------------------------------------------------------------
 LOG EVENTS in action methods
- - Every action method have at method start a Logger output in DEBUG mode.
- - The log message is the same like the method name.
- - Actions methods are: registerOnActionXy(), onActionXy().
+ - Every from the following methods have a logger message in DEBUG mode.
+ - For onActionXy() the message format is the same like the method name.
+ - For registerActions() is the message format: "Register actions in Xy"
+ - For registerOnDynamicActionXy is  the message format: "Register on dynamic action "
 
 Example
 public void onActionSearchInDreams() {
     LoggerFacade.getDefault().debug(this.getClass(), "On action search in Dreams"); // NOI18N
 
+@Override
+public void registerActions() {
+    LoggerFacade.getDefault().debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
+
+private String registerOnDynamicActionDeleteComment() {
+    LoggerFacade.getDefault().debug(this.getClass(), "Register on dynamic action delete Comment"); // NOI18N
+    
 --------------------------------------------------------------------------------

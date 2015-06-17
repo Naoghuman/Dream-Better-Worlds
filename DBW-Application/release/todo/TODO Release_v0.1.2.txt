@@ -15,6 +15,7 @@ BUG
 
 REFACTORING
 #32 Refactore entities to use constants in entity definition.
+#30 Check if all classes which implements actions use the interface IRegisterActions.
 #29 Refactoring logger level in all onActionXy methods from info to debug.
 #28 Implement DialogTemplate in all dialogs.
 #26 Remove in the menu Configuration the entry Testdata.

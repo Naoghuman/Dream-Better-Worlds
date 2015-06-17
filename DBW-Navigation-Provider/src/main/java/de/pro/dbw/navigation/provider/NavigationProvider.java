@@ -46,7 +46,7 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
 //    }
     
     public void register(TabPane tpNavigationLeft, TabPane tbEditor, TabPane tpNavigationRight) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor, tpNavigationRight in NavigationProvider");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor, tpNavigationRight in NavigationProvider"); // NOI18N
         
         this.registerNavigationLeft(tpNavigationLeft, tbEditor);
         this.registerNavigationRight(tpNavigationRight);
@@ -54,15 +54,16 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in NavigationProvider");
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in NavigationProvider"); // NOI18N
         
         DreamBookProvider.getDefault().registerActions();
         HistoryProvider.getDefault().registerActions();
         SearchProvider.getDefault().registerActions();
+        VotingProvider.getDefault().registerActions();
     }
     
     private void registerNavigationLeft(TabPane tpNavigationLeft, TabPane tbEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in NavigationProvider");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in NavigationProvider"); // NOI18N
         
         DreamBookProvider.getDefault().register(tpNavigationLeft);
         SearchProvider.getDefault().register(tpNavigationLeft, tbEditor);

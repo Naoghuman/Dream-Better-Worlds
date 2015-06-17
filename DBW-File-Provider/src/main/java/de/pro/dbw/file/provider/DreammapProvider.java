@@ -112,6 +112,8 @@ public final class DreammapProvider implements IActionConfiguration, IRegisterAc
     
     @Override
     public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DreammapProvider");
+        
 //        this.registerOnActionOpenDreammapFromNavigation();
 //        this.registerOnActionOpenDreammapFormWizard();
     }

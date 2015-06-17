@@ -61,7 +61,7 @@ public class ExerciseProvider implements IActionConfiguration, IRegisterActions 
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in ExerciseProvider"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in ExerciseProvider"); // NOI18N
         
 //        this.registerActionRemoveFileFromEditor();
 //        this.registerActionSaveAllChangedFiles();

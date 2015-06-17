@@ -47,8 +47,9 @@ import javafx.scene.control.TextField;
  *
  * @author PRo
  */
-public class DreamPresenter implements Initializable, IActionConfiguration, IDateConverter, IDefaultIdConfiguration, IUtilConfiguration {
-    
+public class DreamPresenter implements Initializable, IActionConfiguration, 
+        IDateConverter, IDefaultIdConfiguration, IUtilConfiguration
+{
     @FXML private Button bDelete;
     @FXML private Button bSave;
     @FXML private CheckBox cbTime;

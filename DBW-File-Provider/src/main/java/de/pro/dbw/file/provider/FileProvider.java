@@ -78,6 +78,8 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in FileProvider"); // NOI18N
+        
         this.registerActionRemoveFileFromEditor();
         this.registerActionSaveAllChangedFiles();
         

@@ -57,8 +57,8 @@ import javafx.util.Callback;
  * @author PRo
  */
 public class ReflectionPresenter implements Initializable, IActionConfiguration, 
-        IDateConverter, IDefaultIdConfiguration, IUtilConfiguration {
-    
+        IDateConverter, IDefaultIdConfiguration, IUtilConfiguration
+{
     @FXML private Button bDelete;
     @FXML private Button bSave;
     @FXML private CheckBox cbTime;
@@ -127,8 +127,8 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         });
     }
 
-    private String registerOnActionDeleteComment() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register on action delete comment"); // NOI18N
+    private String registerOnDynamicActionDeleteComment() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register on dynamic action delete Comment"); // NOI18N
     
         final String actionKeyForDeleting = ACTION__DELETE_ + System.currentTimeMillis();
         ActionFacade.getDefault().register(
@@ -194,7 +194,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     
         final ReflectionCommentView view = new ReflectionCommentView();
         final ReflectionCommentPresenter presenter = view.getRealPresenter();
-        final String actionKeyForDeleting = this.registerOnActionDeleteComment();
+        final String actionKeyForDeleting = this.registerOnDynamicActionDeleteComment();
         presenter.configure(new ReflectionCommentModel(), actionKeyForDeleting);
         presenter.textProperty().addListener(stringChangeListener);
         
@@ -366,7 +366,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
             final ReflectionCommentView reflectionCommentView = new ReflectionCommentView();
             final ReflectionCommentPresenter presenter = reflectionCommentView.getRealPresenter();
         
-            final String actionKeyForDeleting = this.registerOnActionDeleteComment();
+            final String actionKeyForDeleting = this.registerOnDynamicActionDeleteComment();
             presenter.configure(reflectionCommentModel, actionKeyForDeleting);
             presenter.textProperty().addListener(stringChangeListener);
             

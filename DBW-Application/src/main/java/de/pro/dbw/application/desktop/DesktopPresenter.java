@@ -271,7 +271,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in DesktopPresenter"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DesktopPresenter"); // NOI18N
         
         ExerciseProvider.getDefault().registerActions();
         FileProvider.getDefault().registerActions();

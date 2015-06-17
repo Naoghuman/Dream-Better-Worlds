@@ -16,6 +16,8 @@
  */
 package de.pro.dbw.navigation.provider;
 
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
+import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationPresenter;
 import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationView;
 import de.pro.lib.logger.api.LoggerFacade;
 import javafx.scene.control.Tab;
@@ -25,7 +27,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class VotingProvider {
+public class VotingProvider implements IRegisterActions {
     
     private static VotingProvider instance = null;
     
@@ -44,19 +46,26 @@ public class VotingProvider {
     }
     
     private void initialize() {
-        
+        votingNavigationView = new VotingNavigationView();
     }
     
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider");
+        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider"); // NOI18N
         
         final Tab tab = new Tab("Voting"); // XXX properties
         tab.setClosable(false);
-        votingNavigationView = new VotingNavigationView();
         tab.setContent(votingNavigationView.getView());
         tpNavigationLeft.getTabs().add(tab);
         
         tpNavigationLeft.getSelectionModel().select(tab);
+    }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
+        
+        final VotingNavigationPresenter presenter = votingNavigationView.getRealPresenter();
+        presenter.registerActions();
     }
     
 }

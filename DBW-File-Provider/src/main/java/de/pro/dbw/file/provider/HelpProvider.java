@@ -78,6 +78,8 @@ public class HelpProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in HelpProvider"); // NOI18N
+        
         this.registerOnActionShowHelpAbout();
     }
 

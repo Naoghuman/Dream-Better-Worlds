@@ -55,7 +55,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void initialize() {
-        
+        searchNavigationView = new SearchNavigationView();
     }
 
     public void register(TabPane tpNavigationLeft, TabPane tbEditor) {
@@ -65,7 +65,6 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
         
         final Tab tab = new Tab("Search"); // XXX properties
         tab.setClosable(false);
-        searchNavigationView = new SearchNavigationView();
         tab.setContent(searchNavigationView.getView());
         
         tpNavigationLeft.getTabs().add(tab);
@@ -74,7 +73,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in SearchProvider");
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in SearchProvider");
         
         this.registerOnActionSearchInDreams();
         this.registerOnActionSearchInReflections();

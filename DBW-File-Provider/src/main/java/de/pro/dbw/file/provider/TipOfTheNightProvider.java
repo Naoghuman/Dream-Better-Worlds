@@ -40,8 +40,9 @@ import javafx.stage.Stage;
  *
  * @author PRo
  */
-public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdConfiguration, IPreferencesConfiguration, IRegisterActions {
-    
+public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdConfiguration, 
+        IPreferencesConfiguration, IRegisterActions
+{
     private static TipOfTheNightProvider instance = null;
     
     public static TipOfTheNightProvider getDefault() {
@@ -116,7 +117,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register actions in TipOfTheNightProvider"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in TipOfTheNightProvider"); // NOI18N
         
         this.registerOnActionShowTipOfTheNightEditor();
         this.registerOnActionShowTipOfTheNightWindow();

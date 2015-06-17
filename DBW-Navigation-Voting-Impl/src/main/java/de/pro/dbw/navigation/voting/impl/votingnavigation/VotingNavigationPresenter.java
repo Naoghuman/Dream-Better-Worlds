@@ -19,6 +19,7 @@ package de.pro.dbw.navigation.voting.impl.votingnavigation;
 import de.pro.dbw.base.component.api.VotingComponentModel;
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.voting.api.VotingNavigationModel;
 import de.pro.dbw.util.provider.UtilProvider;
@@ -47,9 +48,8 @@ import javafx.util.Callback;
  *
  * @author PRo
  */
-public class VotingNavigationPresenter 
-    implements Initializable, IActionConfiguration,
-        INavigationConfiguration
+public class VotingNavigationPresenter implements Initializable, IActionConfiguration,
+        INavigationConfiguration, IRegisterActions
 {
     @FXML private ListView lvNavigation;
 
@@ -60,7 +60,7 @@ public class VotingNavigationPresenter
         assert (lvNavigation != null) : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'VotingNavigation.fxml'."; // NOI18N
         
         this.initializeNavigationLeft();
-        this.registerOnActionUpdateVotingNavigation();
+        
         this.refreshVotingNavigation();
     }
     
@@ -153,6 +153,13 @@ public class VotingNavigationPresenter
             lvNavigation.getItems().clear();
             lvNavigation.getItems().addAll(models);
         });
+    }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in VotingNavigationPresenter"); // NOI18N
+        
+        this.registerOnActionUpdateVotingNavigation();
     }
 
     private void registerOnActionUpdateVotingNavigation() {

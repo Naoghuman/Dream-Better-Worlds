@@ -48,10 +48,9 @@ import javafx.scene.layout.HBox;
  *
  * @author PRo
  */
-public final class DreamProvider implements 
-        IActionConfiguration, IDefaultIdConfiguration, IUtilConfiguration,
-        IRegisterActions {
-    
+public final class DreamProvider implements IActionConfiguration, IDefaultIdConfiguration, 
+        IUtilConfiguration, IRegisterActions
+{
     private static DreamProvider instance = null;
     
     public static DreamProvider getDefault() {
@@ -80,6 +79,8 @@ public final class DreamProvider implements
 
     @Override
     public void registerActions() {
+        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DreamProvider"); // NOI18N
+        
         this.registerOnActionCreateNewDream();
         this.registerOnActionCreateNewFastDream();
         this.registerOnActionOpenDreamFromNavigation();

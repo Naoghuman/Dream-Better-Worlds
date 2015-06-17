@@ -41,8 +41,8 @@ import javafx.scene.layout.AnchorPane;
  * @author PRo
  */
 public class ReflectionCommentPresenter implements Initializable, IActionConfiguration,
-        IDateConverter, IDefaultIdConfiguration, IUtilConfiguration {
-    
+        IDateConverter, IDefaultIdConfiguration, IUtilConfiguration
+{
     @FXML private AnchorPane apComment;
     @FXML private Label lComment;
     @FXML private TextArea taComment;
