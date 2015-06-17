@@ -18,6 +18,7 @@ package de.pro.dbw.file.reflection.api;
 
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
+import de.pro.dbw.core.configuration.api.file.reflection.IReflectionCommentConfiguration;
 import de.pro.dbw.core.configuration.api.file.reflection.IReflectionConfiguration;
 import java.io.Externalizable;
 import java.io.IOException;
@@ -57,17 +58,17 @@ import javax.persistence.Transient;
  */
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = "ReflectionModel")
+@Table(name = IReflectionConfiguration.ENTITY__TABLE_NAME__REFLECTON_MODEL)
 @NamedQueries({
     @NamedQuery(
-            name = IReflectionConfiguration.REFLECTION_MODEL__FIND_ALL,
-            query = "SELECT r FROM ReflectionModel r"),
+            name = IReflectionConfiguration.NAMED_QUERY__NAME__FIND_ALL,
+            query = IReflectionConfiguration.NAMED_QUERY__QUERY__FIND_ALL),
     @NamedQuery(
-            name = IReflectionConfiguration.REFLECTION_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY,
-            query = "SELECT r FROM ReflectionModel r WHERE r.generationTime > :generationTime")
+            name = IReflectionConfiguration.NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION__HISTORY,
+            query = IReflectionConfiguration.NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY)
 })
 public class ReflectionModel implements Comparable<ReflectionModel>, Externalizable, 
-        IDefaultIdConfiguration, IUtilConfiguration {
+        IDefaultIdConfiguration, IReflectionConfiguration, IUtilConfiguration {
 
     private static final long serialVersionUID = 1L;
     
@@ -98,7 +99,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = REFLECTION_MODEL__COLUMN_NAME__ID)
     public long getId() {
         if (idProperty == null) {
             return _id;
@@ -117,7 +118,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
 
     public LongProperty idProperty() {
         if (idProperty == null) {
-            idProperty = new SimpleLongProperty(this, "id", _id);
+            idProperty = new SimpleLongProperty(this, REFLECTION_MODEL__COLUMN_NAME__ID, _id);
         }
         return idProperty;
     }
@@ -129,9 +130,9 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
-            name = "MappingReflectionComment",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id")
+            name = JOIN_TABLE__NAME__MAPPING_REFLECTION_COMMENT,
+            joinColumns = @JoinColumn(name = IReflectionCommentConfiguration.REFLECTION_COMMENT_MODEL__COLUMN_NAME__ID),
+            inverseJoinColumns = @JoinColumn(name = IReflectionCommentConfiguration.REFLECTION_COMMENT_MODEL__COLUMN_NAME__ID)
     )
     public List<ReflectionCommentModel> getReflectionCommentModels() {
         if (reflectionCommentModelsProperty == null) {
@@ -151,7 +152,8 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     public ObjectProperty reflectionCommentModelsProperty() {
         if (reflectionCommentModelsProperty == null) {
-            reflectionCommentModelsProperty = new SimpleObjectProperty(this, "reflectioncomment", _reflectionCommentModels);
+            reflectionCommentModelsProperty = new SimpleObjectProperty(this,
+                    REFLECTION_MODEL__COLUMN_NAME__REFLECTION_COMMENT, _reflectionCommentModels);
         }
         
         return reflectionCommentModelsProperty;
@@ -162,7 +164,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     private LongProperty generationTimeProperty;
     private long _generationTime = System.currentTimeMillis();
 
-    @Column(name = "generationtime")
+    @Column(name = REFLECTION_MODEL__COLUMN_NAME__GENERATION_TIME)
     public long getGenerationTime() {
         if (generationTimeProperty == null) {
             return _generationTime;
@@ -181,7 +183,8 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
 
     public LongProperty generationTimeProperty() {
         if (generationTimeProperty == null) {
-            generationTimeProperty = new SimpleLongProperty(this, "generationtime", _generationTime);
+            generationTimeProperty = new SimpleLongProperty(this,
+                    REFLECTION_MODEL__COLUMN_NAME__GENERATION_TIME, _generationTime);
         }
         return generationTimeProperty;
     }
@@ -191,7 +194,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     private StringProperty sourceProperty = null;
     private String _source = SIGN__EMPTY;
     
-    @Column(name = "source")
+    @Column(name = REFLECTION_MODEL__COLUMN_NAME__SOURCE)
     public String getSource() {
         if (sourceProperty == null) {
             return _source;
@@ -210,7 +213,8 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     public StringProperty sourceProperty() {
         if (sourceProperty == null) {
-            sourceProperty = new SimpleStringProperty(this, "source", _source);
+            sourceProperty = new SimpleStringProperty(this,
+                    REFLECTION_MODEL__COLUMN_NAME__SOURCE, _source);
         }
         return sourceProperty;
     }
@@ -220,7 +224,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     private StringProperty textProperty = null;
     private String _text = SIGN__EMPTY;
     
-    @Column(name = "text")
+    @Column(name = REFLECTION_MODEL__COLUMN_NAME__TEXT)
     public String getText() {
         if (textProperty == null) {
             return _text;
@@ -239,7 +243,8 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     public StringProperty textProperty() {
         if (textProperty == null) {
-            textProperty = new SimpleStringProperty(this, "text", _text);
+            textProperty = new SimpleStringProperty(this,
+                    REFLECTION_MODEL__COLUMN_NAME__TEXT, _text);
         }
         return textProperty;
     }
@@ -249,7 +254,7 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     private StringProperty titleProperty = null;
     private String _title = SIGN__EMPTY;
     
-    @Column(name = "title")
+    @Column(name = REFLECTION_MODEL__COLUMN_NAME__TITLE)
     public String getTitle() {
         if (titleProperty == null) {
             return _title;
@@ -268,7 +273,8 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     public StringProperty titleProperty() {
         if (titleProperty == null) {
-            titleProperty = new SimpleStringProperty(this, "title", _title);
+            titleProperty = new SimpleStringProperty(this,
+                    REFLECTION_MODEL__COLUMN_NAME__TITLE, _title);
         }
         return titleProperty;
     }
@@ -333,11 +339,11 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Reflection[");
-        sb.append("id=").append(this.getId());
-        sb.append(", title=").append(this.getTitle());
-        sb.append(", generationtime=").append(this.getGenerationTime());
-        sb.append("]");
+        sb.append("Reflection ["); // NOI18N
+        sb.append("id=").append(this.getId()); // NOI18N
+        sb.append(", title=").append(this.getTitle()); // NOI18N
+        sb.append(", generationtime=").append(this.getGenerationTime()); // NOI18N
+        sb.append("]"); // NOI18N
         
         return sb.toString();
     }

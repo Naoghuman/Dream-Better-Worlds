@@ -58,7 +58,7 @@ public class TipOfTheNightSqlProvider implements ITipOfTheNightConfiguration {
     
     public List<TipOfTheNightModel> findAll() {
         final List<TipOfTheNightModel> allTipsOfTheNight = DatabaseFacade.getDefault().getCrudService()
-                .findByNamedQuery(TipOfTheNightModel.class, TIP_OF_THE_NIGHT__FIND_ALL);
+                .findByNamedQuery(TipOfTheNightModel.class, NAMED_QUERY__NAME__FIND_ALL);
         Collections.sort(allTipsOfTheNight);
         
         return allTipsOfTheNight;

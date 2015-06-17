@@ -45,16 +45,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = "TipOfTheNightModel")
+@Table(name = ITipOfTheNightConfiguration.ENTITY__TABLE_NAME__TIP_OF_THE_NIGHT_MODEL)
 @NamedQueries({
     @NamedQuery(
-            name = ITipOfTheNightConfiguration.TIP_OF_THE_NIGHT__FIND_ALL,
-            query = "SELECT t FROM TipOfTheNightModel t"),
+            name = ITipOfTheNightConfiguration.NAMED_QUERY__NAME__FIND_ALL,
+            query = ITipOfTheNightConfiguration.NAMED_QUERY__QUERY__FIND_ALL),
     @NamedQuery(
-            name = ITipOfTheNightConfiguration.TIP_OF_THE_NIGHT__FIND_ALL_FOR_NAVIGATION__HISTORY,
-            query = "SELECT t FROM TipOfTheNightModel t WHERE t.generationTime > :generationTime")
+            name = ITipOfTheNightConfiguration.NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY,
+            query = ITipOfTheNightConfiguration.NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY)
 })
-public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Externalizable, IDefaultIdConfiguration, IUtilConfiguration {
+public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Externalizable, 
+        IDefaultIdConfiguration, ITipOfTheNightConfiguration, IUtilConfiguration {
 
     // START  ID ---------------------------------------------------------------
     private LongProperty idProperty;
@@ -62,7 +63,7 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__ID)
     public long getId() {
         if (this.idProperty == null) {
             return _id;
@@ -81,7 +82,7 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
 
     public LongProperty idProperty() {
         if (idProperty == null) {
-            idProperty = new SimpleLongProperty(this, "id", _id);
+            idProperty = new SimpleLongProperty(this, TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__ID, _id);
         }
         return idProperty;
     }
@@ -91,7 +92,7 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
     private LongProperty generationTimeProperty;
     private long _generationTime = System.currentTimeMillis();
 
-    @Column(name = "generationtime")
+    @Column(name = TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__GENERATION_TIME)
     public long getGenerationTime() {
         if (this.generationTimeProperty == null) {
             return _generationTime;
@@ -110,7 +111,8 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
 
     public LongProperty generationTimeProperty() {
         if (generationTimeProperty == null) {
-            generationTimeProperty = new SimpleLongProperty(this, "generationtime", _generationTime);
+            generationTimeProperty = new SimpleLongProperty(this,
+                    TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__GENERATION_TIME, _generationTime);
         }
         return generationTimeProperty;
     }
@@ -120,7 +122,7 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
     private StringProperty textProperty = null;
     private String _text = SIGN__EMPTY;
     
-    @Column(name = "text")
+    @Column(name = TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__TEXT)
     public String getText() {
         if (this.textProperty == null) {
             return _text;
@@ -139,7 +141,8 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
     
     public StringProperty textProperty() {
         if (textProperty == null) {
-            textProperty = new SimpleStringProperty(this, "text", _text);
+            textProperty = new SimpleStringProperty(this,
+                    TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__TEXT, _text);
         }
         return textProperty;
     }
@@ -149,7 +152,7 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
     private StringProperty titleProperty = null;
     private String _title = SIGN__EMPTY;
     
-    @Column(name = "title")
+    @Column(name = TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__TITLE)
     public String getTitle() {
         if (this.titleProperty == null) {
             return _title;
@@ -168,23 +171,12 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
     
     public StringProperty titleProperty() {
         if (titleProperty == null) {
-            titleProperty = new SimpleStringProperty(this, "title", _title);
+            titleProperty = new SimpleStringProperty(this,
+                    TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__TITLE, _title);
         }
         return titleProperty;
     }
     // END  TITLE --------------------------------------------------------------
-    
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("TipOfTheNight[");
-        sb.append("id=").append(this.getId());
-        sb.append(", title=").append(this.getTitle());
-        sb.append(", generationtime=").append(this.getGenerationTime());
-        sb.append("]");
-        
-        return sb.toString();
-    }
     
     @Override
     public int hashCode() {
@@ -222,6 +214,18 @@ public class TipOfTheNightModel implements Comparable<TipOfTheNightModel>, Exter
         }
         
         return Long.compare(this.getId(), other.getId());
+    }
+    
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("TipOfTheNightModel ["); // NOI18N
+        sb.append("id=").append(this.getId()); // NOI18N
+        sb.append(", title=").append(this.getTitle()); // NOI18N
+        sb.append(", generationtime=").append(this.getGenerationTime()); // NOI18N
+        sb.append("]"); // NOI18N
+        
+        return sb.toString();
     }
 
     @Override

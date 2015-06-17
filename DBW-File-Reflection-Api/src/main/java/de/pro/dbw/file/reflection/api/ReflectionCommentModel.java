@@ -18,6 +18,7 @@ package de.pro.dbw.file.reflection.api;
 
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
+import de.pro.dbw.core.configuration.api.file.reflection.IReflectionCommentConfiguration;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -37,15 +38,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- * TODO Extention voting the commentary
  *
  * @author PRo
  */
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = "ReflectionCommentModel")
+@Table(name = IReflectionCommentConfiguration.ENTITY__TABLE_NAME__REFLECTON_COMMENT_MODEL)
 public class ReflectionCommentModel implements Comparable<ReflectionCommentModel>, Externalizable,
-        IDefaultIdConfiguration, IUtilConfiguration {
+        IDefaultIdConfiguration, IReflectionCommentConfiguration, IUtilConfiguration {
 
     private static final long serialVersionUID = 1L;
 
@@ -63,7 +63,7 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = REFLECTION_COMMENT_MODEL__COLUMN_NAME__ID)
     public long getId() {
         if (idProperty == null) {
             return _id;
@@ -82,7 +82,8 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
 
     public LongProperty idProperty() {
         if (idProperty == null) {
-            idProperty = new SimpleLongProperty(this, "id", _id);
+            idProperty = new SimpleLongProperty(this,
+                    REFLECTION_COMMENT_MODEL__COLUMN_NAME__ID, _id);
         }
         return idProperty;
     }
@@ -92,7 +93,7 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     private LongProperty generationTimeProperty;
     private long _generationTime = System.currentTimeMillis();
 
-    @Column(name = "generationtime")
+    @Column(name = REFLECTION_COMMENT_MODEL__COLUMN_NAME__GENERATION_TIME)
     public long getGenerationTime() {
         if (generationTimeProperty == null) {
             return _generationTime;
@@ -111,7 +112,8 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
 
     public LongProperty generationTimeProperty() {
         if (generationTimeProperty == null) {
-            generationTimeProperty = new SimpleLongProperty(this, "generationtime", _generationTime);
+            generationTimeProperty = new SimpleLongProperty(this,
+                    REFLECTION_COMMENT_MODEL__COLUMN_NAME__GENERATION_TIME, _generationTime);
         }
         return generationTimeProperty;
     }
@@ -121,7 +123,7 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     private StringProperty textProperty = null;
     private String _text = SIGN__EMPTY;
     
-    @Column(name = "text")
+    @Column(name = REFLECTION_COMMENT_MODEL__COLUMN_NAME__TEXT)
     public String getText() {
         if (textProperty == null) {
             return _text;
@@ -140,7 +142,8 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     
     public StringProperty textProperty() {
         if (textProperty == null) {
-            textProperty = new SimpleStringProperty(this, "text", _text);
+            textProperty = new SimpleStringProperty(this,
+                    REFLECTION_COMMENT_MODEL__COLUMN_NAME__TEXT, _text);
         }
         return textProperty;
     }
@@ -170,10 +173,10 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("ReflectionComment[");
-        sb.append("id=").append(this.getId());
-        sb.append(", generationtime=").append(this.getGenerationTime());
-        sb.append("]");
+        sb.append("ReflectionComment ["); // NOI18N
+        sb.append("id=").append(this.getId()); // NOI18N
+        sb.append(", generationtime=").append(this.getGenerationTime()); // NOI18N
+        sb.append("]"); // NOI18N
         
         return sb.toString();
     }

@@ -1,7 +1,13 @@
 --------------------------------------------------------------------------------
 CODING RULES FOR ACTIONS
 --------------------------------------------------------------------------------
-LOG EVENTS
+TODO
+ - REGISTER at program start all action methods in a class with the interface 
+   IRegisterActions.
+ - REGISTER an action method in a class with the library Lib_Actions.
+
+--------------------------------------------------------------------------------
+LOG EVENTS in action methods
  - Every action method have at method start a Logger output in DEBUG mode.
  - The log message is the same like the method name.
  - Actions methods are: registerOnActionXy(), onActionXy().

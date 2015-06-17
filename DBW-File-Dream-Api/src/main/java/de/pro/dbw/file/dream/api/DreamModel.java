@@ -47,16 +47,17 @@ import javax.persistence.Transient;
  */
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = "DreamModel")
+@Table(name = IDreamConfiguration.ENTITY__TABLE_NAME__DREAM_MODEL)
 @NamedQueries({
     @NamedQuery(
-            name = IDreamConfiguration.DREAM_MODEL__FIND_ALL,
-            query = "SELECT d FROM DreamModel d"),
+            name = IDreamConfiguration.NAMED_QUERY__NAME__FIND_ALL,
+            query = IDreamConfiguration.NAMED_QUERY__QUERY__FIND_ALL),
     @NamedQuery(
-            name = IDreamConfiguration.DREAM_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY,
-            query = "SELECT d FROM DreamModel d WHERE d.generationTime > :generationTime")
+            name = IDreamConfiguration.NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY,
+            query = IDreamConfiguration.NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY)
 })
-public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefaultIdConfiguration, IUtilConfiguration {
+public class DreamModel implements Comparable<DreamModel>, Externalizable, 
+        IDefaultIdConfiguration, IDreamConfiguration, IUtilConfiguration {
 
     private static final long serialVersionUID = 1L;
     
@@ -88,7 +89,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = DREAM_MODEL__COLUMN_NAME__ID)
     public long getId() {
         if (this.idProperty == null) {
             return _id;
@@ -107,7 +108,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
 
     public LongProperty idProperty() {
         if (idProperty == null) {
-            idProperty = new SimpleLongProperty(this, "id", _id);
+            idProperty = new SimpleLongProperty(this, DREAM_MODEL__COLUMN_NAME__ID, _id);
         }
         return idProperty;
     }
@@ -117,7 +118,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     private LongProperty generationTimeProperty;
     private long _generationTime = System.currentTimeMillis();
 
-    @Column(name = "generationtime")
+    @Column(name = DREAM_MODEL__COLUMN_NAME__GENERATION_TIME)
     public long getGenerationTime() {
         if (this.generationTimeProperty == null) {
             return _generationTime;
@@ -136,7 +137,8 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
 
     public LongProperty generationTimeProperty() {
         if (generationTimeProperty == null) {
-            generationTimeProperty = new SimpleLongProperty(this, "generationtime", _generationTime);
+            generationTimeProperty = new SimpleLongProperty(this,
+                    DREAM_MODEL__COLUMN_NAME__GENERATION_TIME, _generationTime);
         }
         return generationTimeProperty;
     }
@@ -146,7 +148,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     private BooleanProperty favoriteProperty = null;
     private boolean _favorite = Boolean.FALSE;
     
-    @Column(name = "favorite")
+    @Column(name = DREAM_MODEL__COLUMN_NAME__FAVORITE)
     public Boolean isFavorite() {
         if (this.favoriteProperty == null) {
             return _favorite;
@@ -165,7 +167,8 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     
     public BooleanProperty favoriteProperty() {
         if (favoriteProperty == null) {
-            favoriteProperty = new SimpleBooleanProperty(this, "favorite", _favorite);
+            favoriteProperty = new SimpleBooleanProperty(this, 
+                    DREAM_MODEL__COLUMN_NAME__FAVORITE, _favorite);
         }
         return favoriteProperty;
     }
@@ -175,7 +178,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     private StringProperty favoriteReasonProperty = null;
     private String _favoriteReason = SIGN__EMPTY;
     
-    @Column(name = "favoritereason")
+    @Column(name = DREAM_MODEL__COLUMN_NAME__FAVORITE_REASON)
     public String getFavoriteReason() {
         if (this.favoriteReasonProperty == null) {
             return _favoriteReason;
@@ -194,7 +197,8 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     
     public StringProperty favoriteReasonProperty() {
         if (favoriteReasonProperty == null) {
-            favoriteReasonProperty = new SimpleStringProperty(this, "favoritereason", _favoriteReason);
+            favoriteReasonProperty = new SimpleStringProperty(this,
+                    DREAM_MODEL__COLUMN_NAME__FAVORITE_REASON, _favoriteReason);
         }
         return favoriteReasonProperty;
     }
@@ -204,7 +208,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     private StringProperty descriptionProperty = null;
     private String _description = SIGN__EMPTY;
     
-    @Column(name = "description")
+    @Column(name = DREAM_MODEL__COLUMN_NAME__DESCRIPTION)
     public String getDescription() {
         if (this.descriptionProperty == null) {
             return _description;
@@ -223,7 +227,8 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     
     public StringProperty descriptionProperty() {
         if (descriptionProperty == null) {
-            descriptionProperty = new SimpleStringProperty(this, "description", _description);
+            descriptionProperty = new SimpleStringProperty(this,
+                    DREAM_MODEL__COLUMN_NAME__DESCRIPTION, _description);
         }
         return descriptionProperty;
     }
@@ -233,7 +238,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     private StringProperty textProperty = null;
     private String _text = SIGN__EMPTY;
     
-    @Column(name = "text")
+    @Column(name = DREAM_MODEL__COLUMN_NAME__TEXT)
     public String getText() {
         if (this.textProperty == null) {
             return _text;
@@ -252,7 +257,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     
     public StringProperty textProperty() {
         if (textProperty == null) {
-            textProperty = new SimpleStringProperty(this, "text", _text);
+            textProperty = new SimpleStringProperty(this, DREAM_MODEL__COLUMN_NAME__TEXT, _text);
         }
         return textProperty;
     }
@@ -262,7 +267,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     private StringProperty titleProperty = null;
     private String _title = SIGN__EMPTY;
     
-    @Column(name = "title")
+    @Column(name = DREAM_MODEL__COLUMN_NAME__TITLE)
     public String getTitle() {
         if (this.titleProperty == null) {
             return _title;
@@ -281,7 +286,7 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     
     public StringProperty titleProperty() {
         if (titleProperty == null) {
-            titleProperty = new SimpleStringProperty(this, "title", _title);
+            titleProperty = new SimpleStringProperty(this, DREAM_MODEL__COLUMN_NAME__TITLE, _title);
         }
         return titleProperty;
     }
@@ -342,11 +347,11 @@ public class DreamModel implements Comparable<DreamModel>, Externalizable, IDefa
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Dream[");
-        sb.append("id=").append(this.getId());
-        sb.append(", title=").append(this.getTitle());
-        sb.append(", generationtime=").append(this.getGenerationTime());
-        sb.append("]");
+        sb.append("Dream ["); // NOI18N
+        sb.append("id=").append(this.getId()); // NOI18N
+        sb.append(", title=").append(this.getTitle()); // NOI18N
+        sb.append(", generationtime=").append(this.getGenerationTime()); // NOI18N
+        sb.append("]"); // NOI18N
         
         return sb.toString();
     }

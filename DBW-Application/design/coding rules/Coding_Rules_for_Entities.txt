@@ -1,0 +1,70 @@
+--------------------------------------------------------------------------------
+CODING RULES FOR ENTITIES
+--------------------------------------------------------------------------------
+ORDER from methods in an entity.
+ - Construktor with following method initialize().
+ - All methods which will be serialized.
+ - All methods which want be serialized.
+ - hashCode(), equals(Object), compareTo(XyModel), toString()
+ - writeExternal(ObjectOutput), readExternal(ObjectInput)
+
+Example
+See entity DreamModel in modul DBW-File-Dream-Api.
+
+--------------------------------------------------------------------------------
+CONSTANTS in Entity
+In all @Xy parameters are constants used which are implemented in the entity 
+interface. The format for the constants are:
+For @Table
+ - Prefix = ENTITY__TABLE_NAME__
+ - and the entity itself
+For @NamedQuery(name/query)
+ - Prefix = NAMED_QUERY__NAME__
+ - Prefix = NAMED_QUERY__QUERY__
+ - and the query description
+For @Column
+ - Prefix = entity__COLUMN_NAME__
+ - and the parameter itself
+For @JoinTable(name)
+ - Prefix = JOIN_TABLE__NAME__MAPPING_
+ - and the name from the mapping entity
+For @JoinColumn(name)
+ - Use the constant from the mapping column.
+
+Example
+@Table(name = IDreamConfiguration.ENTITY__TABLE_NAME__DREAM_MODEL)
+
+@NamedQuery(
+        name = IDreamConfiguration.NAMED_QUERY__NAME__FIND_ALL,
+        query = IDreamConfiguration.NAMED_QUERY__QUERY__FIND_ALL)
+
+@Column(name = DREAM_MODEL__COLUMN_NAME__ID)
+
+@JoinTable( // Defined in entity ReflectionModel
+        name = JOIN_TABLE__NAME__MAPPING_REFLECTION_COMMENT,
+        joinColumns = @JoinColumn(name = IReflectionCommentConfiguration.REFLECTION_COMMENT_MODEL__COLUMN_NAME__ID),
+        inverseJoinColumns = @JoinColumn(name = IReflectionCommentConfiguration.REFLECTION_COMMENT_MODEL__COLUMN_NAME__ID)
+)
+
+--------------------------------------------------------------------------------
+SERIALIZABLE from the entity
+Serializable in entities are done with implementation from the interface
+Externalizable. The two methods from this interface are position at the end in
+the interface.
+
+Example 
+@Override
+public void writeExternal(ObjectOutput out) throws IOException {
+    out.writeLong(this.getId());
+    out.writeLong(this.getGenerationTime());
+    ...
+}
+
+@Override
+public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    this.setId(in.readLong());
+    this.setGenerationTime(in.readLong());
+    ...
+}
+
+--------------------------------------------------------------------------------

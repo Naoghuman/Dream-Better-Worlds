@@ -21,11 +21,23 @@ package de.pro.dbw.core.configuration.api.file.reflection;
  * @author PRo
  */
 public interface IReflectionConfiguration {
+
+    public static final String ENTITY__TABLE_NAME__REFLECTON_MODEL = "ReflectionModel"; // NOI18N
     
-    public static final String REFLECTION_MODEL__FIND_ALL = "ReflectionModel.findAll"; // NOI18N
-    public static final String REFLECTION_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY = "ReflectionModel.findAllForNavigationHistory"; // NOI18N
+    public static final String NAMED_QUERY__NAME__FIND_ALL = "ReflectionModel.findAll"; // NOI18N
+    public static final String NAMED_QUERY__QUERY__FIND_ALL = "SELECT r FROM ReflectionModel r"; // NOI18N
     
-    public static final String PARA__REFLECTION_MODEL__GENERATIONTIME = "generationTime"; // NOI18N
-    public static final String PARA__REFLECTION_MODEL__PARENTID = "parentId"; // NOI18N
+    public static final String NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION__HISTORY = "ReflectionModel.findAllForNavigationHistory"; // NOI18N
+    public static final String NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY = "SELECT r FROM ReflectionModel r WHERE r.generationTime > :generationTime"; // NOI18N
+    
+    public static final String REFLECTION_MODEL__COLUMN_NAME__GENERATION_TIME = "generationTime"; // NOI18N
+    public static final String REFLECTION_MODEL__COLUMN_NAME__ID = "id"; // NOI18N
+    public static final String REFLECTION_MODEL__COLUMN_NAME__PARENT_ID = "parentId"; // NOI18N
+    public static final String REFLECTION_MODEL__COLUMN_NAME__REFLECTION_COMMENT = "reflectioncomment"; // NOI18N
+    public static final String REFLECTION_MODEL__COLUMN_NAME__SOURCE = "source"; // NOI18N
+    public static final String REFLECTION_MODEL__COLUMN_NAME__TEXT = "text"; // NOI18N
+    public static final String REFLECTION_MODEL__COLUMN_NAME__TITLE = "title"; // NOI18N
+    
+    public static final String JOIN_TABLE__NAME__MAPPING_REFLECTION_COMMENT = "MappingReflectionComment"; // NOI18N
 
 }

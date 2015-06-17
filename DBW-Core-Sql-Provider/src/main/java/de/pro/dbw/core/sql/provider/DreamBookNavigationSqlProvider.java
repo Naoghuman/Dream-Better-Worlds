@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @author PRo
  */
-public class DreamBookNavigationSqlProvider implements IDreamConfiguration, IReflectionConfiguration {
+public class DreamBookNavigationSqlProvider {
     
     private static DreamBookNavigationSqlProvider instance = null;
     
@@ -43,14 +43,14 @@ public class DreamBookNavigationSqlProvider implements IDreamConfiguration, IRef
     
     public List<DreamModel> findAllDreams() {
         final List<DreamModel> dreams = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
-                DreamModel.class, DREAM_MODEL__FIND_ALL);
+                DreamModel.class, IDreamConfiguration.NAMED_QUERY__NAME__FIND_ALL);
             
         return dreams;
     }
     
     public List<ReflectionModel> findAllReflections() {
         final List<ReflectionModel> reflections = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
-                ReflectionModel.class, REFLECTION_MODEL__FIND_ALL);
+                ReflectionModel.class, IReflectionConfiguration.NAMED_QUERY__NAME__FIND_ALL);
             
         return reflections;
     }

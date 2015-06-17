@@ -24,6 +24,7 @@ REFACTORING
 ADDITIONAL
 
 CHECK
+#32 Refactore entities to use constants in entity definition.
 #24 Create a singleton tab for the file Welcome.
 
 --------------------------------------------------------------------------------

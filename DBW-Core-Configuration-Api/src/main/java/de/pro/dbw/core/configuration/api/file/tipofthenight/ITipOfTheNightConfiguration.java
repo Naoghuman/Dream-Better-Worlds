@@ -21,10 +21,18 @@ package de.pro.dbw.core.configuration.api.file.tipofthenight;
  * @author PRo
  */
 public interface ITipOfTheNightConfiguration {
+
+    public static final String ENTITY__TABLE_NAME__TIP_OF_THE_NIGHT_MODEL = "TipOfTheNightModel"; // NOI18N
     
-    public static final String TIP_OF_THE_NIGHT__FIND_ALL = "TipOfTheNightModel.findAll"; // NOI18N
-    public static final String TIP_OF_THE_NIGHT__FIND_ALL_FOR_NAVIGATION__HISTORY = "TipOfTheNightModel.findAllForNavigationHistory"; // NOI18N
+    public static final String NAMED_QUERY__NAME__FIND_ALL = "TipOfTheNightModel.findAll"; // NOI18N
+    public static final String NAMED_QUERY__QUERY__FIND_ALL = "SELECT t FROM TipOfTheNightModel t"; // NOI18N
     
-    public static final String PARA__TIP_OF_THE_NIGHT__GENERATIONTIME = "generationTime"; // NOI18N
+    public static final String NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY = "TipOfTheNightModel.findAllForNavigationHistory"; // NOI18N
+    public static final String NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY = "SELECT t FROM TipOfTheNightModel t WHERE t.generationTime > :generationTime"; // NOI18N
+    
+    public static final String TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__GENERATION_TIME = "generationTime"; // NOI18N
+    public static final String TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__ID = "id"; // NOI18N
+    public static final String TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__TEXT = "text"; // NOI18N
+    public static final String TIP_OF_THE_NIGHT_MODEL__COLUMN_NAME__TITLE = "title"; // NOI18N
     
 }

@@ -21,10 +21,21 @@ package de.pro.dbw.core.configuration.api.file.dream;
  * @author PRo
  */
 public interface IDreamConfiguration {
+
+    public static final String ENTITY__TABLE_NAME__DREAM_MODEL = "DreamModel"; // NOI18N
     
-    public static final String DREAM_MODEL__FIND_ALL = "DreamModel.findAll"; // NOI18N
-    public static final String DREAM_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY = "DreamModel.findAllForNavigationHistory"; // NOI18N
+    public static final String NAMED_QUERY__NAME__FIND_ALL = "DreamModel.findAll"; // NOI18N
+    public static final String NAMED_QUERY__QUERY__FIND_ALL = "SELECT d FROM DreamModel d"; // NOI18N
     
-    public static final String PARA__DREAM_MODEL__GENERATIONTIME = "generationTime"; // NOI18N
+    public static final String NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY = "DreamModel.findAllForNavigationHistory"; // NOI18N
+    public static final String NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY = "SELECT d FROM DreamModel d WHERE d.generationTime > :generationTime"; // NOI18N
+    
+    public static final String DREAM_MODEL__COLUMN_NAME__DESCRIPTION = "description"; // NOI18N
+    public static final String DREAM_MODEL__COLUMN_NAME__GENERATION_TIME = "generationTime"; // NOI18N
+    public static final String DREAM_MODEL__COLUMN_NAME__ID = "id"; // NOI18N
+    public static final String DREAM_MODEL__COLUMN_NAME__FAVORITE = "favorite"; // NOI18N
+    public static final String DREAM_MODEL__COLUMN_NAME__FAVORITE_REASON = "favoritereason"; // NOI18N
+    public static final String DREAM_MODEL__COLUMN_NAME__TEXT = "text"; // NOI18N
+    public static final String DREAM_MODEL__COLUMN_NAME__TITLE = "title"; // NOI18N
     
 }

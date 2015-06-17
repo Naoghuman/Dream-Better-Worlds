@@ -47,10 +47,10 @@ public class HistoryNavigationSqlProvider implements IDreamConfiguration, IRefle
     
     public List<DreamModel> findAllDreams(int addDays) {
         final Map<String, Object> parameters = FXCollections.observableHashMap();
-        parameters.put(PARA__DREAM_MODEL__GENERATIONTIME,
+        parameters.put(DREAM_MODEL__COLUMN_NAME__GENERATION_TIME,
                 UtilProvider.getDefault().getDateConverter().addDays(addDays));
         final List<DreamModel> dreams = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
-                DreamModel.class, DREAM_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY, parameters);
+                DreamModel.class, NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY, parameters);
         Collections.sort(dreams);
         
         return dreams;
@@ -58,10 +58,10 @@ public class HistoryNavigationSqlProvider implements IDreamConfiguration, IRefle
     
     public List<ReflectionModel> findAllReflections(int addDays) {
         final Map<String, Object> parameters = FXCollections.observableHashMap();
-        parameters.put(PARA__REFLECTION_MODEL__GENERATIONTIME,
+        parameters.put(REFLECTION_MODEL__COLUMN_NAME__GENERATION_TIME,
                 UtilProvider.getDefault().getDateConverter().addDays(addDays));
         final List<ReflectionModel> reflections = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
-                ReflectionModel.class, REFLECTION_MODEL__FIND_ALL_FOR_NAVIGATION__HISTORY, parameters);
+                ReflectionModel.class, NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION__HISTORY, parameters);
         Collections.sort(reflections);
         
         return reflections;
