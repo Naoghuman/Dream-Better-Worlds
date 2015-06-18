@@ -18,8 +18,8 @@ package de.pro.dbw.file.provider;
 
 import de.jensd.fx.glyphs.weathericons.WeatherIcon;
 import de.pro.dbw.file.dream.api.DreamModel;
-import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;

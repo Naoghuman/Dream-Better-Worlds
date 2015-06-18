@@ -16,7 +16,7 @@
  */
 package de.pro.dbw.file.help.impl.aboutdialogcontent;
 
-import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.dialog.api.IDialogSize;
 import de.pro.dbw.dialog.provider.DialogProvider;

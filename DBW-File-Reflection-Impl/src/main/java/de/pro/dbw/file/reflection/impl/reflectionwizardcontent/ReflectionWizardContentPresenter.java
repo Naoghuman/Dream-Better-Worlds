@@ -16,7 +16,7 @@
  */
 package de.pro.dbw.file.reflection.impl.reflectionwizardcontent;
 
-import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;

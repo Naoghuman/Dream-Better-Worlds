@@ -16,7 +16,7 @@
  */
 package de.pro.dbw.navigation.search.impl.searchnavigation;
 
-import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.navigation.search.impl.searchindreams.SearchInDreamsView;
 import de.pro.dbw.navigation.search.impl.searchintipsofthenight.SearchInTipsOfTheNightView;

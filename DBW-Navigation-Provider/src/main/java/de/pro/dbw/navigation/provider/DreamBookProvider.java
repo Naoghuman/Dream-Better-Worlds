@@ -5,8 +5,8 @@
  */
 package de.pro.dbw.navigation.provider;
 
-import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
 import de.pro.dbw.navigation.dreambook.api.DreamBookNavigationModel;
 import de.pro.dbw.navigation.dreambook.impl.dreambooknavigation.DreamBookNavigationPresenter;
 import de.pro.dbw.navigation.dreambook.impl.dreambooknavigation.DreamBookNavigationView;

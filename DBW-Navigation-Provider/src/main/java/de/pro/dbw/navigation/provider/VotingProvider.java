@@ -16,7 +16,7 @@
  */
 package de.pro.dbw.navigation.provider;
 
-import de.pro.dbw.core.configuration.api.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
 import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationPresenter;
 import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationView;
 import de.pro.lib.logger.api.LoggerFacade;

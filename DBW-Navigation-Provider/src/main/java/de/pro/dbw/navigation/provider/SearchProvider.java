@@ -18,9 +18,9 @@ package de.pro.dbw.navigation.provider;
 
 import de.pro.dbw.base.component.api.ExtendedTabModel;
 import de.pro.dbw.base.component.impl.extendedtab.ExtendedTab;
-import de.pro.dbw.core.configuration.api.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
 import de.pro.dbw.base.provider.BaseProvider;
-import de.pro.dbw.core.configuration.api.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
 import de.pro.dbw.navigation.search.impl.searchnavigation.SearchNavigationView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
