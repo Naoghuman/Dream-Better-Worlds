@@ -16,7 +16,7 @@
  */
 package de.pro.dbw.navigation.search.impl.searchindreamsresult;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.navigation.search.api.SearchDataModel;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;

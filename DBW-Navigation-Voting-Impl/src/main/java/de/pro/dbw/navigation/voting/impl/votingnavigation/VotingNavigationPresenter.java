@@ -18,8 +18,8 @@ package de.pro.dbw.navigation.voting.impl.votingnavigation;
 
 import de.pro.dbw.base.component.api.VotingComponentModel;
 import de.pro.dbw.base.provider.BaseProvider;
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.voting.api.VotingNavigationModel;
 import de.pro.dbw.util.provider.UtilProvider;

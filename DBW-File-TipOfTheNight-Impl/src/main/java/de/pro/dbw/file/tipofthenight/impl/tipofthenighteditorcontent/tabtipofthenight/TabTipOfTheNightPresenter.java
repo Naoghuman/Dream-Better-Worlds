@@ -16,8 +16,8 @@
  */
 package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofthenight;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.core.configuration.api.file.tipofthenight.ITipOfTheNightConfiguration;

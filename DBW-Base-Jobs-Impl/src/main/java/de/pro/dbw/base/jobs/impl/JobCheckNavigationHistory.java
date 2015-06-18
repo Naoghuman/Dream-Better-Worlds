@@ -16,7 +16,7 @@
  */
 package de.pro.dbw.base.jobs.impl;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.job.IJobConfiguration;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;

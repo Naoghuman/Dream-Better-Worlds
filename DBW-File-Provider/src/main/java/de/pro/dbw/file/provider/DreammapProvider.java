@@ -16,8 +16,8 @@
  */
 package de.pro.dbw.file.provider;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 //import de.pro.dbw.file.dreammap.api.DreammapModel;
 //import de.pro.dbw.file.dreammap.impl.dreammap.DreammapPresenter;
 //import de.pro.dbw.file.dreammap.impl.dreammap.DreammapView;

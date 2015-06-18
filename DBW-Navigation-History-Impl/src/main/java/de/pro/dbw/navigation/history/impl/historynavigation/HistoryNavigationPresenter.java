@@ -16,8 +16,8 @@
  */
 package de.pro.dbw.navigation.history.impl.historynavigation;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.history.api.HistoryNavigationModel;

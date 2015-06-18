@@ -5,8 +5,8 @@
  */
 package de.pro.dbw.navigation.provider;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.navigation.history.api.HistoryNavigationModel;
 import de.pro.dbw.navigation.history.impl.historynavigation.HistoryNavigationPresenter;
 import de.pro.dbw.navigation.history.impl.historynavigation.HistoryNavigationView;

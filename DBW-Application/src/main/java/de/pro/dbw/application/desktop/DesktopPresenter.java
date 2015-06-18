@@ -16,8 +16,8 @@
  */
 package de.pro.dbw.application.desktop;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.desktop.IDesktopConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;

@@ -16,7 +16,7 @@
  */
 package de.pro.dbw.dialog.impl.dialogtemplate;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.dialog.api.DialogEventHandler;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.awt.Dimension;

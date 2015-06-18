@@ -17,8 +17,8 @@
 package de.pro.dbw.file.provider;
 
 import de.jensd.fx.glyphs.weathericons.WeatherIcon;
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;

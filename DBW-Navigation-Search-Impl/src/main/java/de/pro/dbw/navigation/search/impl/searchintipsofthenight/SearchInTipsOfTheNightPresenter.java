@@ -18,7 +18,7 @@ package de.pro.dbw.navigation.search.impl.searchintipsofthenight;
 
 import de.pro.dbw.base.component.api.ExtendedTabModel;
 import de.pro.dbw.base.component.api.IExtendedTextField;
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;

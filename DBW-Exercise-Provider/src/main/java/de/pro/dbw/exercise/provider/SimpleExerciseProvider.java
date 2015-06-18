@@ -16,8 +16,8 @@
  */
 package de.pro.dbw.exercise.provider;
 
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.lib.logger.api.LoggerFacade;
 import javafx.scene.control.TabPane;
 

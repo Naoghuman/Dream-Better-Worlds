@@ -18,7 +18,7 @@ package de.pro.dbw.navigation.search.impl.searchindreams;
 
 import de.pro.dbw.base.component.api.ExtendedTabModel;
 import de.pro.dbw.base.component.api.IExtendedTextField;
-import de.pro.dbw.core.configuration.api.core.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.search.ISearchConfiguration;
 import de.pro.dbw.navigation.search.api.SearchDataModel;
 import de.pro.dbw.navigation.search.impl.searchnavigation.api.SqlStatementHelper;

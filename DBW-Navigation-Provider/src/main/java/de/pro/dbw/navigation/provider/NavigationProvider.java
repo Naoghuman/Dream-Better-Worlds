@@ -5,7 +5,7 @@
  */
 package de.pro.dbw.navigation.provider;
 
-import de.pro.dbw.core.configuration.api.core.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
