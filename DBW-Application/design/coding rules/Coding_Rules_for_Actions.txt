@@ -6,6 +6,8 @@ TODO
    IRegisterActions. Exception are dynamic actions which aren't registered in 
    the overriden method.
  - REGISTER an action method in a class with the library Lib_Actions.
+ - ACTION-KEYS are defined in the interface IActionConfiguration in the modul
+   DBW-Core-Configuration-Api.
 
 --------------------------------------------------------------------------------
 LOG EVENTS in action methods
