@@ -29,7 +29,6 @@ public interface IApplicationConfiguration {
     public static final Duration DBW__LITTLE_DELAY__DURATION_125 = Duration.millis(125.0d);
     public static final Duration DBW__LITTLE_DELAY__DURATION_250 = Duration.millis(250.0d);
     
-    public static final String DBW__CSS = "DreamBetterWorlds.css"; // NOI18N
     public static final String DBW__DATABASE_NAME = "dbw"; // NOI18N
     public static final String DBW__GOODBYE_MSG = "  Goodbye from 'Dream Better Worlds'. Happy real life :)"; // NOI18N
     // XXX load version from pom.xml

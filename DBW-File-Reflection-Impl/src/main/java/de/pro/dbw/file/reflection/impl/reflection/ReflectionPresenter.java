@@ -17,6 +17,7 @@
 package de.pro.dbw.file.reflection.impl.reflection;
 
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
+import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
@@ -105,7 +106,8 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     private void initializeCommentArea() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize Comment area in ReflectionPresenter"); // NOI18N
     
-        lvComments.getStylesheets().addAll(this.getClass().getResource("Reflection.css").toExternalForm()); // NOI18N
+        lvComments.getStylesheets().addAll(this.getClass().getResource(
+                ICssConfiguration.FILE_REFLECTION_IMPL__REFLECTION__CSS).toExternalForm());
         lvComments.getItems().clear();
         lvComments.setCellFactory(new Callback<ListView<ReflectionCommentView>, ListCell<ReflectionCommentView>>() {
 

@@ -18,6 +18,7 @@ package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofth
 
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.core.configuration.api.file.tipofthenight.ITipOfTheNightConfiguration;
@@ -109,7 +110,8 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     private void initializeListView() {
         LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView TipsOfTheNight"); // NOI18N
 
-        lvTipsOfTheNight.getStylesheets().addAll(this.getClass().getResource("TabTipOfTheNight.css").toExternalForm()); // NOI18N
+        lvTipsOfTheNight.getStylesheets().addAll(this.getClass().getResource(
+                ICssConfiguration.FILE_TIP_OF_THE_NIGHT_IMPL__TAB_TIP_OF_THE_NIGHT__CSS).toExternalForm());
         lvTipsOfTheNight.getItems().clear();
         
         lvTipsOfTheNight.setCellFactory((list) -> {

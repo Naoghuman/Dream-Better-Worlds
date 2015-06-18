@@ -1,0 +1,16 @@
+--------------------------------------------------------------------------------
+CODING RULES FOR CSS
+--------------------------------------------------------------------------------
+Every css file in Dream-Better-Worlds will be injected through constants which
+are defined in the modul DBW-Core-Configuration-Api in the interface
+ICssConfiguration.
+
+The format for a constant is:
+ 1) prefix = modulname (without DBW-) + __
+ 2) the css file name
+ 3) and __CSS as suffix
+
+Example
+public static final String APPLICATION__DESKTOP__CSS = "Desktop.css"; // NOI18N
+
+--------------------------------------------------------------------------------

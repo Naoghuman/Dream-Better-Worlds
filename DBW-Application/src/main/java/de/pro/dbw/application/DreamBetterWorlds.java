@@ -7,6 +7,7 @@ import de.pro.dbw.application.desktop.api.DesktopFacade;
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.base.provider.BaseProvider;
+import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.provider.FileProvider;
 import de.pro.lib.database.api.DatabaseFacade;
@@ -47,7 +48,8 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
         final Double height = PreferencesFacade.getDefault().getDouble(
                 PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
         final Scene scene = new Scene(DesktopFacade.getDefault().getDesktop(), width, height);
-        final String uriStylesheet = this.getClass().getResource(DBW__CSS).toExternalForm();
+        final String uriStylesheet = this.getClass().getResource(
+                ICssConfiguration.APPLICATION__DREAM_BETTER_WORDS__CSS).toExternalForm();
         scene.getStylesheets().add(uriStylesheet);
 //        scene.setOnKeyReleased(DesktopFacade.getDefault().getGlobalKeyEventHandler());
         System.out.println(" XXX DreamBetterWorlds.start() GlobalKeyEventHandler()");
