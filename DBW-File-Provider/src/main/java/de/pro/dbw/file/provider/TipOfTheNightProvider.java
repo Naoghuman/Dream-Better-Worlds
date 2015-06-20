@@ -63,7 +63,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
         
     }
     
-    public void checkShowTipOfTheNightAtStart() {
+    public void checkShowAtStartTipOfTheNight() {
         LoggerFacade.getDefault().info(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
     
         final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(

@@ -74,10 +74,10 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
         
         stage.show();
         
-        this.checkShowXyAtStart();
+        this.checkShowAtStart();
     }
     
-    private void checkShowXyAtStart() {
+    private void checkShowAtStart() {
         LoggerFacade.getDefault().info(this.getClass(), "Check show at start");
     
         final PauseTransition pt = new PauseTransition(DBW__LITTLE_DELAY__DURATION_250);

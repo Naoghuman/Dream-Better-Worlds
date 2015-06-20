@@ -7,6 +7,7 @@ NEW
 ENHANCEMENT
 #28 Implement DialogTemplate in all dialogs.
 #27 Create DialogTemplate as basic for all dialogs.
+#24 Create a singleton tab for the file Welcome.
 #23 Create new dialog About (Help).
 #18 Enhance the dialogs so that they can moved.
 
@@ -29,6 +30,5 @@ REFACTORING
 ADDITIONAL
 
 CHECK
-#24 Create a singleton tab for the file Welcome.
 
 --------------------------------------------------------------------------------

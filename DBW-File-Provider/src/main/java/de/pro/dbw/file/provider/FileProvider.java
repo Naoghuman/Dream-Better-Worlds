@@ -52,8 +52,8 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
     }
     
     public void checkShowAtStart() {
-        TipOfTheNightProvider.getDefault().checkShowTipOfTheNightAtStart();
-        HelpProvider.getDefault().checkShowWelcomeHelpAtStart();
+        TipOfTheNightProvider.getDefault().checkShowAtStartTipOfTheNight();
+        HelpProvider.getDefault().checkShowAtStartWelcomeHelp();
     }
     
     public DreammapProvider getDreammapProvider() {

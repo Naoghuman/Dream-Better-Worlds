@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="189.0" prefWidth="251.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.help.impl.welcomehelp.WelcomeHelpPresenter">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <children>
+                <ToolBar layoutX="14.0" layoutY="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                    <items>
+                        <CheckBox fx:id="cbShowAtStart" mnemonicParsing="false" onAction="#showAtStart" text="Show at start" />
+                    </items>
+                </ToolBar>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="was möchte ich hier anzeigen?" />
+                        <Label text="- das neueste in dream-better-worlds version" />
+                        <Label text="- neustes in meiner eigenen website" />
+                        <Label text="- neuste bücher, internet-seiten, übungen, videos vorstellen" />
+                        <Label text="- lädt v-nr. von internet - wenn neuer, dann zeigen" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -95,7 +95,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         assert (spDesktop != null)         : "fx:id=\"spDesktop\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         
         this.registerActions();
-        this.registerDialogLayer();
+        this.registerDialogLayers();
         this.registerEditorAndNavigation();
         
         this.initializeToolBar();
@@ -262,7 +262,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     public void onActionShowHelpWelcome() {
         LoggerFacade.getDefault().debug(this.getClass(), "On action show Help Welcome"); // NOI18N
         
-//        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
+        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
     public void onActionShowTipOfTheNightEditor() {
@@ -287,7 +287,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         ToolProvider.getDefault().registerActions();
     }
     
-    private void registerDialogLayer() {
+    private void registerDialogLayers() {
         LoggerFacade.getDefault().info(this.getClass(), "Register Dialog layers"); // NOI18N
         
         DialogProvider.getDefault().register(apDialogLayer, apDialogLayer2);

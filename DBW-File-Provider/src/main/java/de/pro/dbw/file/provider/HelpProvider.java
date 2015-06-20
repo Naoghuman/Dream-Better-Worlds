@@ -18,23 +18,29 @@ package de.pro.dbw.file.provider;
 
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
+import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
 import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentPresenter;
 import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentView;
+import de.pro.dbw.file.help.impl.welcomehelp.WelcomeHelpView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 /**
  *
  * @author PRo
  */
-public class HelpProvider implements IActionConfiguration, IRegisterActions {
-    
+public class HelpProvider implements IActionConfiguration, IDefaultIdConfiguration,
+        IPreferencesConfiguration, IRegisterActions
+{    
     private static HelpProvider instance = null;
     
     public static HelpProvider getDefault() {
@@ -56,17 +62,17 @@ public class HelpProvider implements IActionConfiguration, IRegisterActions {
         
     }
 
-    void checkShowWelcomeHelpAtStart() {
+    void checkShowAtStartWelcomeHelp() {
         LoggerFacade.getDefault().info(this.getClass(), "Check if Welcome should show at start"); // NOI18N
     
-//        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
-//                PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
-//                PREF__SHOW_AT_START__TIP_OF_THE_NIGHT__DEFAULT_VALUE);
-//        if (!isShowAtStart) {
-//            return;
-//        }
-//        
-//        this.onActionShowTipOfTheNightWindow();
+        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
+                PREF__SHOW_AT_START__WELCOME,
+                PREF__SHOW_AT_START__WELCOME__DEFAULT_VALUE);
+        if (!isShowAtStart) {
+            return;
+        }
+        
+        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
     public void register(TabPane tpEditor, TabPane tpNavigationRight) {
@@ -81,6 +87,7 @@ public class HelpProvider implements IActionConfiguration, IRegisterActions {
         LoggerFacade.getDefault().debug(this.getClass(), "Register actions in HelpProvider"); // NOI18N
         
         this.registerOnActionShowHelpAbout();
+        this.registerOnActionShowHelpWelcome();
     }
 
     private void registerOnActionShowHelpAbout() {
@@ -96,6 +103,30 @@ public class HelpProvider implements IActionConfiguration, IRegisterActions {
 
                     final Parent dialog = dialogView.getView();
                     DialogProvider.getDefault().show(dialog);
+                });
+    }
+    
+    private void registerOnActionShowHelpWelcome() {
+        ActionFacade.getDefault().register(
+                ACTION__SHOW_HELP__WELCOME,
+                (ActionEvent ae) -> {
+                    // Check if the welcome-help is open
+                    for (Tab tab : tpEditor.getTabs()) {
+                        if (tab.getId().equals(String.valueOf(FILE__WELCOME__DEFAULT_ID))) {
+                            tpEditor.getSelectionModel().select(tab);
+                            return;
+                        }
+                    }
+
+                    // Create new welcome-help
+                    final Tab tab = new Tab();
+                    tab.setText("Welcome"); // XXX properties
+                    final WelcomeHelpView view = new WelcomeHelpView();
+                    tab.setContent(view.getView());
+                    tab.setId(String.valueOf(FILE__WELCOME__DEFAULT_ID));
+
+                    tpEditor.getTabs().add(0, tab);
+                    tpEditor.getSelectionModel().select(tab);
                 });
     }
     
