@@ -54,7 +54,7 @@
                   </VBox>
                   <HBox alignment="TOP_RIGHT" spacing="10.0">
                       <children>
-                          <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionReset" prefWidth="64.0" text="Reset" />
+                          <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionRefresh" prefWidth="64.0" text="Refresh" />
                           <Button fx:id="bCreateDream" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionCreate" prefWidth="64.0" text="Create" />
                           <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionClose" prefWidth="64.0" text="Close" />
                       </children>

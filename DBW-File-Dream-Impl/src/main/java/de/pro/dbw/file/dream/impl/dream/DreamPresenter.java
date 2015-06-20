@@ -107,7 +107,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionDelete() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action delete"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Delete"); // NOI18N
 
         DialogProvider.getDefault().showDeleteDialog(
                 resources.getString(KEY__DIALOG_DELETE__TITLE),
@@ -117,7 +117,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
                     DialogProvider.getDefault().hide();
                     
                     final Boolean removeFile = Boolean.TRUE;
-                    this.onActionUpdateGui(removeFile);
+                    this.onActionRefreshGui(removeFile);
                 },
                 (ActionEvent ae) -> { // No
                     DialogProvider.getDefault().hide();
@@ -134,14 +134,36 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
         this.show(oldModel);
     }
     
+    private void onActionRefreshGui(Boolean removeFile) {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh Gui"); // NOI18N
+        
+        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
+        ActionTransferModel transferModel = new ActionTransferModel();
+        if (removeFile) {
+            transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
+            transferModel.setLong(model.getId());
+            transferModels.add(transferModel);
+        }
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        transferModels.add(transferModel);
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
+        transferModels.add(transferModel);
+        
+        ActionFacade.getDefault().handle(transferModels);
+    }
+    
     public void onActionSave() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action save"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Save"); // NOI18N
         
         onActionSave(Boolean.TRUE);
     }
     
     public void onActionSave(Boolean updateGui) {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action save"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Save"); // NOI18N
         
         System.out.println(" XXX DreamPresenter.onActionSave() add validation for input");
         
@@ -174,7 +196,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
         model.setMarkAsChanged(Boolean.FALSE);
         
         final Boolean removeFile = Boolean.FALSE;
-        this.onActionUpdateGui(removeFile);
+        this.onActionRefreshGui(removeFile);
     }
     
 //    public void registerOnActionShowExtendedSliderDialog() {
@@ -194,28 +216,6 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
 //                    DialogProvider.getDefault().hide();
 //                });
 //    }
-    
-    private void onActionUpdateGui(Boolean removeFile) {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action update gui"); // NOI18N
-        
-        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
-        ActionTransferModel transferModel = new ActionTransferModel();
-        if (removeFile) {
-            transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
-            transferModel.setLong(model.getId());
-            transferModels.add(transferModel);
-        }
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-        transferModels.add(transferModel);
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
-        transferModels.add(transferModel);
-        
-        ActionFacade.getDefault().handle(transferModels);
-    }
     
     public void show(DreamModel model) {
         LoggerFacade.getDefault().info(this.getClass(), "Show dream: " + model.getTitle()); // NOI18N

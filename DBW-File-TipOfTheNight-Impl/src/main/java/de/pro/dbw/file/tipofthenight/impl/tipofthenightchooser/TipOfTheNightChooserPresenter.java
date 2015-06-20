@@ -121,7 +121,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     public void onActionNext() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action next"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Next"); // NOI18N
     
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());

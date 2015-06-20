@@ -173,8 +173,8 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
         return IDialogConfiguration.SIZE__W495_H330;
     }
     
-    public void onActionReset() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action reset"); // NOI18N
+    public void onActionRefresh() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
     
         tfTitle.setText(null);
         taDescription.setText(null);
@@ -186,13 +186,13 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     }
     
     public void onActionClose() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action close"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Close"); // NOI18N
     
         DialogProvider.getDefault().hide();
     }
     
     public void onActionCreate() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action create"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Create"); // NOI18N
     
         final SequentialTransition st = new SequentialTransition();
         final PauseTransition pt1 = new PauseTransition(Duration.ZERO);

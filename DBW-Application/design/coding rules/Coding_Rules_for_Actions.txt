@@ -1,13 +1,40 @@
 --------------------------------------------------------------------------------
 CODING RULES FOR ACTIONS
 --------------------------------------------------------------------------------
-TODO
- - REGISTER at program start all action methods in a class with the interface 
-   IRegisterActions. Exception are dynamic actions which aren't registered in 
-   the overriden method.
- - REGISTER an action method in a class with the library Lib_Actions.
- - ACTION-KEYS are defined in the interface IActionConfiguration in the modul
-   DBW-Core-Configuration-Api.
+NAMING CONVENTION from the action methods
+ - onActionXy()
+ - onActionAddXy()
+ - onActionClose()
+ - onActionCreate()
+ - onActionEdit()
+ - onActionDelete()
+ - onActionJobXy()
+ - onActionRefreshXy()
+ - onActionOpenFromXy()
+ - onActionSave()
+ - onActionSearchInXy()
+ - onActionShowXy()
+
+All actions have there equivalent in the registerOnActionXy methods.
+
+--------------------------------------------------------------------------------
+REGISTER an action with the library Lib-Actions.
+For more information see the ReadMe from the library.
+ - https://github.com/Naoghuman/lib-action
+
+Example
+private void registerOnActionCreateNewDream() {
+    ActionFacade.getDefault().register(
+            ACTION__CREATE_NEW_DREAM,
+            (ActionEvent ae) -> {
+                this.show();
+            });
+}
+
+--------------------------------------------------------------------------------
+DEFINE ACTION-KEYS
+ACTION-KEYS are defined in the interface IActionConfiguration in the module
+DBW-Core-Configuration-Api.
 
 --------------------------------------------------------------------------------
 LOG EVENTS in action methods

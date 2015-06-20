@@ -84,6 +84,8 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     }
     
     public void onActionShow() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Show"); // NOI18N
+        
         /*
         TODO
          - Shows the chart for this Voting.
@@ -91,6 +93,8 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     }
     
     public void onActionVote() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Vote"); // NOI18N
+        
         /*
         TODO
          - Vote this Voting (only ones per day).

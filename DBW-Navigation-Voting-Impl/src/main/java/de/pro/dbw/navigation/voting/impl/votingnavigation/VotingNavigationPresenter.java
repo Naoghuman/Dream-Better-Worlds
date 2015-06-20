@@ -161,10 +161,10 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
     public void registerActions() {
         LoggerFacade.getDefault().debug(this.getClass(), "Register actions in VotingNavigationPresenter"); // NOI18N
         
-        this.registerOnActionUpdateVotingNavigation();
+        this.registerOnActionRefreshVotingNavigation();
     }
 
-    private void registerOnActionUpdateVotingNavigation() {
+    private void registerOnActionRefreshVotingNavigation() {
         ActionFacade.getDefault().register(
                 ACTION__REFRESH_NAVIGATION__VOTING,
                 (ActionEvent ae) -> {

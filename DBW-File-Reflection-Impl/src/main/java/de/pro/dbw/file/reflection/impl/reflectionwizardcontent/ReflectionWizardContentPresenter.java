@@ -190,26 +190,14 @@ public class ReflectionWizardContentPresenter implements Initializable, IActionC
         return IDialogConfiguration.SIZE__W495_H414;
     }
     
-    public void onActionReset() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action reset"); // NOI18N
-    
-        tfTitle.setText(null);
-        taText.setText(null);
-        
-        final Long now = System.currentTimeMillis();
-        tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, PATTERN__DATE));
-        cbTime.setSelected(Boolean.TRUE);
-        tfTime.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, PATTERN__TIME));
-    }
-    
     public void onActionClose() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action close"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Close"); // NOI18N
     
         DialogProvider.getDefault().hide();
     }
     
     public void onActionCreate() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action create"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Create"); // NOI18N
     
         final SequentialTransition st = new SequentialTransition();
         final PauseTransition pt1 = new PauseTransition(Duration.ZERO);
@@ -238,9 +226,21 @@ public class ReflectionWizardContentPresenter implements Initializable, IActionC
     }
     
     public void onActionEdit() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action edit"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Edit"); // NOI18N
     
         this.onActionCreate();
+    }
+    
+    public void onActionRefresh() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
+    
+        tfTitle.setText(null);
+        taText.setText(null);
+        
+        final Long now = System.currentTimeMillis();
+        tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, PATTERN__DATE));
+        cbTime.setSelected(Boolean.TRUE);
+        tfTime.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, PATTERN__TIME));
     }
     
     private void save() {

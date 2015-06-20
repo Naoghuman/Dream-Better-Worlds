@@ -197,7 +197,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionAddComment() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action add comment"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action add Comment"); // NOI18N
     
         final ReflectionCommentView view = new ReflectionCommentView();
         final ReflectionCommentPresenter presenter = view.getRealPresenter();
@@ -212,7 +212,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionDelete() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action delete"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Delete"); // NOI18N
 
         // TODO properties
         DialogProvider.getDefault().showDeleteDialog(
@@ -223,7 +223,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
                     DialogProvider.getDefault().hide();
                     
                     final Boolean removeFile = Boolean.TRUE;
-                    this.onActionUpdateGui(removeFile);
+                    this.onActionRefreshGui(removeFile);
                 },
                 (ActionEvent ae) -> { // No
                     DialogProvider.getDefault().hide();
@@ -231,13 +231,35 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
 
     public void onActionRefresh() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action refresh"); // NOI18N
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
         // TODO not better to load the old state from db?
         if (oldModel == null) {
             return;
         }
         
         this.show(oldModel);
+    }
+    
+    private void onActionRefreshGui(Boolean removeFile) {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh Gui"); // NOI18N
+    
+        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
+        ActionTransferModel transferModel = new ActionTransferModel();
+        if (removeFile) {
+            transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
+            transferModel.setLong(model.getId());
+            transferModels.add(transferModel);
+        }
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        transferModels.add(transferModel);
+        
+        transferModel = new ActionTransferModel();
+        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
+        transferModels.add(transferModel);
+        
+        ActionFacade.getDefault().handle(transferModels);
     }
 
     public void onActionSave() {
@@ -280,29 +302,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         model.setMarkAsChanged(Boolean.FALSE);
         
         final Boolean removeFile = Boolean.FALSE;
-        this.onActionUpdateGui(removeFile);
-    }
-    
-    private void onActionUpdateGui(Boolean removeFile) {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action update gui"); // NOI18N
-    
-        final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
-        ActionTransferModel transferModel = new ActionTransferModel();
-        if (removeFile) {
-            transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
-            transferModel.setLong(model.getId());
-            transferModels.add(transferModel);
-        }
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-        transferModels.add(transferModel);
-        
-        transferModel = new ActionTransferModel();
-        transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
-        transferModels.add(transferModel);
-        
-        ActionFacade.getDefault().handle(transferModels);
+        this.onActionRefreshGui(removeFile);
     }
     
     public void show(ReflectionModel model) {
