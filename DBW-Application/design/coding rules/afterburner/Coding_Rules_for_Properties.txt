@@ -31,5 +31,9 @@ key.file.dream=Dream
 
 And here an example to use the key to get the value from the ResourceBundle.
 tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE__DREAM), ACTION__CREATE_NEW_DREAM));
+
+--------------------------------------------------------------------------------
+EXCEPTION
+Global properties will be stored in DBW-Application/DreamBetterWorlds.properties.
         
 --------------------------------------------------------------------------------
