@@ -7,7 +7,6 @@ import de.pro.dbw.application.desktop.api.DesktopFacade;
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.base.provider.BaseProvider;
-import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.provider.FileProvider;
 import de.pro.lib.database.api.DatabaseFacade;
@@ -24,6 +23,8 @@ import javafx.stage.WindowEvent;
 
 public class DreamBetterWorlds extends Application implements IApplicationConfiguration, IPreferencesConfiguration {
 
+    private static final String CSS__DREAM_BETTER_WORLDS = "DreamBetterWorlds.css"; // NOI18N
+    
     private static final String KEY__APPLICATION__MESSAGE_GOODBYE = "application.message.goodbye"; // NOI18N
     private static final String KEY__APPLICATION__MESSAGE_WELCOME = "application.message.welcome"; // NOI18N
     private static final String KEY__APPLICATION__TITLE = "application.title"; // NOI18N
@@ -57,8 +58,7 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
         final Double height = PreferencesFacade.getDefault().getDouble(
                 PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
         final Scene scene = new Scene(DesktopFacade.getDefault().getDesktop(), width, height);
-        final String uriStylesheet = this.getClass().getResource(
-                ICssConfiguration.APPLICATION__DREAM_BETTER_WORDS__CSS).toExternalForm();
+        final String uriStylesheet = this.getClass().getResource(CSS__DREAM_BETTER_WORLDS).toExternalForm();
         scene.getStylesheets().add(uriStylesheet);
 //        scene.setOnKeyReleased(DesktopFacade.getDefault().getGlobalKeyEventHandler());
         System.out.println(" XXX DreamBetterWorlds.start() GlobalKeyEventHandler()");

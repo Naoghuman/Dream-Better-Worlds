@@ -18,7 +18,6 @@ package de.pro.dbw.navigation.dreambook.impl.dreambooknavigation;
 
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
-import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.dreambook.api.DreamBookNavigationModel;
@@ -57,6 +56,8 @@ import javafx.util.Callback;
 public class DreamBookNavigationPresenter implements Initializable, IActionConfiguration,
         IDreamConfiguration, INavigationConfiguration, IRegisterActions
 {
+    private static final String CSS_DREAM_BOOK_NAVIGATION = "DreamBookNavigation.css"; // NOI18N
+    
     @FXML private ListView lvNavigation;
 
     @Override
@@ -73,8 +74,7 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
     private void initializeNavigationLeft() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize navigation left"); // NOI18N
         
-        lvNavigation.getStylesheets().addAll(this.getClass().getResource(
-                ICssConfiguration.NAVIGATION_DREAM_BOOK_IMPL__DREAM_BOOK_NAVIGATION__CSS).toExternalForm());
+        lvNavigation.getStylesheets().addAll(this.getClass().getResource(CSS_DREAM_BOOK_NAVIGATION).toExternalForm());
         lvNavigation.getItems().clear();
         
         lvNavigation.setCellFactory(new Callback<ListView<DreamBookNavigationModel>, ListCell<DreamBookNavigationModel>>() {

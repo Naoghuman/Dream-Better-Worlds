@@ -18,7 +18,6 @@ package de.pro.dbw.navigation.history.impl.historynavigation;
 
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
-import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.history.api.HistoryNavigationModel;
@@ -62,6 +61,8 @@ import javafx.util.Callback;
 public class HistoryNavigationPresenter implements Initializable, IActionConfiguration,
         IDreamConfiguration, INavigationConfiguration, IRegisterActions
 {
+    private static final String CSS__HISTORY_NAVIGATION = "HistoryNavigation.css"; // NOI18N
+    
     @FXML private Label lDreamCount;
     @FXML private ListView lvNavigation;
 
@@ -80,8 +81,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     private void initializeHistoryListView() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize navigation history"); // NOI18N
         
-        lvNavigation.getStylesheets().addAll(this.getClass().getResource(
-                ICssConfiguration.NAVIGATION_HISTORY_IMPL__HISTORY_NAVIGATION__CSS).toExternalForm());
+        lvNavigation.getStylesheets().addAll(this.getClass().getResource(CSS__HISTORY_NAVIGATION).toExternalForm());
         lvNavigation.getItems().clear();
         
         lvNavigation.setCellFactory(new Callback<ListView<HistoryNavigationModel>, ListCell<HistoryNavigationModel>>() {

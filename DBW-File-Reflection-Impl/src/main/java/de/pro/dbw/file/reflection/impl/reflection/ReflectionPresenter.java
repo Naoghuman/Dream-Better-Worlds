@@ -17,7 +17,6 @@
 package de.pro.dbw.file.reflection.impl.reflection;
 
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
-import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
@@ -60,6 +59,8 @@ import javafx.util.Callback;
 public class ReflectionPresenter implements Initializable, IActionConfiguration, 
         IDateConverter, IDefaultIdConfiguration, IUtilConfiguration
 {
+    private static final String CSS__REFLECTION = "Reflection.css"; // NOI18N
+    
     private static final String KEY__DIALOG_DELETE__TITLE = "dialog.delete.title"; // NOI18N
     
     @FXML private Button bDelete;
@@ -111,8 +112,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     private void initializeCommentArea() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize Comment area in ReflectionPresenter"); // NOI18N
     
-        lvComments.getStylesheets().addAll(this.getClass().getResource(
-                ICssConfiguration.FILE_REFLECTION_IMPL__REFLECTION__CSS).toExternalForm());
+        lvComments.getStylesheets().addAll(this.getClass().getResource(CSS__REFLECTION).toExternalForm());
         lvComments.getItems().clear();
         lvComments.setCellFactory(new Callback<ListView<ReflectionCommentView>, ListCell<ReflectionCommentView>>() {
 

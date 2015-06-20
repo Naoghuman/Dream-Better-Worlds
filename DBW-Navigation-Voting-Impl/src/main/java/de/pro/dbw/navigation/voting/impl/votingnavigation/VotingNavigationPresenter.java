@@ -20,7 +20,6 @@ import de.pro.dbw.base.component.api.VotingComponentModel;
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
-import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.voting.api.VotingNavigationModel;
 import de.pro.dbw.util.provider.UtilProvider;
@@ -52,6 +51,8 @@ import javafx.util.Callback;
 public class VotingNavigationPresenter implements Initializable, IActionConfiguration,
         INavigationConfiguration, IRegisterActions
 {
+    private static final String CSS_VOTING_NAVIGATION = "VotingNavigation.css"; // NOI18N
+    
     @FXML private ListView lvNavigation;
 
     @Override
@@ -68,8 +69,7 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
     private void initializeNavigationLeft() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize navigation left"); // NOI18N
         
-        lvNavigation.getStylesheets().addAll(this.getClass().getResource(
-                ICssConfiguration.NAVIGATION_VOTING_IMPL__VOTING_NAVIGATION__CSS).toExternalForm());
+        lvNavigation.getStylesheets().addAll(this.getClass().getResource(CSS_VOTING_NAVIGATION).toExternalForm());
         lvNavigation.getItems().clear();
         
         lvNavigation.setCellFactory(new Callback<ListView<VotingNavigationModel>, ListCell<VotingNavigationModel>>() {

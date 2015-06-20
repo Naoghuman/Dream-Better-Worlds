@@ -19,7 +19,6 @@ package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofth
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
-import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
@@ -60,6 +59,8 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         IApplicationConfiguration, IDefaultIdConfiguration, IPreferencesConfiguration,
         ITipOfTheNightConfiguration, IRegisterActions, IUtilConfiguration
 {
+    private static final String CSS__TAB_TIP_OF_THE_NIGHT = "TabTipOfTheNight.css"; // NOI18N
+    
     private static final String KEY__DIALOG_DELETE__TITLE = "dialog.delete.title"; // NOI18N
     
     @FXML private Button bDelete;
@@ -118,8 +119,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     private void initializeListView() {
         LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView TipsOfTheNight"); // NOI18N
 
-        lvTipsOfTheNight.getStylesheets().addAll(this.getClass().getResource(
-                ICssConfiguration.FILE_TIP_OF_THE_NIGHT_IMPL__TAB_TIP_OF_THE_NIGHT__CSS).toExternalForm());
+        lvTipsOfTheNight.getStylesheets().addAll(this.getClass().getResource(CSS__TAB_TIP_OF_THE_NIGHT).toExternalForm());
         lvTipsOfTheNight.getItems().clear();
         
         lvTipsOfTheNight.setCellFactory((list) -> {
