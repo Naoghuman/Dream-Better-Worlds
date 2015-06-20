@@ -1,0 +1,17 @@
+--------------------------------------------------------------------------------
+CODING RULES FOR [PACKAGENAME]VIEW
+--------------------------------------------------------------------------------
+The class [PACKAGENAME]View extends from FXMLView. One additional method will be
+created in the class -> getRealPresenter() so we musn't cast in the project the
+method getPresenter():Object.
+
+Example
+public class DreamBookNavigationView extends FXMLView {
+
+    public DreamBookNavigationPresenter getRealPresenter() {
+        return (DreamBookNavigationPresenter) super.getPresenter();
+    }
+    
+}
+
+--------------------------------------------------------------------------------
