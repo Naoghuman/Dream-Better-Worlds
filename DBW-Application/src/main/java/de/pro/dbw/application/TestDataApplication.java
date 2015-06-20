@@ -19,8 +19,10 @@ package de.pro.dbw.application;
 import com.airhacks.afterburner.injection.Injector;
 import de.pro.dbw.application.testdata.TestDataView;
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
+import static de.pro.dbw.core.configuration.api.application.IApplicationConfiguration.DBW__RESOURCE_BUNDLE;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -30,19 +32,25 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
- * TODO
  * 
  * @author PRo
  */
 public class TestDataApplication extends Application implements IApplicationConfiguration {
+    
+    @Override
+    public void init() throws Exception {
+        PropertiesFacade.getDefault().register(DBW__RESOURCE_BUNDLE);
+        
+        final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
+        final String message = this.getProperty(KEY__APPLICATION__TESTDATA_MESSAGE_START);
+        LoggerFacade.getDefault().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        LoggerFacade.getDefault().message('~', 80, "Start " + DBW__TITLE__TESTDATA); // NOI18N
-        
         final TestDataView view = new TestDataView();
         final Scene scene = new Scene(view.getView(), 1280.0d, 720.0d);
-        primaryStage.setTitle(DBW__TITLE__TESTDATA);
+        primaryStage.setTitle(this.getProperty(KEY__APPLICATION__TESTDATA_TITLE));
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest((WindowEvent we) -> {
            we.consume();
@@ -53,8 +61,14 @@ public class TestDataApplication extends Application implements IApplicationConf
         primaryStage.show();
     }
     
+    private String getProperty(String propertyKey) {
+        return PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
+    }
+    
     private void onCloseRequest() {
-        LoggerFacade.getDefault().message('~', 80, "Stop " + DBW__TITLE__TESTDATA); // NOI18N
+        final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
+        final String message = this.getProperty(KEY__APPLICATION__TESTDATA_MESSAGE_STOP);
+        LoggerFacade.getDefault().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
         
         Injector.forgetAll();
         DatabaseFacade.getDefault().shutdown();

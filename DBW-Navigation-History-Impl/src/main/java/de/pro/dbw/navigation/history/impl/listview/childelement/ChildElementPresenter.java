@@ -41,7 +41,7 @@ public class ChildElementPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize ChildElementPresenter"); // NOI18N
+        LoggerFacade.getDefault().trace(this.getClass(), "Initialize ChildElementPresenter"); // NOI18N
         
         assert (bpContent != null) : "fx:id=\"bpContent\" was not injected: check your FXML file 'ChildElement.fxml'."; // NOI18N
     }

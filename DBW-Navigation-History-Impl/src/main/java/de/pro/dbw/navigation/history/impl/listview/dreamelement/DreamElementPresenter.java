@@ -16,9 +16,15 @@
  */
 package de.pro.dbw.navigation.history.impl.listview.dreamelement;
 
+import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
+import static de.pro.dbw.core.configuration.api.application.IApplicationConfiguration.DBW__RESOURCE_BUNDLE;
+import static de.pro.dbw.core.configuration.api.application.IApplicationConfiguration.KEY__APPLICATION__PREFIX_NEW;
+import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
+import static de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration.SIGN__EMPTY;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -29,8 +35,9 @@ import javafx.scene.control.Label;
  *
  * @author PRo
  */
-public class DreamElementPresenter implements Initializable {
-    
+public class DreamElementPresenter implements Initializable, IApplicationConfiguration,
+        IUtilConfiguration
+{
     @FXML private Label lDream;
     @FXML private Label lGenerationTime;
     @FXML private Label lPrefix;
@@ -43,8 +50,7 @@ public class DreamElementPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize DreamElementPresenter"); // NOI18N
-        System.out.println(" XXX DreamElementPresenter -> log with trace(...)");
+        LoggerFacade.getDefault().trace(this.getClass(), "Initialize DreamElementPresenter"); // NOI18N
         
         assert (lDream != null)          : "fx:id=\"lDream\" was not injected: check your FXML file 'DreamElement.fxml'."; // NOI18N
         assert (lGenerationTime != null) : "fx:id=\"lGenerationTime\" was not injected: check your FXML file 'DreamElement.fxml'."; // NOI18N
@@ -52,8 +58,7 @@ public class DreamElementPresenter implements Initializable {
     }
     
     public void configure(Long generationTime, String title, Long idToOpen) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Configure DreamElementPresenter"); // NOI18N
-        System.out.println(" XXX DreamElementPresenter -> log with trace(...)");
+        LoggerFacade.getDefault().trace(this.getClass(), "Configure DreamElementPresenter"); // NOI18N
         
         this.generationTime = generationTime;
         this.title = title;
@@ -62,7 +67,9 @@ public class DreamElementPresenter implements Initializable {
         final Boolean hasPrefixNew = UtilProvider.getDefault().getDateConverter().isAfter(-3, generationTime);
         lPrefix.setVisible(hasPrefixNew);
         lPrefix.setManaged(hasPrefixNew);
-        lPrefix.setText(hasPrefixNew ? "New" : ""); // NOI18N // XXX Properties
+        lPrefix.setText(hasPrefixNew ?
+                PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW)
+                : SIGN__EMPTY);
         
         date = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
                 generationTime, IDateConverter.PATTERN__DATE__HISTORY);

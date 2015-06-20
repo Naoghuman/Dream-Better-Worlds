@@ -13,6 +13,7 @@ import de.pro.dbw.file.provider.FileProvider;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -23,19 +24,27 @@ import javafx.stage.WindowEvent;
 
 public class DreamBetterWorlds extends Application implements IApplicationConfiguration, IPreferencesConfiguration {
 
+    private static final String KEY__APPLICATION__MESSAGE_GOODBYE = "application.message.goodbye"; // NOI18N
+    private static final String KEY__APPLICATION__MESSAGE_WELCOME = "application.message.welcome"; // NOI18N
+    private static final String KEY__APPLICATION__TITLE = "application.title"; // NOI18N
+    
     @Override
     public void init() throws Exception {
         System.out.println("XXX DreamBetterWorlds.init() remove lib joda-time");
         System.out.println("XXX DreamBetterWorlds.init() look why the generated jar not work (application will not start with doubleclick)");
         
-        LoggerFacade.getDefault().message(DBW__BORDER_SIGN, 80, DBW__WELCOME_MSG);
+        PropertiesFacade.getDefault().register(DBW__RESOURCE_BUNDLE);
+        
+        final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
+        final String message = this.getProperty(KEY__APPLICATION__MESSAGE_WELCOME);
+        LoggerFacade.getDefault().message(borderSign, 80, message);
         
         final Boolean dropPreferencesFileAtStart = Boolean.FALSE;
         PreferencesFacade.getDefault().init(dropPreferencesFileAtStart);
         
         System.out.println("XXX DreamBetterWorlds.init() remove TestDatabase.createTestData()");
 //        TestDatabase.createTestData();
-        DatabaseFacade.getDefault().register(DBW__DATABASE_NAME);
+        DatabaseFacade.getDefault().register(this.getProperty(KEY__APPLICATION__DATABASE));
         System.out.println("XXX DreamBetterWorlds.init() -> JavaFX+JPA+Serialization=https://gist.github.com/james-d/e485ac525c71e20bb453");
     
         BaseProvider.getDefault().getJobProvider().start();
@@ -54,7 +63,8 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
 //        scene.setOnKeyReleased(DesktopFacade.getDefault().getGlobalKeyEventHandler());
         System.out.println(" XXX DreamBetterWorlds.start() GlobalKeyEventHandler()");
         
-        stage.setTitle(DBW__TITLE__APPLICATION);
+        stage.setTitle(this.getProperty(KEY__APPLICATION__TITLE));
+        
         stage.setScene(scene);
         stage.setOnCloseRequest((WindowEvent we) -> {
            we.consume();
@@ -75,6 +85,10 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
             FileProvider.getDefault().checkShowAtStart();
         });
         pt.playFromStart();
+    }
+    
+    private String getProperty(String propertyKey) {
+        return PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
     }
     
     private void onCloseRequest() {
@@ -104,12 +118,13 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
     }
     
     private void shutdownApplication() {
-        
         BaseProvider.getDefault().getJobProvider().stop();
         Injector.forgetAll();
         DatabaseFacade.getDefault().shutdown();
         
-        LoggerFacade.getDefault().message(DBW__BORDER_SIGN, 80, DBW__GOODBYE_MSG);
+        final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
+        final String message = this.getProperty(KEY__APPLICATION__MESSAGE_GOODBYE);
+        LoggerFacade.getDefault().message(borderSign, 80, message);
     
         final PauseTransition pt = new PauseTransition(DBW__LITTLE_DELAY__DURATION_125);
         pt.setOnFinished((ActionEvent event) -> {

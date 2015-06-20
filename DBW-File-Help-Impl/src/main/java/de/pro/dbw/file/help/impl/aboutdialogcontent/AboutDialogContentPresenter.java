@@ -24,7 +24,6 @@ import de.pro.lib.logger.api.LoggerFacade;
 import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**

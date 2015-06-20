@@ -16,11 +16,13 @@
  */
 package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.tabtipofthenight;
 
+import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.css.ICssConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
+import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.configuration.api.file.tipofthenight.ITipOfTheNightConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
@@ -28,6 +30,7 @@ import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -54,9 +57,11 @@ import javafx.scene.layout.FlowPane;
  * @author PRo
  */
 public class TabTipOfTheNightPresenter implements Initializable, IActionConfiguration, 
-        IDefaultIdConfiguration, IPreferencesConfiguration, ITipOfTheNightConfiguration,
-        IRegisterActions
+        IApplicationConfiguration, IDefaultIdConfiguration, IPreferencesConfiguration,
+        ITipOfTheNightConfiguration, IRegisterActions, IUtilConfiguration
 {
+    private static final String KEY__DIALOG_DELETE__TITLE = "dialog.delete.title"; // NOI18N
+    
     @FXML private Button bDelete;
     @FXML private Button bNew;
     @FXML private Button bSave;
@@ -68,11 +73,14 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     
     private int index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
     
+    private ResourceBundle resources = null;
     private TipOfTheNightChangeListener changeListener = null;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize TabTipOfTheNightPresenter"); // NOI18N
+        
+        this.resources = resources;
         
         assert (bDelete != null)          : "fx:id=\"bDelete\" was not injected: check your FXML file 'TabTipOfTheNight.fxml'."; // NOI18N
         assert (bNew != null)             : "fx:id=\"bNew\" was not injected: check your FXML file 'TabTipOfTheNight.fxml'."; // NOI18N
@@ -181,8 +189,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         }
 
         DialogProvider.getDefault().showDeleteDialog2(
-                // TODO properties
-                "Do you really want delete this tip of the night?",  // NOI18N
+                resources.getString(KEY__DIALOG_DELETE__TITLE),
                 (ActionEvent ae) -> { // Yes
                     SqlProvider.getDefault().getTipOfTheNightProvider().delete(model.getId());
         
@@ -216,8 +223,8 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         final TipOfTheNightModel model = new TipOfTheNightModel();
         model.setGenerationTime(System.currentTimeMillis());
         model.setId(FILE__TIP_OF_THE_NIGHT__DEFAULT_ID);
-        model.setText(""); // XXX properties
-        model.setTitle("New"); // XXX properties
+        model.setText(SIGN__EMPTY);
+        model.setTitle(PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW));
 
         allTipsOfTheNight.add(model);
         this.select(model, allTipsOfTheNight);

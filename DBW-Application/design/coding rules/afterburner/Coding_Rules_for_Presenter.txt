@@ -2,22 +2,6 @@
 CODING RULES FOR [PACKAGENAME]PRESENTER
 --------------------------------------------------------------------------------
 [PACKAGENAME].properties
-The properties file will automatically injected. You can access to the file
-through the parameter 'resources'.
-
-Every access through a key will defined as a private constant in the
-[PACKAGENAME]Presenter.
-The key have the format in [PACKAGENAME]Presenter:
- - 'KEY__'[name]
-
-Example
-private static final String KEY__NAME = "key.name"; // NOI18N
-
-
-The key have the format in the properties file:
- - 'key.'[name]'='[value]
-
-Example
-key.name=value
+Access properties in [PACKAGENAME]Presenter see Coding_Rules_for_Properties.txt.
 
 --------------------------------------------------------------------------------

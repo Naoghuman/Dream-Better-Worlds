@@ -230,6 +230,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     }
     
     private void refreshInfoLabel(int dreamSize) {
+        // TODO design the message new (rolling text?)
         String dreamCount = "zero"; // NOI18N
         String dreamSuffix = "s"; // NOI18N
         if (dreamSize == 1) {

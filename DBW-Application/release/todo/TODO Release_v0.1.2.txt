@@ -15,7 +15,7 @@ FEATURE
 BUG
 
 REFACTORING
-#36 Refactore to use constants for access CSS files.
+#41 Refactore to use constants for access properties files.
 #32 Refactore entities to use constants in entity definition.
 #30 Check if all classes which implements actions use the interface IRegisterActions.
 #29 Refactoring logger level in all onActionXy methods from info to debug.
@@ -27,8 +27,8 @@ REFACTORING
 ADDITIONAL
 
 CHECK
-#41 Refactore to use constants for access properties files.
 #37 Refactore action methods to use uniform methodnames.
+#36 Refactore to use constants for access CSS files.
 #24 Create a singleton tab for the file Welcome.
 
 --------------------------------------------------------------------------------

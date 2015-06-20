@@ -24,16 +24,16 @@ import javafx.util.Duration;
  */
 public interface IApplicationConfiguration {
     
-    public static final Character DBW__BORDER_SIGN = '#'; // NOI18N
-    
     public static final Duration DBW__LITTLE_DELAY__DURATION_125 = Duration.millis(125.0d);
     public static final Duration DBW__LITTLE_DELAY__DURATION_250 = Duration.millis(250.0d);
     
-    public static final String DBW__DATABASE_NAME = "dbw"; // NOI18N
-    public static final String DBW__GOODBYE_MSG = "  Goodbye from 'Dream Better Worlds'. Happy real life :)"; // NOI18N
-    // XXX load version from pom.xml
-    public static final String DBW__TITLE__APPLICATION = "Dream Better Worlds v0.1.2-SNAPSHOT"; // NOI18N -SNAPSHOT
-    public static final String DBW__TITLE__TESTDATA = "Testdata v0.1.2-SNAPSHOT"; // NOI18N
-    public static final String DBW__WELCOME_MSG = "  Welcome to 'Dream Better Worlds'. Clearly lucid dreaming :)"; // NOI18N
+    public static final String DBW__RESOURCE_BUNDLE = "/de/pro/dbw/application/DreamBetterWorlds.properties"; // NOI18N
+    
+    public static final String KEY__APPLICATION__BORDER_SIGN = "application.border.sign"; // NOI18N
+    public static final String KEY__APPLICATION__DATABASE = "application.database"; // NOI18N
+    public static final String KEY__APPLICATION__PREFIX_NEW = "application.prefix.new"; // NOI18N
+    public static final String KEY__APPLICATION__TESTDATA_MESSAGE_START = "application.testdata.message.start"; // NOI18N
+    public static final String KEY__APPLICATION__TESTDATA_MESSAGE_STOP = "application.testdata..message.stop"; // NOI18N
+    public static final String KEY__APPLICATION__TESTDATA_TITLE = "application.testdata.title"; // NOI18N
     
 }

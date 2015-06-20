@@ -43,16 +43,23 @@ import javafx.scene.layout.AnchorPane;
 public class ReflectionCommentPresenter implements Initializable, IActionConfiguration,
         IDateConverter, IDefaultIdConfiguration, IUtilConfiguration
 {
+    private static final String KEY__DIALOG_DELETE__TITLE = "dialog.delete.title"; // NOI18N
+    private static final String KEY__REFLECTION_COMMENT__AT = "reflection.comment.at"; // NOI18N
+    
     @FXML private AnchorPane apComment;
     @FXML private Label lComment;
     @FXML private TextArea taComment;
     
     private ReflectionCommentModel reflectionCommentModel = null;
+    
+    private ResourceBundle resources = null;
     private String actionKeyForDeletion = null;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionCommentPresenter"); // NOI18N
+        
+        this.resources = resources;
     
         assert (apComment != null) : "fx:id=\"apComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
         assert (lComment != null)  : "fx:id=\"lComment\" was not injected: check your FXML file 'ReflectionComment.fxml'."; // NOI18N
@@ -72,10 +79,11 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         final String date = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
                 this.reflectionCommentModel.getGenerationTime(),
                 IDateConverter.PATTERN__DATE__COMMENT);
+        final String at = resources.getString(KEY__REFLECTION_COMMENT__AT);
         final String time = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
                 this.reflectionCommentModel.getGenerationTime(),
                 IDateConverter.PATTERN__TIME);
-        lComment.setText(date + " at " + time); // NOI18N TODO properties
+        lComment.setText(date + at + time);
         
         taComment.setText(this.reflectionCommentModel.getText());
         this.bind();
@@ -92,9 +100,8 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         actionTransferModel.setActionKey(actionKeyForDeletion);
         actionTransferModel.setObject(reflectionCommentModel);
         
-        // TODO properties
         DialogProvider.getDefault().showDeleteDialog(
-                "Do you really want delete this comment?", // NOI18N
+                resources.getString(KEY__DIALOG_DELETE__TITLE),
                 (ActionEvent ae) -> { // Yes
                     ActionFacade.getDefault().handle(actionTransferModel);
                     DialogProvider.getDefault().hide();

@@ -16,9 +16,12 @@
  */
 package de.pro.dbw.navigation.dreambook.impl.listview.reflectionelement;
 
+import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
+import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -26,35 +29,33 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 /**
- * New Title
- * Date Time
  *
  * @author PRo
  */
-public class ReflectionElementPresenter implements Initializable {
-    
+public class ReflectionElementPresenter implements Initializable, IApplicationConfiguration,
+        IUtilConfiguration
+{
     @FXML private Label lReflection;
     @FXML private Label lGenerationTime;
     @FXML private Label lPrefix;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize ReflectionElementPresenter"); // NOI18N
-        System.out.println(" XXX ReflectionElementPresenter -> log with trace(...)");
+        LoggerFacade.getDefault().trace(this.getClass(), "Initialize ReflectionElementPresenter"); // NOI18N
         
         assert (lReflection != null)     : "fx:id=\"lReflection\" was not injected: check your FXML file 'ReflectionElement.fxml'."; // NOI18N
         assert (lGenerationTime != null) : "fx:id=\"lGenerationTime\" was not injected: check your FXML file 'ReflectionElement.fxml'."; // NOI18N
         assert (lPrefix != null)         : "fx:id=\"lPrefix\" was not injected: check your FXML file 'ReflectionElement.fxml'."; // NOI18N
     }
     
-    public void configure(Boolean hasPrefixNew, Long generationTime, String title) {//, Long idToOpen) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Configure ReflectionElementPresenter"); // NOI18N
-        
-        System.out.println(" XXX ReflectionElementPresenter -> log with trace(...)");
+    public void configure(Boolean hasPrefixNew, Long generationTime, String title) {
+        LoggerFacade.getDefault().trace(this.getClass(), "Configure ReflectionElementPresenter"); // NOI18N
 
         lPrefix.setVisible(hasPrefixNew);
         lPrefix.setManaged(hasPrefixNew);
-        lPrefix.setText(hasPrefixNew ? "New" : ""); // NOI18N // XXX Properties
+        lPrefix.setText(hasPrefixNew ?
+                PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW)
+                : SIGN__EMPTY);
         
         lGenerationTime.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(
                 generationTime, IDateConverter.PATTERN__GENERATIONTIME));

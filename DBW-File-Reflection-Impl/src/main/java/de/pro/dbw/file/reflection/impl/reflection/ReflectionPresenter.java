@@ -60,6 +60,8 @@ import javafx.util.Callback;
 public class ReflectionPresenter implements Initializable, IActionConfiguration, 
         IDateConverter, IDefaultIdConfiguration, IUtilConfiguration
 {
+    private static final String KEY__DIALOG_DELETE__TITLE = "dialog.delete.title"; // NOI18N
+    
     @FXML private Button bDelete;
     @FXML private Button bSave;
     @FXML private CheckBox cbTime;
@@ -75,11 +77,14 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     private ReflectionModel oldModel = null;
     
     private BooleanChangeListener booleanChangeListener = null;
+    private ResourceBundle resources = null;
     private StringChangeListener stringChangeListener = null;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionPresenter"); // NOI18N
+        
+        this.resources = resources;
     
         assert (bDelete != null)      : "fx:id=\"bDelete\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (bSave != null)        : "fx:id=\"bSave\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
@@ -211,7 +216,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
 
         // TODO properties
         DialogProvider.getDefault().showDeleteDialog(
-                "Do you really want delete this reflection?",  // NOI18N
+                resources.getString(KEY__DIALOG_DELETE__TITLE),
                 (ActionEvent ae) -> { // Yes
                     SqlProvider.getDefault().getReflectionSqlProvider().deleteReflectionWithAllComments(model.getId());
                     

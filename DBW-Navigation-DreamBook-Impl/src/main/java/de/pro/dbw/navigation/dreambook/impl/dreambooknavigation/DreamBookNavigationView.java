@@ -23,8 +23,9 @@ import com.airhacks.afterburner.views.FXMLView;
  * @author PRo
  */
 public class DreamBookNavigationView extends FXMLView {
-    
+
     public DreamBookNavigationPresenter getRealPresenter() {
         return (DreamBookNavigationPresenter) super.getPresenter();
     }
+    
 }

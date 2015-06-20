@@ -60,6 +60,10 @@ import javafx.util.Duration;
 public class DesktopPresenter implements Initializable, IActionConfiguration, 
         IDesktopConfiguration, IRegisterActions, IUtilConfiguration
 {
+    private static final String KEY__FILE__DREAM = "key.file.dream"; // NOI18N
+    private static final String KEY__FILE__DREAM_FAST = "key.file.dream.fast"; // NOI18N
+    private static final String KEY__FILE__TIP_OF_THE_NIGHT = "key.file.tipofthenight"; // NOI18N
+    
     @FXML private AnchorPane apDialogLayer;
     @FXML private AnchorPane apDialogLayer2;
     @FXML private BorderPane bpNavigationLeft;
@@ -70,11 +74,15 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     @FXML private TabPane tpNavigationRight;
     @FXML private ToolBar tbDesktop;
     @FXML private SplitPane spDesktop;
+    
+    private ResourceBundle resources = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize DesktopPresenter"); // NOI18N
         
+        this.resources = resources;
+
         assert (apDialogLayer != null)     : "fx:id=\"apDialogLayer\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (apDialogLayer2 != null)    : "fx:id=\"apDialogLayer2\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
         assert (bpNavigationLeft != null)  : "fx:id=\"bpNavigationLeft\" was not injected: check your FXML file 'Desktop.fxml'."; // NOI18N
@@ -156,14 +164,14 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     private void initializeToolBar() {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize ToolBar"); // NOI18N
         
-        tbDesktop.getItems().add(this.createToolBarButton("Dream", ACTION__CREATE_NEW_DREAM)); // NOI18N
-        tbDesktop.getItems().add(this.createToolBarButton("Fast Dream", ACTION__CREATE_NEW_FAST_DREAM)); // NOI18N
+        tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE__DREAM), ACTION__CREATE_NEW_DREAM));
+        tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE__DREAM_FAST), ACTION__CREATE_NEW_FAST_DREAM));
 //        tbDesktop.getItems().add(FileProvider.getDefault().getToolBarButton(EFileType.DREAMMAP));
 //        tbDesktop.getItems().add(FileProvider.getDefault().getToolBarButton(EFileType.EXERCISE));
 //        tbDesktop.getItems().add(new Separator(Orientation.VERTICAL));
 //        tbDesktop.getItems().add(TipOfTheNightFeatureProvider.getDefault().getToolBarButton());
         tbDesktop.getItems().add(new Separator(Orientation.VERTICAL));
-        tbDesktop.getItems().add(this.createToolBarButton("Tip of the Night", ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW)); // NOI18N
+        tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE__TIP_OF_THE_NIGHT), ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW));
 //        tbDesktop.getItems().add(this.createToolBarButton("Welcome", ACTION__SHOW_HELP__WELCOME)); // NOI18N
     }
     
