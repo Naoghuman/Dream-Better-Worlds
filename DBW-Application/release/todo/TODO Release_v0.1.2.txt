@@ -5,6 +5,7 @@ NEW
 #22 Create new modules DBW-File-Help(-Api, -Impl).
 
 ENHANCEMENT
+#43 Enhance show() in DBW-Dialog-Provider to use DialogTemplate internal.
 #28 Implement DialogTemplate in all dialogs.
 #27 Create DialogTemplate as basic for all dialogs.
 #24 Create a singleton tab for the file Welcome.

@@ -20,8 +20,6 @@ import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentPresenter;
 import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentView;
@@ -30,7 +28,6 @@ import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
 import javafx.event.ActionEvent;
-import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -96,13 +93,7 @@ public class HelpProvider implements IActionConfiguration, IDefaultIdConfigurati
                 (ActionEvent ae) -> {
                     final AboutDialogContentView contentView = new AboutDialogContentView();
                     final AboutDialogContentPresenter contentPresenter = contentView.getRealPresenter();
-                    
-                    final DialogTemplateView dialogView = new DialogTemplateView();
-                    final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
-                    dialogPresenter.configure("About", contentView.getView(), contentPresenter.getSize()); // NOI18N
-
-                    final Parent dialog = dialogView.getView();
-                    DialogProvider.getDefault().show(dialog);
+                    DialogProvider.getDefault().show("About", contentView.getView(), contentPresenter.getSize()); // NOI18N
                 });
     }
     

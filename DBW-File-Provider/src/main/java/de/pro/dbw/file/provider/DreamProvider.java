@@ -27,8 +27,6 @@ import de.pro.dbw.file.dream.impl.dream.DreamPresenter;
 import de.pro.dbw.file.dream.impl.dream.DreamView;
 import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentView;
 import de.pro.dbw.core.sql.provider.SqlProvider;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentPresenter;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
@@ -38,7 +36,6 @@ import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -234,12 +231,6 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
         
         final DreamWizardContentView contentView = new DreamWizardContentView();
         final DreamWizardContentPresenter contentPresenter = contentView.getRealPresenter();
-        
-        final DialogTemplateView dialogView = new DialogTemplateView();
-        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
-        dialogPresenter.configure("Dream Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
-        
-        final Parent dialog = dialogView.getView();
-        DialogProvider.getDefault().show(dialog);
+        DialogProvider.getDefault().show("Dream Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
     }
 }

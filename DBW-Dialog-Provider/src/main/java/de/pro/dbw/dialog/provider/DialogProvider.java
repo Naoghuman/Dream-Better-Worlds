@@ -27,6 +27,7 @@ import de.pro.dbw.dialog.impl.savesinglefiledialogcontent.SaveSingleFileDialogCo
 import de.pro.dbw.dialog.impl.savesinglefiledialogcontent.SaveSingleFileDialogContentView;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
+import java.awt.Dimension;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -85,7 +86,7 @@ public class DialogProvider implements IPreferencesConfiguration {
         this.hide2();
     }
     
-    private void setPositionFromDialog(Parent dialog) {
+    private void setDialogPosition(Parent dialog) {
         final Double width = PreferencesFacade.getDefault().getDouble(
                 PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
         final Double height = PreferencesFacade.getDefault().getDouble(
@@ -94,22 +95,40 @@ public class DialogProvider implements IPreferencesConfiguration {
         dialog.setLayoutY((height / 2) - (dialog.prefHeight(Double.MAX_VALUE) / 2));
     }
     
-    public void show(Parent dialog) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer");
-        
-        this.setPositionFromDialog(dialog);
+    private void setDialogVisible(Parent dialog) {
         apDialogLayer.getChildren().add(dialog);
         apDialogLayer.setVisible(Boolean.TRUE);
         apDialogLayer.setManaged(Boolean.TRUE);
     }
     
-    public void show2(Parent dialog) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer2"); // NOI18N
-        
-        this.setPositionFromDialog(dialog);
+    private void setDialogVisible2(Parent dialog) {
         apDialogLayer2.getChildren().add(dialog);
         apDialogLayer2.setVisible(Boolean.TRUE);
         apDialogLayer2.setManaged(Boolean.TRUE);
+    }
+    
+    public void show(String title, Parent content, Dimension size) {
+        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer");
+        
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure(title, content, size);
+        
+        final Parent dialog = dialogView.getView();
+        this.setDialogPosition(dialog);
+        this.setDialogVisible(dialog);
+    }
+    
+    public void show2(String title, Parent content, Dimension size) {
+        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer2"); // NOI18N
+        
+        final DialogTemplateView dialogView = new DialogTemplateView();
+        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
+        dialogPresenter.configure(title, content, size);
+        
+        final Parent dialog = dialogView.getView();
+        this.setDialogPosition(dialog);
+        this.setDialogVisible2(dialog);
     }
     
     public void showDeleteDialog(
@@ -128,7 +147,8 @@ public class DialogProvider implements IPreferencesConfiguration {
         dialogPresenter.configure("Delete", contentView.getView(), contentPresenter.getSize()); // NOI18N
         
         final Parent dialog = dialogView.getView();
-        this.show(dialog);
+        this.setDialogPosition(dialog);
+        this.setDialogVisible(dialog);
     }
     
     public void showDeleteDialog2(
@@ -147,7 +167,8 @@ public class DialogProvider implements IPreferencesConfiguration {
         dialogPresenter.configure("Delete", contentView.getView(), contentPresenter.getSize()); // NOI18N
         
         final Parent dialog = dialogView.getView();
-        this.show2(dialog);
+        this.setDialogPosition(dialog);
+        this.setDialogVisible2(dialog);
     }
     
     public void showSaveMultiFilesDialog(
@@ -165,7 +186,8 @@ public class DialogProvider implements IPreferencesConfiguration {
         dialogPresenter.configure("Save", contentView.getView(), contentPresenter.getSize()); // NOI18N
         
         final Parent dialog = dialogView.getView();
-        this.show(dialog);
+        this.setDialogPosition(dialog);
+        this.setDialogVisible(dialog);
     }
     
     public void showSaveSingleFileDialog(
@@ -183,7 +205,8 @@ public class DialogProvider implements IPreferencesConfiguration {
         dialogPresenter.configure("Save", contentView.getView(), contentPresenter.getSize()); // NOI18N
         
         final Parent dialog = dialogView.getView();
-        this.show(dialog);
+        this.setDialogPosition(dialog);
+        this.setDialogVisible(dialog);
     }
     
 }

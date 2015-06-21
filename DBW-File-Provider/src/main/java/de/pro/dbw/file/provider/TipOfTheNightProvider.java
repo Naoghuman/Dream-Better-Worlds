@@ -81,13 +81,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
         
         final TipOfTheNightEditorContentView contentView = new TipOfTheNightEditorContentView();
         final TipOfTheNightEditorContentPresenter contentPresenter = contentView.getRealPresenter();
-        
-        final DialogTemplateView dialogView = new DialogTemplateView();
-        final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
-        dialogPresenter.configure("Tip of the Night Editor", contentView.getView(), contentPresenter.getSize()); // NOI18N
-        
-        final Parent dialog = dialogView.getView();
-        DialogProvider.getDefault().show(dialog);
+        DialogProvider.getDefault().show("Tip of the Night Editor", contentView.getView(), contentPresenter.getSize()); // NOI18N
     }
     
     private void onActionShowTipOfTheNightWindow() {
@@ -107,8 +101,6 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
         window.show();
     }
     
-    // TODO Menu Configuration -> Tip of the Nights for Editor
-
     public void register(TabPane tpEditor) {
         LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
         

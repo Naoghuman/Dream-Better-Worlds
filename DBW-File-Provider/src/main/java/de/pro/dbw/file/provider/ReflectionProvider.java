@@ -21,8 +21,6 @@ import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.file.reflection.impl.reflection.ReflectionPresenter;
@@ -37,7 +35,6 @@ import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -86,7 +83,8 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
 
     private void registerOnActionCreateNewFileReflection() {
-        ActionFacade.getDefault().register(ACTION__CREATE_NEW_FILE__REFLECTION,
+        ActionFacade.getDefault().register(
+                ACTION__CREATE_NEW_FILE__REFLECTION,
                 (ActionEvent ae) -> {
                     LoggerFacade.getDefault().debug(this.getClass(), "Show Reflection Wizard in CREATE mode."); // NOI18N
 
@@ -94,27 +92,22 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
                     final ReflectionWizardContentPresenter contentPresenter = contentView.getRealPresenter();
                     contentPresenter.configureWizardForCreateMode();
                     
-                    final DialogTemplateView dialogView = new DialogTemplateView();
-                    final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
-                    dialogPresenter.configure("Reflection Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
-
-                    final Parent dialog = dialogView.getView();
-                    DialogProvider.getDefault().show(dialog);
+                    DialogProvider.getDefault().show("Reflection Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
                 });
     }
 
     private void registerOnActionEditFileReflection() {
-        ActionFacade.getDefault().register(ACTION__EDIT_FILE__REFLECTION,
+        ActionFacade.getDefault().register(
+                ACTION__EDIT_FILE__REFLECTION,
                 (ActionEvent ae) -> {
                     LoggerFacade.getDefault().debug(this.getClass(), "Show Reflection Wizard in EDIT mode."); // NOI18N
 
-                    final ReflectionWizardContentView view = new ReflectionWizardContentView();
-                    final ReflectionWizardContentPresenter presenter = view.getRealPresenter();
+                    final ReflectionWizardContentView contentView = new ReflectionWizardContentView();
+                    final ReflectionWizardContentPresenter contentPresenter = contentView.getRealPresenter();
                     // TODO catch the ReflectionModel from ae.getSource()
-                    presenter.configureWizardForEditMode(new ReflectionModel());
-                            
-                    final Parent dialog = view.getView();
-                    DialogProvider.getDefault().show(dialog);
+                    contentPresenter.configureWizardForEditMode(new ReflectionModel());
+                    
+                    DialogProvider.getDefault().show("Reflection Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
                 });
     }
     
