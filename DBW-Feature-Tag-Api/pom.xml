@@ -10,4 +10,18 @@
     <artifactId>DBW-Feature-Tag-Api</artifactId>
     <packaging>jar</packaging>
     
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Database-ObjectDB</artifactId>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>de.pro</groupId>
+            <artifactId>DBW-Core-Configuration-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    
 </project>

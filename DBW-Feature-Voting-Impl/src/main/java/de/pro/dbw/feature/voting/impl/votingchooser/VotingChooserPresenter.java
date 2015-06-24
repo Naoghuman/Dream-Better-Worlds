@@ -33,7 +33,7 @@ public class VotingChooserPresenter implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize VotingChooserPresenter");
         
-//        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
+//        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'VotingChooser.fxml'."; // NOI18N
     }
     
 }

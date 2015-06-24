@@ -16,6 +16,7 @@
  */
 package de.pro.dbw.util.provider;
 
+import de.pro.dbw.util.impl.ColorConverter;
 import de.pro.dbw.util.impl.DateConverter;
 
 /**
@@ -24,6 +25,7 @@ import de.pro.dbw.util.impl.DateConverter;
  */
 public final class UtilProvider {
     
+    private static ColorConverter colorConverter = null;
     private static DateConverter dateConverter = null;
     private static UtilProvider instance = null;
     
@@ -40,7 +42,12 @@ public final class UtilProvider {
     }
     
     private void initialize() {
+        colorConverter = new ColorConverter();
         dateConverter = new DateConverter();
+    }
+    
+    public ColorConverter getColorConverter() {
+        return colorConverter;
     }
     
     public DateConverter getDateConverter() {

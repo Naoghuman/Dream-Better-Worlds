@@ -50,6 +50,10 @@ public class SqlProvider {
         return ReflectionSqlProvider.getDefault();
     }
     
+    public TagCategorySqlProvider getTagCategorySqlProvider() {
+        return TagCategorySqlProvider.getDefault();
+    }
+    
     public TipOfTheNightSqlProvider getTipOfTheNightProvider() {
         return TipOfTheNightSqlProvider.getDefault();
     }

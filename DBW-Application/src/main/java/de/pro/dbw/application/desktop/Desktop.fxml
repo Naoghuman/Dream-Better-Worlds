@@ -19,6 +19,15 @@
                         <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewFileReflection" text="Reflection" />
                             </items>
                         </Menu>
+                  <Menu mnemonicParsing="false" text="Extras">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Tag">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#onActionShowTagCategoryEditor" text="Tag Category Editor" />
+                          </items>
+                        </Menu>
+                    </items>
+                  </Menu>
                         <Menu mnemonicParsing="false" text="Configuration">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#onActionShowTipOfTheNightEditor" text="Tip of the Night" />

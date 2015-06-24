@@ -61,6 +61,7 @@ public interface IActionConfiguration {
     public static final String ACTION__SHOW_HELP__ABOUT = "ACTION__SHOW_HELP__ABOUT"; // NOI18N
     public static final String ACTION__SHOW_HELP__WELCOME = "ACTION__SHOW_HELP__WELCOME"; // NOI18N
     public static final String ACTION__SHOW_SEARCH_IN_DREAMS = "ACTION__SHOW_SEARCH_IN_DREAMS"; // NOI18N
+    public static final String ACTION__SHOW_TAG_CATEGORY__EDITOR = "ACTION__SHOW_TAG_CATEGORY__EDITOR"; // NOI18N
     public static final String ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR = "ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR"; // NOI18N
     public static final String ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW = "ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW"; // NOI18N
     

@@ -14,26 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.voting.impl.votingeditor;
+package de.pro.dbw.feature.tag.impl.tagcategoryeditor;
 
-import de.pro.lib.logger.api.LoggerFacade;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import com.airhacks.afterburner.views.FXMLView;
 
 /**
  *
  * @author PRo
  */
-public class VotingEditorPresenter implements Initializable {
+public class TagCategoryEditorView extends FXMLView {
     
-//    @FXML private Button bNo;
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize VotingEditorPresenter");
-        
-//        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'VotingEditor.fxml'."; // NOI18N
+    public TagCategoryEditorPresenter getRealPresenter() {
+        return (TagCategoryEditorPresenter) this.getPresenter();
     }
     
 }

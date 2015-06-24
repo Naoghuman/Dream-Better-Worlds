@@ -13,7 +13,49 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Action</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Logger</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>de.pro</groupId>
+            <artifactId>Lib-Properties</artifactId>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.airhacks</groupId>
+            <artifactId>afterburner.fx</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>de.pro</groupId>
+            <artifactId>DBW-Core-Configuration-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Core-Sql-Provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Dialog-Provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Feature-Tag-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Util-Provider</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

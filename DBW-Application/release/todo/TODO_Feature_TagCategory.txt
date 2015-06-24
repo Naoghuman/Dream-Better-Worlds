@@ -1,0 +1,18 @@
+--------------------------------------------------------------------------------
+TODO FEATURE TAG-CATEGORY
+--------------------------------------------------------------------------------
+TagCategoryEditorPresenter
+ - Constant for css
+ - Properties file and values
+ - Check which parameters can be null in entity TagCategoryModel
+ - initializeListView()
+    - Style ListCell with css
+
+TagCategoryProvider
+ - Properties file and values
+
+TagCategoryModel
+ - Integrate MarkAsChanged into TagCategoryEditorPresenter so the User can
+   changed more then one Item.
+
+--------------------------------------------------------------------------------

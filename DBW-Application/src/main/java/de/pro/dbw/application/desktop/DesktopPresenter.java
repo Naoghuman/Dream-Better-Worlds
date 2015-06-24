@@ -265,6 +265,12 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
+    public void onActionShowTagCategoryEditor() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tag Category Editor"); // NOI18N
+        
+        ActionFacade.getDefault().handle(ACTION__SHOW_TAG_CATEGORY__EDITOR);
+    }
+    
     public void onActionShowTipOfTheNightEditor() {
         LoggerFacade.getDefault().debug(this.getClass(), "On action show Tip of the Night Editor"); // NOI18N
         
@@ -282,6 +288,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DesktopPresenter"); // NOI18N
         
         ExerciseProvider.getDefault().registerActions();
+        FeatureProvider.getDefault().registerActions();
         FileProvider.getDefault().registerActions();
         NavigationProvider.getDefault().registerActions();
         ToolProvider.getDefault().registerActions();
