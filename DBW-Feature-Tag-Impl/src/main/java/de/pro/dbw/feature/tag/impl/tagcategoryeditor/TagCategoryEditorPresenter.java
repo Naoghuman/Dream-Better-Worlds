@@ -44,13 +44,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 /**
@@ -209,9 +207,6 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         
         final List<TagCategoryModel> allTagCategories = FXCollections.observableArrayList();
         allTagCategories.addAll(SqlProvider.getDefault().getTagCategorySqlProvider().findAll());
-        // XXX
-        System.out.println("--------------------------------------------------");
-        System.out.println(allTagCategories.toString());
         if (allTagCategories.isEmpty()) {
             tfTitle.setText(null);
             cpColor.setValue(Color.WHITE);
@@ -236,7 +231,6 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
                 .getSelectedItem();
         model.setTitle(tfTitle.getText());
         model.setDescription(taDescription.getText());
-        System.out.println("save color: " + UtilProvider.getDefault().getColorConverter().convertColorToString(cpColor.getValue()));
         model.setColor(UtilProvider.getDefault().getColorConverter().convertColorToString(cpColor.getValue()));
         
         SqlProvider.getDefault().getTagCategorySqlProvider().createOrUpdate(model, FEATURE__TAG_CATEGORY__DEFAULT_ID);
@@ -260,10 +254,6 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
             final TagCategoryModel modelToSelect = (model != null) ? model : allTagCategories.get(0);
             lvActiveCategories.getSelectionModel().select(modelToSelect);
             lvActiveCategories.scrollTo(modelToSelect);
-            
-            
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println("  tag-categories: " + lvActiveCategories.getItems().size());
         });
     }
     
@@ -282,9 +272,6 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
             tfTitle.setText(model.getTitle());
             cpColor.setValue(UtilProvider.getDefault().getColorConverter().convertStringToColor(model.getColor()));
             taDescription.setText(model.getDescription());
-            
-            System.out.println("select color: " + model.getColor());
-        
         }
     }
 }
