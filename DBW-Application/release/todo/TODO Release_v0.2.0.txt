@@ -14,6 +14,8 @@ REFACTORING
 ADDITIONAL
 
 CHECK
- - Tags or Dreammap or SimpleExercise or Search or Voting?
+ - Voting, Tags
+ - Testdata
+ - Dreammap or SimpleExercise or Search?
 
 --------------------------------------------------------------------------------
