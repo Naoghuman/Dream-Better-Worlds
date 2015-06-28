@@ -14,15 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.tag.api;
+package de.pro.dbw.feature.tag.impl.tageditor;
+
+import com.airhacks.afterburner.views.FXMLView;
 
 /**
  *
  * @author PRo
  */
-public enum ETagCategoryEditorMode {
+public class TagEditorView extends FXMLView {
     
-    OPEN_FROM_MENU,
-    OPEN_FROM_WIZARD;
+    public TagEditorPresenter getRealPresenter() {
+        return (TagEditorPresenter) this.getPresenter();
+    }
     
 }

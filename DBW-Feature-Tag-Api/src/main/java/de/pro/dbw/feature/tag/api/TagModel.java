@@ -19,25 +19,36 @@ package de.pro.dbw.feature.tag.api;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.configuration.api.feature.tag.ITagCategoryConfiguration;
+import de.pro.dbw.core.configuration.api.feature.tag.ITagConfiguration;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.List;
+import java.util.Objects;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.LongProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -47,19 +58,19 @@ import javax.persistence.Transient;
  */
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = ITagCategoryConfiguration.ENTITY__TABLE_NAME__TAG_CATEGORY_MODEL)
+@Table(name = ITagConfiguration.ENTITY__TABLE_NAME__TAG_MODEL)
 @NamedQueries({
     @NamedQuery(
-            name = ITagCategoryConfiguration.NAMED_QUERY__NAME__FIND_ALL,
-            query = ITagCategoryConfiguration.NAMED_QUERY__QUERY__FIND_ALL)
+            name = ITagConfiguration.NAMED_QUERY__NAME__FIND_ALL,
+            query = ITagConfiguration.NAMED_QUERY__QUERY__FIND_ALL)
 })
-public class TagCategoryModel implements Comparable<TagCategoryModel>,
-        IDefaultIdConfiguration, Externalizable, ITagCategoryConfiguration,
+public class TagModel implements Comparable<TagModel>,
+        IDefaultIdConfiguration, Externalizable, ITagConfiguration,
         IUtilConfiguration
 {
     private static final long serialVersionUID = 1L;
     
-    public TagCategoryModel() {
+    public TagModel() {
         this.initialize();
     }
     
@@ -73,7 +84,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = TAG_CATEGORY_MODEL__COLUMN_NAME__ID)
+    @Column(name = TAG_MODEL__COLUMN_NAME__ID)
     public long getId() {
         if (idProperty == null) {
             return _id;
@@ -93,7 +104,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     public LongProperty idProperty() {
         if (idProperty == null) {
             idProperty = new SimpleLongProperty(this, 
-                    TAG_CATEGORY_MODEL__COLUMN_NAME__ID, _id);
+                    TAG_MODEL__COLUMN_NAME__ID, _id);
         }
         return idProperty;
     }
@@ -103,7 +114,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     private LongProperty generationTimeProperty;
     private long _generationTime = System.currentTimeMillis();
 
-    @Column(name = TAG_CATEGORY_MODEL__COLUMN_NAME__GENERATION_TIME)
+    @Column(name = TAG_MODEL__COLUMN_NAME__GENERATION_TIME)
     public long getGenerationTime() {
         if (generationTimeProperty == null) {
             return _generationTime;
@@ -123,47 +134,54 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     public LongProperty generationTimeProperty() {
         if (generationTimeProperty == null) {
             generationTimeProperty = new SimpleLongProperty(this, 
-                    TAG_CATEGORY_MODEL__COLUMN_NAME__GENERATION_TIME, _generationTime);
+                    TAG_MODEL__COLUMN_NAME__GENERATION_TIME, _generationTime);
         }
         return generationTimeProperty;
     }
     // END  GENERATIONTIME -----------------------------------------------------
     
-    // START  COLOR ------------------------------------------------------------
-    private StringProperty colorProperty = null;
-    private String _color = SIGN__EMPTY;
     
-    @Column(name = TAG_CATEGORY_MODEL__COLUMN_NAME__COLOR)
-    public String getColor() {
-        if (colorProperty == null) {
-            return _color;
+    // START  TAG-CATEGORY -----------------------------------------------------
+    private ObjectProperty tagCategoryModelsProperty;
+    private List<TagCategoryModel> _tagCategoryModels = FXCollections.observableArrayList();
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = JOIN_TABLE__NAME__MAPPING_TAG_CATEGORY,
+            joinColumns = @JoinColumn(name = ITagCategoryConfiguration.TAG_CATEGORY_MODEL__COLUMN_NAME__ID),
+            inverseJoinColumns = @JoinColumn(name = ITagCategoryConfiguration.TAG_CATEGORY_MODEL__COLUMN_NAME__ID)
+    )
+    public List<TagCategoryModel> getTagCategoryModels() {
+        if (tagCategoryModelsProperty == null) {
+            return _tagCategoryModels;
         } else {
-            return colorProperty.get();
+            return (List<TagCategoryModel>) tagCategoryModelsProperty.getValue();
         }
     }
-
-    public final void setColor(String color) {
-        if (colorProperty == null) {
-            _color = color;
+    
+    public void setTagCategoryModels(List<TagCategoryModel> tagCategoryModels) {
+        if (tagCategoryModelsProperty == null) {
+            _tagCategoryModels = tagCategoryModels;
         } else {
-            colorProperty.set(color);
+            tagCategoryModelsProperty.setValue(tagCategoryModels);
         }
     }
-
-    public StringProperty colorProperty() {
-        if (colorProperty == null) {
-            colorProperty = new SimpleStringProperty(this, 
-                    TAG_CATEGORY_MODEL__COLUMN_NAME__COLOR, _color);
+    
+    public ObjectProperty tagCategoryModelsProperty() {
+        if (tagCategoryModelsProperty == null) {
+            tagCategoryModelsProperty = new SimpleObjectProperty(this,
+                    TAG_MODEL__COLUMN_NAME__TAG_CATEGORY, _tagCategoryModels);
         }
-        return colorProperty;
+        
+        return tagCategoryModelsProperty;
     }
-    // END  COLOR --------------------------------------------------------------
+    // END  TAG-CATEGORY -------------------------------------------------------
     
     // START  DESCRIPTION ------------------------------------------------------
     private StringProperty descriptionProperty = null;
     private String _description = SIGN__EMPTY;
     
-    @Column(name = TAG_CATEGORY_MODEL__COLUMN_NAME__DESCRIPTION)
+    @Column(name = TAG_MODEL__COLUMN_NAME__DESCRIPTION)
     public String getDescription() {
         if (descriptionProperty == null) {
             return _description;
@@ -183,7 +201,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     public StringProperty descriptionProperty() {
         if (descriptionProperty == null) {
             descriptionProperty = new SimpleStringProperty(this, 
-                    TAG_CATEGORY_MODEL__COLUMN_NAME__DESCRIPTION, _description);
+                    TAG_MODEL__COLUMN_NAME__DESCRIPTION, _description);
         }
         return descriptionProperty;
     }
@@ -193,7 +211,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     private StringProperty titleProperty = null;
     private String _title = SIGN__EMPTY;
     
-    @Column(name = TAG_CATEGORY_MODEL__COLUMN_NAME__TITLE)
+    @Column(name = TAG_MODEL__COLUMN_NAME__TITLE)
     public String getTitle() {
         if (titleProperty == null) {
             return _title;
@@ -213,7 +231,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     public StringProperty titleProperty() {
         if (titleProperty == null) {
             titleProperty = new SimpleStringProperty(this, 
-                    TAG_CATEGORY_MODEL__COLUMN_NAME__TITLE, _title);
+                    TAG_MODEL__COLUMN_NAME__TITLE, _title);
         }
         return titleProperty;
     }
@@ -249,8 +267,8 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        final TagCategoryModel other = (TagCategoryModel) obj;
-        if (this.getId() != other.getId()) {
+        final TagModel other = (TagModel) obj;
+        if (!Objects.equals(this.getId(), other.getId())) {
             return false;
         }
         
@@ -258,7 +276,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     }
     
     @Override
-    public int compareTo(TagCategoryModel other) {
+    public int compareTo(TagModel other) {
         int compareTo = this.getTitle().compareTo(other.getTitle());
         if (compareTo != 0) {
             return compareTo;
@@ -274,11 +292,10 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("TagCategory ["); // NOI18N
+        sb.append("Tag ["); // NOI18N
         sb.append("id=").append(this.getId()); // NOI18N
         sb.append(", title=").append(this.getTitle()); // NOI18N
         sb.append(", generationtime=").append(this.getGenerationTime()); // NOI18N
-        sb.append(", color=").append(this.getColor()); // NOI18N
         sb.append("]"); // NOI18N
         
         return sb.toString();
@@ -288,7 +305,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeLong(this.getId());
         out.writeLong(this.getGenerationTime());
-        out.writeObject(this.getColor());
+        out.writeObject(this.getTagCategoryModels());
         out.writeObject(this.getTitle());
         out.writeObject(this.getDescription());
     }
@@ -298,7 +315,7 @@ public class TagCategoryModel implements Comparable<TagCategoryModel>,
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         this.setId(in.readLong());
         this.setGenerationTime(in.readLong());
-        this.setColor(String.valueOf(in.readObject()));
+        this.setTagCategoryModels((List<TagCategoryModel>) in.readObject());
         this.setTitle(String.valueOf(in.readObject()));
         this.setDescription(String.valueOf(in.readObject()));
     }

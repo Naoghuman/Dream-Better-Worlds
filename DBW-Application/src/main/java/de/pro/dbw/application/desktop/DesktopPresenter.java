@@ -265,6 +265,12 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
+    public void onActionShowTagEditor() {
+        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tag Editor"); // NOI18N
+        
+        ActionFacade.getDefault().handle(ACTION__SHOW_TAG__EDITOR);
+    }
+    
     public void onActionShowTagCategoryEditor() {
         LoggerFacade.getDefault().debug(this.getClass(), "On action show Tag Category Editor"); // NOI18N
         

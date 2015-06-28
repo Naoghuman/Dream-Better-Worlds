@@ -35,6 +35,11 @@
         
         <dependency>
             <groupId>de.pro</groupId>
+            <artifactId>DBW-Base-Provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.pro</groupId>
             <artifactId>DBW-Core-Configuration-Api</artifactId>
             <version>${project.version}</version>
         </dependency>

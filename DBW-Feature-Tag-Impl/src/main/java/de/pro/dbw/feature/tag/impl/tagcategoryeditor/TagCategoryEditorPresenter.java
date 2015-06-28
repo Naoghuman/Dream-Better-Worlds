@@ -23,7 +23,7 @@ import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.dbw.dialog.api.IDialogSize;
 import de.pro.dbw.dialog.provider.DialogProvider;
-import de.pro.dbw.feature.tag.api.ETagCategoryEditorMode;
+import de.pro.dbw.feature.tag.api.ETagEditorMode;
 import de.pro.dbw.feature.tag.api.TagCategoryModel;
 import de.pro.dbw.util.provider.UtilProvider;
 import de.pro.lib.action.api.ActionFacade;
@@ -58,17 +58,19 @@ import javafx.scene.paint.Color;
 public class TagCategoryEditorPresenter implements Initializable, IApplicationConfiguration,
         IDefaultIdConfiguration, IDialogSize, IUtilConfiguration
 {
+    private static final String CSS__TAG_CATEGORY_EDITOR = "TagCategoryEditor.css"; // NOI18N
+    
     @FXML private Button bClose;
     @FXML private Button bNew;
     @FXML private Button bSave;
     @FXML private ColorPicker cpColor;
-    @FXML private ListView lvActiveCategories;
+    @FXML private ListView lvAvailableTagCategories;
     @FXML private TextArea taDescription;
     @FXML private TextField tfTitle;
     
-    private ETagCategoryEditorMode tagCategoryEditorMode = ETagCategoryEditorMode.OPEN_FROM_MENU;
+    private ETagEditorMode tagCategoryEditorMode = ETagEditorMode.OPEN_FROM_MENU;
     private String responseActionKey = null;
-    private TagCategoryChangeListener changeListener = null;
+    private TagCategoryChangeListener tagCategoryChangeListener = null;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,8 +80,8 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         assert (bNew != null)    : "fx:id=\"bRemove\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
         assert (bSave != null)   : "fx:id=\"bSave\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
         assert (cpColor != null) : "fx:id=\"cpColor\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
-        assert (lvActiveCategories != null) : "fx:id=\"lvActiveCategories\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
-        assert (taDescription != null)      : "fx:id=\"taDescription\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
+        assert (lvAvailableTagCategories != null) : "fx:id=\"lvAvailableTagCategories\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
+        assert (taDescription != null)            : "fx:id=\"taDescription\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
         assert (tfTitle != null) : "fx:id=\"tfTitle\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
         
         this.initializeButtons();
@@ -93,7 +95,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     private void initializeButtons() {
         LoggerFacade.getDefault().debug(this.getClass(), "Initialize Buttons");
         
-        bSave.disableProperty().bind(Bindings.isEmpty(lvActiveCategories.getItems()));
+        bSave.disableProperty().bind(Bindings.isEmpty(lvAvailableTagCategories.getItems()));
     }
     
     private void initializeDescription() {
@@ -105,10 +107,10 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     private void initializeListView() {
         LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView in Voting Editor"); // NOI18N
 
-        lvActiveCategories.getStylesheets().addAll(this.getClass().getResource("TagCategoryEditor.css").toExternalForm()); // NOI18N
-        lvActiveCategories.getItems().clear();
+        lvAvailableTagCategories.getStylesheets().addAll(this.getClass().getResource(CSS__TAG_CATEGORY_EDITOR).toExternalForm());
+        lvAvailableTagCategories.getItems().clear();
         
-        lvActiveCategories.setCellFactory((list) -> {
+        lvAvailableTagCategories.setCellFactory((list) -> {
             return new ListCell<TagCategoryModel>() {
                 @Override
                 protected void updateItem(TagCategoryModel model, boolean empty) {
@@ -130,8 +132,8 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
             };
         });
         
-        changeListener = new TagCategoryChangeListener();
-        lvActiveCategories.getSelectionModel().selectedItemProperty().addListener(changeListener);
+        tagCategoryChangeListener = new TagCategoryChangeListener();
+        lvAvailableTagCategories.getSelectionModel().selectedItemProperty().addListener(tagCategoryChangeListener);
     }
     
     private void initializeTitle() {
@@ -140,11 +142,11 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         tfTitle.setText(null);
     }
     
-    public void configure(ETagCategoryEditorMode tagCategoryEditorMode) {
+    public void configure(ETagEditorMode tagCategoryEditorMode) {
         this.configure(tagCategoryEditorMode, null);
     }
 
-    public void configure(ETagCategoryEditorMode tagCategoryEditorMode, String responseActionKey) {
+    public void configure(ETagEditorMode tagCategoryEditorMode, String responseActionKey) {
         this.tagCategoryEditorMode = tagCategoryEditorMode;
         this.responseActionKey = responseActionKey;
     }
@@ -173,13 +175,13 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         
         // Check if a new TagCategory exists
         final List<TagCategoryModel> allTagCategories = FXCollections.observableArrayList();
-        allTagCategories.addAll(lvActiveCategories.getItems());
+        allTagCategories.addAll(lvAvailableTagCategories.getItems());
         
         for (TagCategoryModel model : allTagCategories) {
             if (Objects.equals(model.getId(), FEATURE__TAG_CATEGORY__DEFAULT_ID)) {
                 Platform.runLater(() -> {
-                    lvActiveCategories.getSelectionModel().select(model);
-                    lvActiveCategories.scrollTo(model);
+                    lvAvailableTagCategories.getSelectionModel().select(model);
+                    lvAvailableTagCategories.scrollTo(model);
                 });
                 
                 return;
@@ -202,7 +204,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     private void onActionRefresh() {
         LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
         
-        final TagCategoryModel model = (TagCategoryModel) lvActiveCategories.getSelectionModel()
+        final TagCategoryModel model = (TagCategoryModel) lvAvailableTagCategories.getSelectionModel()
                 .getSelectedItem();
         
         final List<TagCategoryModel> allTagCategories = FXCollections.observableArrayList();
@@ -212,8 +214,8 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
             cpColor.setValue(Color.WHITE);
             taDescription.setText(null);
             
-            lvActiveCategories.getSelectionModel().selectedItemProperty().removeListener(changeListener);
-            lvActiveCategories.getItems().clear();
+            lvAvailableTagCategories.getSelectionModel().selectedItemProperty().removeListener(tagCategoryChangeListener);
+            lvAvailableTagCategories.getItems().clear();
                 
             return;
         }
@@ -227,7 +229,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         TODO
             - The title must be unique (only [A-Z][a-z][0-9] + leer + - + _)
         */
-        final TagCategoryModel model = (TagCategoryModel) lvActiveCategories.getSelectionModel()
+        final TagCategoryModel model = (TagCategoryModel) lvAvailableTagCategories.getSelectionModel()
                 .getSelectedItem();
         model.setTitle(tfTitle.getText());
         model.setDescription(taDescription.getText());
@@ -237,7 +239,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         
         // Update gui
         final List<TagCategoryModel> allTagCategories = FXCollections.observableArrayList();
-        allTagCategories.addAll(lvActiveCategories.getItems());
+        allTagCategories.addAll(lvAvailableTagCategories.getItems());
         this.select(model, allTagCategories);
     }
     
@@ -246,14 +248,14 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         Platform.runLater(() -> {
             Collections.sort(allTagCategories);
             
-            lvActiveCategories.getSelectionModel().selectedItemProperty().removeListener(changeListener);
-            lvActiveCategories.getItems().clear();
-            lvActiveCategories.getItems().addAll(allTagCategories);
-            lvActiveCategories.getSelectionModel().selectedItemProperty().addListener(changeListener);
+            lvAvailableTagCategories.getSelectionModel().selectedItemProperty().removeListener(tagCategoryChangeListener);
+            lvAvailableTagCategories.getItems().clear();
+            lvAvailableTagCategories.getItems().addAll(allTagCategories);
+            lvAvailableTagCategories.getSelectionModel().selectedItemProperty().addListener(tagCategoryChangeListener);
             
             final TagCategoryModel modelToSelect = (model != null) ? model : allTagCategories.get(0);
-            lvActiveCategories.getSelectionModel().select(modelToSelect);
-            lvActiveCategories.scrollTo(modelToSelect);
+            lvAvailableTagCategories.getSelectionModel().select(modelToSelect);
+            lvAvailableTagCategories.scrollTo(modelToSelect);
         });
     }
     

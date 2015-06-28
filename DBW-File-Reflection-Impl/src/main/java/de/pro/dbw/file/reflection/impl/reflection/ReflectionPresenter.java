@@ -214,7 +214,6 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     public void onActionDelete() {
         LoggerFacade.getDefault().debug(this.getClass(), "On action Delete"); // NOI18N
 
-        // TODO properties
         DialogProvider.getDefault().showDeleteDialog(
                 resources.getString(KEY__DIALOG_DELETE__TITLE),
                 (ActionEvent ae) -> { // Yes
@@ -232,7 +231,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
 
     public void onActionRefresh() {
         LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
-        // TODO not better to load the old state from db?
+        // TODO its not better to load the old state from db?
         if (oldModel == null) {
             return;
         }

@@ -36,4 +36,8 @@ public interface IApplicationConfiguration {
     public static final String KEY__APPLICATION__TESTDATA_MESSAGE_STOP = "application.testdata..message.stop"; // NOI18N
     public static final String KEY__APPLICATION__TESTDATA_TITLE = "application.testdata.title"; // NOI18N
     
+    public static final String KEY__FEATURE_TAG__TAG_CATEGORY_CHOOSER_TITLE = "feature.tag.category.chooser.title"; // NOI18N
+    public static final String KEY__FEATURE_TAG__TAG_CATEGORY_EDTIOR_TITLE = "feature.tag.category.editor.title"; // NOI18N
+    public static final String KEY__FEATURE_TAG__TAG_EDTIOR_TITLE = "feature.tag.editor.title"; // NOI18N
+    
 }

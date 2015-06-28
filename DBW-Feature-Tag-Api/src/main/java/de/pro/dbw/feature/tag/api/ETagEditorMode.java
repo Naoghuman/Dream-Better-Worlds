@@ -14,22 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.core.configuration.api.application.dialog;
-
-import java.awt.Dimension;
+package de.pro.dbw.feature.tag.api;
 
 /**
  *
  * @author PRo
  */
-public interface IDialogConfiguration {
-    // TODO all sizes are in the format 16:9
-    public Dimension SIZE__W200_H300 = new Dimension(200, 300);
+public enum ETagEditorMode {
     
-    public Dimension SIZE__W300_H200 = new Dimension(300, 200);
-    public Dimension SIZE__W400_H450 = new Dimension(400, 450);
-    public Dimension SIZE__W495_H330 = new Dimension(495, 330);
-    public Dimension SIZE__W495_H414 = new Dimension(495, 414);
-    public Dimension SIZE__W875_H359 = new Dimension(875, 359);
+    OPEN_FROM_MENU,
+    OPEN_FROM_WIZARD;
     
 }

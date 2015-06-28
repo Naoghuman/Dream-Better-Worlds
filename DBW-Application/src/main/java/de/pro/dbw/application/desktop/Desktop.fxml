@@ -23,7 +23,8 @@
                     <items>
                         <Menu mnemonicParsing="false" text="Tag">
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#onActionShowTagCategoryEditor" text="Tag Category Editor" />
+                              <MenuItem mnemonicParsing="false" onAction="#onActionShowTagEditor" text="Tag Editor" />
+                            <MenuItem mnemonicParsing="false" onAction="#onActionShowTagCategoryEditor" text="Category Editor" />
                           </items>
                         </Menu>
                     </items>

@@ -1,0 +1,20 @@
+--------------------------------------------------------------------------------
+RELEASE v0.x.y (2015-MM-dd HH:mm)
+--------------------------------------------------------------------------------
+NEW
+
+ENHANCEMENT
+#46 [Feature Tag] Create TagEditor and integrated it into project
+#45 [Feature-Tag] Create TagCategoryEditor and integrated it into project
+
+FEATURE
+
+BUG
+
+REFACTORING
+
+ADDITIONAL
+
+CHECK
+
+--------------------------------------------------------------------------------

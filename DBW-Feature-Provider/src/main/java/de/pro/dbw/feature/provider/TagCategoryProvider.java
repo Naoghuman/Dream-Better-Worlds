@@ -16,6 +16,7 @@
  */
 package de.pro.dbw.feature.provider;
 
+import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.dialog.provider.DialogProvider;
@@ -23,14 +24,16 @@ import de.pro.dbw.feature.tag.impl.tagcategoryeditor.TagCategoryEditorPresenter;
 import de.pro.dbw.feature.tag.impl.tagcategoryeditor.TagCategoryEditorView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.event.ActionEvent;
 
 /**
  *
  * @author PRo
  */
-public class TagCategoryProvider implements IActionConfiguration, IRegisterActions {
-    
+public class TagCategoryProvider implements IActionConfiguration, IApplicationConfiguration,
+        IRegisterActions
+{
     private static TagCategoryProvider instance = null;
     
     public static TagCategoryProvider getDefault() {
@@ -69,8 +72,8 @@ public class TagCategoryProvider implements IActionConfiguration, IRegisterActio
         
         final TagCategoryEditorView contentView = new TagCategoryEditorView();
         final TagCategoryEditorPresenter contentPresenter = contentView.getRealPresenter();
-        DialogProvider.getDefault().show("Tag Category Editor", contentView.getView(), contentPresenter.getSize()); // NOI18N
-        // TODO properties
+        final String title = PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_CATEGORY_EDTIOR_TITLE);
+        DialogProvider.getDefault().show(title, contentView.getView(), contentPresenter.getSize());
     }
     
 }

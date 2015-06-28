@@ -19,11 +19,17 @@ package de.pro.dbw.base.provider;
 import de.pro.dbw.base.component.api.ExtendedTabModel;
 import de.pro.dbw.base.component.api.IExtendedTextField;
 import de.pro.dbw.base.component.api.VotingComponentModel;
+import de.pro.dbw.base.component.api.listcell.checkbox.CheckBoxListCellModel;
 import de.pro.dbw.base.component.impl.extendedtab.ExtendedTab;
 import de.pro.dbw.base.component.impl.extendedtextfield.ExtendedTextFieldImpl;
+import de.pro.dbw.base.component.impl.listcell.checkbox.CheckBoxListCell;
 import de.pro.dbw.base.component.impl.votingcomponent.VotingComponentPresenter;
 import de.pro.dbw.base.component.impl.votingcomponent.VotingComponentView;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Parent;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 
 /**
  *
@@ -47,6 +53,13 @@ public class ComponentProvider {
     
     private void initialize() {
         
+    }
+    
+    public Callback<ListView<CheckBoxListCellModel>, ListCell<CheckBoxListCellModel>> getCheckBoxListCellCallback(
+            final Callback<CheckBoxListCellModel, ObservableValue<Boolean>> selectedProperty,
+            final Callback<CheckBoxListCellModel, ObservableValue<Boolean>> disableProperty
+    ) {
+        return CheckBoxListCell.create(selectedProperty, disableProperty);
     }
     
     public ExtendedTab getTab(ExtendedTabModel model) {

@@ -8,14 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="330.0" prefWidth="495.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.feature.tag.impl.tagcategoryeditor.TagCategoryEditorPresenter">
+<AnchorPane id="AnchorPane" prefHeight="330.0" prefWidth="495.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.feature.tag.impl.tageditor.TagEditorPresenter">
     <children>
         <HBox layoutX="70.0" layoutY="120.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" HBox.hgrow="NEVER">
                     <children>
-                        <Label text="Available Tag Categories" />
-                        <ListView fx:id="lvAvailableTagCategories" VBox.vgrow="ALWAYS" />
+                        <Label text="Available Tags" />
+                        <ListView fx:id="lvAvailableTags" VBox.vgrow="ALWAYS" />
                         <HBox alignment="TOP_RIGHT" spacing="10.0">
                             <children>
                                 <Button fx:id="bNew" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionNew" prefWidth="64.0" text="New" />
@@ -30,12 +30,22 @@
                     <children>
                         <Label text="Title" />
                         <TextField fx:id="tfTitle" />
-                  <Label text="Color">
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </Label>
-                  <ColorPicker fx:id="cpColor" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="128.0" />
+                  <VBox>
+                     <children>
+                        <Label text="Categories">
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </Label>
+                        <HBox spacing="5.0">
+                           <children>
+                              <FlowPane fx:id="fpTagCategories" hgap="5.0" style="-fx-background-color: lightgrey;" vgap="5.0" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="bShowTagCategoryChooser" disable="true" mnemonicParsing="false" onAction="#onActionShowTagCategoryChooser" text="..." />
+                              <Button mnemonicParsing="false" onAction="#onActionShowTagCategoryEditor" text="E" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                         <Label text="Description">
                             <padding>
                                 <Insets top="10.0" />

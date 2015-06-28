@@ -1,0 +1,33 @@
+--------------------------------------------------------------------------------
+TODO FEATURE TAG
+--------------------------------------------------------------------------------
+Tag(Category)EditorPresenter
+ - Properties file and values
+ - Check which parameters can be null in entity Tag(Category)Model
+ - initializeListView()
+    - Style ListCell with css
+
+Tag(Category)Model
+ - Integrate MarkAsChanged into Tag(Category)EditorPresenter so the User can
+   changed more then one Item.
+
+TagEditor -> TagCategoryChooser -> TagCategoryEditor?
+ - Need new dialogLayer3
+ - Need new button edit in TagCategoryChooser.
+
+Dialoge (TagEditor, TagCategoryChooser (-Editor)
+ - Änderungen an ein Element wird als * im Namen in der ListView angezeigt.
+ - User kann mehrere Elemente gleichzeitig ändern.
+ - Benötigt ein Refresh-Button.
+
+TagCategoryEditor
+ - Sortierung der Einträge nach Color
+ - StackOverflow: How to sort color codes from light to dark in Java
+    - http://stackoverflow.com/questions/25680108/how-to-sort-color-codes-from-light-to-dark-in-java
+ - Model erhält 2 Komperator
+   - Namesortierung ist Defaultwert.
+   - Entscheidung des User kann über Lib-Propeties gespeichert werden (welche
+     Sortierung (Farbe/Name) verwendet werden soll)
+ - Enhancement
+
+--------------------------------------------------------------------------------
