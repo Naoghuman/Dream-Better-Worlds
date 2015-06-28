@@ -1,0 +1,9 @@
+--------------------------------------------------------------------------------
+TODO CODING RULES FOR CSS 
+--------------------------------------------------------------------------------
+2 Areas
+ - afterburner injected the css file package.css in XyPresenter.
+    - new file in folder afterburner
+ - all other use the the library Lib-Properties.
+
+--------------------------------------------------------------------------------
