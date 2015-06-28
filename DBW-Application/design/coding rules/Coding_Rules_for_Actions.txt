@@ -41,7 +41,7 @@ LOG EVENTS in action methods
  - Every from the following methods have a logger message in DEBUG mode.
  - For onActionXy() the message format is the same like the method name.
  - For registerActions() is the message format: "Register actions in Xy"
- - For registerOnDynamicActionXy is  the message format: "Register on dynamic action "
+ - For registerOnDynamicActionXy is the message format: "Register on dynamic action "
 
 Example
 public void onActionSearchInDreams() {
