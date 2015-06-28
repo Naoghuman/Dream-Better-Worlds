@@ -35,5 +35,7 @@ tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE_
 --------------------------------------------------------------------------------
 EXCEPTION
 Global properties will be stored in DBW-Application/DreamBetterWorlds.properties.
+ - That means all properties which can't access over the [PACKAGENAME].properties.
+ - Or properties which will be used in more then one module.
         
 --------------------------------------------------------------------------------
