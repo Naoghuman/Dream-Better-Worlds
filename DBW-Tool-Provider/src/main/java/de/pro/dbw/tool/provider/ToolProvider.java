@@ -49,7 +49,8 @@ public class ToolProvider implements IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in ToolProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), 
+                "Register actions in ToolProvider"); // NOI18N
         
     }
     

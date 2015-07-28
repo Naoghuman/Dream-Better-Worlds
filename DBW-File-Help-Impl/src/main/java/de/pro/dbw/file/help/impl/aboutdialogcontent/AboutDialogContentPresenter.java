@@ -37,14 +37,14 @@ public class AboutDialogContentPresenter implements Initializable, IActionConfig
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize AboutDialogContentPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize AboutDialogContentPresenter"); // NOI18N
         
 //        assert (apDialog != null) : "fx:id=\"apDialog\" was not injected: check your FXML file 'AboutDialogContent.fxml'."; // NOI18N
         
     }
     
     public void onActionClose() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action close"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action close"); // NOI18N
         
         DialogProvider.getDefault().hide();
     }

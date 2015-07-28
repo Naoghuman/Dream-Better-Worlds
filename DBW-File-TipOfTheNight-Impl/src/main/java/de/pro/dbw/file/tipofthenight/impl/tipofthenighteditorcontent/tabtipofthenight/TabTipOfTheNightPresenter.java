@@ -79,7 +79,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize TabTipOfTheNightPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize TabTipOfTheNightPresenter"); // NOI18N
         
         this.resources = resources;
         
@@ -111,13 +111,13 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     private void initializeIndex() {
-        index = PreferencesFacade.getDefault().getInt(
+        index = PreferencesFacade.INSTANCE.getPreferences().getInt(
                 PREF__TIP_OF_THE_NIGHT_INDEX,
                 PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE);
     }
     
     private void initializeListView() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView TipsOfTheNight"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Initialize ListView TipsOfTheNight"); // NOI18N
 
         lvTipsOfTheNight.getStylesheets().addAll(this.getClass().getResource(CSS__TAB_TIP_OF_THE_NIGHT).toExternalForm());
         lvTipsOfTheNight.getItems().clear();
@@ -143,13 +143,13 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     private void initializeTitle() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize TextField Title"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Initialize TextField Title"); // NOI18N
         
         tfTitle.setText(null);
     }
     
     private void initializeText() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize TextArea Text"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Initialize TextArea Text"); // NOI18N
         
         taTip.setText(null);
     }
@@ -163,7 +163,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionShowCategoryChooserDialog() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Category Chooser Dialog"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action show Category Chooser Dialog"); // NOI18N
         
         /*
         TODO
@@ -173,13 +173,13 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionCloseTipOfTheNightEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action close Tip of the Night Editor"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action close Tip of the Night Editor"); // NOI18N
         
         DialogProvider.getDefault().hide();
     }
     
     public void onActionDeleteTipOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action delete Tip of the Night"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action delete Tip of the Night"); // NOI18N
         
         final TipOfTheNightModel model = (TipOfTheNightModel) lvTipsOfTheNight.getSelectionModel().getSelectedItem();
         if (Objects.equals(model.getId(), FILE__TIP_OF_THE_NIGHT__DEFAULT_ID)) {
@@ -193,7 +193,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
                 (ActionEvent ae) -> { // Yes
                     SqlProvider.getDefault().getTipOfTheNightProvider().delete(model.getId());
         
-                    ActionFacade.getDefault().handle(ACTION__REFRESH_TIP_OF_THE_NIGHT__EDITOR);
+                    ActionFacade.INSTANCE.getAction().handle(ACTION__REFRESH_TIP_OF_THE_NIGHT__EDITOR);
                     DialogProvider.getDefault().hide2();
                 },
                 (ActionEvent ae) -> { // No
@@ -202,7 +202,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionNewTipOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action new Tip of the Night"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action new Tip of the Night"); // NOI18N
 
         // Check if a new TipOfTheNight exists
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
@@ -224,14 +224,14 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         model.setGenerationTime(System.currentTimeMillis());
         model.setId(FILE__TIP_OF_THE_NIGHT__DEFAULT_ID);
         model.setText(SIGN__EMPTY);
-        model.setTitle(PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW));
+        model.setTitle(PropertiesFacade.INSTANCE.getProperties().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW));
 
         allTipsOfTheNight.add(model);
         this.select(model, allTipsOfTheNight);
     }
     
     private void onActionRefresh() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action refresh"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action refresh"); // NOI18N
         
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
@@ -248,7 +248,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
         
         if (index >= allTipsOfTheNight.size()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
-            PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+            PreferencesFacade.INSTANCE.getPreferences().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
         }
         
         final TipOfTheNightModel model = allTipsOfTheNight.get(index);
@@ -256,7 +256,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionSaveTipOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action save Tip of the Night"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action save Tip of the Night"); // NOI18N
         
         /*
         TODO
@@ -277,15 +277,15 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in TabTipOfTheNightPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in TabTipOfTheNightPresenter"); // NOI18N
         
         this.registerOnActionRefresh();
     }
     
     private void registerOnActionRefresh() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register on action Refresh"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register on action Refresh"); // NOI18N
         
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__REFRESH_TIP_OF_THE_NIGHT__EDITOR,
                 (ActionEvent ae) -> {
                     this.onActionRefresh();
@@ -319,7 +319,7 @@ public class TabTipOfTheNightPresenter implements Initializable, IActionConfigur
             final int newIndex = lvTipsOfTheNight.getSelectionModel().getSelectedIndex();
             if (newIndex != index) {
                 index = newIndex;
-                PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+                PreferencesFacade.INSTANCE.getPreferences().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             }
             
             tfTitle.setText(newValue.getTitle());

@@ -42,14 +42,14 @@ public class DreamBookNavigationSqlProvider {
     private DreamBookNavigationSqlProvider() {}
     
     public List<DreamModel> findAllDreams() {
-        final List<DreamModel> dreams = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
+        final List<DreamModel> dreams = DatabaseFacade.INSTANCE.getDatabase().getCrudService().findByNamedQuery(
                 DreamModel.class, IDreamConfiguration.NAMED_QUERY__NAME__FIND_ALL);
             
         return dreams;
     }
     
     public List<ReflectionModel> findAllReflections() {
-        final List<ReflectionModel> reflections = DatabaseFacade.getDefault().getCrudService().findByNamedQuery(
+        final List<ReflectionModel> reflections = DatabaseFacade.INSTANCE.getDatabase().getCrudService().findByNamedQuery(
                 ReflectionModel.class, IReflectionConfiguration.NAMED_QUERY__NAME__FIND_ALL);
             
         return reflections;

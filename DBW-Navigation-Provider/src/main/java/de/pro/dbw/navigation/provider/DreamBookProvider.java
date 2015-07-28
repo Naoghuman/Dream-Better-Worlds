@@ -45,7 +45,7 @@ public class DreamBookProvider implements IActionConfiguration, IRegisterActions
     }
 
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in DreamBookProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft in DreamBookProvider"); // NOI18N
         
         final Tab tab = new Tab("Dreambook");  // NOI18N // XXX propeties
         tab.setClosable(false);
@@ -57,7 +57,7 @@ public class DreamBookProvider implements IActionConfiguration, IRegisterActions
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DreamBookProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in DreamBookProvider"); // NOI18N
         
         this.registerOnActionJobCheckDreamBookNavigation();
         
@@ -66,10 +66,10 @@ public class DreamBookProvider implements IActionConfiguration, IRegisterActions
     }
     
     private void registerOnActionJobCheckDreamBookNavigation() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK,
                 (ActionEvent ae) -> {
-                    LoggerFacade.getDefault().debug(this.getClass(), "Register job for check DreamBook-Navigation"); // NOI18N
+                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check DreamBook-Navigation"); // NOI18N
                     
                     final DreamBookNavigationPresenter presenter = dreamBookNavigationView.getRealPresenter();
                     final ObservableList<DreamBookNavigationModel> items = presenter.getItems();
@@ -84,7 +84,7 @@ public class DreamBookProvider implements IActionConfiguration, IRegisterActions
                         }
                         
                         if (UtilProvider.getDefault().getDateConverter().isBefore(-3, item.getGenerationTime())) {
-                            LoggerFacade.getDefault().debug(DreamBookProvider.class,
+                            LoggerFacade.INSTANCE.getLogger().debug(DreamBookProvider.class,
                                     "DateConverter.isBefore(-3, item.getGenerationTime())"); // NOI18N
                                     
                             presenter.refresh();

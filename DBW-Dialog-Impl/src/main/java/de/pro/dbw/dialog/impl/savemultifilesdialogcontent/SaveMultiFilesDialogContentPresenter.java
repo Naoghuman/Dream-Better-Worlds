@@ -39,7 +39,7 @@ public class SaveMultiFilesDialogContentPresenter implements Initializable, IDia
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize SaveMultiFilesDialogContentPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize SaveMultiFilesDialogContentPresenter"); // NOI18N
     
         assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'SaveMultiFilesDialogContent.fxml'."; // NOI18N
         assert (bYes != null)     : "fx:id=\"bYes\" was not injected: check your FXML file 'SaveMultiFilesDialogContent.fxml'."; // NOI18N

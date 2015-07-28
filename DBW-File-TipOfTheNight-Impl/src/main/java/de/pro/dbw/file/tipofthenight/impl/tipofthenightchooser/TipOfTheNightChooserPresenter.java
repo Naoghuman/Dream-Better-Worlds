@@ -52,7 +52,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize TipOfTheNightChooserPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize TipOfTheNightChooserPresenter"); // NOI18N
         
         assert (bNext != null)           : "fx:id=\"bNext\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
         assert (bRandom != null)         : "fx:id=\"bRandom\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
@@ -91,7 +91,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     ----------------------------------------------------------------------------
     */
     private void initialize() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize Tip of the Night presenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize Tip of the Night presenter"); // NOI18N
         
         this.initializeIndex();
         this.initializeShowAtStart();
@@ -100,13 +100,13 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     private void initializeIndex() {
-        index = PreferencesFacade.getDefault().getInt(
+        index = PreferencesFacade.INSTANCE.getPreferences().getInt(
                 PREF__TIP_OF_THE_NIGHT_INDEX,
                 PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE);
     }
     
     private void initializeShowAtStart() {
-        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
+        final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getPreferences().getBoolean(
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT__DEFAULT_VALUE);
         cbShowAtStart.setSelected(isShowAtStart);
@@ -121,13 +121,13 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     public void onActionNext() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Next"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Next"); // NOI18N
     
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
         if (allTipsOfTheNight.isEmpty()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
-            PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+            PreferencesFacade.INSTANCE.getPreferences().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             this.show(null);
             
             return;
@@ -137,19 +137,19 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         if (index >= allTipsOfTheNight.size()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
         }
-        PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+        PreferencesFacade.INSTANCE.getPreferences().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
         
         this.show(allTipsOfTheNight.get(index));
     }
     
     public void onActionRandom() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Random"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Random"); // NOI18N
         
         final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
         allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
         if (allTipsOfTheNight.isEmpty()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
-            PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+            PreferencesFacade.INSTANCE.getPreferences().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             this.show(null);
             
             return;
@@ -166,16 +166,16 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
            index = random.nextInt(allTipsOfTheNight.size()); 
         }
         while (index == oldIndex);
-        PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+        PreferencesFacade.INSTANCE.getPreferences().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
         
         this.show(allTipsOfTheNight.get(index));
     }
     
     public void onActionShowAtStart() {
-        LoggerFacade.getDefault().debug(this.getClass(),
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(),
                 "On action show at start: " + cbShowAtStart.isSelected()); // NOI18N
     
-        PreferencesFacade.getDefault().putBoolean(
+        PreferencesFacade.INSTANCE.getPreferences().putBoolean(
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
                 cbShowAtStart.isSelected());
     }
@@ -194,7 +194,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     private void showCurrentTipOfTheNight(TipOfTheNightModel model) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show TipOfTheNight: " + model.getTitle()); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show TipOfTheNight: " + model.getTitle()); // NOI18N
     
         lTitle.setText(model.getTitle());
         taTipOfTheNight.setText(model.getText());
@@ -204,7 +204,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     private void showNoTipOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "No TipOfTheNights are created"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "No TipOfTheNights are created"); // NOI18N
     
         lTitle.setText(null);
         taTipOfTheNight.setText(null);
@@ -225,7 +225,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         
         if (index < 0 || index >= allTipsOfTheNight.size()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
-            PreferencesFacade.getDefault().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+            PreferencesFacade.INSTANCE.getPreferences().putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
         }
         
         final TipOfTheNightModel model = allTipsOfTheNight.get(index);

@@ -61,7 +61,7 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     public void hide() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Hide dialoglayer");
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Hide dialoglayer");
         
         apDialogLayer.getChildren().clear();
         apDialogLayer.setVisible(Boolean.FALSE);
@@ -69,7 +69,7 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     public void hide2() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Hide dialoglayer2");
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Hide dialoglayer2");
         
         apDialogLayer2.getChildren().clear();
         apDialogLayer2.setVisible(Boolean.FALSE);
@@ -77,7 +77,7 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     public void register(AnchorPane apDialogLayer, AnchorPane apDialogLayer2) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register AnchorPane apDialogLayer, apDialogLayer2 in DialogProvider");
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register AnchorPane apDialogLayer, apDialogLayer2 in DialogProvider");
         
         this.apDialogLayer = apDialogLayer;
         this.apDialogLayer2 = apDialogLayer2;
@@ -87,9 +87,9 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     private void setDialogPosition(Parent dialog) {
-        final Double width = PreferencesFacade.getDefault().getDouble(
+        final Double width = PreferencesFacade.INSTANCE.getPreferences().getDouble(
                 PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
-        final Double height = PreferencesFacade.getDefault().getDouble(
+        final Double height = PreferencesFacade.INSTANCE.getPreferences().getDouble(
                 PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
         dialog.setLayoutX((width / 2) - (dialog.prefWidth(Double.MAX_VALUE) / 2));
         dialog.setLayoutY((height / 2) - (dialog.prefHeight(Double.MAX_VALUE) / 2));
@@ -108,7 +108,7 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     public void show(String title, Parent content, Dimension size) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer");
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialoglayer");
         
         final DialogTemplateView dialogView = new DialogTemplateView();
         final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
@@ -120,7 +120,7 @@ public class DialogProvider implements IPreferencesConfiguration {
     }
     
     public void show2(String title, Parent content, Dimension size) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialoglayer2"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialoglayer2"); // NOI18N
         
         final DialogTemplateView dialogView = new DialogTemplateView();
         final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
@@ -136,7 +136,7 @@ public class DialogProvider implements IPreferencesConfiguration {
             EventHandler<ActionEvent> onActionYes,
             EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for Delete"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for Delete"); // NOI18N
         
         final DeleteDialogContentView contentView = new DeleteDialogContentView();
         final DeleteDialogContentPresenter contentPresenter = contentView.getRealPresenter();
@@ -156,7 +156,7 @@ public class DialogProvider implements IPreferencesConfiguration {
             EventHandler<ActionEvent> onActionYes,
             EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for Delete2"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for Delete2"); // NOI18N
         
         final DeleteDialogContentView contentView = new DeleteDialogContentView();
         final DeleteDialogContentPresenter contentPresenter = contentView.getRealPresenter();
@@ -175,7 +175,7 @@ public class DialogProvider implements IPreferencesConfiguration {
         EventHandler<ActionEvent> onActionYes,
         EventHandler<ActionEvent> onActionNo
     ) {   
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for SaveMultiFiles"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for SaveMultiFiles"); // NOI18N
         
         final SaveMultiFilesDialogContentView contentView = new SaveMultiFilesDialogContentView();
         final SaveMultiFilesDialogContentPresenter contentPresenter = contentView.getRealPresenter();
@@ -194,7 +194,7 @@ public class DialogProvider implements IPreferencesConfiguration {
         EventHandler<ActionEvent> onActionYes,
         EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show dialog for SaveSingleFile"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for SaveSingleFile"); // NOI18N
         
         final SaveSingleFileDialogContentView contentView = new SaveSingleFileDialogContentView();
         final SaveSingleFileDialogContentPresenter contentPresenter = contentView.getRealPresenter();

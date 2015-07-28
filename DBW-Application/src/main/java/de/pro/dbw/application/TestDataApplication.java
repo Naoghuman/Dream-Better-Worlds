@@ -39,11 +39,11 @@ public class TestDataApplication extends Application implements IApplicationConf
     
     @Override
     public void init() throws Exception {
-        PropertiesFacade.getDefault().register(DBW__RESOURCE_BUNDLE);
+        PropertiesFacade.INSTANCE.getProperties().register(DBW__RESOURCE_BUNDLE);
         
         final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
         final String message = this.getProperty(KEY__APPLICATION__TESTDATA_MESSAGE_START);
-        LoggerFacade.getDefault().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
+        LoggerFacade.INSTANCE.getLogger().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
     }
 
     @Override
@@ -62,16 +62,16 @@ public class TestDataApplication extends Application implements IApplicationConf
     }
     
     private String getProperty(String propertyKey) {
-        return PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
+        return PropertiesFacade.INSTANCE.getProperties().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
     }
     
     private void onCloseRequest() {
         final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
         final String message = this.getProperty(KEY__APPLICATION__TESTDATA_MESSAGE_STOP);
-        LoggerFacade.getDefault().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
+        LoggerFacade.INSTANCE.getLogger().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
         
         Injector.forgetAll();
-        DatabaseFacade.getDefault().shutdown();
+        DatabaseFacade.INSTANCE.getDatabase().shutdown();
         
         final PauseTransition pt = new PauseTransition(DBW__LITTLE_DELAY__DURATION_125);
         pt.setOnFinished((ActionEvent event) -> {

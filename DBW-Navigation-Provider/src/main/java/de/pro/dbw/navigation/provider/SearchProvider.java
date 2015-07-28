@@ -59,7 +59,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
 
     public void register(TabPane tpNavigationLeft, TabPane tbEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in SearchProvider");
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in SearchProvider");
         
         this.tbEditor = tbEditor;
         
@@ -73,7 +73,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in SearchProvider");
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in SearchProvider");
         
         this.registerOnActionSearchInDreams();
         this.registerOnActionSearchInReflections();
@@ -81,7 +81,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionSearchInDreams() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SEARCH_IN__DREAMS,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -90,7 +90,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionSearchInReflections() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SEARCH_IN__REFLECTIONS,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -99,7 +99,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionSearchInTipsOfTheNight() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();

@@ -83,7 +83,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize ReflectionPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize ReflectionPresenter"); // NOI18N
         
         this.resources = resources;
     
@@ -103,14 +103,14 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     private void initializeListeners() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize listeners in ReflectionPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize listeners in ReflectionPresenter"); // NOI18N
         
         booleanChangeListener = new BooleanChangeListener();
         stringChangeListener = new StringChangeListener();
     }
     
     private void initializeCommentArea() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize Comment area in ReflectionPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize Comment area in ReflectionPresenter"); // NOI18N
     
         lvComments.getStylesheets().addAll(this.getClass().getResource(CSS__REFLECTION).toExternalForm());
         lvComments.getItems().clear();
@@ -135,14 +135,14 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
 
     private String registerOnDynamicActionDeleteComment() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register on dynamic action delete Comment"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register on dynamic action delete Comment"); // NOI18N
     
         final String actionKeyForDeleting = ACTION__DELETE_ + System.currentTimeMillis();
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 actionKeyForDeleting,
                 (ActionEvent ae) -> {
                     final ActionTransferModel actionTransferModel = (ActionTransferModel) ae.getSource();
-                    ActionFacade.getDefault().remove(actionTransferModel.getActionKey());
+                    ActionFacade.INSTANCE.getAction().remove(actionTransferModel.getActionKey());
                     
                     final ReflectionCommentModel reflectionCommentModelToDelete = (ReflectionCommentModel) actionTransferModel.getObject();
                     final Long idToDelete = reflectionCommentModelToDelete.getId();
@@ -197,7 +197,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionAddComment() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action add Comment"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action add Comment"); // NOI18N
     
         final ReflectionCommentView view = new ReflectionCommentView();
         final ReflectionCommentPresenter presenter = view.getRealPresenter();
@@ -212,7 +212,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionDelete() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Delete"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Delete"); // NOI18N
 
         // TODO properties
         DialogProvider.getDefault().showDeleteDialog(
@@ -231,7 +231,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
 
     public void onActionRefresh() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Refresh"); // NOI18N
         // TODO not better to load the old state from db?
         if (oldModel == null) {
             return;
@@ -241,7 +241,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     private void onActionRefreshGui(Boolean removeFile) {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh Gui"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Refresh Gui"); // NOI18N
     
         final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
         ActionTransferModel transferModel = new ActionTransferModel();
@@ -259,18 +259,18 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
         transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
         transferModels.add(transferModel);
         
-        ActionFacade.getDefault().handle(transferModels);
+        ActionFacade.INSTANCE.getAction().handle(transferModels);
     }
 
     public void onActionSave() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action save"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action save"); // NOI18N
         
         final Boolean updateGui = Boolean.TRUE;
         this.onActionSave(updateGui);
     }
     
     public void onActionSave(Boolean updateGui) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Save Reflection and Comments to database"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Save Reflection and Comments to database"); // NOI18N
         
         System.out.println(" XXX ReflectionPresenter.onActionSave(boolean) add validation for input");
         
@@ -306,7 +306,7 @@ public class ReflectionPresenter implements Initializable, IActionConfiguration,
     }
     
     public void show(ReflectionModel model) {
-        LoggerFacade.getDefault().info(this.getClass(), "Show reflection: " + model.getTitle()); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Show reflection: " + model.getTitle()); // NOI18N
         
         this.model = model;
         this.model.setMarkAsChanged(this.model.getId() == FILE__REFLECTION__DEFAULT_ID.longValue());

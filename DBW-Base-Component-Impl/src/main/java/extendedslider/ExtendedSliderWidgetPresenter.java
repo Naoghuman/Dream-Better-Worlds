@@ -39,7 +39,7 @@ public class ExtendedSliderWidgetPresenter implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize ExtendedSliderWidgetPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize ExtendedSliderWidgetPresenter"); // NOI18N
     
         assert (bEdit != null)         : "fx:id=\"bEdit\" was not injected: check your FXML file 'ExtendedSliderWidget.fxml'."; // NOI18N
         assert (lSelection != null)    : "fx:id=\"lSelection\" was not injected: check your FXML file 'ExtendedSliderWidget.fxml'."; // NOI18N
@@ -49,13 +49,13 @@ public class ExtendedSliderWidgetPresenter implements Initializable {
     }
     
     public void onActionEdit() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action edit"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "On action edit"); // NOI18N
         System.out.println("  ExtendedSliderWidgetPresenter.XXX onActionEdit()"
                 + "show dialog ExtendedSliderEditor with data from here");
     }
     
     public void onActionReadMore() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action read more"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "On action read more"); // NOI18N
     
         /*
         TODO

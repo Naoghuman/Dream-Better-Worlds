@@ -10,6 +10,7 @@ FEATURE
 BUG
 
 REFACTORING
+#61 [Dependencies] Update project to the new versions from my own libraries.
 
 ADDITIONAL
 
@@ -19,8 +20,6 @@ CHECK
 
 #63 [Technical Documents] Write new document Singleton Enum Facade.
 #62 [Technical Documents] Create new side Technical Documents in project wiki.
-
-#61 [Dependencies] Update project to the new versions from my own libraries.
 
 #60 [Navigation] Use properties from Navigation tabnames.
 

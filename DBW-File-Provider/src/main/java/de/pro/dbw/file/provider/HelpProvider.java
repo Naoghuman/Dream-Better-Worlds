@@ -60,20 +60,20 @@ public class HelpProvider implements IActionConfiguration, IDefaultIdConfigurati
     }
 
     void checkShowAtStartWelcomeHelp() {
-        LoggerFacade.getDefault().info(this.getClass(), "Check if Welcome should show at start"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Check if Welcome should show at start"); // NOI18N
     
-        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
+        final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getPreferences().getBoolean(
                 PREF__SHOW_AT_START__WELCOME,
                 PREF__SHOW_AT_START__WELCOME__DEFAULT_VALUE);
         if (!isShowAtStart) {
             return;
         }
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
     public void register(TabPane tpEditor, TabPane tpNavigationRight) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in HelpProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in HelpProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
         this.tpNavigationRight = tpNavigationRight;
@@ -81,14 +81,14 @@ public class HelpProvider implements IActionConfiguration, IDefaultIdConfigurati
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in HelpProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in HelpProvider"); // NOI18N
         
         this.registerOnActionShowHelpAbout();
         this.registerOnActionShowHelpWelcome();
     }
 
     private void registerOnActionShowHelpAbout() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SHOW_HELP__ABOUT,
                 (ActionEvent ae) -> {
                     final AboutDialogContentView contentView = new AboutDialogContentView();
@@ -98,7 +98,7 @@ public class HelpProvider implements IActionConfiguration, IDefaultIdConfigurati
     }
     
     private void registerOnActionShowHelpWelcome() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SHOW_HELP__WELCOME,
                 (ActionEvent ae) -> {
                     // Check if the welcome-help is open

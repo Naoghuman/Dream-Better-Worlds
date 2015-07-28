@@ -50,7 +50,7 @@ public class VotingProvider implements IRegisterActions {
     }
     
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider"); // NOI18N
         
         final Tab tab = new Tab("Voting"); // XXX properties
         tab.setClosable(false);
@@ -62,7 +62,7 @@ public class VotingProvider implements IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
         
         final VotingNavigationPresenter presenter = votingNavigationView.getRealPresenter();
         presenter.registerActions();

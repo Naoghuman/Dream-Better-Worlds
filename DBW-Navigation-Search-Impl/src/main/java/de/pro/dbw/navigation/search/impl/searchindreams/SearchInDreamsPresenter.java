@@ -67,7 +67,7 @@ public class SearchInDreamsPresenter implements
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize SearchInDreamsPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize SearchInDreamsPresenter"); // NOI18N
         
         assert (spSearchComponents != null) : "fx:id=\"spSearchComponents\" was not injected: check your FXML file 'SearchInDreams.fxml'."; // NOI18N
         assert (vbSearchComponents != null) : "fx:id=\"vbSearchComponents\" was not injected: check your FXML file 'SearchInDreams.fxml'."; // NOI18N
@@ -129,7 +129,7 @@ public class SearchInDreamsPresenter implements
     }
     
     public void onActionSearchInDreams() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action search in Dreams"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action search in Dreams"); // NOI18N
         
         final SearchDataModel searchDataModel = new SearchDataModel();
         searchDataModel.setSimpleSqlInfo(SqlStatementHelper.createSimpleSqlInfoForSearchIn(vbSimpleSqlInfo));
@@ -156,7 +156,7 @@ public class SearchInDreamsPresenter implements
         transferModel.setActionKey(ACTION__SEARCH_IN__DREAMS);
         transferModel.setObject(model);
         
-        ActionFacade.getDefault().handle(transferModel);
+        ActionFacade.INSTANCE.getAction().handle(transferModel);
     }
     
     private void setWidthForScrollPaneComponent() {

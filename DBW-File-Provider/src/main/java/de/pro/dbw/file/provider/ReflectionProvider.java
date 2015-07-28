@@ -68,14 +68,14 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in ReflectionProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane editor in ReflectionProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in ReflectionProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in ReflectionProvider"); // NOI18N
         
         this.registerOnActionCreateNewFileReflection();
         this.registerOnActionEditFileReflection();
@@ -83,10 +83,10 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
 
     private void registerOnActionCreateNewFileReflection() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__CREATE_NEW_FILE__REFLECTION,
                 (ActionEvent ae) -> {
-                    LoggerFacade.getDefault().debug(this.getClass(), "Show Reflection Wizard in CREATE mode."); // NOI18N
+                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Reflection Wizard in CREATE mode."); // NOI18N
 
                     final ReflectionWizardContentView contentView = new ReflectionWizardContentView();
                     final ReflectionWizardContentPresenter contentPresenter = contentView.getRealPresenter();
@@ -97,10 +97,10 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
 
     private void registerOnActionEditFileReflection() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__EDIT_FILE__REFLECTION,
                 (ActionEvent ae) -> {
-                    LoggerFacade.getDefault().debug(this.getClass(), "Show Reflection Wizard in EDIT mode."); // NOI18N
+                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Reflection Wizard in EDIT mode."); // NOI18N
 
                     final ReflectionWizardContentView contentView = new ReflectionWizardContentView();
                     final ReflectionWizardContentPresenter contentPresenter = contentView.getRealPresenter();
@@ -112,7 +112,7 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
     
     private void registerOnActionOpenFileReflectionFromNavigation() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__OPEN_REFLECTION__FROM_NAVIGATION,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -200,7 +200,7 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
     
     private void showReflectionSaveDialog(ReflectionPresenter presenter, Long idToRemove) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show Save Reflection Dialog"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Save Reflection Dialog"); // NOI18N
         
         final ActionTransferModel transferModel = new ActionTransferModel();
         transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
@@ -211,13 +211,13 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
                     presenter.onActionSave();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.getDefault().handle(transferModel);
+                    ActionFacade.INSTANCE.getAction().handle(transferModel);
                 },
                 (ActionEvent ae) -> { // No
                     presenter.onActionRefresh();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.getDefault().handle(transferModel);
+                    ActionFacade.INSTANCE.getAction().handle(transferModel);
                 });
     }
     

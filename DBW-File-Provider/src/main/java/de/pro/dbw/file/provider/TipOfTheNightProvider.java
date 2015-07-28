@@ -64,9 +64,9 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     public void checkShowAtStartTipOfTheNight() {
-        LoggerFacade.getDefault().info(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
     
-        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
+        final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getPreferences().getBoolean(
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT__DEFAULT_VALUE);
         if (!isShowAtStart) {
@@ -77,7 +77,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     private void onActionShowTipOfTheNightEditor() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
         
         final TipOfTheNightEditorContentView contentView = new TipOfTheNightEditorContentView();
         final TipOfTheNightEditorContentPresenter contentPresenter = contentView.getRealPresenter();
@@ -85,7 +85,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     private void onActionShowTipOfTheNightWindow() {
-        LoggerFacade.getDefault().info(this.getClass(), "On action show TipOfTheNight window"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "On action show TipOfTheNight window"); // NOI18N
     
         final Stage window = new Stage();
         window.initModality(Modality.NONE);
@@ -102,21 +102,21 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }
     
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in TipOfTheNightProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in TipOfTheNightProvider"); // NOI18N
         
         this.registerOnActionShowTipOfTheNightEditor();
         this.registerOnActionShowTipOfTheNightWindow();
     }
     
     private void registerOnActionShowTipOfTheNightEditor() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR,
                 (ActionEvent ae) -> {
                     this.onActionShowTipOfTheNightEditor();
@@ -124,7 +124,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     private void registerOnActionShowTipOfTheNightWindow() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW,
                 (ActionEvent ae) -> {
                     this.onActionShowTipOfTheNightWindow();

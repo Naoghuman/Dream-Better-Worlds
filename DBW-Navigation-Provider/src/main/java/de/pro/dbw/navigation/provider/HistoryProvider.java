@@ -45,7 +45,7 @@ public class HistoryProvider implements IActionConfiguration, IRegisterActions {
     }
 
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in HistoryProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft in HistoryProvider"); // NOI18N
         
         final Tab tab = new Tab("History");// XXX properties
         tab.setClosable(false);
@@ -57,7 +57,7 @@ public class HistoryProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in HistoryProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in HistoryProvider"); // NOI18N
         
         this.registerOnActionJobCheckHistoryNavigation();
         
@@ -66,10 +66,10 @@ public class HistoryProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionJobCheckHistoryNavigation() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__JOB_CHECK_NAVIGATION__HISTORY,
                 (ActionEvent ae) -> {
-                    LoggerFacade.getDefault().debug(this.getClass(), "Register job for check History-Navigation"); // NOI18N
+                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check History-Navigation"); // NOI18N
                     
                     final HistoryNavigationPresenter presenter = historyNavigationView.getRealPresenter();
                     final ObservableList<HistoryNavigationModel> items = presenter.getItems();
@@ -84,7 +84,7 @@ public class HistoryProvider implements IActionConfiguration, IRegisterActions {
                         }
                         
                         if (UtilProvider.getDefault().getDateConverter().isBefore(-3, item.getGenerationTime())) {
-                            LoggerFacade.getDefault().debug(HistoryProvider.class,
+                            LoggerFacade.INSTANCE.getLogger().debug(HistoryProvider.class,
                                     "DateConverter.isBefore(-3, item.getGenerationTime())"); // NOI18N
                                     
                             presenter.refresh();
@@ -99,7 +99,7 @@ public class HistoryProvider implements IActionConfiguration, IRegisterActions {
                         }
                         
                         if (UtilProvider.getDefault().getDateConverter().isBefore(-30, item.getGenerationTime())) {
-                            LoggerFacade.getDefault().debug(HistoryProvider.class,
+                            LoggerFacade.INSTANCE.getLogger().debug(HistoryProvider.class,
                                     "DateConverter.isBefore(-30, item.getGenerationTime())"); // NOI18N
                             
                             presenter.refresh();

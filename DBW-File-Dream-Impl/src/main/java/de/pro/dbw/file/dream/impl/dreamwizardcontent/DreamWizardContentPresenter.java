@@ -73,7 +73,7 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize DreamWizardPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize DreamWizardPresenter"); // NOI18N
     
         assert (bCreateDream != null)  : "fx:id=\"bCreateDream\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
         assert (cbTime != null)        : "fx:id=\"cbTime\" was not injected: check your FXML file 'DreamWizard.fxml'."; // NOI18N
@@ -120,7 +120,7 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     }
     
     private void initializeDescription() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize description"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize description"); // NOI18N
         
         taDescription.setText( // XXX Test
                 "Categories:\n" // NOI18N
@@ -132,7 +132,7 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     }
     
     private void initializeSaveProgress() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize save progress"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize save progress"); // NOI18N
         
         piSave.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
         piSave.setVisible(Boolean.FALSE);
@@ -143,7 +143,7 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     }
     
     private void initializeTime() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize Time component"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize Time component"); // NOI18N
         
         final Long now = System.currentTimeMillis();
         tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, PATTERN__DATE));
@@ -174,7 +174,7 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     }
     
     public void onActionRefresh() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Refresh"); // NOI18N
     
         tfTitle.setText(null);
         taDescription.setText(null);
@@ -186,13 +186,13 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     }
     
     public void onActionClose() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Close"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Close"); // NOI18N
     
         DialogProvider.getDefault().hide();
     }
     
     public void onActionCreate() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Create"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Create"); // NOI18N
     
         final SequentialTransition st = new SequentialTransition();
         final PauseTransition pt1 = new PauseTransition(Duration.ZERO);
@@ -221,7 +221,7 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
     }
     
     private void save() {
-        LoggerFacade.getDefault().info(this.getClass(), "Save new dream to database"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Save new dream to database"); // NOI18N
         
         // Catch data
         final DreamModel model = new DreamModel();
@@ -239,8 +239,8 @@ public class DreamWizardContentPresenter implements Initializable, IActionConfig
         SqlProvider.getDefault().getDreamSqlProvider().create(model);
         
         // Update gui
-        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-        ActionFacade.getDefault().handle(ACTION__REFRESH_NAVIGATION__HISTORY);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__REFRESH_NAVIGATION__HISTORY);
     }
     
 }

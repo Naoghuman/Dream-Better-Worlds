@@ -52,7 +52,7 @@ public class ExerciseProvider implements IActionConfiguration, IRegisterActions 
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in ExerciseProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane editor in ExerciseProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
         
@@ -61,7 +61,7 @@ public class ExerciseProvider implements IActionConfiguration, IRegisterActions 
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in ExerciseProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in ExerciseProvider"); // NOI18N
         
 //        this.registerActionRemoveFileFromEditor();
 //        this.registerActionSaveAllChangedFiles();

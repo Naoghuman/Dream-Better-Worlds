@@ -45,19 +45,19 @@ public class TipOfTheNightSqlProvider implements ITipOfTheNightConfiguration {
     public void createOrUpdate(TipOfTheNightModel model, Long defaultId) {
         if (Objects.equals(model.getId(), defaultId)) {
             model.setId(System.currentTimeMillis());
-            DatabaseFacade.getDefault().getCrudService().create(model);
+            DatabaseFacade.INSTANCE.getDatabase().getCrudService().create(model);
         }
         else {
-            DatabaseFacade.getDefault().getCrudService().update(model);
+            DatabaseFacade.INSTANCE.getDatabase().getCrudService().update(model);
         }
     }
     
     public void delete(Long idToDelete) {
-        DatabaseFacade.getDefault().getCrudService().delete(TipOfTheNightModel.class, idToDelete);
+        DatabaseFacade.INSTANCE.getDatabase().getCrudService().delete(TipOfTheNightModel.class, idToDelete);
     }
     
     public List<TipOfTheNightModel> findAll() {
-        final List<TipOfTheNightModel> allTipsOfTheNight = DatabaseFacade.getDefault().getCrudService()
+        final List<TipOfTheNightModel> allTipsOfTheNight = DatabaseFacade.INSTANCE.getDatabase().getCrudService()
                 .findByNamedQuery(TipOfTheNightModel.class, NAMED_QUERY__NAME__FIND_ALL);
         Collections.sort(allTipsOfTheNight);
         
