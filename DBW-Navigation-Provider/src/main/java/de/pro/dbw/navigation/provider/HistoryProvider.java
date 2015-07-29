@@ -66,10 +66,11 @@ public class HistoryProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionJobCheckHistoryNavigation() {
+                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check History-Navigation"); // NOI18N
         ActionFacade.INSTANCE.getAction().register(
                 ACTION__JOB_CHECK_NAVIGATION__HISTORY,
                 (ActionEvent ae) -> {
-                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check History-Navigation"); // NOI18N
+                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Check if History-Navigation is up to date"); // NOI18N
                     
                     final HistoryNavigationPresenter presenter = historyNavigationView.getRealPresenter();
                     final ObservableList<HistoryNavigationModel> items = presenter.getItems();

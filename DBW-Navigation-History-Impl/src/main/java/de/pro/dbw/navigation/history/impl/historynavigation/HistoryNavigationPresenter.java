@@ -262,28 +262,29 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     private void showElementsInListView(List<ParentElementView> parentElementViews, List<ChildElementView> childElementViews) {
         lvNavigation.getItems().clear();
         
-        for (ParentElementView parentElementView : parentElementViews) {
-            final HistoryNavigationModel parentHistoryNavigationModel = new HistoryNavigationModel();
-            parentHistoryNavigationModel.setView(parentElementView.getView());
-            lvNavigation.getItems().add(parentHistoryNavigationModel);
+        for (ParentElementView parentView : parentElementViews) {
+            final HistoryNavigationModel parentModel = new HistoryNavigationModel();
+            parentModel.setView(parentView.getView());
+            lvNavigation.getItems().add(parentModel);
 
             int size = 0;
-            for (ChildElementView childElementView : childElementViews) {
-                if (!parentElementView.getRealPresenter().getDate().equals(childElementView.getRealPresenter().getDate())) {
+            for (ChildElementView childView : childElementViews) {
+                final ChildElementPresenter childPresenter = childView.getRealPresenter();
+                if (!parentView.getRealPresenter().getDate().equals(childPresenter.getDate())) {
                     continue;
                 }
                 
-                final HistoryNavigationModel childHistoryNavigationModel = new HistoryNavigationModel();
-                childHistoryNavigationModel.setActionKey(childElementView.getRealPresenter().getActionKey());
-                childHistoryNavigationModel.setGenerationTime(childElementView.getRealPresenter().getGenerationTime());
-                childHistoryNavigationModel.setIdToOpen(childElementView.getRealPresenter().getIdToOpen());
-                childHistoryNavigationModel.setView(childElementView.getView());
+                final HistoryNavigationModel childModel = new HistoryNavigationModel();
+                childModel.setActionKey(childPresenter.getActionKey());
+                childModel.setGenerationTime(childPresenter.getGenerationTime());
+                childModel.setIdToOpen(childPresenter.getIdToOpen());
+                childModel.setView(childView.getView());
                 
-                lvNavigation.getItems().add(childHistoryNavigationModel);
+                lvNavigation.getItems().add(childModel);
                 ++size;
             }
             
-            final ParentElementPresenter parentElementPresenter = parentElementView.getRealPresenter();
+            final ParentElementPresenter parentElementPresenter = parentView.getRealPresenter();
             parentElementPresenter.setSize(size);
         }
     }

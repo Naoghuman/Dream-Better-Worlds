@@ -30,6 +30,9 @@ import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.PauseTransition;
@@ -97,6 +100,17 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         this.registerActions();
         this.registerDialogLayers();
         this.registerEditorAndNavigation();
+        
+        List<String> list = new ArrayList<>();
+        list.add("b");
+        list.add("1");
+        list.add("A");
+        list.add("B");
+        list.add("2");
+        list.add("a");
+        
+        Collections.sort(list);
+        System.out.println(list);
         
         this.initializeToolBar();
         this.initializeMenuBar();

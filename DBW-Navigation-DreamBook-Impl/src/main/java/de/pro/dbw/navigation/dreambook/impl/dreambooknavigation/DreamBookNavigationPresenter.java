@@ -146,6 +146,7 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
                 model.setActionKey(ACTION__OPEN_DREAM__FROM_NAVIGATION);
                 model.setIdToOpen(dream.getId());
                 model.setGenerationTime(dream.getGenerationTime());
+                model.setTitle(dream.getTitle());
                 
                 final DreamElementView view = new DreamElementView();
                 final DreamElementPresenter presenter = view.getRealPresenter();
@@ -161,6 +162,7 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
                 model.setActionKey(ACTION__OPEN_REFLECTION__FROM_NAVIGATION);
                 model.setIdToOpen(reflection.getId());
                 model.setGenerationTime(reflection.getGenerationTime());
+                model.setTitle(reflection.getTitle());
                 
                 final ReflectionElementView view = new ReflectionElementView();
                 final ReflectionElementPresenter presenter = view.getRealPresenter();

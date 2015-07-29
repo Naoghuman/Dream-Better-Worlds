@@ -8,6 +8,7 @@ ENHANCEMENT
 FEATURE
 
 BUG
+#44 Check sorting in DreamBookNavigation and HistoryNavigation.
 
 REFACTORING
 #61 [Dependencies] Update project to the new versions from my own libraries.
@@ -23,8 +24,6 @@ CHECK
 #62 [Technical Documents] Create new side Technical Documents in project wiki.
 
 #60 [Navigation] Use properties from Navigation tabnames.
-
-#44 Check sorting in DreamBookNavigation and HistoryNavigation.
 
 #31 Refactore in DBW-File-TipOfTheNight-Impl the packages.
 

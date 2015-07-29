@@ -66,10 +66,12 @@ public class DreamBookProvider implements IActionConfiguration, IRegisterActions
     }
     
     private void registerOnActionJobCheckDreamBookNavigation() {
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check DreamBook-Navigation"); // NOI18N
+                    
         ActionFacade.INSTANCE.getAction().register(
                 ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK,
                 (ActionEvent ae) -> {
-                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check DreamBook-Navigation"); // NOI18N
+                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Check DreamBook-Navigation is prefix New actual"); // NOI18N
                     
                     final DreamBookNavigationPresenter presenter = dreamBookNavigationView.getRealPresenter();
                     final ObservableList<DreamBookNavigationModel> items = presenter.getItems();

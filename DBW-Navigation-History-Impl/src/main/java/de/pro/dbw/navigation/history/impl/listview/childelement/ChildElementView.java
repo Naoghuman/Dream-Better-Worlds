@@ -17,6 +17,8 @@
 package de.pro.dbw.navigation.history.impl.listview.childelement;
 
 import com.airhacks.afterburner.views.FXMLView;
+import de.pro.dbw.util.api.IDateConverter;
+import de.pro.dbw.util.provider.UtilProvider;
 
 /**
  *
@@ -27,15 +29,28 @@ public class ChildElementView extends FXMLView implements Comparable<ChildElemen
     public ChildElementPresenter getRealPresenter() {
         return (ChildElementPresenter) super.getPresenter();
     }
-
+    
     @Override
     public int compareTo(ChildElementView other) {
-        int compare = Long.compare(other.getRealPresenter().getGenerationTime(), this.getRealPresenter().getGenerationTime());
+        final ChildElementPresenter otherPresenter = other.getRealPresenter();
+        final String dateTimeOther = UtilProvider.getDefault().getDateConverter()
+                .convertLongToDateTime(otherPresenter.getGenerationTime(), IDateConverter.PATTERN__DATETIME);
+        
+        final ChildElementPresenter thisPresenter = this.getRealPresenter();
+        final String dateTimeThis = UtilProvider.getDefault().getDateConverter()
+                .convertLongToDateTime(thisPresenter.getGenerationTime(), IDateConverter.PATTERN__DATETIME);
+        
+        int compare = dateTimeOther.compareTo(dateTimeThis);
         if (compare != 0) {
             return compare;
-        } 
+        }
         
-        return other.getRealPresenter().getTitle().compareTo(this.getRealPresenter().getTitle());
+        compare = thisPresenter.getTitle().compareTo(otherPresenter.getTitle());
+        if (compare != 0) {
+            return compare;
+        }
+        
+        return Long.compare(otherPresenter.getGenerationTime(), thisPresenter.getGenerationTime());
     }
     
 }
