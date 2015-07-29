@@ -21,8 +21,8 @@ import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
-import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentPresenter;
-import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentView;
+import de.pro.dbw.file.help.impl.aboutdialog.AboutDialogPresenter;
+import de.pro.dbw.file.help.impl.aboutdialog.AboutDialogView;
 import de.pro.dbw.file.help.impl.welcomehelp.WelcomeHelpView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -88,12 +88,11 @@ public class HelpProvider implements IActionConfiguration, IDefaultIdConfigurati
     }
 
     private void registerOnActionShowHelpAbout() {
-        ActionFacade.INSTANCE.getAction().register(
-                ACTION__SHOW_HELP__ABOUT,
+        ActionFacade.INSTANCE.getAction().register(ACTION__SHOW_HELP__ABOUT,
                 (ActionEvent ae) -> {
-                    final AboutDialogContentView contentView = new AboutDialogContentView();
-                    final AboutDialogContentPresenter contentPresenter = contentView.getRealPresenter();
-                    DialogProvider.getDefault().show("About", contentView.getView(), contentPresenter.getSize()); // NOI18N
+                    final AboutDialogView view = new AboutDialogView();
+                    final AboutDialogPresenter presenter = view.getRealPresenter();
+                    DialogProvider.getDefault().show("About", view.getView(), presenter.getSize()); // NOI18N
                 });
     }
     

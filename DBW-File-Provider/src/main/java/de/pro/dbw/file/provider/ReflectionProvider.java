@@ -25,8 +25,8 @@ import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.file.reflection.impl.reflection.ReflectionPresenter;
 import de.pro.dbw.file.reflection.impl.reflection.ReflectionView;
-import de.pro.dbw.file.reflection.impl.reflectionwizardcontent.ReflectionWizardContentPresenter;
-import de.pro.dbw.file.reflection.impl.reflectionwizardcontent.ReflectionWizardContentView;
+import de.pro.dbw.file.reflection.impl.reflectionwizard.ReflectionWizardPresenter;
+import de.pro.dbw.file.reflection.impl.reflectionwizard.ReflectionWizardView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -83,31 +83,29 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
     }
 
     private void registerOnActionCreateNewFileReflection() {
-        ActionFacade.INSTANCE.getAction().register(
-                ACTION__CREATE_NEW_FILE__REFLECTION,
+        ActionFacade.INSTANCE.getAction().register(ACTION__CREATE_NEW_FILE__REFLECTION,
                 (ActionEvent ae) -> {
                     LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Reflection Wizard in CREATE mode."); // NOI18N
 
-                    final ReflectionWizardContentView contentView = new ReflectionWizardContentView();
-                    final ReflectionWizardContentPresenter contentPresenter = contentView.getRealPresenter();
-                    contentPresenter.configureWizardForCreateMode();
+                    final ReflectionWizardView view = new ReflectionWizardView();
+                    final ReflectionWizardPresenter presenter = view.getRealPresenter();
+                    presenter.configureWizardForCreateMode();
                     
-                    DialogProvider.getDefault().show("Reflection Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
+                    DialogProvider.getDefault().show("Reflection Wizard", view.getView(), presenter.getSize()); // NOI18N
                 });
     }
 
     private void registerOnActionEditFileReflection() {
-        ActionFacade.INSTANCE.getAction().register(
-                ACTION__EDIT_FILE__REFLECTION,
+        ActionFacade.INSTANCE.getAction().register(ACTION__EDIT_FILE__REFLECTION,
                 (ActionEvent ae) -> {
                     LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Reflection Wizard in EDIT mode."); // NOI18N
 
-                    final ReflectionWizardContentView contentView = new ReflectionWizardContentView();
-                    final ReflectionWizardContentPresenter contentPresenter = contentView.getRealPresenter();
+                    final ReflectionWizardView view = new ReflectionWizardView();
+                    final ReflectionWizardPresenter presenter = view.getRealPresenter();
                     // TODO catch the ReflectionModel from ae.getSource()
-                    contentPresenter.configureWizardForEditMode(new ReflectionModel());
+                    presenter.configureWizardForEditMode(new ReflectionModel());
                     
-                    DialogProvider.getDefault().show("Reflection Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
+                    DialogProvider.getDefault().show("Reflection Wizard", view.getView(), presenter.getSize()); // NOI18N
                 });
     }
     

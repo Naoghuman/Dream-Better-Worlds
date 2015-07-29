@@ -23,9 +23,9 @@ import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesCon
 import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
 import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.dialog.provider.DialogProvider;
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.TipOfTheNightEditorContentView;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEditorView;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserView;
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditorcontent.TipOfTheNightEditorContentPresenter;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEditorPresenter;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
@@ -79,9 +79,9 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     private void onActionShowTipOfTheNightEditor() {
         LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
         
-        final TipOfTheNightEditorContentView contentView = new TipOfTheNightEditorContentView();
-        final TipOfTheNightEditorContentPresenter contentPresenter = contentView.getRealPresenter();
-        DialogProvider.getDefault().show("Tip of the Night Editor", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        final TipOfTheNightEditorView view = new TipOfTheNightEditorView();
+        final TipOfTheNightEditorPresenter presenter = view.getRealPresenter();
+        DialogProvider.getDefault().show("Tip of the Night Editor", view.getView(), presenter.getSize()); // NOI18N
     }
     
     private void onActionShowTipOfTheNightWindow() {

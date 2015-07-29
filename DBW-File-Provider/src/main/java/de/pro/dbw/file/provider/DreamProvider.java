@@ -25,9 +25,9 @@ import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.dream.impl.dream.DreamPresenter;
 import de.pro.dbw.file.dream.impl.dream.DreamView;
-import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentView;
+import de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardView;
 import de.pro.dbw.core.sql.provider.SqlProvider;
-import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentPresenter;
+import de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardPresenter;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -229,8 +229,8 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     public void showDreamWizard() {
         LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Dream Wizard"); // NOI18N
         
-        final DreamWizardContentView contentView = new DreamWizardContentView();
-        final DreamWizardContentPresenter contentPresenter = contentView.getRealPresenter();
-        DialogProvider.getDefault().show("Dream Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        final DreamWizardView view = new DreamWizardView();
+        final DreamWizardPresenter presenter = view.getRealPresenter();
+        DialogProvider.getDefault().show("Dream Wizard", view.getView(), presenter.getSize()); // NOI18N
     }
 }
