@@ -23,7 +23,8 @@ CHECK
 #63 [Technical Documents] Write new document Singleton Enum Facade.
 #62 [Technical Documents] Create new side Technical Documents in project wiki.
 
-#60 [Navigation] Use properties from Navigation tabnames.
+#66 [Dialog] Use properties for dialog title.
+#60 [Navigation] Use properties for Navigation tabnames.
 
 #31 Refactore in DBW-File-TipOfTheNight-Impl the packages.
 
