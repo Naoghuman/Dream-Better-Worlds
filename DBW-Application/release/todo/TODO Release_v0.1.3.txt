@@ -12,6 +12,7 @@ BUG
 
 REFACTORING
 #61 [Dependencies] Update project to the new versions from my own libraries.
+#60 [Navigation] Use properties for Navigation tabnames.
 #33 Refactore class names (when they are used in dialogs) to remove Content in their names.
 
 ADDITIONAL
@@ -24,7 +25,6 @@ CHECK
 #62 [Technical Documents] Create new side Technical Documents in project wiki.
 
 #66 [Dialog] Use properties for dialog title.
-#60 [Navigation] Use properties for Navigation tabnames.
 
 #31 Refactore in DBW-File-TipOfTheNight-Impl the packages.
 

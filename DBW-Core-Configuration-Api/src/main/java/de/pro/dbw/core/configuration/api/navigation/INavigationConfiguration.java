@@ -34,4 +34,11 @@ public interface INavigationConfiguration {
     
     public static final Duration REFRESH_AFTER_100_MILLIS = Duration.millis(100.0d);
     
+    public static final String KEY__NAVIGATION_TAB__DREAMBOOK = "key.navigation.tab.dreambook"; // NOI18N
+    public static final String KEY__NAVIGATION_TAB__HISTORY = "key.navigation.tab.history"; // NOI18N
+    public static final String KEY__NAVIGATION_TAB__SEARCH = "key.navigation.tab.search"; // NOI18N
+    public static final String KEY__NAVIGATION_TAB__VOTING = "key.navigation.tab.voting"; // NOI18N
+    
+    public static final String NAVIGATION__RESOURCE_BUNDLE = "/de/pro/dbw/navigation/provider/NavigationProvider.properties"; // NOI18N
+    
 }

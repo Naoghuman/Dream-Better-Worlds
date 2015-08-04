@@ -9,6 +9,7 @@ import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -38,12 +39,10 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
     }
     
     private void initialize() {
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize NavigationProvider");
         
+        PropertiesFacade.INSTANCE.getProperties().register(NAVIGATION__RESOURCE_BUNDLE);
     }
-    
-//    public DreamBookProvider getDreamBookProvider() {
-//        return DreamBookProvider.getDefault();
-//    }
     
     public void register(TabPane tpNavigationLeft, TabPane tbEditor, TabPane tpNavigationRight) {
         LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor, tpNavigationRight in NavigationProvider"); // NOI18N

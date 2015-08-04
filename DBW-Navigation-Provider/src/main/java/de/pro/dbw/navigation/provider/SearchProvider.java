@@ -21,10 +21,14 @@ import de.pro.dbw.base.component.impl.extendedtab.ExtendedTab;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
+import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.KEY__NAVIGATION_TAB__DREAMBOOK;
+import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.NAVIGATION__RESOURCE_BUNDLE;
 import de.pro.dbw.navigation.search.impl.searchnavigation.SearchNavigationView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Tab;
@@ -34,7 +38,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class SearchProvider implements IActionConfiguration, IRegisterActions {
+public class SearchProvider implements IActionConfiguration, INavigationConfiguration, IRegisterActions {
     
     private static SearchProvider instance = null;
     
@@ -63,7 +67,8 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
         
         this.tbEditor = tbEditor;
         
-        final Tab tab = new Tab("Search"); // XXX properties
+        final String tabName = PropertiesFacade.INSTANCE.getProperties().getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__SEARCH);
+        final Tab tab = new Tab(tabName);
         tab.setClosable(false);
         tab.setContent(searchNavigationView.getView());
         

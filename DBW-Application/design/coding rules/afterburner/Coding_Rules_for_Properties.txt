@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
 CODING RULES FOR PROPERTIES
 --------------------------------------------------------------------------------
-[PACKAGENAME].properties
+[PACKAGE-NAME].properties
 The properties file will automatically injected in the initialize method in the 
-class [PACKAGENAME]Presenter. 
+particular class [PACKAGE-NAME]Presenter. 
 
 Example
-public class DesktopPresenter ... {
+public class DesktopPresenter {
     private ResourceBundle resources = null;
 
     @Override
@@ -14,17 +14,13 @@ public class DesktopPresenter ... {
         LoggerFacade.getDefault().info(this.getClass(), "Initialize DesktopPresenter"); // NOI18N
 
         this.resources = resources;
-
-        ...
     }
-
-        ...
 }
 
 --------------------------------------------------------------------------------
 ACCESS to properties
 Every access through a key will defined as a private constant in the class
-[PACKAGENAME]Presenter. The constant have the format:
+[PACKAGE-NAME]Presenter. The constant have the format:
  - 'KEY__'[name]
 
 Format for the key in a property files:
@@ -34,22 +30,19 @@ Example for a key/value pair:
  - key.file.dream=Dream
 
 Example for access a property over a key a value:
-public class DesktopPresenter ... {
+public class DesktopPresenter {
     private static final String KEY__FILE__DREAM = "key.file.dream"; // NOI18N
 
     private void initializeToolBar() {
         LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize ToolBar"); // NOI18N
         
         tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE__DREAM), ACTION__CREATE_NEW_DREAM));
-
-        ...
     }
-
-        ...
 }
 
 --------------------------------------------------------------------------------
 EXCEPTION
-Global properties will be stored in DBW-Application/DreamBetterWorlds.properties.
+The definition from global properties will be descript in the file
+Coding_Rules_for_Properties.txt in the folder design/coding rules.
         
 --------------------------------------------------------------------------------
