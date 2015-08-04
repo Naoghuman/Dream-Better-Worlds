@@ -19,6 +19,7 @@ package de.pro.dbw.file.provider;
 import de.jensd.fx.glyphs.weathericons.WeatherIcon;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.dbw.dialog.provider.DialogProvider;
@@ -30,6 +31,7 @@ import de.pro.dbw.file.reflection.impl.reflectionwizard.ReflectionWizardView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
@@ -44,8 +46,8 @@ import javafx.scene.layout.HBox;
  *
  * @author PRo
  */
-public class ReflectionProvider implements IActionConfiguration, IRegisterActions,
-        IUtilConfiguration
+public class ReflectionProvider implements IActionConfiguration, IDialogConfiguration,
+        IRegisterActions, IUtilConfiguration
 {
     private static ReflectionProvider instance = null;
     
@@ -91,7 +93,8 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
                     final ReflectionWizardPresenter presenter = view.getRealPresenter();
                     presenter.configureWizardForCreateMode();
                     
-                    DialogProvider.getDefault().show("Reflection Wizard", view.getView(), presenter.getSize()); // NOI18N
+                    final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__REFLECTION_WIZARD);
+                    DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
                 });
     }
 
@@ -105,7 +108,8 @@ public class ReflectionProvider implements IActionConfiguration, IRegisterAction
                     // TODO catch the ReflectionModel from ae.getSource()
                     presenter.configureWizardForEditMode(new ReflectionModel());
                     
-                    DialogProvider.getDefault().show("Reflection Wizard", view.getView(), presenter.getSize()); // NOI18N
+                    final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__REFLECTION_WIZARD);
+                    DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
                 });
     }
     

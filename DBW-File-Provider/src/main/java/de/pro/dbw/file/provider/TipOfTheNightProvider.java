@@ -19,9 +19,8 @@ package de.pro.dbw.file.provider;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
+import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplatePresenter;
-import de.pro.dbw.dialog.impl.dialogtemplate.DialogTemplateView;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEditorView;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserView;
@@ -29,8 +28,8 @@ import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEdito
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.event.ActionEvent;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Modality;
@@ -41,7 +40,7 @@ import javafx.stage.Stage;
  * @author PRo
  */
 public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdConfiguration, 
-        IPreferencesConfiguration, IRegisterActions
+        IDialogConfiguration, IPreferencesConfiguration, IRegisterActions
 {
     private static TipOfTheNightProvider instance = null;
     
@@ -81,7 +80,8 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
         
         final TipOfTheNightEditorView view = new TipOfTheNightEditorView();
         final TipOfTheNightEditorPresenter presenter = view.getRealPresenter();
-        DialogProvider.getDefault().show("Tip of the Night Editor", view.getView(), presenter.getSize()); // NOI18N
+        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT_EDITOR);
+        DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
     }
     
     private void onActionShowTipOfTheNightWindow() {
@@ -92,7 +92,8 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
 //        window.initOwner(stage);
         window.setAlwaysOnTop(Boolean.FALSE);
         window.setResizable(Boolean.FALSE);
-        window.setTitle("Tip of the Night"); // XXX load from properties
+        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT);
+        window.setTitle(title);
         
         final TipOfTheNightChooserView view = new TipOfTheNightChooserView();
         final Scene scene = new Scene(view.getView(), 375, 250);

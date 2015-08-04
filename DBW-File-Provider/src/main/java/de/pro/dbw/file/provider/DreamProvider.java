@@ -21,6 +21,7 @@ import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
+import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.dream.impl.dream.DreamPresenter;
@@ -31,6 +32,7 @@ import de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardPresenter;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
@@ -46,7 +48,7 @@ import javafx.scene.layout.HBox;
  * @author PRo
  */
 public final class DreamProvider implements IActionConfiguration, IDefaultIdConfiguration, 
-        IUtilConfiguration, IRegisterActions
+        IDialogConfiguration, IUtilConfiguration, IRegisterActions
 {
     private static DreamProvider instance = null;
     
@@ -231,6 +233,8 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
         
         final DreamWizardView view = new DreamWizardView();
         final DreamWizardPresenter presenter = view.getRealPresenter();
-        DialogProvider.getDefault().show("Dream Wizard", view.getView(), presenter.getSize()); // NOI18N
+        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DREAM_WIZARD);
+        DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
     }
+    
 }
