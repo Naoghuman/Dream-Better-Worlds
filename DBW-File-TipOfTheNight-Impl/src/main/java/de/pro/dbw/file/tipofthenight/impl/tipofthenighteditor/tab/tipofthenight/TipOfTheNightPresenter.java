@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight;
+package de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tab.tipofthenight;
 
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
@@ -55,11 +55,11 @@ import javafx.scene.layout.FlowPane;
  * 
  * @author PRo
  */
-public class TabTipOfTheNightPresenter implements Initializable, IActionConfiguration, 
+public class TipOfTheNightPresenter implements Initializable, IActionConfiguration, 
         IApplicationConfiguration, IDefaultIdConfiguration, IPreferencesConfiguration,
         ITipOfTheNightConfiguration, IRegisterActions, IUtilConfiguration
 {
-    private static final String CSS__TAB_TIP_OF_THE_NIGHT = "TabTipOfTheNight.css"; // NOI18N
+    private static final String CSS__TAB_TIP_OF_THE_NIGHT = "TipOfTheNight.css"; // NOI18N
     
     private static final String KEY__DIALOG_DELETE__TITLE = "dialog.delete.title"; // NOI18N
     

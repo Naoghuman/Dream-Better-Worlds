@@ -20,9 +20,9 @@ import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.dialog.api.IDialogSize;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserPresenter;
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight.TabTipOfTheNightView;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserView;
-import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tabtipofthenight.TabTipOfTheNightPresenter;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tab.tipofthenight.TipOfTheNightPresenter;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.tab.tipofthenight.TipOfTheNightView;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.awt.Dimension;
 import java.net.URL;
@@ -60,8 +60,8 @@ public class TipOfTheNightEditorPresenter implements Initializable,
         chooserPresenter.prepareForPreview();
         bpPreview.setCenter(chooser.getView());
         
-        final TabTipOfTheNightView tabTipOfTheNight = new TabTipOfTheNightView();
-        final TabTipOfTheNightPresenter tabTipOfTheNightPresenter = tabTipOfTheNight.getRealPresenter();
+        final TipOfTheNightView tabTipOfTheNight = new TipOfTheNightView();
+        final TipOfTheNightPresenter tabTipOfTheNightPresenter = tabTipOfTheNight.getRealPresenter();
         tabTipOfTheNightPresenter.registerActions();
         tTipOfTheNight.setContent(tabTipOfTheNight.getView());
         

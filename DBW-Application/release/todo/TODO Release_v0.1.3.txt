@@ -15,6 +15,7 @@ REFACTORING
 #61 [Dependencies] Update project to the new versions from my own libraries.
 #60 [Navigation] Use properties for Navigation tabnames.
 #33 Refactore class names (when they are used in dialogs) to remove Content in their names.
+#31 Refactore in DBW-File-TipOfTheNight-Impl the packages.
 
 ADDITIONAL
 
@@ -24,7 +25,5 @@ CHECK
 
 #63 [Technical Documents] Write new document Singleton Enum Facade.
 #62 [Technical Documents] Create new side Technical Documents in project wiki.
-
-#31 Refactore in DBW-File-TipOfTheNight-Impl the packages.
 
 --------------------------------------------------------------------------------
