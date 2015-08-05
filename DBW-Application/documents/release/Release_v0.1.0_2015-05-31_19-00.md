@@ -15,7 +15,7 @@ Write it down into a new Reflection file and then reflect over it (like how in a
 
 Download
 --------
-The download can be find here: [Release v0.1.0 (2015-05-31 19:00)]
+The download can be found here: [Release v0.1.0 (2015-05-31 19:00)]
 
 
 
