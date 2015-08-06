@@ -22,6 +22,7 @@ Content
 Technical documents
 ---
 * [Release Notes](#ReleaseNotes)
+* [Templates](#Templates)
 
 
 
@@ -66,7 +67,16 @@ An overview about all existings releases can be found here:
 
 
 
+Templates<a name="Templates" />
+---
+
+* [Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md] shows the template to create a `Release` 
+  file which contains the information what happen in xy release.
+
+
+
 [//]: # (Links)
 [General Public License 3.0]:http://www.gnu.org/licenses/gpl-3.0.en.html
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
 [Release v0.1.2 (2015-06-30 18:45)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.2
+[Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:DBW-Application/documents/templates/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
