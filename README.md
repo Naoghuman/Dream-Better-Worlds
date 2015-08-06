@@ -1,5 +1,5 @@
-# Dream-Better-Worlds
----
+Dream-Better-Worlds
+===
 
 > “I dreamed I was a butterfly, flitting around in the sky; then I awoke. Now I 
 > wonder: Am I a man who dreamt of being a butterfly, or am I a butterfly dreaming 
@@ -12,35 +12,35 @@ TODO Screenshot from Application (Flickr)
 
 
 
-## Content
+Content
 ---
 * [License](#License)
 * [Autor](#Autor)
 * [Contact](#Contact)
 
 
-## Technical documents
+Technical documents
 ---
 * [Release Notes](#ReleaseNotes)
 
 
 
 [//]: # (Content)
-### License<a name="License" />
+License<a name="License" />
 ---
 
 The project `Dream-Better-Worlds` is licensed under [General Public License 3.0].
 
 
 
-### Autor<a name="Autor" />
+Autor<a name="Autor" />
 ---
 
 The project `Dream-Better-Worlds` is maintained by me, Peter Rogge. See [Contact](#Contact).
 
 
 
-### Contact<a name="Contact" />
+Contact<a name="Contact" />
 ---
 
 You can reach me under <dream-better-worlds@gmx.de>.
@@ -48,7 +48,7 @@ You can reach me under <dream-better-worlds@gmx.de>.
 
 
 [//]: # (Technical documents)
-### Release Notes<a name="ReleaseNotes" />
+Release Notes<a name="ReleaseNotes" />
 ---
 
 Current pre-release is `v0.1.2` which contains following points:
