@@ -51,7 +51,20 @@ You can reach me under <dream-better-worlds@gmx.de>.
 Releases<a name="Releases" />
 --------
 
+Current pre-release is `v0.1.2` which contains following points:
+* New `Coding Rules` are written which defined the coding rules for the application 
+  `Dream-Better-Worlds`. The files can be found in the modul DBW-Application under 
+  /design/coding_rules.
+* The dialog modules was be rewritten for the coming release v0.2.0.
+* The menubar is cleanup.
+
+Detailed information about the pre-release can be found here: [Release v0.1.2 (2015-06-30 18:45)]
+
+An overview about all releases can be found here: [Overview from all releases in Dream-Better-Worlds]
+
 
 
 [//]: # (Links)
 [General Public License 3.0]:http://www.gnu.org/licenses/gpl-3.0.en.html
+[Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
+[Release v0.1.2 (2015-06-30 18:45)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.2
