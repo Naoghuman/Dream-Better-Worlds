@@ -47,4 +47,10 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.2`.
 #20 Remove in the menu the entry Exercises.
 
 
+
 #### Additional
+
+
+
+[//]: # (Issues which will be integrated in this release)
+
