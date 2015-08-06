@@ -26,19 +26,18 @@ Preparation<a name="Preparation" />
 * Navigate in explorer into the folder from the updated `pom.xml` descripted in
   the previous step.
 * Open the `CommandLine` with `Shift + right click`.
-* In the `CommandLine` execute `mvn versions:update-child-modules` without the 
-  quotation.
+* In the `CommandLine` execute `mvn versions:update-child-modules`.
 * `Build with Dependencies` the project so that the application can start.
-* Delete following folders in the child-modul `DBW-Application`.
+* Delete following folders in the child-modul `DBW-Application`:
     - Folder `database`.
     - Folder `log`.
     - Folder `target`.
-* Delete following files in the child-modul `DBW-Application`.
+* Delete following files in the child-modul `DBW-Application`:
     - File `Preferences.properties`.
 * Check the `Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md` for the new version.
-* Update the `ReadMe` (section `Release Notes`).
+* Update the `ReadMe.md` (section `Release Notes`).
 * Create a `zip` from the project and store it local.
-* Commit all changes into the branch `release_vX.Y.Z`.
+* Commit all changes into the branch `release_vX.Y.Z` in `GitHub`.
 
 
 
@@ -47,7 +46,7 @@ Release<a name="Release" />
 
 * Merge the branch `release_vX.Y.Z` into the branch `master`.
 * Run the branch `master` local to see if new exception happen during the merge.
-* Commit all changes into the branch `master`.
+* Commit all changes into the branch `master` in `GitHub`.
 * Release the new release in `GitHub`.
     - Use the prepared `Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md` for the release text.
 
@@ -61,6 +60,6 @@ Post-Processing<a name="PostProcessing" />
   merge.
 * Add the previously removed commentary into the `pom.xml` from the child-modul 
   `DBW-Application`.
-* Commit all changes into the branch `development`.
-* Repeat the previous 3 steps for all other existing branches.
+* Commit all changes into the branch `development` in `GitHub`.
+* Repeat the previous steps for all other existing branches.
     - Merge the branch `development` into the branch `xy`. 
