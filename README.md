@@ -53,7 +53,7 @@ You can reach me under <dream-better-worlds@gmx.de>.
 How To ...<a name="HowTo" />
 ---
 
-* [HowToRelease.md] shows the step by step procedure how to release in 
+* [HowToRelease.md] shows the step-by-step instruction how to release in 
   `Dream-Better-Worlds`.
 
 
