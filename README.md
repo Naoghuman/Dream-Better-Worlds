@@ -21,7 +21,7 @@ Content
 
 Technical documents
 -------------------
-* [Releases](#Releases)
+* [Release Notes](#ReleaseNotes)
 
 
 
@@ -40,7 +40,6 @@ The project `Dream-Better-Worlds` is maintained by me, Peter Rogge. See [Contact
 
 
 
-[//]: # (Technical documents)
 Contact<a name="Contact" />
 -------
 
@@ -48,19 +47,21 @@ You can reach me under <dream-better-worlds@gmx.de>.
 
 
 
-Releases<a name="Releases" />
---------
+[//]: # (Technical documents)
+Release Notes<a name="ReleaseNotes" />
+-------------
 
-Current pre-release is `v0.1.2` which contains following points:
-* New `Coding Rules` are written which defined the coding rules for the application 
-  `Dream-Better-Worlds`. The files can be found in the modul DBW-Application under 
-  /design/coding_rules.
-* The dialog modules was be rewritten for the coming release v0.2.0.
-* The menubar is cleanup.
-
-Detailed information about the pre-release can be found here: [Release v0.1.2 (2015-06-30 18:45)]
-
-An overview about all releases can be found here: [Overview from all releases in Dream-Better-Worlds]
+Current pre-release is [Release v0.1.2 (2015-06-30 18:45)].
+* Summary from the current release:
+    - New `Coding Rules` files are written which defined the coding rules for 
+      the application `Dream-Better-Worlds`. The files can be found in the modul 
+      DBW-Application under /design/coding_rules.
+    - The dialog modules was be rewritten for the coming release v0.2.0.
+    - The menubar is cleanup.
+* [Release v0.1.2 (2015-06-30 18:45)] shows detailed information about the current 
+  release.
+* [Overview from all releases in Dream-Better-Worlds] shows an overview about 
+  all releases in `Dream-Better-Worlds`.
 
 
 
@@ -68,3 +69,4 @@ An overview about all releases can be found here: [Overview from all releases in
 [General Public License 3.0]:http://www.gnu.org/licenses/gpl-3.0.en.html
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
 [Release v0.1.2 (2015-06-30 18:45)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.2
+
