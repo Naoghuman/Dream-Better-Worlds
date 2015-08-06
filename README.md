@@ -51,17 +51,18 @@ You can reach me under <dream-better-worlds@gmx.de>.
 Release Notes<a name="ReleaseNotes" />
 -------------
 
-Current pre-release is [Release v0.1.2 (2015-06-30 18:45)].
-* Summary from the current release:
-    - New `Coding Rules` files are written which defined the coding rules for 
+Current pre-release is `v0.1.2` which contains following points:
+* New `Coding Rules` files are written which defined the coding rules for 
       the application `Dream-Better-Worlds`. The files can be found in the modul 
       DBW-Application under /design/coding_rules.
-    - The dialog modules was be rewritten for the coming release v0.2.0.
-    - The menubar is cleanup.
-* [Release v0.1.2 (2015-06-30 18:45)] shows detailed information about the current 
-  release.
-* [Overview from all releases in Dream-Better-Worlds] shows an overview about 
-  all releases in `Dream-Better-Worlds`.
+* The dialog modules was be rewritten for the coming release v0.2.0.
+* The menubar is cleanup.
+
+Detailed information about the current release can be found here:
+* [Release v0.1.2 (2015-06-30 18:45)]
+
+An overview about all existings releases can be found here:
+* [Overview from all releases in Dream-Better-Worlds]
 
 
 
