@@ -40,7 +40,7 @@ Technical Documents
 
 
 [//]: # (Links for Technical Informations)
-[License]:DBW-Application/documents/general/TechnicalInformations.md
+[License]:DBW-Application/documents/general/TechnicalInformations.md#License
 [Autor]:DBW-Application/documents/general/TechnicalInformations.md#Autor
 [Contact]:DBW-Application/documents/general/TechnicalInformations.md#Contact
 
@@ -48,6 +48,6 @@ Technical Documents
 
 
 [//]: # (Links for Technical Documents)
-[How To ...]:DBW-Application/documents/general/TechnicalDocuments.md
-[Release Notes]:DBW-Application/documents/general/TechnicalDocuments.md
-[Templates]:DBW-Application/documents/general/TechnicalDocuments.md
+[How To ...]:DBW-Application/documents/general/TechnicalDocuments.md#HowTo
+[Release Notes]:DBW-Application/documents/general/TechnicalDocuments.md#ReleaseNotes
+[Templates]:DBW-Application/documents/general/TechnicalDocuments.md#Templates
