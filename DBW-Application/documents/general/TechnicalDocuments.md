@@ -71,14 +71,14 @@ Templates<a name="Templates" />
 
 [//]: # (Links)
 [Afterburner]:http://afterburner.adam-bien.com/
-[Coding Rules for Actions (General)]:./coding-rules/general/CodingRulesForActions.md
-[Coding Rules for CSS (General)]:./coding-rules/general/CodingRulesForCSS.md
-[Coding Rules for Entities (General)]:./coding-rules/general/CodingRulesForEntities.md
-[Coding Rules for Properties (General)]:./coding-rules/general/CodingRulesForProperties.md
-[Coding Rules for Presenter (Afterburner)]:./coding-rules/afterburner/CodingRulesForPresenter.md
-[Coding Rules for Properties (Afterburner)]:./coding-rules/afterburner/CodingRulesForProperties.md
-[Coding Rules for View (Afterburner)]:./coding-rules/afterburner/CodingRulesForView.md
-[HowToRelease.md]:./release/HowToRelease.md
+[Coding Rules for Actions (General)]:./../coding-rules/general/CodingRulesForActions.md
+[Coding Rules for CSS (General)]:./../coding-rules/general/CodingRulesForCSS.md
+[Coding Rules for Entities (General)]:./../coding-rules/general/CodingRulesForEntities.md
+[Coding Rules for Properties (General)]:./../coding-rules/general/CodingRulesForProperties.md
+[Coding Rules for Presenter (Afterburner)]:./../coding-rules/afterburner/CodingRulesForPresenter.md
+[Coding Rules for Properties (Afterburner)]:./../coding-rules/afterburner/CodingRulesForProperties.md
+[Coding Rules for View (Afterburner)]:./../coding-rules/afterburner/CodingRulesForView.md
+[HowToRelease.md]:./../release/HowToRelease.md
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
 [Release v0.1.2 (2015-06-30 18:45)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.2
-[Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:./release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
+[Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:./../release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
