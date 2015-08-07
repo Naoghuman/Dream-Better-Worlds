@@ -35,6 +35,7 @@ Technical Informations
 Technical Documents
 ---
 * [Overview Technical Documents]
+    - [Coding Rules]
     - [How To ...]
     - [Release Notes]
     - [Templates]
@@ -52,6 +53,7 @@ Technical Documents
 
 [//]: # (Links for Technical Documents)
 [Overview Technical Documents]:DBW-Application/documents/general/TechnicalDocuments.md
+[Coding Rules]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRules
 [How To ...]:DBW-Application/documents/general/TechnicalDocuments.md#HowTo
 [Release Notes]:DBW-Application/documents/general/TechnicalDocuments.md#ReleaseNotes
 [Templates]:DBW-Application/documents/general/TechnicalDocuments.md#Templates
