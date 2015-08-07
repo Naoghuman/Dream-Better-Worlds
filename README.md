@@ -41,8 +41,8 @@ Technical Documents
 
 [//]: # (Links for Technical Informations)
 [License]:DBW-Application/documents/general/TechnicalInformations.md
-[Autor]:DBW-Application/documents/general/TechnicalInformations.md
-[Contact]:DBW-Application/documents/general/TechnicalInformations.md
+[Autor]:DBW-Application/documents/general/TechnicalInformations.md#Autor
+[Contact]:DBW-Application/documents/general/TechnicalInformations.md#Contact
 
 
 
