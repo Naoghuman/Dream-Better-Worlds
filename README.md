@@ -8,84 +8,46 @@ Dream-Better-Worlds
 > Chuang Tzu, 389-286 BC
 
 
-TODO Screenshot from Application (Flickr)
+TODO Add main screenshoot from Application (Flickr)
 
 
 
-Content
+TODO Add description
+
+
+
+TODO Add download
+
+
+
+TODO Add sub screenshoots from Application (Flickr)
+
+
+
+Technical Informations
 ---
-* [License](#License)
-* [Autor](#Autor)
-* [Contact](#Contact)
+* [License]
+* [Autor]
+* [Contact]
 
 
-Technical documents
+Technical Documents
 ---
-* [How To ...](#HowTo)
-* [Release Notes](#ReleaseNotes)
-* [Templates](#Templates)
+* [How To ...]
+* [Release Notes]
+* [Templates]
 
 
 
-[//]: # (Content)
-License<a name="License" />
----
-
-The project `Dream-Better-Worlds` is licensed under [General Public License 3.0].
-
-
-
-Autor<a name="Autor" />
----
-
-The project `Dream-Better-Worlds` is maintained by me, Peter Rogge. See [Contact](#Contact).
+[//]: # (Links for Technical Informations)
+[License]:DBW-Application/documents/general/TechnicalInformations.md
+[Autor]:DBW-Application/documents/general/TechnicalInformations.md
+[Contact]:DBW-Application/documents/general/TechnicalInformations.md
 
 
 
-Contact<a name="Contact" />
----
 
-You can reach me under <dream-better-worlds@gmx.de>.
-
-
-
-[//]: # (Technical documents)
-How To ...<a name="HowTo" />
----
-
-* [HowToRelease.md] shows the step-by-step instruction how to release in 
-  `Dream-Better-Worlds`.
-
-
-Release Notes<a name="ReleaseNotes" />
----
-
-Current pre-release is `v0.1.2` which contains following points:
-* New `Coding Rules` files are written which defined the coding rules for 
-      the application `Dream-Better-Worlds`. The files can be found in the modul 
-      DBW-Application under /design/coding_rules.
-* The dialog modules was be rewritten for the coming release v0.2.0.
-* The menubar is cleanup.
-
-Detailed information about the current release can be found here:
-* [Release v0.1.2 (2015-06-30 18:45)]
-
-An overview about all existings releases can be found here:
-* [Overview from all releases in Dream-Better-Worlds]
-
-
-
-Templates<a name="Templates" />
----
-
-* [Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md] shows the template to create a `Release` 
-  file which contains the information what happen in xy release.
-
-
-
-[//]: # (Links)
-[General Public License 3.0]:http://www.gnu.org/licenses/gpl-3.0.en.html
-[HowToRelease.md]:DBW-Application/documents/release/HowToRelease.md
-[Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
-[Release v0.1.2 (2015-06-30 18:45)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.2
-[Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:DBW-Application/documents/release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
+[//]: # (Links for Technical Documents)
+[How To ...]:DBW-Application/documents/general/TechnicalDocuments.md
+[Release Notes]:DBW-Application/documents/general/TechnicalDocuments.md
+[Templates]:DBW-Application/documents/general/TechnicalDocuments.md
