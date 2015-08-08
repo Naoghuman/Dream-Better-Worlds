@@ -24,4 +24,7 @@ Articel
  - Implementation from the design pattern Facade as Singleton.
  - Managing the branches in GitHub with GitFlow.
 
+Document
+ - New document HowToMergeBranchesWithNetBeans.md.
+
 --------------------------------------------------------------------------------
