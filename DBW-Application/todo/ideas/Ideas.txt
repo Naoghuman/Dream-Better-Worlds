@@ -27,4 +27,7 @@ Articel
 Document
  - New document HowToMergeBranchesWithNetBeans.md.
 
+New section Info
+ - Add here useful links to different javafx themes (TechnicalInformations.md)
+
 --------------------------------------------------------------------------------
