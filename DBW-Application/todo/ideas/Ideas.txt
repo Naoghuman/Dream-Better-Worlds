@@ -20,4 +20,8 @@ Chuan Tzu quotes
 http://www.taoism.net/enter.htm
  -> Tao Stories -> The Dream of the Butterfly
 
+Articel
+ - Implementation from the design pattern Facade as Singleton.
+ - Managing the branches in GitHub with GitFlow.
+
 --------------------------------------------------------------------------------
