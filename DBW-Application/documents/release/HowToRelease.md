@@ -22,6 +22,7 @@ Preparation<a name="Preparation" />
 
 * The project is in a state to release :) .
 * Remove the commentary in the `pom.xml` from the child-modul `DBW-Application`.
+    - `Pre-releases` mustn't comment out because they have no executable jar.
 * Update `pom.xml`from the parent-modul `Dream-Better-Worlds` to the new version.
 * Navigate in explorer into the folder from the updated `pom.xml` descripted in
   the previous step.
