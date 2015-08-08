@@ -34,7 +34,7 @@ public class DaydreamInspirationWindowPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize DaydreamInspirationWindowPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize DaydreamInspirationWindowPresenter"); // NOI18N
         
         assert (tSearch != null)    : "fx:id=\"tSearch\" was not injected: check your FXML file 'DaydreamInspirationWindow.fxml'."; // NOI18N
         assert (tTopicFocus != null)    : "fx:id=\"tTopicFocus\" was not injected: check your FXML file 'DaydreamInspirationWindow.fxml'."; // NOI18N

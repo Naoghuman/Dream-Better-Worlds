@@ -1,0 +1,33 @@
+--------------------------------------------------------------------------------
+IDEAS
+--------------------------------------------------------------------------------
+New Parameter
+ - Language
+    - Its a flag in which language you write a dream, daydream, reflection...
+    - A file will have a new language icons component, where the user can see
+      in which languages he write this file. For example use this in Dreambook
+      or History to show additional information. Use this in the file to switch
+      to the current language.
+ - Link (LinkedIn)
+    - The link LinkedIn shows where for example a dream is posted. For example
+      when you have posted a dream in a dream forum in internet you can add a
+      LinkedIn link to the dream for you as additional information.
+
+INFO
+Chuan Tzu quotes
+ - http://thinkexist.com/quotation/you-will-always-find-an-answer-in-the-sound-of/397376.html
+
+http://www.taoism.net/enter.htm
+ -> Tao Stories -> The Dream of the Butterfly
+
+Articel
+ - Implementation from the design pattern Facade as Singleton.
+ - Managing the branches in GitHub with GitFlow.
+
+Document
+ - New document HowToMergeBranchesWithNetBeans.md.
+
+New section Info
+ - Add here useful links to different javafx themes (TechnicalInformations.md)
+
+--------------------------------------------------------------------------------

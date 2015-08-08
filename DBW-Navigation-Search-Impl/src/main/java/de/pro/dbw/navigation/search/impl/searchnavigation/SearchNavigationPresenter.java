@@ -41,7 +41,7 @@ public class SearchNavigationPresenter implements Initializable, IActionConfigur
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize SearchNavigationPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize SearchNavigationPresenter"); // NOI18N
         
         assert (tSearchInDreams != null)           : "fx:id=\"tSearchInDreams\" was not injected: check your FXML file 'SearchNavigation'."; // NOI18N
         assert (tSearchInTipsOfTheNight != null)   : "fx:id=\"tSearchInTipsOfTheNight\" was not injected: check your FXML file 'SearchNavigation.fxml'."; // NOI18N
@@ -50,7 +50,7 @@ public class SearchNavigationPresenter implements Initializable, IActionConfigur
     }
     
     private void initializeViews() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize views"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize views"); // NOI18N
         
         searchInDreamsView = new SearchInDreamsView();
         tSearchInDreams.setContent(searchInDreamsView.getView());

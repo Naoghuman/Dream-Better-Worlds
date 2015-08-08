@@ -44,7 +44,7 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize VotingComponentPresenter");
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize VotingComponentPresenter");
         
         assert (bShow != null)         : "fx:id=\"bShow\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
         assert (bVote != null)         : "fx:id=\"bVote\" was not injected: check your FXML file 'VotingComponent.fxml'."; // NOI18N
@@ -64,7 +64,7 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     }
     
     public void configure(VotingComponentModel votingComponentModel) {
-        LoggerFacade.getDefault().info(this.getClass(), "Configure VotingComponentPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Configure VotingComponentPresenter"); // NOI18N
         
         this.votingComponentModel = votingComponentModel;
         
@@ -84,7 +84,7 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     }
     
     public void onActionShow() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Show"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Show"); // NOI18N
         
         /*
         TODO
@@ -93,7 +93,7 @@ public class VotingComponentPresenter implements Initializable, IActionConfigura
     }
     
     public void onActionVote() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Vote"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Vote"); // NOI18N
         
         /*
         TODO

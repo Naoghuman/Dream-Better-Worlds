@@ -65,7 +65,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
     }
     
     public void register(TabPane tpEditor, TabPane tpNavigationRight) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in FileProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in FileProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
         
@@ -78,7 +78,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in FileProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in FileProvider"); // NOI18N
         
         this.registerActionRemoveFileFromEditor();
         this.registerActionSaveAllChangedFiles();
@@ -91,7 +91,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerActionRemoveFileFromEditor() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__REMOVE_FILE_FROM_EDITOR,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -106,7 +106,7 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
     }
     
     public void registerActionSaveAllChangedFiles() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SAVE_ALL_CHANGED_FILES,
                 (ActionEvent ae) -> {
                     DreamProvider.getDefault().saveAll();

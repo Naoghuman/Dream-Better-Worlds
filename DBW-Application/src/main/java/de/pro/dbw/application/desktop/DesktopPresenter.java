@@ -79,7 +79,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize DesktopPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize DesktopPresenter"); // NOI18N
         
         this.resources = resources;
 
@@ -104,19 +104,19 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
 
     private void initializeDesktopSplitPane() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize desktop SplitPane"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize desktop SplitPane"); // NOI18N
         
         SplitPane.setResizableWithParent(bpNavigationLeft, Boolean.FALSE);
         SplitPane.setResizableWithParent(bpNavigationRight, Boolean.FALSE);
         
         // Load divider positions
         Platform.runLater(() -> {
-            final Double dividerPositionLeft = PreferencesFacade.getDefault().getDouble(
+            final Double dividerPositionLeft = PreferencesFacade.INSTANCE.getPreferences().getDouble(
                     this.getClass(), DESKTOP__DIVIDER_POSITION__LEFT,
                     DESKTOP__DIVIDER_POSITION__LEFT__DEFAULT_VALUE);
             spDesktop.getDividers().get(DESKTOP__DIVIDER_POSITION__INDEX_0).setPosition(dividerPositionLeft);
             
-            final Double dividerPositionRight = PreferencesFacade.getDefault().getDouble(
+            final Double dividerPositionRight = PreferencesFacade.INSTANCE.getPreferences().getDouble(
                     this.getClass(), DESKTOP__DIVIDER_POSITION__RIGHT,
                     DESKTOP__DIVIDER_POSITION__RIGHT__DEFAULT_VALUE);
             spDesktop.getDividers().get(DESKTOP__DIVIDER_POSITION__INDEX_1).setPosition(dividerPositionRight);
@@ -126,7 +126,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         final PauseTransition pauseTransitionLeft = new PauseTransition();
         pauseTransitionLeft.setDuration(Duration.millis(DESKTOP__DIVIDER_POSITION__DURATION));
         pauseTransitionLeft.setOnFinished((ActionEvent event) -> {
-            PreferencesFacade.getDefault().putDouble(
+            PreferencesFacade.INSTANCE.getPreferences().putDouble(
                     this.getClass(), DESKTOP__DIVIDER_POSITION__LEFT,
                     spDesktop.getDividerPositions()[DESKTOP__DIVIDER_POSITION__INDEX_0]);
         });
@@ -145,7 +145,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         final PauseTransition pauseTransitionRight = new PauseTransition();
         pauseTransitionRight.setDuration(Duration.millis(DESKTOP__DIVIDER_POSITION__DURATION));
         pauseTransitionRight.setOnFinished((ActionEvent event) -> {
-            PreferencesFacade.getDefault().putDouble(
+            PreferencesFacade.INSTANCE.getPreferences().putDouble(
                     this.getClass(), DESKTOP__DIVIDER_POSITION__RIGHT,
                     spDesktop.getDividerPositions()[DESKTOP__DIVIDER_POSITION__INDEX_1]);
         });
@@ -162,7 +162,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
 
     private void initializeToolBar() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize ToolBar"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize ToolBar"); // NOI18N
         
         tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE__DREAM), ACTION__CREATE_NEW_DREAM));
         tbDesktop.getItems().add(this.createToolBarButton(resources.getString(KEY__FILE__DREAM_FAST), ACTION__CREATE_NEW_FAST_DREAM));
@@ -179,7 +179,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         final Button btn = new Button();
         btn.setText(title);
         btn.setOnAction((ActionEvent event) -> {
-            ActionFacade.getDefault().handle(actionKey);
+            ActionFacade.INSTANCE.getAction().handle(actionKey);
         });
         
         
@@ -187,7 +187,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
     
     private void initializeMenuBar() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize MenuBar"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize MenuBar"); // NOI18N
         
 //        mbDesktop.prefHeightProperty().bind(tbDesktop.heightProperty());
 //        mbDesktop.setVisible(false);
@@ -195,7 +195,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
     
     public Boolean checkForUnsavedFiles() {
-        LoggerFacade.getDefault().info(this.getClass(), "Check for unsaved files"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Check for unsaved files"); // NOI18N
         
         if (tpEditor.getTabs().isEmpty()) {
             return Boolean.FALSE;
@@ -216,70 +216,70 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionCreateNewDream() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action create new Dream"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action create new Dream"); // NOI18N
         
 //        ActionFacade.getDefault().handle(ACTION__CREATE_NEW_DREAM);
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_SEARCH_IN_DREAMS); // XXX test
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SHOW_SEARCH_IN_DREAMS); // XXX test
     }
     
     public void onActionCreateNewFastDream() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action create new fast Dream"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action create new fast Dream"); // NOI18N
         // TODO dreams can only created with the dream dialog (renname it, remove menu...)
-        ActionFacade.getDefault().handle(ACTION__CREATE_NEW_FAST_DREAM);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__CREATE_NEW_FAST_DREAM);
     }
     
     public void onActionCreateNewFileReflection() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action create new file Reflection"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action create new file Reflection"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__CREATE_NEW_FILE__REFLECTION);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__CREATE_NEW_FILE__REFLECTION);
     }
 
     public void onActionSaveMultiFiles() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action save Multi Files"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action save Multi Files"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__SAVE_ALL_CHANGED_FILES);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SAVE_ALL_CHANGED_FILES);
     }
     
     public void onActionShowExtendedSliderEditorDialog() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Extended Slider Editor"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action show Extended Slider Editor"); // NOI18N
         
 //        DialogProvider1.getDefault().showExtendedSliderEditorDialog();
     }
     
     public void onActionShowHelp() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Help"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action show Help"); // NOI18N
         
 //        ActionFacade.getDefault().handle(ACTION__SHOW_HELP);
     }
     
     public void onActionShowHelpAbout() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Help About"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action show Help About"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__ABOUT);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SHOW_HELP__ABOUT);
     }
     
     public void onActionShowHelpWelcome() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Help Welcome"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action show Help Welcome"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
     public void onActionShowTipOfTheNightEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tip of the Night Editor"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action show Tip of the Night Editor"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR);
     }
     
     public void onActionShowTipOfTheNightWindow() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tip of the Night Window"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action show Tip of the Night Window"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW);
     }
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DesktopPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in DesktopPresenter"); // NOI18N
         
         ExerciseProvider.getDefault().registerActions();
         FileProvider.getDefault().registerActions();
@@ -288,13 +288,13 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
     
     private void registerDialogLayers() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register Dialog layers"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register Dialog layers"); // NOI18N
         
         DialogProvider.getDefault().register(apDialogLayer, apDialogLayer2);
     }
     
     private void registerEditorAndNavigation() {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes tpNavigationLeft, tpEditor, tpNavigationRight in DesktopPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPanes tpNavigationLeft, tpEditor, tpNavigationRight in DesktopPresenter"); // NOI18N
         
         ExerciseProvider.getDefault().register(tpEditor);
         FeatureProvider.getDefault().register(tpEditor);

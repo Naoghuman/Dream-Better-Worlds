@@ -39,29 +39,29 @@ public class TestDataPresenter implements Initializable, IApplicationConfigurati
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize TestDataPresenter");
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize TestDataPresenter");
     
 //        assert (bNo != null)  : "fx:id=\"bNo\" was not injected: check your FXML file 'SaveMultiFiles.fxml'."; // NOI18N
     }
     
     private String getProperty(String propertyKey) {
-        return PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
+        return PropertiesFacade.INSTANCE.getProperties().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
     }
     
     public void onActionCreateTestData() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action create TestData"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action create TestData"); // NOI18N
         
         final SequentialTransition st = new SequentialTransition();
         final PauseTransition ptDropPreviousDB = new PauseTransition(Duration.ZERO);
         ptDropPreviousDB.setOnFinished((ActionEvent event) -> {
-            DatabaseFacade.getDefault().drop(this.getProperty(KEY__APPLICATION__DATABASE));
+            DatabaseFacade.INSTANCE.getDatabase().drop(this.getProperty(KEY__APPLICATION__DATABASE));
             // TODO how to access to the 
         });
         st.getChildren().add(ptDropPreviousDB);
         
         final PauseTransition ptCreateNewDB = new PauseTransition(DBW__LITTLE_DELAY__DURATION_250);
         ptCreateNewDB.setOnFinished((ActionEvent event) -> {
-            DatabaseFacade.getDefault().register(this.getProperty(KEY__APPLICATION__DATABASE));
+            DatabaseFacade.INSTANCE.getDatabase().register(this.getProperty(KEY__APPLICATION__DATABASE));
         });
         st.getChildren().add(ptCreateNewDB);
 

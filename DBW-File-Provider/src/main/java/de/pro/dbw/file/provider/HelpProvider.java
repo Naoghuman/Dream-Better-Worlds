@@ -19,14 +19,16 @@ package de.pro.dbw.file.provider;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
+import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
-import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentPresenter;
-import de.pro.dbw.file.help.impl.aboutdialogcontent.AboutDialogContentView;
+import de.pro.dbw.file.help.impl.aboutdialog.AboutDialogPresenter;
+import de.pro.dbw.file.help.impl.aboutdialog.AboutDialogView;
 import de.pro.dbw.file.help.impl.welcomehelp.WelcomeHelpView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -36,7 +38,7 @@ import javafx.scene.control.TabPane;
  * @author PRo
  */
 public class HelpProvider implements IActionConfiguration, IDefaultIdConfiguration,
-        IPreferencesConfiguration, IRegisterActions
+        IDialogConfiguration, IPreferencesConfiguration, IRegisterActions
 {    
     private static HelpProvider instance = null;
     
@@ -60,20 +62,20 @@ public class HelpProvider implements IActionConfiguration, IDefaultIdConfigurati
     }
 
     void checkShowAtStartWelcomeHelp() {
-        LoggerFacade.getDefault().info(this.getClass(), "Check if Welcome should show at start"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Check if Welcome should show at start"); // NOI18N
     
-        final Boolean isShowAtStart = PreferencesFacade.getDefault().getBoolean(
+        final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getPreferences().getBoolean(
                 PREF__SHOW_AT_START__WELCOME,
                 PREF__SHOW_AT_START__WELCOME__DEFAULT_VALUE);
         if (!isShowAtStart) {
             return;
         }
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_HELP__WELCOME);
+        ActionFacade.INSTANCE.getAction().handle(ACTION__SHOW_HELP__WELCOME);
     }
     
     public void register(TabPane tpEditor, TabPane tpNavigationRight) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in HelpProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in HelpProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
         this.tpNavigationRight = tpNavigationRight;
@@ -81,24 +83,24 @@ public class HelpProvider implements IActionConfiguration, IDefaultIdConfigurati
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in HelpProvider"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in HelpProvider"); // NOI18N
         
         this.registerOnActionShowHelpAbout();
         this.registerOnActionShowHelpWelcome();
     }
 
     private void registerOnActionShowHelpAbout() {
-        ActionFacade.getDefault().register(
-                ACTION__SHOW_HELP__ABOUT,
+        ActionFacade.INSTANCE.getAction().register(ACTION__SHOW_HELP__ABOUT,
                 (ActionEvent ae) -> {
-                    final AboutDialogContentView contentView = new AboutDialogContentView();
-                    final AboutDialogContentPresenter contentPresenter = contentView.getRealPresenter();
-                    DialogProvider.getDefault().show("About", contentView.getView(), contentPresenter.getSize()); // NOI18N
+                    final AboutDialogView view = new AboutDialogView();
+                    final AboutDialogPresenter presenter = view.getRealPresenter();
+                    final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__ABOUT);
+                    DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
                 });
     }
     
     private void registerOnActionShowHelpWelcome() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.getAction().register(
                 ACTION__SHOW_HELP__WELCOME,
                 (ActionEvent ae) -> {
                     // Check if the welcome-help is open

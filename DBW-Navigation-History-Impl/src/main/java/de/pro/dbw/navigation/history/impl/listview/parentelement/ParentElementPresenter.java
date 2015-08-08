@@ -37,14 +37,14 @@ public class ParentElementPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().trace(this.getClass(), "Initialize ParentElementPresenter");
+        LoggerFacade.INSTANCE.getLogger().trace(this.getClass(), "Initialize ParentElementPresenter");
         
         assert (lDay != null) : "fx:id=\"lDay\" was not injected: check your FXML file 'ParentElement.fxml'."; // NOI18N
         
     }
 
     public void configure(Long generationTime, String date) {
-        LoggerFacade.getDefault().trace(this.getClass(), "Configure ParentElementPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().trace(this.getClass(), "Configure ParentElementPresenter"); // NOI18N
         
         this.generationTime = generationTime;
         this.date = date;

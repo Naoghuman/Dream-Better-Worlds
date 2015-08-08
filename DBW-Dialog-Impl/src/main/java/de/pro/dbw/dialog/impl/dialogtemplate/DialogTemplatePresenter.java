@@ -41,7 +41,7 @@ public class DialogTemplatePresenter implements Initializable, IActionConfigurat
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize DialogTemplatePresenter"); // NOI18N
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize DialogTemplatePresenter"); // NOI18N
         
         assert (apDialog != null) : "fx:id=\"apDialog\" was not injected: check your FXML file 'DialogTemplate.fxml'."; // NOI18N
         assert (tpDialog != null) : "fx:id=\"tpDialog\" was not injected: check your FXML file 'DialogTemplate.fxml'."; // NOI18N

@@ -47,7 +47,7 @@ public class ReflectionSqlProvider implements IDefaultIdConfiguration, IReflecti
     
     public void createOrUpdate(ReflectionModel model) {
         // All in one transaction
-        DatabaseFacade.getDefault().getCrudService().beginTransaction();
+        DatabaseFacade.INSTANCE.getDatabase().getCrudService().beginTransaction();
         
         final List<ReflectionCommentModel> reflectionCommentModelsToDelete = FXCollections.observableArrayList();
         for (Iterator iterator = model.getReflectionCommentModels().iterator(); iterator.hasNext();) {
@@ -73,26 +73,26 @@ public class ReflectionSqlProvider implements IDefaultIdConfiguration, IReflecti
         
         if (Objects.equals(model.getId(), FILE__REFLECTION__DEFAULT_ID)) {
             model.setId(System.currentTimeMillis());
-            DatabaseFacade.getDefault().getCrudService().create(model, Boolean.FALSE);
+            DatabaseFacade.INSTANCE.getDatabase().getCrudService().create(model, Boolean.FALSE);
         }
         else {
-            DatabaseFacade.getDefault().getCrudService().update(model, Boolean.FALSE);
+            DatabaseFacade.INSTANCE.getDatabase().getCrudService().update(model, Boolean.FALSE);
         }
         
         for (ReflectionCommentModel reflectionCommentModelToDelete : reflectionCommentModelsToDelete) {
-            DatabaseFacade.getDefault().getCrudService().delete(ReflectionCommentModel.class,
+            DatabaseFacade.INSTANCE.getDatabase().getCrudService().delete(ReflectionCommentModel.class,
                     reflectionCommentModelToDelete.getId(), Boolean.FALSE);
         }
         
-        DatabaseFacade.getDefault().getCrudService().commitTransaction();
+        DatabaseFacade.INSTANCE.getDatabase().getCrudService().commitTransaction();
     }
     
     public void deleteReflectionWithAllComments(Long idToDelete) {
-        DatabaseFacade.getDefault().getCrudService().delete(ReflectionModel.class, idToDelete);
+        DatabaseFacade.INSTANCE.getDatabase().getCrudService().delete(ReflectionModel.class, idToDelete);
     }
     
     public ReflectionModel findReflectionById(Long reflectionId) {
-        final ReflectionModel model = DatabaseFacade.getDefault().getCrudService().findById(
+        final ReflectionModel model = DatabaseFacade.INSTANCE.getDatabase().getCrudService().findById(
                 ReflectionModel.class, reflectionId);
         Collections.sort(model.getReflectionCommentModels());
         

@@ -42,7 +42,7 @@ public class DateConverter implements IDateConverter {
     }
     
     public Long convertDateTimeToLong(String dateTime, String pattern) {
-        LoggerFacade.getDefault().debug(DateConverter.class, String.format(
+        LoggerFacade.INSTANCE.getLogger().debug(DateConverter.class, String.format(
                     "Convert %s with %s to Long", dateTime, pattern));
         
         try {
@@ -50,7 +50,7 @@ public class DateConverter implements IDateConverter {
             final Date converted = (Date) formatter.parse(dateTime);
             return converted.getTime();
         } catch (ParseException pe) {
-            LoggerFacade.getDefault().error(DateConverter.class, String.format(
+            LoggerFacade.INSTANCE.getLogger().error(DateConverter.class, String.format(
                     "Can't convert %s with %s to Long", dateTime, pattern), pe);
         }
         
