@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.pro</groupId>
     <artifactId>Dream-Better-Worlds</artifactId>
-    <version>0.1.3</version> <!-- -SNAPSHOT -->
+    <version>0.1.4-SNAPSHOT</version> <!-- -SNAPSHOT -->
     <packaging>pom</packaging>
     <name>Dream-Better-Worlds</name>
     <inceptionYear>2014</inceptionYear>
@@ -106,10 +106,10 @@
                 <type>jar</type>
             </dependency>
             <dependency>
-                    <groupId>de.pro</groupId>
-                    <artifactId>Lib-Audioclip</artifactId>
-                    <version>Lib-Audioclip-0.0.3-SNAPSHOT</version>
-                    <type>jar</type>
+                <groupId>de.pro</groupId>
+                <artifactId>Lib-Audioclip</artifactId>
+                <version>Lib-Audioclip-0.0.3-SNAPSHOT</version>
+                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>de.pro</groupId>
@@ -197,7 +197,8 @@
         <module>DBW-File-Dreammap-Api</module>
         <module>DBW-File-Dreammap-Impl</module>
         <module>DBW-File-Help-Api</module>
-        <module>DBW-File-Help-Impl</module><module>DBW-File-Provider</module>
+        <module>DBW-File-Help-Impl</module>
+        <module>DBW-File-Provider</module>
         <module>DBW-File-Reflection-Api</module>
         <module>DBW-File-Reflection-Impl</module>
         <module>DBW-File-TipOfTheNight-Api</module>
