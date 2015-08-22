@@ -39,6 +39,8 @@ How To ...<a name="HowTo" />
 
 * [HowToCloneOtherBranchesThenMasterWithNetBeans.md] describes the steps how to 
   clone `other` branches then the `master` branch with [NetBeans IDE].
+* [HowToMergeBranchesWithNetBeans.md] describes the steps how to merge branches 
+  from [GitHub] in the [NetBeans IDE].
 * [HowToRelease.md] contains a step-by-step instruction how to release a release
   in `Dream-Better-Worlds`.
 
@@ -82,6 +84,7 @@ Templates<a name="Templates" />
 [Coding Rules for View (Afterburner)]:./../coding-rules/afterburner/CodingRulesForView.md
 [NetBeans IDE]:https://netbeans.org/
 [HowToCloneOtherBranchesThenMasterWithNetBeans.md]:./../howto/HowToCloneOtherBranchesThenMasterWithNetBeans.md
+[HowToMergeBranchesWithNetBeans.md]:./../howto/HowToMergeBranchesWithNetBeans.md
 [HowToRelease.md]:./../howto/HowToRelease.md
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
 [Release v0.1.3 (2015-08-09 10:00)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.3
