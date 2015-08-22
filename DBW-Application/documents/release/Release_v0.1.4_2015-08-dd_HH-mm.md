@@ -12,7 +12,9 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
 #72 [Documents] Create new section 'Libraries' in 'Technical Informations'.
 
 
+
 #### Enhancement
+#75 [Documents] Create new file HowToCloneOtherBranchesThenMasterWithNetBeans.md
 
 
 

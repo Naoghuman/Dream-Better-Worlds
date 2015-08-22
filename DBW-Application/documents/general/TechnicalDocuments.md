@@ -37,6 +37,8 @@ Coding Rules<a name="CodingRules" />
 How To ...<a name="HowTo" />
 ---
 
+* [HowToCloneOtherBranchesThenMasterWithNetBeans.md] describes the steps how to 
+  clone `other` branches then the 'Master' branch with [NetBeans IDE].
 * [HowToRelease.md] contains a step-by-step instruction how to release a release
   in `Dream-Better-Worlds`.
 
@@ -78,6 +80,8 @@ Templates<a name="Templates" />
 [Coding Rules for Presenter (Afterburner)]:./../coding-rules/afterburner/CodingRulesForPresenter.md
 [Coding Rules for Properties (Afterburner)]:./../coding-rules/afterburner/CodingRulesForProperties.md
 [Coding Rules for View (Afterburner)]:./../coding-rules/afterburner/CodingRulesForView.md
+[NetBeans IDE]:https://netbeans.org/
+[HowToCloneOtherBranchesThenMasterWithNetBeans.md]:./../howto/HowToCloneOtherBranchesThenMasterWithNetBeans.md
 [HowToRelease.md]:./../release/HowToRelease.md
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
 [Release v0.1.3 (2015-08-09 10:00)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.3
