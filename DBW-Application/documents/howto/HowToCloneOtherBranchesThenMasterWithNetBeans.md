@@ -1,7 +1,7 @@
 How to clone other Branches then Master with NetBeans
 ===
 
-This document describes the steps how to clone `other` branches then the 'Master'
+This document describes the steps how to clone `other` branches then the `master`
 branch with [NetBeans IDE].
 
 

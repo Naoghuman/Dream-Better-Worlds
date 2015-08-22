@@ -38,7 +38,7 @@ How To ...<a name="HowTo" />
 ---
 
 * [HowToCloneOtherBranchesThenMasterWithNetBeans.md] describes the steps how to 
-  clone `other` branches then the 'Master' branch with [NetBeans IDE].
+  clone `other` branches then the `master` branch with [NetBeans IDE].
 * [HowToRelease.md] contains a step-by-step instruction how to release a release
   in `Dream-Better-Worlds`.
 
