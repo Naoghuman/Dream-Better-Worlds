@@ -28,6 +28,7 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
 
 
 #### Refactoring
+#77 [Documents] Rename the links in ReadMe for TechnicalInformations, -Documents.
 #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'.
 
 

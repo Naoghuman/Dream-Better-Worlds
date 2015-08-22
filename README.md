@@ -26,7 +26,7 @@ TODO Add sub screenshoots from Application (Flickr)
 
 Technical Informations
 ---
-* [Overview Technical Informations]
+* [TechnicalInformations.md]
     - [Libraries]
     - [License]
     - [Autor]
@@ -35,7 +35,7 @@ Technical Informations
 
 Technical Documents
 ---
-* [Overview Technical Documents]
+* [TechnicalDocuments.md]
     - [Coding Rules]
     - [How To ...]
     - [Release Notes]
@@ -44,7 +44,7 @@ Technical Documents
 
 
 [//]: # (Links for Technical Informations)
-[Overview Technical Informations]:DBW-Application/documents/general/TechnicalInformations.md
+[TechnicalInformations.md]:DBW-Application/documents/general/TechnicalInformations.md
 [Libraries]:DBW-Application/documents/general/TechnicalDocuments.md#Libraries
 [License]:DBW-Application/documents/general/TechnicalInformations.md#License
 [Autor]:DBW-Application/documents/general/TechnicalInformations.md#Autor
@@ -54,7 +54,7 @@ Technical Documents
 
 
 [//]: # (Links for Technical Documents)
-[Overview Technical Documents]:DBW-Application/documents/general/TechnicalDocuments.md
+[TechnicalDocuments.md]:DBW-Application/documents/general/TechnicalDocuments.md
 [Coding Rules]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRules
 [How To ...]:DBW-Application/documents/general/TechnicalDocuments.md#HowTo
 [Release Notes]:DBW-Application/documents/general/TechnicalDocuments.md#ReleaseNotes
