@@ -82,7 +82,7 @@ Templates<a name="Templates" />
 [Coding Rules for View (Afterburner)]:./../coding-rules/afterburner/CodingRulesForView.md
 [NetBeans IDE]:https://netbeans.org/
 [HowToCloneOtherBranchesThenMasterWithNetBeans.md]:./../howto/HowToCloneOtherBranchesThenMasterWithNetBeans.md
-[HowToRelease.md]:./../release/HowToRelease.md
+[HowToRelease.md]:./../howto/HowToRelease.md
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
 [Release v0.1.3 (2015-08-09 10:00)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.3
 [Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:./../release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
