@@ -19,6 +19,7 @@ Content
 
 Pre-Condition<a name="PreCondition" />
 ---
+
 * If both branches are in a state to merge and the branches are checked out in
   [NetBeans IDE] then goto section [Merge](#Merge).
   
@@ -26,6 +27,7 @@ Pre-Condition<a name="PreCondition" />
   
 Check out branches<a name="CheckOutBranches" />
 ---
+
 * Click Team -> Git -> Clone in [NetBeans IDE].
 * Paste https://github.com/Naoghuman/Dream-Better-Worlds.git into `Repository URL`.
 * Add `User` and `Password` and click `Next`.
@@ -36,6 +38,7 @@ Check out branches<a name="CheckOutBranches" />
 
 Merge<a name="Merge" />
 ---
+
 * Check out the `destination` branch.
 * Right click in `Git Repository Browser` on the `source` branch and select 
   `Merge revision`.
@@ -47,6 +50,7 @@ Merge<a name="Merge" />
 
 Conflict<a name="Conflict" />
 ---
+
 * Happens during the [Merge](#Merge) a `conflict` then a warning popup will be
   shown in [NetBeans IDE].
 * Click the `TODO Name? Review` button.
@@ -58,6 +62,7 @@ Conflict<a name="Conflict" />
 
 Post-Processing<a name="PostProcessing" />
 ---
+
 * Check if in the `source` branches extentions (for example new moduls) are 
   available which not exists in the `destination` branch.
 * If an extentions exists, then controll if there also the new `features` needed 

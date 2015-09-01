@@ -17,8 +17,8 @@ Content
         * [Coding Rules for Properties (Afterburner)](#CodingRulesForPropertiesAfterburner)
         * [Coding Rules for View (Afterburner)](#CodingRulesForViewAfterburner)
 * [How To ...](#HowTo)
-    * [How to clone other branches then master with NetBeans](#HowToCloneOtherBranchesThenMasterWithNetBeans)
-    * [How to merge branches in NetBeans](#HowToMergeBranchesInNetBeans)
+    * [How to clone other branches then master with NetBeans IDE](#HowToCloneOtherBranchesThenMasterWithNetBeansIDE)
+    * [How to merge branches in NetBeans IDE](#HowToMergeBranchesInNetBeansIDE)
     * [How to release](#HowToRelease)
 * [Release Notes](#ReleaseNotes)
 * [Templates](#Templates)
@@ -65,19 +65,19 @@ Coding Rules<a name="CodingRules" />
 ### Coding Rules in Context from library afterburner<a name="CodingRulesInContextFromLibraryAfterburner" />
 
 
-#### Coding Rules for Presenter (Afterburner)]<a name="CodingRulesForPresenterAfterburner" />
+#### Coding Rules for Presenter (Afterburner)<a name="CodingRulesForPresenterAfterburner" />
 * This file contains the `Coding Rules` for writing a `Presenter` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
 * For more information see [CodingRulesForPresenterAfterburner.md].
 
 
-#### Coding Rules for Properties (Afterburner)]<a name="CodingRulesForPropertiesAfterburner" />
+#### Coding Rules for Properties (Afterburner)<a name="CodingRulesForPropertiesAfterburner" />
 * This file contains the `Coding Rules` for working with `Properties` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
 * For more information see [CodingRulesForPropertiesAfterburner.md].
 
 
-#### Coding Rules for View (Afterburner)]<a name="CodingRulesForViewAfterburner" />
+#### Coding Rules for View (Afterburner)<a name="CodingRulesForViewAfterburner" />
 * This file contains the `Coding Rules` for writing a `View` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
 * For more information see [CodingRulesForViewAfterburner.md].
@@ -88,16 +88,16 @@ How To ...<a name="HowTo" />
 ---
 
 
-### How to clone other branches then master with NetBeans<a name="HowToCloneOtherBranchesThenMasterWithNetBeans" />
+### How to clone other branches then master with NetBeans IDE<a name="HowToCloneOtherBranchesThenMasterWithNetBeansIDE" />
 * This file describes the steps how to `clone` other branches then the `master` 
   branch with [NetBeans IDE].
-* For more information see [HowToCloneOtherBranchesThenMasterWithNetBeans.md].
+* For more information see [HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md].
 
 
-### How to merge branches in NetBeans<a name="HowToMergeBranchesInNetBeans" />
+### How to merge branches in NetBeansIDE<a name="HowToMergeBranchesInNetBeansIDE" />
 * This file describes the steps how to `merge` branches from [GitHub] in the 
   [NetBeans IDE].
-* For more information see [HowToMergeBranchesInNetBeans.md].
+* For more information see [HowToMergeBranchesInNetBeansIDE.md].
 
 
 ### How to release<a name="HowToRelease" />
@@ -147,8 +147,8 @@ Templates<a name="Templates" />
 [CodingRulesForViewAfterburner.md]:./../coding-rules/afterburner/CodingRulesForView.md
 
 [GitHub]:https://github.com/
-[HowToCloneOtherBranchesThenMasterWithNetBeans.md]:./../howto/HowToCloneOtherBranchesThenMasterWithNetBeans.md
-[HowToMergeBranchesInNetBeans.md]:./../howto/HowToMergeBranchesInNetBeans.md
+[HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md]:./../howto/HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md
+[HowToMergeBranchesInNetBeansIDE.md]:./../howto/HowToMergeBranchesInNetBeansIDE.md
 [HowToRelease.md]:./../howto/HowToRelease.md
 [NetBeans IDE]:https://netbeans.org/
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
