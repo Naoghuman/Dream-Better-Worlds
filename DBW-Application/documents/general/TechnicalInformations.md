@@ -6,6 +6,9 @@ Technical Informations
 Content
 ---
 
+* [Release Notes](#ReleaseNotes)
+    * [Current release](#CurrentRelease)
+    * [Overview releases in Dream-Better-Worlds](#OverviewReleasesInDreamBetterWorlds)
 * [Libraries](#Libraries)
     * [Own Libraries](#OwnLibraries)
         * [Lib-Action](#LibAction)
@@ -19,6 +22,30 @@ Content
 * [License](#License)
 * [Autor](#Autor)
 * [Contact](#Contact)
+
+
+
+Release Notes<a name="ReleaseNotes" />
+---
+
+
+### Current release<a name="CurrentRelease" />
+
+Current pre-release is `v0.1.3` which contains following points:
+* The main focus in this release is the documentation. Extended the ReadMe.md
+  with serveral document from the area 'Technical Informations' and 'Technical 
+  documents'.
+* Internal will now .properties files be used für the names in dialogs and tabs.
+* A bug will be fixed which concerns the sorting in DreamBook and History.
+
+Detailed information about the current pre-release can be found here:
+* [Release v0.1.3 (2015-08-09 10:00)]
+
+
+### Overview releases in Dream-Better-Worlds<a name="OverviewReleasesInDreamBetterWorlds" />
+
+An overview about all existings releases can be found here:
+* [Overview from all releases in Dream-Better-Worlds]
 
 
 
@@ -78,21 +105,21 @@ Libraries<a name="Libraries" />
 License<a name="License" />
 ---
 
-The project `Dream-Better-Worlds` is licensed under [General Public License 3.0].
+* The project `Dream-Better-Worlds` is licensed under [General Public License 3.0].
 
 
 
 Autor<a name="Autor" />
 ---
 
-The project `Dream-Better-Worlds` is maintained by me, Peter Rogge. See [Contact](#Contact).
+* The project `Dream-Better-Worlds` is maintained by me, Peter Rogge. See [Contact](#Contact).
 
 
 
 Contact<a name="Contact" />
 ---
 
-You can reach me under <dream-better-worlds@gmx.de>.
+* You can reach me under <dream-better-worlds@gmx.de>.
 
 
 
@@ -105,3 +132,5 @@ You can reach me under <dream-better-worlds@gmx.de>.
 [Project page from Lib-Preferences]:https://github.com/Naoghuman/lib-preferences
 [Project page from Lib-Properties]:https://github.com/Naoghuman/lib-properties
 [Project page from Lib-Resources]:https://github.com/Naoghuman/lib-resources
+[Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
+[Release v0.1.3 (2015-08-09 10:00)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.3

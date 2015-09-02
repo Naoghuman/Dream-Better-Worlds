@@ -20,7 +20,6 @@ Content
     * [How to clone other branches then master with NetBeans IDE](#HowToCloneOtherBranchesThenMasterWithNetBeansIDE)
     * [How to merge branches in NetBeans IDE](#HowToMergeBranchesInNetBeansIDE)
     * [How to release](#HowToRelease)
-* [Release Notes](#ReleaseNotes)
 * [Templates](#Templates)
 
 
@@ -107,24 +106,6 @@ How To ...<a name="HowTo" />
 
 
 
-Release Notes<a name="ReleaseNotes" />
----
-
-Current pre-release is `v0.1.3` which contains following points:
-* The main focus in this release is the documentation. Extended the ReadMe.md
-  with serveral document from the area 'Technical Informations' and 'Technical 
-  documents'.
-* Internal will now .properties files be used für the names in dialogs and tabs.
-* A bug will be fixed which concerns the sorting in DreamBook and History.
-
-Detailed information about the current release can be found here:
-* [Release v0.1.3 (2015-08-09 10:00)]
-
-An overview about all existings releases can be found here:
-* [Overview from all releases in Dream-Better-Worlds]
-
-
-
 Templates<a name="Templates" />
 ---
 
@@ -151,6 +132,4 @@ Templates<a name="Templates" />
 [HowToMergeBranchesInNetBeansIDE.md]:./../howto/HowToMergeBranchesInNetBeansIDE.md
 [HowToRelease.md]:./../howto/HowToRelease.md
 [NetBeans IDE]:https://netbeans.org/
-[Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
-[Release v0.1.3 (2015-08-09 10:00)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.3
 [Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:./../release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md

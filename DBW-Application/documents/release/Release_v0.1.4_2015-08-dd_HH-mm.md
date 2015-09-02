@@ -29,6 +29,7 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
 
 
 #### Refactoring
+#87 [Documents] Move section 'Releases' to 'Technical Informations'.
 #77 [Documents] Rename the links in ReadMe for TechnicalInformations, -Documents.
 #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'.
 
@@ -38,6 +39,8 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
 
 
 [//]: # (Issues which will be integrated in this release)
+
+#86 [Documents] Create new section 'Additional Informations' in 'Technical Documents'.
 #63 [Documents] Write new document SingletonEnumFacade.md.
 #55 [Coding Rules] Refactore existing, create new Coding_Rules_for_CSS.txt for entities. (rename)
 #49 [Testdata] Create new file Coding_Rules_for_Testdata.txt (rename)
