@@ -29,6 +29,7 @@ Technical Informations
 
 The document [TechnicalInformations.md] contains following sections:
 
+* [Release Notes]
 * [Libraries]
     * [Own Libraries]
 	* [Lib-Action]
@@ -63,7 +64,6 @@ The document [TechnicalDocuments.md] contains following sections:
     * [How to clone other branches then master with NetBeans]
     * [How to merge branches in NetBeans]
     * [How to release]
-* [Release Notes]
 * [Templates]
 
 
@@ -81,6 +81,7 @@ The document [TechnicalDocuments.md] contains following sections:
 [Lib-Preferences]:DBW-Application/documents/general/TechnicalInformations.md#LibPreferences
 [Lib-Properties]:DBW-Application/documents/general/TechnicalInformations.md#LibProperties
 [Lib-Resources]:DBW-Application/documents/general/TechnicalInformations.md#LibResources
+[Release Notes]:DBW-Application/documents/general/TechnicalInformations.md#ReleaseNotes
 [TechnicalInformations.md]:DBW-Application/documents/general/TechnicalInformations.md
 [Own Libraries]:DBW-Application/documents/general/TechnicalInformations.md#OwnLibraries
 
@@ -103,5 +104,4 @@ The document [TechnicalDocuments.md] contains following sections:
 [How to clone other branches then master with NetBeans]:DBW-Application/documents/general/TechnicalDocuments.md#HowToCloneOtherBranchesThenMasterWithNetBeans
 [How to merge branches in NetBeans]:DBW-Application/documents/general/TechnicalDocuments.md#HowToMergeBranchesInNetBeans
 [How to release]:DBW-Application/documents/general/TechnicalDocuments.md#HowToRelease
-[Release Notes]:DBW-Application/documents/general/TechnicalDocuments.md#ReleaseNotes
 [Templates]:DBW-Application/documents/general/TechnicalDocuments.md#Templates
