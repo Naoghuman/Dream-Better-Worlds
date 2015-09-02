@@ -49,16 +49,15 @@ Technical Documents
 
 The document [TechnicalDocuments.md] contains following sections:
 
-* [Coding Rules]
-    * [General Coding Rules]
-        * [Coding Rules for Actions (General)]
-        * [Coding Rules for CSS (General)]
-        * [Coding Rules for Entities (General)]
-        * [Coding Rules for Properties (General)]
-    * [Coding Rules in Context from library afterburner]
-        * [Coding Rules for Presenter (Afterburner)]
-        * [Coding Rules for Properties (Afterburner)]
-        * [Coding Rules for View (Afterburner)]
+* [General Coding Rules]
+    * [Coding Rules for Actions (General)]
+    * [Coding Rules for CSS (General)]
+    * [Coding Rules for Entities (General)]
+    * [Coding Rules for Properties (General)]
+* [Coding Rules in Context from library afterburner]
+    * [Coding Rules for Presenter (Afterburner)]
+    * [Coding Rules for Properties (Afterburner)]
+    * [Coding Rules for View (Afterburner)]
 * [How To ...]
     * [How to clone other branches then master with NetBeans]
     * [How to merge branches in NetBeans]
@@ -88,7 +87,6 @@ The document [TechnicalDocuments.md] contains following sections:
 
 [//]: # (Links for Technical Documents)
 [TechnicalDocuments.md]:DBW-Application/documents/general/TechnicalDocuments.md
-[Coding Rules]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRules
 [Coding Rules in Context from library afterburner]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesInContextFromLibraryAfterburner
 [Coding Rules for Actions (General)]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesForActionsGeneral
 [Coding Rules for CSS (General)]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesForCSSGeneral

@@ -6,16 +6,15 @@ Technical Documents
 Content
 ---
 
-* [Coding Rules](#CodingRules)
-    * [General Coding Rules](#GeneralCodingRules)
-        * [Coding Rules for Actions (General)](#CodingRulesForActionsGeneral)
-        * [Coding Rules for CSS (General)](#CodingRulesForCSSGeneral)
-        * [Coding Rules for Entities (General)](#CodingRulesForEntitiesGeneral)
-        * [Coding Rules for Properties (General)](#CodingRulesForPropertiesGeneral)
-    * [Coding Rules in Context from library afterburner](#CodingRulesInContextFromLibraryAfterburner)
-        * [Coding Rules for Presenter (Afterburner)](#CodingRulesForPresenterAfterburner)
-        * [Coding Rules for Properties (Afterburner)](#CodingRulesForPropertiesAfterburner)
-        * [Coding Rules for View (Afterburner)](#CodingRulesForViewAfterburner)
+* [General Coding Rules](#GeneralCodingRules)
+    * [Coding Rules for Actions (General)](#CodingRulesForActionsGeneral)
+    * [Coding Rules for CSS (General)](#CodingRulesForCSSGeneral)
+    * [Coding Rules for Entities (General)](#CodingRulesForEntitiesGeneral)
+    * [Coding Rules for Properties (General)](#CodingRulesForPropertiesGeneral)
+* [Coding Rules in Context from library afterburner](#CodingRulesInContextFromLibraryAfterburner)
+    * [Coding Rules for Presenter (Afterburner)](#CodingRulesForPresenterAfterburner)
+    * [Coding Rules for Properties (Afterburner)](#CodingRulesForPropertiesAfterburner)
+    * [Coding Rules for View (Afterburner)](#CodingRulesForViewAfterburner)
 * [How To ...](#HowTo)
     * [How to clone other branches then master with NetBeans IDE](#HowToCloneOtherBranchesThenMasterWithNetBeansIDE)
     * [How to merge branches in NetBeans IDE](#HowToMergeBranchesInNetBeansIDE)
@@ -24,59 +23,52 @@ Content
 
 
 
-Coding Rules<a name="CodingRules" />
+General Coding Rules<a name="GeneralCodingRules" />
 ---
 
-`Coding Rules` defined the rules how some functionality should be implemented in
-`Dream-Better-Worlds`. There are 2 main areas which have their own `Coding Rules`.
-* General `Coding Rules` apply for the hole application.
-* Expected the `Coding Rules` in contex from the library [Afterburner].
 
-
-### General Coding Rules<a name="GeneralCodingRules" />
-
-
-#### Coding Rules for Actions (General)<a name="CodingRulesForActionsGeneral" />
+### Coding Rules for Actions (General)<a name="CodingRulesForActionsGeneral" />
 * This file contains the `Coding Rules` for writing `Actions` in
   `Dream-Better-Worlds` in general purpose.
 * For more information see [CodingRulesForActionsGeneral.md].
 
 
-#### Coding Rules for CSS (General)<a name="CodingRulesForCSSGeneral" />
+### Coding Rules for CSS (General)<a name="CodingRulesForCSSGeneral" />
 * This file contains the `Coding Rules` for styling with `CSS` in
   `Dream-Better-Worlds` in general purpose.
 * For more information see [CodingRulesForCSSGeneral.md].
 
 
-#### Coding Rules for Entities (General)<a name="CodingRulesForEntitiesGeneral" />
+### Coding Rules for Entities (General)<a name="CodingRulesForEntitiesGeneral" />
 * This file contains the `Coding Rules` for writing `Entities` in
   `Dream-Better-Worlds` in general purpose.
 * For more information see [CodingRulesForEntitiesGeneral.md].
 
 
-#### Coding Rules for Properties (General)<a name="CodingRulesForPropertiesGeneral" />
+### Coding Rules for Properties (General)<a name="CodingRulesForPropertiesGeneral" />
 * This file contains the `Coding Rules` for working with `Properties` in
   `Dream-Better-Worlds` in general purpose.
 * For more information see [CodingRulesForPropertiesGeneral.md].
 
 
 
-### Coding Rules in Context from library afterburner<a name="CodingRulesInContextFromLibraryAfterburner" />
+Coding Rules in Context from library afterburner<a name="CodingRulesInContextFromLibraryAfterburner" />
+---
 
 
-#### Coding Rules for Presenter (Afterburner)<a name="CodingRulesForPresenterAfterburner" />
+### Coding Rules for Presenter (Afterburner)<a name="CodingRulesForPresenterAfterburner" />
 * This file contains the `Coding Rules` for writing a `Presenter` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
 * For more information see [CodingRulesForPresenterAfterburner.md].
 
 
-#### Coding Rules for Properties (Afterburner)<a name="CodingRulesForPropertiesAfterburner" />
+### Coding Rules for Properties (Afterburner)<a name="CodingRulesForPropertiesAfterburner" />
 * This file contains the `Coding Rules` for working with `Properties` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
 * For more information see [CodingRulesForPropertiesAfterburner.md].
 
 
-#### Coding Rules for View (Afterburner)<a name="CodingRulesForViewAfterburner" />
+### Coding Rules for View (Afterburner)<a name="CodingRulesForViewAfterburner" />
 * This file contains the `Coding Rules` for writing a `View` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
 * For more information see [CodingRulesForViewAfterburner.md].
