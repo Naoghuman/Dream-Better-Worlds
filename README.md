@@ -30,16 +30,15 @@ Technical Informations
 The document [TechnicalInformations.md] contains following sections:
 
 * [Release Notes]
-* [Libraries]
-    * [Own Libraries]
-	* [Lib-Action]
-        * [Lib-Database-Objectdb]
-	* [Lib-Logger]
-	* [Lib-Preferences]
-	* [Lib-Properties]
-	* [Lib-Resources]
-    * [External Libraries]
-	* [afterburner]
+* [Own Libraries]
+    * [Lib-Action]
+    * [Lib-Database-Objectdb]
+    * [Lib-Logger]
+    * [Lib-Preferences]
+    * [Lib-Properties]
+    * [Lib-Resources]
+* [External Libraries]
+    * [afterburner]
 * [License]
 * [Autor]
 * [Contact]
@@ -73,7 +72,6 @@ The document [TechnicalDocuments.md] contains following sections:
 [Autor]:DBW-Application/documents/general/TechnicalInformations.md#Autor
 [Contact]:DBW-Application/documents/general/TechnicalInformations.md#Contact
 [External Libraries]:DBW-Application/documents/general/TechnicalInformations.md#ExernalLibraries
-[Libraries]:DBW-Application/documents/general/TechnicalInformations.md#Libraries
 [License]:DBW-Application/documents/general/TechnicalInformations.md#License
 [Lib-Action]:DBW-Application/documents/general/TechnicalInformations.md#LibAction
 [Lib-Database-Objectdb]:DBW-Application/documents/general/TechnicalInformations.md#LibDatabaseObjectDB
