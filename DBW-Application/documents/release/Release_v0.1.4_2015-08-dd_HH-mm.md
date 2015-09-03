@@ -9,6 +9,7 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
 
 
 #### New
+#86 [Documents] Create new section 'Additional Informations' in 'Technical Documents'.
 #75 [Documents] Create new file HowToCloneOtherBranchesThenMasterWithNetBeans.md.
 #73 [Documents] Create new HowToMergeBranchesInNetBeans.md.
 #72 [Documents] Create new section 'Libraries' in 'Technical Informations'.
@@ -39,8 +40,6 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
 
 
 [//]: # (Issues which will be integrated in this release)
-
-#86 [Documents] Create new section 'Additional Informations' in 'Technical Documents'.
 #63 [Documents] Write new document SingletonEnumFacade.md.
 #55 [Coding Rules] Refactore existing, create new Coding_Rules_for_CSS.txt for entities. (rename)
 #49 [Testdata] Create new file Coding_Rules_for_Testdata.txt (rename)

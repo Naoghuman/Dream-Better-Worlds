@@ -63,6 +63,9 @@ The document [TechnicalDocuments.md] contains following sections:
     * [How to merge branches in NetBeans]
     * [How to release]
 * [Templates]
+* [Additional Informations]
+    * [aim42 Method Guide]
+    * [Google Material Design]
 
 
 
@@ -86,7 +89,8 @@ The document [TechnicalDocuments.md] contains following sections:
 
 
 [//]: # (Links for Technical Documents)
-[TechnicalDocuments.md]:DBW-Application/documents/general/TechnicalDocuments.md
+[Additional Informations]:DBW-Application/documents/general/TechnicalDocuments.md#AdditionalInformations
+[aim42 Method Guide]:DBW-Application/documents/general/TechnicalDocuments.md#Aim42MethodGuide
 [Coding Rules in Context from library afterburner]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesInContextFromLibraryAfterburner
 [Coding Rules for Actions (General)]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesForActionsGeneral
 [Coding Rules for CSS (General)]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesForCSSGeneral
@@ -96,8 +100,10 @@ The document [TechnicalDocuments.md] contains following sections:
 [Coding Rules for Properties (General)]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesForPropertiesGeneral
 [Coding Rules for View (Afterburner)]:DBW-Application/documents/general/TechnicalDocuments.md#CodingRulesForViewAfterburner
 [General Coding Rules]:DBW-Application/documents/general/TechnicalDocuments.md#GeneralCodingRules
+[Google Material Design]:DBW-Application/documents/general/TechnicalDocuments.md#GoogleMaterialDesign
 [How To ...]:DBW-Application/documents/general/TechnicalDocuments.md#HowTo
 [How to clone other branches then master with NetBeans]:DBW-Application/documents/general/TechnicalDocuments.md#HowToCloneOtherBranchesThenMasterWithNetBeans
 [How to merge branches in NetBeans]:DBW-Application/documents/general/TechnicalDocuments.md#HowToMergeBranchesInNetBeans
 [How to release]:DBW-Application/documents/general/TechnicalDocuments.md#HowToRelease
+[TechnicalDocuments.md]:DBW-Application/documents/general/TechnicalDocuments.md
 [Templates]:DBW-Application/documents/general/TechnicalDocuments.md#Templates

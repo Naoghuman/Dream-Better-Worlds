@@ -20,6 +20,9 @@ Content
     * [How to merge branches in NetBeans IDE](#HowToMergeBranchesInNetBeansIDE)
     * [How to release](#HowToRelease)
 * [Templates](#Templates)
+* [Additional Informations](#AdditionalInformations)
+    * [aim42 Method Guide](#Aim42MethodGuide)
+    * [Google Material Design](#GoogleMaterialDesign)
 
 
 
@@ -107,8 +110,26 @@ Templates<a name="Templates" />
 
 
 
+Additional Informations<a name="AdditionalInformations" />
+---
+
+
+### aim42 Method Guide<a name="Aim42MethodGuide" />
+* aim42 is collection of practices and patterns to support software evolution, 
+  maintenance, evolution and improvement of software systems.
+* For more informations see [aim42 in GitHub].
+
+
+### Google Material Design<a name="GoogleMaterialDesign" />
+* Create a visual language that synthesizes classic principles of good design 
+  with the innovation and possibility of technology and science.
+* For more informations see [Material Design Guidelines].
+
+
+
 [//]: # (Links)
 [Afterburner]:http://afterburner.adam-bien.com/
+[aim42 in GitHub]:https://github.com/aim42/aim42
 
 [CodingRulesForActionsGeneral.md]:./../coding-rules/general/CodingRulesForActions.md
 [CodingRulesForCSSGeneral.md]:./../coding-rules/general/CodingRulesForCSS.md
@@ -124,4 +145,5 @@ Templates<a name="Templates" />
 [HowToMergeBranchesInNetBeansIDE.md]:./../howto/HowToMergeBranchesInNetBeansIDE.md
 [HowToRelease.md]:./../howto/HowToRelease.md
 [NetBeans IDE]:https://netbeans.org/
+[Material Design Guidelines]:https://www.google.com/design/spec/material-design/introduction.html
 [Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:./../release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
