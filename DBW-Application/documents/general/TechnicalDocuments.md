@@ -33,25 +33,25 @@ General Coding Rules<a name="GeneralCodingRules" />
 ### Coding Rules for Actions (General)<a name="CodingRulesForActionsGeneral" />
 * This file contains the `Coding Rules` for writing `Actions` in
   `Dream-Better-Worlds` in general purpose.
-* For more information see [CodingRulesForActionsGeneral.md].
+* For more informations see [CodingRulesForActionsGeneral.md].
 
 
 ### Coding Rules for CSS (General)<a name="CodingRulesForCSSGeneral" />
 * This file contains the `Coding Rules` for styling with `CSS` in
   `Dream-Better-Worlds` in general purpose.
-* For more information see [CodingRulesForCSSGeneral.md].
+* For more informations see [CodingRulesForCSSGeneral.md].
 
 
 ### Coding Rules for Entities (General)<a name="CodingRulesForEntitiesGeneral" />
 * This file contains the `Coding Rules` for writing `Entities` in
   `Dream-Better-Worlds` in general purpose.
-* For more information see [CodingRulesForEntitiesGeneral.md].
+* For more informations see [CodingRulesForEntitiesGeneral.md].
 
 
 ### Coding Rules for Properties (General)<a name="CodingRulesForPropertiesGeneral" />
 * This file contains the `Coding Rules` for working with `Properties` in
   `Dream-Better-Worlds` in general purpose.
-* For more information see [CodingRulesForPropertiesGeneral.md].
+* For more informations see [CodingRulesForPropertiesGeneral.md].
 
 
 
@@ -62,19 +62,19 @@ Coding Rules in Context from library afterburner<a name="CodingRulesInContextFro
 ### Coding Rules for Presenter (Afterburner)<a name="CodingRulesForPresenterAfterburner" />
 * This file contains the `Coding Rules` for writing a `Presenter` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
-* For more information see [CodingRulesForPresenterAfterburner.md].
+* For more informations see [CodingRulesForPresenterAfterburner.md].
 
 
 ### Coding Rules for Properties (Afterburner)<a name="CodingRulesForPropertiesAfterburner" />
 * This file contains the `Coding Rules` for working with `Properties` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
-* For more information see [CodingRulesForPropertiesAfterburner.md].
+* For more informations see [CodingRulesForPropertiesAfterburner.md].
 
 
 ### Coding Rules for View (Afterburner)<a name="CodingRulesForViewAfterburner" />
 * This file contains the `Coding Rules` for writing a `View` in
   `Dream-Better-Worlds` in context from the library [Afterburner].
-* For more information see [CodingRulesForViewAfterburner.md].
+* For more informations see [CodingRulesForViewAfterburner.md].
 
 
 
@@ -85,19 +85,19 @@ How To ...<a name="HowTo" />
 ### How to clone other branches then master with NetBeans IDE<a name="HowToCloneOtherBranchesThenMasterWithNetBeansIDE" />
 * This file describes the steps how to `clone` other branches then the `master` 
   branch with [NetBeans IDE].
-* For more information see [HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md].
+* For more informations see [HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md].
 
 
 ### How to merge branches in NetBeansIDE<a name="HowToMergeBranchesInNetBeansIDE" />
 * This file describes the steps how to `merge` branches from [GitHub] in the 
   [NetBeans IDE].
-* For more information see [HowToMergeBranchesInNetBeansIDE.md].
+* For more informations see [HowToMergeBranchesInNetBeansIDE.md].
 
 
 ### How to release<a name="HowToRelease" />
 * This file contains a step-by-step instruction how to `release` a release
   in `Dream-Better-Worlds`.
-* For more information see [HowToRelease.md].
+* For more informations see [HowToRelease.md].
 
 
 
