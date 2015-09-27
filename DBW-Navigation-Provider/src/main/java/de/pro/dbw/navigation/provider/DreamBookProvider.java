@@ -5,7 +5,6 @@
  */
 package de.pro.dbw.navigation.provider;
 
-import static de.pro.dbw.core.configuration.api.application.IApplicationConfiguration.DBW__RESOURCE_BUNDLE;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
@@ -48,9 +47,9 @@ public class DreamBookProvider implements IActionConfiguration, INavigationConfi
     }
 
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft in DreamBookProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft in DreamBookProvider"); // NOI18N
         
-        final String tabName = PropertiesFacade.INSTANCE.getProperties().getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__DREAMBOOK);
+        final String tabName = PropertiesFacade.INSTANCE.getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__DREAMBOOK);
         final Tab tab = new Tab(tabName);
         tab.setClosable(false);
         tab.setContent(dreamBookNavigationView.getView());
@@ -61,7 +60,7 @@ public class DreamBookProvider implements IActionConfiguration, INavigationConfi
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in DreamBookProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in DreamBookProvider"); // NOI18N
         
         this.registerOnActionJobCheckDreamBookNavigation();
         
@@ -70,12 +69,12 @@ public class DreamBookProvider implements IActionConfiguration, INavigationConfi
     }
     
     private void registerOnActionJobCheckDreamBookNavigation() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check DreamBook-Navigation"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register job for check DreamBook-Navigation"); // NOI18N
                     
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK,
                 (ActionEvent ae) -> {
-                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Check DreamBook-Navigation is prefix New actual"); // NOI18N
+                    LoggerFacade.INSTANCE.debug(this.getClass(), "Check DreamBook-Navigation is prefix New actual"); // NOI18N
                     
                     final DreamBookNavigationPresenter presenter = dreamBookNavigationView.getRealPresenter();
                     final ObservableList<DreamBookNavigationModel> items = presenter.getItems();
@@ -90,7 +89,7 @@ public class DreamBookProvider implements IActionConfiguration, INavigationConfi
                         }
                         
                         if (UtilProvider.getDefault().getDateConverter().isBefore(-3, item.getGenerationTime())) {
-                            LoggerFacade.INSTANCE.getLogger().debug(DreamBookProvider.class,
+                            LoggerFacade.INSTANCE.debug(DreamBookProvider.class,
                                     "DateConverter.isBefore(-3, item.getGenerationTime())"); // NOI18N
                                     
                             presenter.refresh();

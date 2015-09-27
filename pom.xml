@@ -102,43 +102,43 @@
             <dependency>
                 <groupId>de.pro</groupId>
                 <artifactId>Lib-Action</artifactId>
-                <version>0.2.0</version>
+                <version>0.2.2</version>
                 <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>de.pro</groupId>
                 <artifactId>Lib-Audioclip</artifactId>
-                <version>Lib-Audioclip-0.0.3-SNAPSHOT</version>
+                <version>Lib-Audioclip-0.0.4-SNAPSHOT</version>
                 <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>de.pro</groupId>
                 <artifactId>Lib-Database-ObjectDB</artifactId>
-                <version>0.0.6</version>
+                <version>0.0.7</version>
                 <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>de.pro</groupId>
                 <artifactId>Lib-Logger</artifactId>
-                <version>0.2.0</version>
+                <version>0.2.1</version>
                 <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>de.pro</groupId>
                 <artifactId>Lib-Preferences</artifactId>
-                <version>0.2.0</version>
+                <version>0.2.1</version>
                 <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>de.pro</groupId>
                 <artifactId>Lib-Properties</artifactId>
-                <version>0.2.0</version>
+                <version>0.2.1</version>
                 <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>de.pro</groupId>
                 <artifactId>Lib-Resources</artifactId>
-                <version>0.0.8</version>
+                <version>0.0.9</version>
                 <type>jar</type>
             </dependency>
         

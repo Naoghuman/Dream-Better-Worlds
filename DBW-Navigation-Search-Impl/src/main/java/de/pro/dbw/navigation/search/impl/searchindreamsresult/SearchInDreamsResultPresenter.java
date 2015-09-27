@@ -34,7 +34,7 @@ public class SearchInDreamsResultPresenter implements Initializable, IActionConf
     @FXML private Button bSearchInDreams;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize SearchInDreamsResultPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize SearchInDreamsResultPresenter"); // NOI18N
         
 //        assert (spSearchComponents != null) : "fx:id=\"spSearchComponents\" was not injected: check your FXML file 'SearchInDreamsResult.fxml'."; // NOI18N
         
@@ -42,7 +42,7 @@ public class SearchInDreamsResultPresenter implements Initializable, IActionConf
     }
 
     public void configure(SearchDataModel searchDataModel) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Configure SearchDataModel"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Configure SearchDataModel"); // NOI18N
         
     }
     

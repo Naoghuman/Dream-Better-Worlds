@@ -79,7 +79,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize ReflectionWizardPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ReflectionWizardPresenter"); // NOI18N
     
         assert (bCreate != null)    : "fx:id=\"bCreate\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
         assert (bEdit != null)      : "fx:id=\"bEdit\" was not injected: check your FXML file 'ReflectionWizard.fxml'."; // NOI18N
@@ -129,7 +129,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     private void initializeSaveProgress() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize save progress"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize save progress"); // NOI18N
         
         piSave.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
         piSave.setVisible(Boolean.FALSE);
@@ -140,7 +140,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     private void initializeTimeComponents() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize Time component"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize Time component"); // NOI18N
         
         final Long now = System.currentTimeMillis();
         tfDate.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, PATTERN__DATE));
@@ -166,7 +166,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     public void configureWizardForCreateMode() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Configure Reflection Wizard for CREATE mode."); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Configure Reflection Wizard for CREATE mode."); // NOI18N
     
         bEdit.setVisible(Boolean.FALSE);
         bEdit.setManaged(Boolean.FALSE);
@@ -175,7 +175,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     public void configureWizardForEditMode(ReflectionModel model) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Configure Reflection Wizard for EDIT mode."); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Configure Reflection Wizard for EDIT mode."); // NOI18N
     
         bCreate.setVisible(Boolean.FALSE);
         bCreate.setManaged(Boolean.FALSE);
@@ -191,13 +191,13 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionClose() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Close"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Close"); // NOI18N
     
         DialogProvider.getDefault().hide();
     }
     
     public void onActionCreate() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Create"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Create"); // NOI18N
     
         final SequentialTransition st = new SequentialTransition();
         final PauseTransition pt1 = new PauseTransition(Duration.ZERO);
@@ -226,13 +226,13 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     public void onActionEdit() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Edit"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Edit"); // NOI18N
     
         this.onActionCreate();
     }
     
     public void onActionRefresh() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Refresh"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Refresh"); // NOI18N
     
         tfTitle.setText(null);
         taText.setText(null);
@@ -244,7 +244,7 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
     }
     
     private void save() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Save new Reflection file to database"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Save new Reflection file to database"); // NOI18N
         
         // Catch data
         model.setTitle(tfTitle.getText());
@@ -262,12 +262,12 @@ public class ReflectionWizardPresenter implements Initializable, IActionConfigur
         model = new ReflectionModel();
 
         // Update gui
-        ActionFacade.INSTANCE.getAction().handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
-        ActionFacade.INSTANCE.getAction().handle(ACTION__REFRESH_NAVIGATION__HISTORY);
+        ActionFacade.INSTANCE.handle(ACTION__REFRESH_NAVIGATION__DREAMBOOK);
+        ActionFacade.INSTANCE.handle(ACTION__REFRESH_NAVIGATION__HISTORY);
     }
     
     private void show(ReflectionModel model) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Show ReflectionModel"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Show ReflectionModel"); // NOI18N
         
         this.model = model;
 

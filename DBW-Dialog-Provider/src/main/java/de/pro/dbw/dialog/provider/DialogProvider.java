@@ -59,13 +59,13 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
     }
     
     private void initialize() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize DialogProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize DialogProvider"); // NOI18N
         
-        PropertiesFacade.INSTANCE.getProperties().register(DIALOG__RESOURCE_BUNDLE);
+        PropertiesFacade.INSTANCE.register(DIALOG__RESOURCE_BUNDLE);
     }
     
     public void hide() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Hide dialoglayer"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Hide dialoglayer"); // NOI18N
         
         apDialogLayer.getChildren().clear();
         apDialogLayer.setVisible(Boolean.FALSE);
@@ -73,7 +73,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
     }
     
     public void hide2() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Hide dialoglayer2"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Hide dialoglayer2"); // NOI18N
         
         apDialogLayer2.getChildren().clear();
         apDialogLayer2.setVisible(Boolean.FALSE);
@@ -81,7 +81,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
     }
     
     public void register(AnchorPane apDialogLayer, AnchorPane apDialogLayer2) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register AnchorPane apDialogLayer, apDialogLayer2 in DialogProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register AnchorPane apDialogLayer, apDialogLayer2 in DialogProvider"); // NOI18N
         
         this.apDialogLayer = apDialogLayer;
         this.apDialogLayer2 = apDialogLayer2;
@@ -91,10 +91,8 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
     }
     
     private void setDialogPosition(Parent dialog) {
-        final Double width = PreferencesFacade.INSTANCE.getPreferences().getDouble(
-                PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
-        final Double height = PreferencesFacade.INSTANCE.getPreferences().getDouble(
-                PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
+        final Double width = PreferencesFacade.INSTANCE.getDouble(PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
+        final Double height = PreferencesFacade.INSTANCE.getDouble(PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
         dialog.setLayoutX((width / 2) - (dialog.prefWidth(Double.MAX_VALUE) / 2));
         dialog.setLayoutY((height / 2) - (dialog.prefHeight(Double.MAX_VALUE) / 2));
     }
@@ -112,7 +110,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
     }
     
     public void show(String title, Parent content, Dimension size) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialoglayer"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show dialoglayer"); // NOI18N
         
         final DialogTemplateView dialogView = new DialogTemplateView();
         final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
@@ -124,7 +122,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
     }
     
     public void show2(String title, Parent content, Dimension size) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialoglayer2"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show dialoglayer2"); // NOI18N
         
         final DialogTemplateView dialogView = new DialogTemplateView();
         final DialogTemplatePresenter dialogPresenter = dialogView.getRealPresenter();
@@ -140,7 +138,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
             EventHandler<ActionEvent> onActionYes,
             EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for Delete"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show dialog for Delete"); // NOI18N
         
         final DeleteDialogView view = new DeleteDialogView();
         final DeleteDialogPresenter presenter = view.getRealPresenter();
@@ -148,7 +146,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
         
         final DialogTemplateView templateView = new DialogTemplateView();
         final DialogTemplatePresenter templatePresenter = templateView.getRealPresenter();
-        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DELETE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DELETE);
         templatePresenter.configure(title, view.getView(), presenter.getSize());
         
         final Parent dialog = templateView.getView();
@@ -161,7 +159,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
             EventHandler<ActionEvent> onActionYes,
             EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for Delete2"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show dialog for Delete2"); // NOI18N
         
         final DeleteDialogView view = new DeleteDialogView();
         final DeleteDialogPresenter presenter = view.getRealPresenter();
@@ -169,7 +167,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
         
         final DialogTemplateView templateView = new DialogTemplateView();
         final DialogTemplatePresenter templatePresenter = templateView.getRealPresenter();
-        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DELETE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DELETE);
         templatePresenter.configure(title, view.getView(), presenter.getSize());
         
         final Parent dialog = templateView.getView();
@@ -181,7 +179,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
         EventHandler<ActionEvent> onActionYes,
         EventHandler<ActionEvent> onActionNo
     ) {   
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for SaveMultiFiles"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show dialog for SaveMultiFiles"); // NOI18N
         
         final SaveMultiFilesDialogView view = new SaveMultiFilesDialogView();
         final SaveMultiFilesDialogPresenter presenter = view.getRealPresenter();
@@ -189,7 +187,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
         
         final DialogTemplateView templateView = new DialogTemplateView();
         final DialogTemplatePresenter templatePresenter = templateView.getRealPresenter();
-        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__SAVE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__SAVE);
         templatePresenter.configure(title, view.getView(), presenter.getSize());
         
         final Parent dialog = templateView.getView();
@@ -201,7 +199,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
         EventHandler<ActionEvent> onActionYes,
         EventHandler<ActionEvent> onActionNo
     ) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show dialog for SaveSingleFile"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show dialog for SaveSingleFile"); // NOI18N
         
         final SaveSingleFileDialogView view = new SaveSingleFileDialogView();
         final SaveSingleFileDialogPresenter presenter = view.getRealPresenter();
@@ -209,7 +207,7 @@ public class DialogProvider implements IDialogConfiguration, IPreferencesConfigu
         
         final DialogTemplateView templateView = new DialogTemplateView();
         final DialogTemplatePresenter templatePresenter = templateView.getRealPresenter();
-        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__SAVE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__SAVE);
         templatePresenter.configure(title, view.getView(), presenter.getSize());
         
         final Parent dialog = templateView.getView();

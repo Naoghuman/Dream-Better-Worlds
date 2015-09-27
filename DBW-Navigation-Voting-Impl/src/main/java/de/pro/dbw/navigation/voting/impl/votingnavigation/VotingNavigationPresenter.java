@@ -57,7 +57,7 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize VotingNavigationPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingNavigationPresenter"); // NOI18N
         
         assert (lvNavigation != null) : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'VotingNavigation.fxml'."; // NOI18N
         
@@ -67,7 +67,7 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
     }
     
     private void initializeNavigationLeft() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize navigation left"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize navigation left"); // NOI18N
         
         lvNavigation.getStylesheets().addAll(this.getClass().getResource(CSS_VOTING_NAVIGATION).toExternalForm());
         lvNavigation.getItems().clear();
@@ -111,7 +111,7 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
                 transferModel.setActionKey(model.getActionKey());
                 transferModel.setLong(model.getIdToOpen());
 
-                ActionFacade.INSTANCE.getAction().handle(transferModel);
+                ActionFacade.INSTANCE.handle(transferModel);
             }
         });
 //        lvNavigation.getSelectionModel().selectedItemProperty().addListener((ObservableValue observable, Object oldValue, Object newValue) -> {
@@ -132,7 +132,7 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
 
     public void refresh() {
         Platform.runLater(() -> {
-            LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Load navigation for Voting"); // NOI18N
+            LoggerFacade.INSTANCE.info(this.getClass(), "Load navigation for Voting"); // NOI18N
 
             final List<VotingNavigationModel> models = FXCollections.observableArrayList();
 //            final List<VotingModel> votings = SqlProvider.getDefault().getVotingNavigationSqlProvider().findAllActiveVotings();
@@ -159,13 +159,13 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in VotingNavigationPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in VotingNavigationPresenter"); // NOI18N
         
         this.registerOnActionRefreshVotingNavigation();
     }
 
     private void registerOnActionRefreshVotingNavigation() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__REFRESH_NAVIGATION__VOTING,
                 (ActionEvent ae) -> {
                     this.refresh();

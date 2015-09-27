@@ -63,9 +63,9 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     public void checkShowAtStartTipOfTheNight() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
     
-        final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getPreferences().getBoolean(
+        final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getBoolean(
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT__DEFAULT_VALUE);
         if (!isShowAtStart) {
@@ -76,23 +76,23 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     private void onActionShowTipOfTheNightEditor() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
         
         final TipOfTheNightEditorView view = new TipOfTheNightEditorView();
         final TipOfTheNightEditorPresenter presenter = view.getRealPresenter();
-        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT_EDITOR);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT_EDITOR);
         DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
     }
     
     private void onActionShowTipOfTheNightWindow() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "On action show TipOfTheNight window"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "On action show TipOfTheNight window"); // NOI18N
     
         final Stage window = new Stage();
         window.initModality(Modality.NONE);
 //        window.initOwner(stage);
         window.setAlwaysOnTop(Boolean.FALSE);
         window.setResizable(Boolean.FALSE);
-        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT);
         window.setTitle(title);
         
         final TipOfTheNightChooserView view = new TipOfTheNightChooserView();
@@ -103,21 +103,21 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }
     
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in TipOfTheNightProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in TipOfTheNightProvider"); // NOI18N
         
         this.registerOnActionShowTipOfTheNightEditor();
         this.registerOnActionShowTipOfTheNightWindow();
     }
     
     private void registerOnActionShowTipOfTheNightEditor() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR,
                 (ActionEvent ae) -> {
                     this.onActionShowTipOfTheNightEditor();
@@ -125,7 +125,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     private void registerOnActionShowTipOfTheNightWindow() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW,
                 (ActionEvent ae) -> {
                     this.onActionShowTipOfTheNightWindow();

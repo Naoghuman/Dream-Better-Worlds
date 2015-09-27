@@ -22,8 +22,6 @@ import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
-import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.KEY__NAVIGATION_TAB__DREAMBOOK;
-import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.NAVIGATION__RESOURCE_BUNDLE;
 import de.pro.dbw.navigation.search.impl.searchnavigation.SearchNavigationView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
@@ -63,11 +61,11 @@ public class SearchProvider implements IActionConfiguration, INavigationConfigur
     }
 
     public void register(TabPane tpNavigationLeft, TabPane tbEditor) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in SearchProvider");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in SearchProvider");
         
         this.tbEditor = tbEditor;
         
-        final String tabName = PropertiesFacade.INSTANCE.getProperties().getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__SEARCH);
+        final String tabName = PropertiesFacade.INSTANCE.getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__SEARCH);
         final Tab tab = new Tab(tabName);
         tab.setClosable(false);
         tab.setContent(searchNavigationView.getView());
@@ -78,7 +76,7 @@ public class SearchProvider implements IActionConfiguration, INavigationConfigur
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in SearchProvider");
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in SearchProvider");
         
         this.registerOnActionSearchInDreams();
         this.registerOnActionSearchInReflections();
@@ -86,7 +84,7 @@ public class SearchProvider implements IActionConfiguration, INavigationConfigur
     }
     
     private void registerOnActionSearchInDreams() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SEARCH_IN__DREAMS,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -95,7 +93,7 @@ public class SearchProvider implements IActionConfiguration, INavigationConfigur
     }
     
     private void registerOnActionSearchInReflections() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SEARCH_IN__REFLECTIONS,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -104,7 +102,7 @@ public class SearchProvider implements IActionConfiguration, INavigationConfigur
     }
     
     private void registerOnActionSearchInTipsOfTheNight() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();

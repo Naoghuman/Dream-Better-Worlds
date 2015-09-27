@@ -1,4 +1,4 @@
-Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
+Welcome to `Dream-Better-Worlds` with the new pre-release `v0.1.4`.
 
 
 
@@ -30,6 +30,7 @@ Welcome to `Dream-Better-Worlds` with a new pre-release `v0.1.4`.
 
 
 #### Refactoring
+#88 [Dependencies] Update the project to the new versions from my own libraries.
 #87 [Documents] Move section 'Releases' to 'Technical Informations'.
 #77 [Documents] Rename the links in ReadMe for TechnicalInformations, -Documents.
 #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'.

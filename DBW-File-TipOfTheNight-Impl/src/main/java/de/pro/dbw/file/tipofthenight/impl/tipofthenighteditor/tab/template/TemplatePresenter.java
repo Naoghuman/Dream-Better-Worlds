@@ -34,7 +34,7 @@ public class TemplatePresenter implements Initializable, IPreferencesConfigurati
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize TabTemplatePresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TabTemplatePresenter"); // NOI18N
         
 //        assert (bpPreview != null) : "fx:id=\"bpPreview\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N
 

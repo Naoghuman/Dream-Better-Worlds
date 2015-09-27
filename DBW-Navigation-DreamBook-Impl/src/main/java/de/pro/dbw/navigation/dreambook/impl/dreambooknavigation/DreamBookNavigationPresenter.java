@@ -62,7 +62,7 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize DreamBookPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize DreamBookPresenter"); // NOI18N
         
         assert (lvNavigation != null) : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'DreamBookNavigation.fxml'."; // NOI18N
         
@@ -72,7 +72,7 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
     }
     
     private void initializeNavigationLeft() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize navigation left"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize navigation left"); // NOI18N
         
         lvNavigation.getStylesheets().addAll(this.getClass().getResource(CSS_DREAM_BOOK_NAVIGATION).toExternalForm());
         lvNavigation.getItems().clear();
@@ -116,7 +116,7 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
                 transferModel.setActionKey(model.getActionKey());
                 transferModel.setLong(model.getIdToOpen());
 
-                ActionFacade.INSTANCE.getAction().handle(transferModel);
+                ActionFacade.INSTANCE.handle(transferModel);
             }
         });
 //        lvNavigation.getSelectionModel().selectedItemProperty().addListener((ObservableValue observable, Object oldValue, Object newValue) -> {
@@ -137,7 +137,7 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
 
     public void refresh() {
         Platform.runLater(() -> {
-            LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Load navigation for DreamBook"); // NOI18N
+            LoggerFacade.INSTANCE.info(this.getClass(), "Load navigation for DreamBook"); // NOI18N
 
             final List<DreamBookNavigationModel> models = FXCollections.observableArrayList();
             final List<DreamModel> dreams = SqlProvider.getDefault().getDreamBookNavigationSqlProvider().findAllDreams();
@@ -181,13 +181,13 @@ public class DreamBookNavigationPresenter implements Initializable, IActionConfi
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in DreamBookNavigationPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in DreamBookNavigationPresenter"); // NOI18N
         
         this.registerOnActionRefreshDreamBookNavigation();
     }
 
     private void registerOnActionRefreshDreamBookNavigation() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__REFRESH_NAVIGATION__DREAMBOOK,
                 (ActionEvent ae) -> {
                     this.refresh();

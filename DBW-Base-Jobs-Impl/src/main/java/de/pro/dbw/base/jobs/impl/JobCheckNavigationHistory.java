@@ -34,12 +34,12 @@ public class JobCheckNavigationHistory implements IActionConfiguration, IJobConf
     private static PauseTransition ptChecker = null;
 
     public static void start() {
-        LoggerFacade.INSTANCE.getLogger().info(JobCheckNavigationHistory.class, "Start job for History-Navigation...");
+        LoggerFacade.INSTANCE.info(JobCheckNavigationHistory.class, "Start job for History-Navigation...");
         
         ptChecker = new PauseTransition();
         ptChecker.setDuration(CHECKER_DURATION);
         ptChecker.setOnFinished((ActionEvent event) -> {
-            ActionFacade.INSTANCE.getAction().handle(ACTION__JOB_CHECK_NAVIGATION__HISTORY);
+            ActionFacade.INSTANCE.handle(ACTION__JOB_CHECK_NAVIGATION__HISTORY);
         
             if (ptChecker.getDelay().equals(CHECKER_DURATION)) {
                 ptChecker.setDelay(Duration.ZERO);
@@ -51,7 +51,7 @@ public class JobCheckNavigationHistory implements IActionConfiguration, IJobConf
     }
     
     public static void stop() {
-        LoggerFacade.INSTANCE.getLogger().info(JobCheckNavigationDreamBook.class, "Stop job for History-Navigation");
+        LoggerFacade.INSTANCE.info(JobCheckNavigationDreamBook.class, "Stop job for History-Navigation");
         
         if (
                 ptChecker != null

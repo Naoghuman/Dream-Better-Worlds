@@ -49,7 +49,7 @@ public class HistoryNavigationSqlProvider implements IDreamConfiguration, IRefle
         final Map<String, Object> parameters = FXCollections.observableHashMap();
         parameters.put(DREAM_MODEL__COLUMN_NAME__GENERATION_TIME,
                 UtilProvider.getDefault().getDateConverter().addDays(addDays));
-        final List<DreamModel> dreams = DatabaseFacade.INSTANCE.getDatabase().getCrudService().findByNamedQuery(
+        final List<DreamModel> dreams = DatabaseFacade.INSTANCE.getCrudService().findByNamedQuery(
                 DreamModel.class, NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY, parameters);
         Collections.sort(dreams);
         
@@ -60,7 +60,7 @@ public class HistoryNavigationSqlProvider implements IDreamConfiguration, IRefle
         final Map<String, Object> parameters = FXCollections.observableHashMap();
         parameters.put(REFLECTION_MODEL__COLUMN_NAME__GENERATION_TIME,
                 UtilProvider.getDefault().getDateConverter().addDays(addDays));
-        final List<ReflectionModel> reflections = DatabaseFacade.INSTANCE.getDatabase().getCrudService().findByNamedQuery(
+        final List<ReflectionModel> reflections = DatabaseFacade.INSTANCE.getCrudService().findByNamedQuery(
                 ReflectionModel.class, NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION__HISTORY, parameters);
         Collections.sort(reflections);
         

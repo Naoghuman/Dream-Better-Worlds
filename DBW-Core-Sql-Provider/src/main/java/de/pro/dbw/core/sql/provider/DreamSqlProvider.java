@@ -39,26 +39,25 @@ public class DreamSqlProvider {
     private DreamSqlProvider() {}
     
     public void create(DreamModel model) {
-        DatabaseFacade.INSTANCE.getDatabase().getCrudService().create(model);
+        DatabaseFacade.INSTANCE.getCrudService().create(model);
     }
     
     public void createOrUpdate(DreamModel model, Long defaultId) {
         if (Objects.equals(model.getId(), defaultId)) {
             model.setId(System.currentTimeMillis());
-            DatabaseFacade.INSTANCE.getDatabase().getCrudService().create(model);
+            DatabaseFacade.INSTANCE.getCrudService().create(model);
         }
         else {
-            DatabaseFacade.INSTANCE.getDatabase().getCrudService().update(model);
+            DatabaseFacade.INSTANCE.getCrudService().update(model);
         }
     }
     
     public void delete(Long idToDelete) {
-        DatabaseFacade.INSTANCE.getDatabase().getCrudService().delete(DreamModel.class, idToDelete);
+        DatabaseFacade.INSTANCE.getCrudService().delete(DreamModel.class, idToDelete);
     }
     
     public DreamModel findById(Long dreamId) {
-        final DreamModel model = DatabaseFacade.INSTANCE.getDatabase().getCrudService()
-                .findById(DreamModel.class, dreamId);
+        final DreamModel model = DatabaseFacade.INSTANCE.getCrudService().findById(DreamModel.class, dreamId);
         
         return model;
     }

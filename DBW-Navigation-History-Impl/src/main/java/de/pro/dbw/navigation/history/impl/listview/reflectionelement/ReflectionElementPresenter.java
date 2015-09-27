@@ -48,7 +48,7 @@ public class ReflectionElementPresenter implements Initializable, IApplicationCo
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().trace(this.getClass(), "Initialize ReflectionElementPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.trace(this.getClass(), "Initialize ReflectionElementPresenter"); // NOI18N
         
         assert (lReflection != null)     : "fx:id=\"lReflection\" was not injected: check your FXML file 'ReflectionElement.fxml'."; // NOI18N
         assert (lGenerationTime != null) : "fx:id=\"lGenerationTime\" was not injected: check your FXML file 'ReflectionElement.fxml'."; // NOI18N
@@ -56,7 +56,7 @@ public class ReflectionElementPresenter implements Initializable, IApplicationCo
     }
     
     public void configure(Long generationTime, String title, Long idToOpen) {
-        LoggerFacade.INSTANCE.getLogger().trace(this.getClass(), "Configure ReflectionElementPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.trace(this.getClass(), "Configure ReflectionElementPresenter"); // NOI18N
         
         this.generationTime = generationTime;
         this.title = title;
@@ -66,7 +66,7 @@ public class ReflectionElementPresenter implements Initializable, IApplicationCo
         lPrefix.setVisible(hasPrefixNew);
         lPrefix.setManaged(hasPrefixNew);
         lPrefix.setText(hasPrefixNew ?
-                PropertiesFacade.INSTANCE.getProperties().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW)
+                PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW)
                 : SIGN__EMPTY);
         
         date = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(

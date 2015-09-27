@@ -70,7 +70,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize DreamFilePresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize DreamFilePresenter"); // NOI18N
         
         this.resources = resources;
         
@@ -90,13 +90,13 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
     }
     
     private void initializeTime() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize Time component"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize Time component"); // NOI18N
         
         tfTime.disableProperty().bind(cbTime.selectedProperty().not());
     }
     
     private void initializeListeners() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize listeners"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize listeners"); // NOI18N
         
         booleanChangeListener = new BooleanChangeListener();
         stringChangeListener = new StringChangeListener();
@@ -107,7 +107,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionDelete() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Delete"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Delete"); // NOI18N
 
         DialogProvider.getDefault().showDeleteDialog(
                 resources.getString(KEY__DIALOG_DELETE__TITLE),
@@ -125,7 +125,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionRefresh() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action refresh"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action refresh"); // NOI18N
         
         if (oldModel == null) {
             return;
@@ -135,7 +135,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
     }
     
     private void onActionRefreshGui(Boolean removeFile) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Refresh Gui"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Refresh Gui"); // NOI18N
         
         final List<ActionTransferModel> transferModels = FXCollections.observableArrayList();
         ActionTransferModel transferModel = new ActionTransferModel();
@@ -153,17 +153,17 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
         transferModel.setActionKey(ACTION__REFRESH_NAVIGATION__HISTORY);
         transferModels.add(transferModel);
         
-        ActionFacade.INSTANCE.getAction().handle(transferModels);
+        ActionFacade.INSTANCE.handle(transferModels);
     }
     
     public void onActionSave() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Save"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Save"); // NOI18N
         
         onActionSave(Boolean.TRUE);
     }
     
     public void onActionSave(Boolean updateGui) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action Save"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Save"); // NOI18N
         
         System.out.println(" XXX DreamPresenter.onActionSave() add validation for input");
         
@@ -200,7 +200,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
     }
     
 //    public void registerOnActionShowExtendedSliderDialog() {
-//        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register on action show Extended Slider Dialog"); // NOI18N
+//        LoggerFacade.INSTANCE.debug(this.getClass(), "Register on action show Extended Slider Dialog"); // NOI18N
 //        
 //        // dynamic action (with open elements (can also dreamfile-id))
 //        final String actionKey = ACTION__SHOW_EXTENDED_SLIDER_DIALOG + model.getId();
@@ -218,7 +218,7 @@ public class DreamPresenter implements Initializable, IActionConfiguration,
 //    }
     
     public void show(DreamModel model) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Show dream: " + model.getTitle()); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Show dream: " + model.getTitle()); // NOI18N
         System.out.println(" XXX DreamPresenter.show() validation date + time");
         
         this.model = model;

@@ -39,13 +39,13 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
     }
     
     private void initialize() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize NavigationProvider");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize NavigationProvider");
         
-        PropertiesFacade.INSTANCE.getProperties().register(NAVIGATION__RESOURCE_BUNDLE);
+        PropertiesFacade.INSTANCE.register(NAVIGATION__RESOURCE_BUNDLE);
     }
     
     public void register(TabPane tpNavigationLeft, TabPane tbEditor, TabPane tpNavigationRight) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor, tpNavigationRight in NavigationProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor, tpNavigationRight in NavigationProvider"); // NOI18N
         
         this.registerNavigationLeft(tpNavigationLeft, tbEditor);
         this.registerNavigationRight(tpNavigationRight);
@@ -53,7 +53,7 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in NavigationProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in NavigationProvider"); // NOI18N
         
         DreamBookProvider.getDefault().registerActions();
         HistoryProvider.getDefault().registerActions();
@@ -62,7 +62,7 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
     }
     
     private void registerNavigationLeft(TabPane tpNavigationLeft, TabPane tbEditor) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in NavigationProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in NavigationProvider"); // NOI18N
         
         DreamBookProvider.getDefault().register(tpNavigationLeft);
         SearchProvider.getDefault().register(tpNavigationLeft, tbEditor);
@@ -79,7 +79,7 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
     }
     
     private void registerNavigationRight(TabPane tpNavigationRight) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationRight in NavigationProvider");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationRight in NavigationProvider");
         
         HistoryProvider.getDefault().register(tpNavigationRight);
         
@@ -94,10 +94,10 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
     }
 
     private void selectPreviousTabSelection(final TabPane tpNavigation, final String key, Integer value) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Select previous tab for: " + key);
+        LoggerFacade.INSTANCE.info(this.getClass(), "Select previous tab for: " + key);
         
         Platform.runLater(() -> {
-            final Integer previousTab = PreferencesFacade.INSTANCE.getPreferences().getInt(
+            final Integer previousTab = PreferencesFacade.INSTANCE.getInt(
                     this.getClass(), key, value);
             tpNavigation.getSelectionModel().select(previousTab);
             
@@ -106,7 +106,7 @@ public class NavigationProvider implements INavigationConfiguration, IRegisterAc
             {
                 @Override
                 public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    PreferencesFacade.INSTANCE.getPreferences().putInt(this.getClass(), key,
+                    PreferencesFacade.INSTANCE.putInt(this.getClass(), key,
                             tpNavigation.getSelectionModel().getSelectedIndex());
                 }
             });

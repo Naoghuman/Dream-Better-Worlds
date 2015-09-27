@@ -45,7 +45,7 @@ public class TipOfTheNightEditorPresenter implements Initializable,
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize TipOfTheNightEditorPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TipOfTheNightEditorPresenter"); // NOI18N
         
         assert (bpPreview != null)      : "fx:id=\"bpPreview\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N
         assert (tTemplate != null)      : "fx:id=\"tTemplate\" was not injected: check your FXML file 'TipOfTheNightEditor.fxml'."; // NOI18N

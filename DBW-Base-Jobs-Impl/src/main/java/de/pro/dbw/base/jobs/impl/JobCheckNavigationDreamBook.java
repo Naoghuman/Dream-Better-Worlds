@@ -34,12 +34,12 @@ public class JobCheckNavigationDreamBook implements IActionConfiguration, IJobCo
     private static PauseTransition ptChecker = null;
 
     public static void start() {
-        LoggerFacade.INSTANCE.getLogger().info(JobCheckNavigationDreamBook.class, "Start job for DreamBook-Navigation...");
+        LoggerFacade.INSTANCE.info(JobCheckNavigationDreamBook.class, "Start job for DreamBook-Navigation...");
         
         ptChecker = new PauseTransition();
         ptChecker.setDuration(CHECKER_DURATION);
         ptChecker.setOnFinished((ActionEvent event) -> {
-            ActionFacade.INSTANCE.getAction().handle(ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK);
+            ActionFacade.INSTANCE.handle(ACTION__JOB_CHECK_NAVIGATION__DREAMBOOK);
         
             if (ptChecker.getDelay().equals(CHECKER_DURATION)) {
                 ptChecker.setDelay(Duration.ZERO);
@@ -51,7 +51,7 @@ public class JobCheckNavigationDreamBook implements IActionConfiguration, IJobCo
     }
     
     public static void stop() {
-        LoggerFacade.INSTANCE.getLogger().info(JobCheckNavigationDreamBook.class, "Stop job for DreamBook-Navigation");
+        LoggerFacade.INSTANCE.info(JobCheckNavigationDreamBook.class, "Stop job for DreamBook-Navigation");
         
         if (
                 ptChecker != null

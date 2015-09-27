@@ -1,4 +1,4 @@
-Welcome to `Dream-Better-Worlds` with a new pre-release `vX.Y.Z`.
+Welcome to `Dream-Better-Worlds` with the new pre-release `vX.Y.Z`.
 
 
 

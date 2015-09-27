@@ -57,7 +57,7 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize ReflectionCommentPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ReflectionCommentPresenter"); // NOI18N
         
         this.resources = resources;
     
@@ -71,7 +71,7 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
     }
 
     public void configure(ReflectionCommentModel reflectionCommentModel, String actionKeyForDeletion) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Configure ReflectionCommentPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Configure ReflectionCommentPresenter"); // NOI18N
     
         this.reflectionCommentModel = reflectionCommentModel;
         this.actionKeyForDeletion = actionKeyForDeletion;
@@ -94,7 +94,7 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
     }
     
     public void onActionDelete() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "On action delete"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action delete"); // NOI18N
     
         final ActionTransferModel actionTransferModel = new ActionTransferModel();
         actionTransferModel.setActionKey(actionKeyForDeletion);
@@ -103,7 +103,7 @@ public class ReflectionCommentPresenter implements Initializable, IActionConfigu
         DialogProvider.getDefault().showDeleteDialog(
                 resources.getString(KEY__DIALOG_DELETE__TITLE),
                 (ActionEvent ae) -> { // Yes
-                    ActionFacade.INSTANCE.getAction().handle(actionTransferModel);
+                    ActionFacade.INSTANCE.handle(actionTransferModel);
                     DialogProvider.getDefault().hide();
                 },
                 (ActionEvent ae) -> { // No

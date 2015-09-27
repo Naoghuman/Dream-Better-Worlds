@@ -19,7 +19,6 @@ package de.pro.dbw.application;
 import com.airhacks.afterburner.injection.Injector;
 import de.pro.dbw.application.testdata.TestDataView;
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
-import static de.pro.dbw.core.configuration.api.application.IApplicationConfiguration.DBW__RESOURCE_BUNDLE;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.properties.api.PropertiesFacade;
@@ -39,11 +38,11 @@ public class TestDataApplication extends Application implements IApplicationConf
     
     @Override
     public void init() throws Exception {
-        PropertiesFacade.INSTANCE.getProperties().register(DBW__RESOURCE_BUNDLE);
+        PropertiesFacade.INSTANCE.register(DBW__RESOURCE_BUNDLE);
         
         final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
         final String message = this.getProperty(KEY__APPLICATION__TESTDATA_MESSAGE_START);
-        LoggerFacade.INSTANCE.getLogger().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
+        LoggerFacade.INSTANCE.message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
     }
 
     @Override
@@ -62,16 +61,16 @@ public class TestDataApplication extends Application implements IApplicationConf
     }
     
     private String getProperty(String propertyKey) {
-        return PropertiesFacade.INSTANCE.getProperties().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
+        return PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
     }
     
     private void onCloseRequest() {
         final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
         final String message = this.getProperty(KEY__APPLICATION__TESTDATA_MESSAGE_STOP);
-        LoggerFacade.INSTANCE.getLogger().message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
+        LoggerFacade.INSTANCE.message(borderSign, 80, message + KEY__APPLICATION__TESTDATA_TITLE);
         
         Injector.forgetAll();
-        DatabaseFacade.INSTANCE.getDatabase().shutdown();
+        DatabaseFacade.INSTANCE.shutdown();
         
         final PauseTransition pt = new PauseTransition(DBW__LITTLE_DELAY__DURATION_125);
         pt.setOnFinished((ActionEvent event) -> {

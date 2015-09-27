@@ -39,7 +39,7 @@ public class SaveSingleFileDialogPresenter implements Initializable, IDialogSize
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize SaveSingleFileDialogPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize SaveSingleFileDialogPresenter"); // NOI18N
         
         assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'SaveSingleFileDialog.fxml'."; // NOI18N
         assert (bYes != null)     : "fx:id=\"bYes\" was not injected: check your FXML file 'SaveSingleFileDialog.fxml'."; // NOI18N

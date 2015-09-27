@@ -18,8 +18,6 @@ package de.pro.dbw.navigation.provider;
 
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
-import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.KEY__NAVIGATION_TAB__DREAMBOOK;
-import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.NAVIGATION__RESOURCE_BUNDLE;
 import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationPresenter;
 import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationView;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -54,9 +52,9 @@ public class VotingProvider implements INavigationConfiguration, IRegisterAction
     }
     
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider"); // NOI18N
         
-        final String tabName = PropertiesFacade.INSTANCE.getProperties().getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__VOTING);
+        final String tabName = PropertiesFacade.INSTANCE.getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__VOTING);
         final Tab tab = new Tab(tabName);
         tab.setClosable(false);
         tab.setContent(votingNavigationView.getView());
@@ -67,7 +65,7 @@ public class VotingProvider implements INavigationConfiguration, IRegisterAction
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
         
         final VotingNavigationPresenter presenter = votingNavigationView.getRealPresenter();
         presenter.registerActions();

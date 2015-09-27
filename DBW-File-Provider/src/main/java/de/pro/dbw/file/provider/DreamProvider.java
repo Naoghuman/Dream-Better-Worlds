@@ -71,14 +71,14 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane editor in DreamProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane editor in DreamProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in DreamProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in DreamProvider"); // NOI18N
         
         this.registerOnActionCreateNewDream();
         this.registerOnActionCreateNewFastDream();
@@ -86,7 +86,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     private void registerOnActionCreateNewDream() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__CREATE_NEW_DREAM,
                 (ActionEvent ae) -> {
                     this.show();
@@ -94,7 +94,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     private void registerOnActionCreateNewFastDream() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__CREATE_NEW_FAST_DREAM,
                 (ActionEvent ae) -> {
                     this.showDreamWizard();
@@ -102,7 +102,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     private void registerOnActionOpenDreamFromNavigation() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__OPEN_DREAM__FROM_NAVIGATION,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -207,7 +207,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     private void showDreamSaveDialog(
             DreamPresenter dreamPresenter, Long idToRemove
     ) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Save Dream Dialog"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show Save Dream Dialog"); // NOI18N
         
         final ActionTransferModel transferModel = new ActionTransferModel();
         transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
@@ -218,22 +218,22 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
                     dreamPresenter.onActionSave();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.INSTANCE.getAction().handle(transferModel);
+                    ActionFacade.INSTANCE.handle(transferModel);
                 },
                 (ActionEvent ae) -> { // No
                     dreamPresenter.onActionRefresh();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.INSTANCE.getAction().handle(transferModel);
+                    ActionFacade.INSTANCE.handle(transferModel);
                 });
     }
     
     public void showDreamWizard() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Dream Wizard"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show Dream Wizard"); // NOI18N
         
         final DreamWizardView view = new DreamWizardView();
         final DreamWizardPresenter presenter = view.getRealPresenter();
-        final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DREAM_WIZARD);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DREAM_WIZARD);
         DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
     }
     

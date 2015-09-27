@@ -36,7 +36,7 @@ public class WelcomeHelpPresenter implements Initializable, IPreferencesConfigur
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize WelcomeHelpFilePresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize WelcomeHelpFilePresenter"); // NOI18N
         
         assert (cbShowAtStart != null) : "fx:id=\"cbShowAtStart\" was not injected: check your FXML file 'WelcomeFile.fxml'."; // NOI18N
 //        assert (taWhatToShow != null)  : "fx:id=\"taWhatToShow\" was not injected: check your FXML file 'WelcomeFile.fxml'."; // NOI18N
@@ -45,16 +45,15 @@ public class WelcomeHelpPresenter implements Initializable, IPreferencesConfigur
     }
     
     private void initializeShowAtStart() {
-        final Boolean selected = PreferencesFacade.INSTANCE.getPreferences().getBoolean(
+        final Boolean selected = PreferencesFacade.INSTANCE.getBoolean(
                 PREF__SHOW_AT_START__WELCOME,
                 PREF__SHOW_AT_START__WELCOME__DEFAULT_VALUE);
         cbShowAtStart.setSelected(selected);
     }
     
     public void showAtStart() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show at start: " + cbShowAtStart.isSelected());
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show at start: " + cbShowAtStart.isSelected());
     
-        PreferencesFacade.INSTANCE.getPreferences().putBoolean(
-                PREF__SHOW_AT_START__WELCOME, cbShowAtStart.isSelected());
+        PreferencesFacade.INSTANCE.putBoolean(PREF__SHOW_AT_START__WELCOME, cbShowAtStart.isSelected());
     }
 }

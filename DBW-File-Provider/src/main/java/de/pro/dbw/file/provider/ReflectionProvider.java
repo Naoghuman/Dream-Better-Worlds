@@ -70,14 +70,14 @@ public class ReflectionProvider implements IActionConfiguration, IDialogConfigur
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane editor in ReflectionProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane editor in ReflectionProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in ReflectionProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in ReflectionProvider"); // NOI18N
         
         this.registerOnActionCreateNewFileReflection();
         this.registerOnActionEditFileReflection();
@@ -85,36 +85,38 @@ public class ReflectionProvider implements IActionConfiguration, IDialogConfigur
     }
 
     private void registerOnActionCreateNewFileReflection() {
-        ActionFacade.INSTANCE.getAction().register(ACTION__CREATE_NEW_FILE__REFLECTION,
+        ActionFacade.INSTANCE.register(
+                ACTION__CREATE_NEW_FILE__REFLECTION,
                 (ActionEvent ae) -> {
-                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Reflection Wizard in CREATE mode."); // NOI18N
+                    LoggerFacade.INSTANCE.debug(this.getClass(), "Show Reflection Wizard in CREATE mode."); // NOI18N
 
                     final ReflectionWizardView view = new ReflectionWizardView();
                     final ReflectionWizardPresenter presenter = view.getRealPresenter();
                     presenter.configureWizardForCreateMode();
                     
-                    final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__REFLECTION_WIZARD);
+                    final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__REFLECTION_WIZARD);
                     DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
                 });
     }
 
     private void registerOnActionEditFileReflection() {
-        ActionFacade.INSTANCE.getAction().register(ACTION__EDIT_FILE__REFLECTION,
+        ActionFacade.INSTANCE.register(
+                ACTION__EDIT_FILE__REFLECTION,
                 (ActionEvent ae) -> {
-                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Reflection Wizard in EDIT mode."); // NOI18N
+                    LoggerFacade.INSTANCE.debug(this.getClass(), "Show Reflection Wizard in EDIT mode."); // NOI18N
 
                     final ReflectionWizardView view = new ReflectionWizardView();
                     final ReflectionWizardPresenter presenter = view.getRealPresenter();
                     // TODO catch the ReflectionModel from ae.getSource()
                     presenter.configureWizardForEditMode(new ReflectionModel());
                     
-                    final String title = PropertiesFacade.INSTANCE.getProperties().getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__REFLECTION_WIZARD);
+                    final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__REFLECTION_WIZARD);
                     DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
                 });
     }
     
     private void registerOnActionOpenFileReflectionFromNavigation() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__OPEN_REFLECTION__FROM_NAVIGATION,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -202,7 +204,7 @@ public class ReflectionProvider implements IActionConfiguration, IDialogConfigur
     }
     
     private void showReflectionSaveDialog(ReflectionPresenter presenter, Long idToRemove) {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Show Save Reflection Dialog"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show Save Reflection Dialog"); // NOI18N
         
         final ActionTransferModel transferModel = new ActionTransferModel();
         transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
@@ -213,13 +215,13 @@ public class ReflectionProvider implements IActionConfiguration, IDialogConfigur
                     presenter.onActionSave();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.INSTANCE.getAction().handle(transferModel);
+                    ActionFacade.INSTANCE.handle(transferModel);
                 },
                 (ActionEvent ae) -> { // No
                     presenter.onActionRefresh();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.INSTANCE.getAction().handle(transferModel);
+                    ActionFacade.INSTANCE.handle(transferModel);
                 });
     }
     
