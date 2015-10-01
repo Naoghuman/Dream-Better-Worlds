@@ -68,7 +68,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize HistoryNavigationPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize HistoryNavigationPresenter");
         
         assert (lDreamCount != null)       : "fx:id=\"lDreamCount\" was not injected: check your FXML file 'HistoryNavigation.fxml'."; // NOI18N
         assert (lvNavigation != null)      : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'HistoryNavigation.fxml'."; // NOI18N
@@ -79,7 +79,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     }
     
     private void initializeHistoryListView() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize navigation history"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize navigation history"); // NOI18N
         
         lvNavigation.getStylesheets().addAll(this.getClass().getResource(CSS__HISTORY_NAVIGATION).toExternalForm());
         lvNavigation.getItems().clear();
@@ -114,7 +114,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
                 transferModel.setActionKey(model.getActionKey());
                 transferModel.setLong(model.getIdToOpen());
                 
-                ActionFacade.INSTANCE.getAction().handle(transferModel);
+                ActionFacade.INSTANCE.handle(transferModel);
             }
         });
     }
@@ -207,7 +207,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     }
     
     public void refresh() {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Refresh History-Navigation");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Refresh History-Navigation");
         
         // Load data from db
         final List<DreamModel> dreamModels = SqlProvider.getDefault().getHistoryNavigationSqlProvider().findAllDreams(-30);
@@ -246,13 +246,13 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in HistoryNavigationPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in HistoryNavigationPresenter"); // NOI18N
         
         this.registerOnActionRefreshHistoryNavigation();
     }
 
     private void registerOnActionRefreshHistoryNavigation() {
-        ActionFacade.INSTANCE.getAction().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__REFRESH_NAVIGATION__HISTORY,
                 (ActionEvent ae) -> {
                     this.refresh();

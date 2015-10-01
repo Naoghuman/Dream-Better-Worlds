@@ -8,8 +8,6 @@ package de.pro.dbw.navigation.provider;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
-import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.KEY__NAVIGATION_TAB__DREAMBOOK;
-import static de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration.NAVIGATION__RESOURCE_BUNDLE;
 import de.pro.dbw.navigation.history.api.HistoryNavigationModel;
 import de.pro.dbw.navigation.history.impl.historynavigation.HistoryNavigationPresenter;
 import de.pro.dbw.navigation.history.impl.historynavigation.HistoryNavigationView;
@@ -49,9 +47,9 @@ public class HistoryProvider implements IActionConfiguration, INavigationConfigu
     }
 
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft in HistoryProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft in HistoryProvider"); // NOI18N
         
-        final String tabName = PropertiesFacade.INSTANCE.getProperties().getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__HISTORY);
+        final String tabName = PropertiesFacade.INSTANCE.getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__HISTORY);
         final Tab tab = new Tab(tabName);
         tab.setClosable(false);
         tab.setContent(historyNavigationView.getView());
@@ -62,7 +60,7 @@ public class HistoryProvider implements IActionConfiguration, INavigationConfigu
 
     @Override
     public void registerActions() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register actions in HistoryProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in HistoryProvider"); // NOI18N
         
         this.registerOnActionJobCheckHistoryNavigation();
         
@@ -71,11 +69,11 @@ public class HistoryProvider implements IActionConfiguration, INavigationConfigu
     }
     
     private void registerOnActionJobCheckHistoryNavigation() {
-                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register job for check History-Navigation"); // NOI18N
-        ActionFacade.INSTANCE.getAction().register(
+                    LoggerFacade.INSTANCE.debug(this.getClass(), "Register job for check History-Navigation"); // NOI18N
+        ActionFacade.INSTANCE.register(
                 ACTION__JOB_CHECK_NAVIGATION__HISTORY,
                 (ActionEvent ae) -> {
-                    LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Check if History-Navigation is up to date"); // NOI18N
+                    LoggerFacade.INSTANCE.debug(this.getClass(), "Check if History-Navigation is up to date"); // NOI18N
                     
                     final HistoryNavigationPresenter presenter = historyNavigationView.getRealPresenter();
                     final ObservableList<HistoryNavigationModel> items = presenter.getItems();
@@ -90,7 +88,7 @@ public class HistoryProvider implements IActionConfiguration, INavigationConfigu
                         }
                         
                         if (UtilProvider.getDefault().getDateConverter().isBefore(-3, item.getGenerationTime())) {
-                            LoggerFacade.INSTANCE.getLogger().debug(HistoryProvider.class,
+                            LoggerFacade.INSTANCE.debug(HistoryProvider.class,
                                     "DateConverter.isBefore(-3, item.getGenerationTime())"); // NOI18N
                                     
                             presenter.refresh();
@@ -105,7 +103,7 @@ public class HistoryProvider implements IActionConfiguration, INavigationConfigu
                         }
                         
                         if (UtilProvider.getDefault().getDateConverter().isBefore(-30, item.getGenerationTime())) {
-                            LoggerFacade.INSTANCE.getLogger().debug(HistoryProvider.class,
+                            LoggerFacade.INSTANCE.debug(HistoryProvider.class,
                                     "DateConverter.isBefore(-30, item.getGenerationTime())"); // NOI18N
                             
                             presenter.refresh();

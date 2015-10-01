@@ -3,8 +3,10 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.1.4`.
 
 
 #### Summary
-* Point
-* Other point
+* The main focus in this release is the documentation. Extended the ReadMe.md
+  with serveral document in the area 'Technical Informations' and 'Technical 
+  documents'.
+* Update also the dependencies to my own libraries.
 
 
 
@@ -17,7 +19,8 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.1.4`.
 
 
 #### Enhancement
-#74 [Documents] Extends the links in ReadMe in sections 'Technical Informations', '- Documents'
+#74 [Documents] Extends the links in ReadMe in sections 'Technical Informations', 
+    '- Documents'
 
 
 
@@ -37,12 +40,3 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.1.4`.
 
 
 #### Additional
-
-
-
-[//]: # (Issues which will be integrated in this release)
-#63 [Documents] Write new document SingletonEnumFacade.md.
-#55 [Coding Rules] Refactore existing, create new Coding_Rules_for_CSS.txt for entities. (rename)
-#49 [Testdata] Create new file Coding_Rules_for_Testdata.txt (rename)
-#48 [Dialog] Create new file Coding_Rules_for_Dialogs.txt (rename)
-#42 Write description in DBW-Application/design/coding rules/Coding_Rules_for_Properties.txt (rename)

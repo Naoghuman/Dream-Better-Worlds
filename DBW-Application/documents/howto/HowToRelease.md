@@ -37,6 +37,7 @@ Preparation<a name="Preparation" />
     - File `Preferences.properties`.
 * Check the `Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md` for the new version.
 * Update the `ReadMe.md` (section `Release Notes`).
+* Update the `DreamBetterWorlds.properties` in child-modul `DBW-Application`.
 * Commit all changes into the branch `release_vX.Y.Z` in `GitHub`.
 * Create a `zip` from the project and store it local.
 
