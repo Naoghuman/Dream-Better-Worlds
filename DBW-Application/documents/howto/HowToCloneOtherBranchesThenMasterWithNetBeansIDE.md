@@ -23,7 +23,7 @@ Clone the specific branch local<a name="CloneSpecificBranchLocal" />
 * Select in popup `Create Branch`.
 * Insert the new branch `name`.
     - Select the `CheckBox` 'Checkout Created Branch'
-
+* Perform the action `Create`.
 
 
 Commit a change in the new local branch<a name="CommitChangeInNewLocalBranch" />
