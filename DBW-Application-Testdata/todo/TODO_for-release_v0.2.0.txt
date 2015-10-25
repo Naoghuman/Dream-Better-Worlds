@@ -1,11 +1,16 @@
 --------------------------------------------------------------------------------
 TODO for release v0.2.0
 --------------------------------------------------------------------------------
-- Save changes as new branch 'prototype-application-testdata'
+- (v) Save changes as new branch 'prototype-application-testdata'
 - Database should be created in modul DBW-Application and not in modul 
   DBW-Application-Testdata
 
-NetBeansIDE-AfterburnerFX-Plugin
- - create bug for 'files exists' -> {0} should be replaced with the prefix
+Bug für die TODOs?
+HowToMergeBranchesInNetBeansIDE.md
+Conflict
+* Happens during the Merge a conflict then the warning popup `Resolve Conflicts` will be shown.
+* Click the `Review` button.
+* The `Git` console will be open which shows all files with a conflict.
+* Go through every file (double click) and resolve the conflict.
 
 --------------------------------------------------------------------------------
