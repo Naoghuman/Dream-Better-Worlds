@@ -68,7 +68,7 @@ public class FeatureProvider implements IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in FeatureProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in FeatureProvider"); // NOI18N
         
         TagProvider.getDefault().registerActions();
         TagCategoryProvider.getDefault().registerActions();

@@ -54,13 +54,13 @@ public class TagProvider implements IActionConfiguration, IApplicationConfigurat
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in TagProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in TagProvider"); // NOI18N
         
         this.registerOnActionShowTagEditor();
     }
 
     private void registerOnActionShowTagEditor() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SHOW_TAG__EDITOR,
                 (ActionEvent ae) -> {
                     this.showTagEditor();
@@ -68,11 +68,11 @@ public class TagProvider implements IActionConfiguration, IApplicationConfigurat
     }
     
     private void showTagEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show Tag Editor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show Tag Editor"); // NOI18N
         
         final TagEditorView contentView = new TagEditorView();
         final TagEditorPresenter contentPresenter = contentView.getRealPresenter();
-        final String title = PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_EDTIOR_TITLE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_EDTIOR_TITLE);
         DialogProvider.getDefault().show(title, contentView.getView(), contentPresenter.getSize());
     }
     

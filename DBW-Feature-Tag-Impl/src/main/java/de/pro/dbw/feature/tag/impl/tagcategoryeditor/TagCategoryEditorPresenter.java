@@ -74,7 +74,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize TagCategoryEditorPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TagCategoryEditorPresenter");
         
         assert (bClose != null)  : "fx:id=\"bAdd\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
         assert (bNew != null)    : "fx:id=\"bRemove\" was not injected: check your FXML file 'TagCategoryEditor.fxml'."; // NOI18N
@@ -93,19 +93,19 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     }
     
     private void initializeButtons() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize Buttons");
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize Buttons");
         
         bSave.disableProperty().bind(Bindings.isEmpty(lvAvailableTagCategories.getItems()));
     }
     
     private void initializeDescription() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize TextArea Description"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize TextArea Description"); // NOI18N
         
         taDescription.setText(null);
     }
     
     private void initializeListView() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView in Voting Editor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize ListView in Voting Editor"); // NOI18N
 
         lvAvailableTagCategories.getStylesheets().addAll(this.getClass().getResource(CSS__TAG_CATEGORY_EDITOR).toExternalForm());
         lvAvailableTagCategories.getItems().clear();
@@ -137,7 +137,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     }
     
     private void initializeTitle() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize TextField title"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize TextField title"); // NOI18N
         
         tfTitle.setText(null);
     }
@@ -157,11 +157,11 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     }
     
     public void onActionClose() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Close"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Close"); // NOI18N
         
         if (responseActionKey != null) {
-            ActionFacade.getDefault().handle(responseActionKey);
-            ActionFacade.getDefault().remove(responseActionKey);
+            ActionFacade.INSTANCE.handle(responseActionKey);
+            ActionFacade.INSTANCE.remove(responseActionKey);
         }
         
         switch (tagCategoryEditorMode) {
@@ -171,7 +171,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     }
     
     public void onActionNew() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action New"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action New"); // NOI18N
         
         // Check if a new TagCategory exists
         final List<TagCategoryModel> allTagCategories = FXCollections.observableArrayList();
@@ -195,14 +195,14 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
         model.setColor(UtilProvider.getDefault().getColorConverter().convertColorToString(Color.WHITE));
         model.setDescription(SIGN__EMPTY);
         model.setMarkAsChanged(Boolean.TRUE);// TODO true == * before the title
-        model.setTitle(PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW));
+        model.setTitle(PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW));
 
         allTagCategories.add(model);
         this.select(model, allTagCategories);
     }
     
     private void onActionRefresh() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Refresh"); // NOI18N
         
         final TagCategoryModel model = (TagCategoryModel) lvAvailableTagCategories.getSelectionModel()
                 .getSelectedItem();
@@ -224,7 +224,7 @@ public class TagCategoryEditorPresenter implements Initializable, IApplicationCo
     }
     
     public void onActionSave() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Save"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Save"); // NOI18N
         /*
         TODO
             - The title must be unique (only [A-Z][a-z][0-9] + leer + - + _)

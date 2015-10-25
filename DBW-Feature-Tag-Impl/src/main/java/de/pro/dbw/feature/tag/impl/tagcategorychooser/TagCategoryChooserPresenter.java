@@ -63,7 +63,7 @@ public class TagCategoryChooserPresenter implements Initializable, IApplicationC
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize TagCategoryChooserPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TagCategoryChooserPresenter");
         
         assert (bCancel != null)  : "fx:id=\"bAdd\" was not injected: check your FXML file 'TagCategoryChooser.fxml'."; // NOI18N
         assert (bOkay != null)    : "fx:id=\"bRemove\" was not injected: check your FXML file 'TagCategoryChooser.fxml'."; // NOI18N
@@ -73,7 +73,7 @@ public class TagCategoryChooserPresenter implements Initializable, IApplicationC
     }
     
     private void initializeListView() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView in TagCategoryChooser"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize ListView in TagCategoryChooser"); // NOI18N
 
         final int maxSelectedCheckBoxes = 3;
         CheckBoxListCellManager.configure(maxSelectedCheckBoxes);
@@ -139,17 +139,17 @@ public class TagCategoryChooserPresenter implements Initializable, IApplicationC
     }
     
     public void onActionCancel() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Close"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Close"); // NOI18N
 
         if (responseActionKey != null) {
-            ActionFacade.getDefault().remove(responseActionKey);
+            ActionFacade.INSTANCE.remove(responseActionKey);
         }
         
         DialogProvider.getDefault().hide2();
     }
     
     public void onActionOkay() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Okay"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Okay"); // NOI18N
 
         if (responseActionKey == null) {
             DialogProvider.getDefault().hide2();
@@ -171,8 +171,8 @@ public class TagCategoryChooserPresenter implements Initializable, IApplicationC
         actionTransferModel.setActionKey(responseActionKey);
         
         // Fire action
-        ActionFacade.getDefault().handle(actionTransferModel);
-        ActionFacade.getDefault().remove(responseActionKey);
+        ActionFacade.INSTANCE.handle(actionTransferModel);
+        ActionFacade.INSTANCE.remove(responseActionKey);
         
         DialogProvider.getDefault().hide2();
     }

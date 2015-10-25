@@ -218,7 +218,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     public void onActionCreateNewDream() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "On action create new Dream"); // NOI18N
         
-//        ActionFacade.getDefault().handle(ACTION__CREATE_NEW_DREAM);
+//        ActionFacade.INSTANCE.handle(ACTION__CREATE_NEW_DREAM);
         
         ActionFacade.INSTANCE.handle(ACTION__SHOW_SEARCH_IN_DREAMS); // XXX test
     }
@@ -250,7 +250,7 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     public void onActionShowHelp() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "On action show Help"); // NOI18N
         
-//        ActionFacade.getDefault().handle(ACTION__SHOW_HELP);
+//        ActionFacade.INSTANCE.handle(ACTION__SHOW_HELP);
     }
     
     public void onActionShowHelpAbout() {
@@ -266,15 +266,15 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionShowTagEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tag Editor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show Tag Editor"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_TAG__EDITOR);
+        ActionFacade.INSTANCE.handle(ACTION__SHOW_TAG__EDITOR);
     }
     
     public void onActionShowTagCategoryEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show Tag Category Editor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show Tag Category Editor"); // NOI18N
         
-        ActionFacade.getDefault().handle(ACTION__SHOW_TAG_CATEGORY__EDITOR);
+        ActionFacade.INSTANCE.handle(ACTION__SHOW_TAG_CATEGORY__EDITOR);
     }
     
     public void onActionShowTipOfTheNightEditor() {

@@ -44,15 +44,15 @@ public class TagSqlProvider implements ITagConfiguration {
     public void createOrUpdate(TagModel model, Long defaultId) {
         if (Objects.equals(model.getId(), defaultId)) {
             model.setId(System.currentTimeMillis());
-            DatabaseFacade.getDefault().getCrudService().create(model);
+            DatabaseFacade.INSTANCE.getCrudService().create(model);
         }
         else {
-            DatabaseFacade.getDefault().getCrudService().update(model);
+            DatabaseFacade.INSTANCE.getCrudService().update(model);
         }
     }
     
     public List<TagModel> findAll() {
-        final List<TagModel> allTags = DatabaseFacade.getDefault().getCrudService()
+        final List<TagModel> allTags = DatabaseFacade.INSTANCE.getCrudService()
                 .findByNamedQuery(TagModel.class, NAMED_QUERY__NAME__FIND_ALL);
         Collections.sort(allTags);
         

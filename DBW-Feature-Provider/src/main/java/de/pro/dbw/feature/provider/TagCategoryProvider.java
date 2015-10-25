@@ -54,13 +54,13 @@ public class TagCategoryProvider implements IActionConfiguration, IApplicationCo
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in TagCategoryProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in TagCategoryProvider"); // NOI18N
         
         this.registerOnActionShowTagCategoryEditor();
     }
 
     private void registerOnActionShowTagCategoryEditor() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SHOW_TAG_CATEGORY__EDITOR,
                 (ActionEvent ae) -> {
                     this.showTagCategoryEditor();
@@ -68,11 +68,11 @@ public class TagCategoryProvider implements IActionConfiguration, IApplicationCo
     }
     
     private void showTagCategoryEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show Tag Category Editor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show Tag Category Editor"); // NOI18N
         
         final TagCategoryEditorView contentView = new TagCategoryEditorView();
         final TagCategoryEditorPresenter contentPresenter = contentView.getRealPresenter();
-        final String title = PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_CATEGORY_EDTIOR_TITLE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_CATEGORY_EDTIOR_TITLE);
         DialogProvider.getDefault().show(title, contentView.getView(), contentPresenter.getSize());
     }
     

@@ -44,15 +44,15 @@ public class TagCategorySqlProvider implements ITagCategoryConfiguration {
     public void createOrUpdate(TagCategoryModel model, Long defaultId) {
         if (Objects.equals(model.getId(), defaultId)) {
             model.setId(System.currentTimeMillis());
-            DatabaseFacade.getDefault().getCrudService().create(model);
+            DatabaseFacade.INSTANCE.getCrudService().create(model);
         }
         else {
-            DatabaseFacade.getDefault().getCrudService().update(model);
+            DatabaseFacade.INSTANCE.getCrudService().update(model);
         }
     }
     
     public List<TagCategoryModel> findAll() {
-        final List<TagCategoryModel> allTagCategories = DatabaseFacade.getDefault().getCrudService()
+        final List<TagCategoryModel> allTagCategories = DatabaseFacade.INSTANCE.getCrudService()
                 .findByNamedQuery(TagCategoryModel.class, NAMED_QUERY__NAME__FIND_ALL);
         Collections.sort(allTagCategories);
         

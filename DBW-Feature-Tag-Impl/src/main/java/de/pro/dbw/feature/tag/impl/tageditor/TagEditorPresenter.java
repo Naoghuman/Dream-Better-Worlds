@@ -85,7 +85,7 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize TagEditorPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TagEditorPresenter");
         
         assert (bClose != null)  : "fx:id=\"bAdd\" was not injected: check your FXML file 'TagEditor.fxml'."; // NOI18N
         assert (bNew != null)    : "fx:id=\"bRemove\" was not injected: check your FXML file 'TagEditor.fxml'."; // NOI18N
@@ -105,19 +105,19 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     private void initializeButtons() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize Buttons");
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize Buttons");
         
         bSave.disableProperty().bind(Bindings.isEmpty(lvAvailableTags.getItems()));
     }
     
     private void initializeDescription() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize TextArea Description"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize TextArea Description"); // NOI18N
         
         taDescription.setText(null);
     }
     
     private void initializeListView() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize ListView in Voting Editor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize ListView in Voting Editor"); // NOI18N
 
         lvAvailableTags.getStylesheets().addAll(this.getClass().getResource(CSS__TAG_EDITOR).toExternalForm());
         lvAvailableTags.getItems().clear();
@@ -146,7 +146,7 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     private void initializeTitle() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Initialize TextField title"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize TextField title"); // NOI18N
         
         tfTitle.setText(null);
     }
@@ -182,11 +182,11 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionClose() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Close"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Close"); // NOI18N
         
         if (responseActionKey != null) {
-            ActionFacade.getDefault().handle(responseActionKey);
-            ActionFacade.getDefault().remove(responseActionKey);
+            ActionFacade.INSTANCE.handle(responseActionKey);
+            ActionFacade.INSTANCE.remove(responseActionKey);
         }
         
         switch (tagEditorMode) {
@@ -196,7 +196,7 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionNew() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action New"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action New"); // NOI18N
         
         // Check if a new Tag exists
         final List<TagModel> allTags = FXCollections.observableArrayList();
@@ -219,14 +219,14 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
         model.setTagCategoryModels(new ArrayList<>());
         model.setDescription(SIGN__EMPTY);
         model.setMarkAsChanged(Boolean.TRUE);// TODO true == * before the title
-        model.setTitle(PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW));
+        model.setTitle(PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW));
 
         allTags.add(model);
         this.select(model, allTags);
     }
     
     private void onActionRefresh() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Refresh"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Refresh"); // NOI18N
         
         final List<TagModel> allTags = FXCollections.observableArrayList();
         allTags.addAll(SqlProvider.getDefault().getTagSqlProvider().findAll());
@@ -246,7 +246,7 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionSave() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action Save"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Save"); // NOI18N
         /*
         TODO
             - The title must be unique (only [A-Z][a-z][0-9] + leer + - + _)
@@ -276,7 +276,7 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     public void onActionShowTagCategoryChooser() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show TagCategoryChooser"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show TagCategoryChooser"); // NOI18N
         
         final TagCategoryChooserView contentView = new TagCategoryChooserView();
         final TagCategoryChooserPresenter contentPresenter = contentView.getRealPresenter();
@@ -294,19 +294,19 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
         final String responseActionKeyFromTagCategoryChooser = this.registerOnDynamicActionRefreshFromTagCategoryChooser();
         contentPresenter.configure(existingTagCategories, responseActionKeyFromTagCategoryChooser);
         
-        final String title = PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_CATEGORY_CHOOSER_TITLE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_CATEGORY_CHOOSER_TITLE);
         DialogProvider.getDefault().show2(title, contentView.getView(), contentPresenter.getSize());
     }
     
     public void onActionShowTagCategoryEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action show TagCategoryEditor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show TagCategoryEditor"); // NOI18N
         
         final TagCategoryEditorView contentView = new TagCategoryEditorView();
         final TagCategoryEditorPresenter contentPresenter = contentView.getRealPresenter();
         final String responseActionKeyFromTagCategoryEditor = this.registerOnDynamicActionRefreshFromTagCategoryEditor();
         contentPresenter.configure(ETagEditorMode.OPEN_FROM_WIZARD, responseActionKeyFromTagCategoryEditor);
         
-        final String title = PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_CATEGORY_EDTIOR_TITLE);
+        final String title = PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__FEATURE_TAG__TAG_CATEGORY_EDTIOR_TITLE);
         DialogProvider.getDefault().show2(title, contentView.getView(), contentPresenter.getSize());
     }
     
@@ -327,10 +327,10 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     private String registerOnDynamicActionRefreshFromTagCategoryChooser() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register on dynamic action refresh from TagCategoryChooser"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register on dynamic action refresh from TagCategoryChooser"); // NOI18N
     
         final String responseActionKeyFromTagCategoryChooser = ACTION__REFRESH_ + System.currentTimeMillis();
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 responseActionKeyFromTagCategoryChooser,
                 (ActionEvent ae) -> {
                     final ActionTransferModel actionTransferModel = (ActionTransferModel) ae.getSource();
@@ -349,10 +349,10 @@ public class TagEditorPresenter implements Initializable, IActionConfiguration,
     }
     
     private String registerOnDynamicActionRefreshFromTagCategoryEditor() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register on dynamic action refresh from TagCategoryEditor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register on dynamic action refresh from TagCategoryEditor"); // NOI18N
     
         final String responseActionKeyFromTagCategoryEditor = ACTION__REFRESH_ + System.currentTimeMillis();
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 responseActionKeyFromTagCategoryEditor,
                 (ActionEvent ae) -> {
                     this.onActionRefresh();

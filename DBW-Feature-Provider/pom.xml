@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.pro</groupId>
         <artifactId>Dream-Better-Worlds</artifactId>
-        <version>0.1.2-SNAPSHOT</version>
+        <version>0.1.4</version>
     </parent>
     <artifactId>DBW-Feature-Provider</artifactId>
     <packaging>jar</packaging>
@@ -16,7 +16,22 @@
             <artifactId>Lib-Logger</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Properties</artifactId>
+            <type>jar</type>
+        </dependency>
         
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Core-Configuration-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Dialog-Provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Feature-Tag-Api</artifactId>
@@ -35,11 +50,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Feature-Voting-Impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DBW-Core-Configuration-Api</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
