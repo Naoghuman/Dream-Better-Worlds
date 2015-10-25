@@ -59,7 +59,7 @@ public class FeatureProvider implements IRegisterActions {
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpEditor in FeatureProvider");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpEditor in FeatureProvider");
         
         this.tpEditor = tpEditor;
         

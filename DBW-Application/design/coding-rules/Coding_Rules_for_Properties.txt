@@ -1,0 +1,41 @@
+--------------------------------------------------------------------------------
+CODING RULES FOR PROPERTIES
+--------------------------------------------------------------------------------
+[CLASS-NAME].properties
+Global properties will be stored in a [CLASS-NAME].properties file under 
+src/main/resources in the particular modul. The file will be registered with the
+help from the class PropertiesFacade (Lib-Properties) in the [CLASS-NAME].java 
+in the initialize method.
+
+Example how to register
+public class NavigationProvider implements INavigationConfiguration {
+    private void initialize() {
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Initialize NavigationProvider");
+        
+        PropertiesFacade.INSTANCE.getProperties().register(NAVIGATION__RESOURCE_BUNDLE);
+    }
+}
+
+The definition for the resource bundle will be happen in the modul
+DBW-Core-Configuration-Api in the particular interface. Here are also all keys
+stored for the access to the specific values.
+
+Example how to define
+public interface INavigationConfiguration {
+    public static final String KEY__NAVIGATION_TAB__DREAMBOOK = "key.navigation.tab.dreambook"; // NOI18N
+    public static final String NAVIGATION__RESOURCE_BUNDLE = "/de/pro/dbw/navigation/provider/NavigationProvider.properties"; // NOI18N
+}
+
+Access to a defined property will be happen with the class PropertiesFacade from
+the library Lib-Properties.
+
+Example how to access
+public class DreamBookProvider implements INavigationConfiguration {
+    public void register(TabPane tpNavigationLeft) {
+        LoggerFacade.INSTANCE.getLogger().info(this.getClass(), "Register TabPane tpNavigationLeft in DreamBookProvider"); // NOI18N
+        
+        final String tabName = PropertiesFacade.INSTANCE.getProperties().getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__DREAMBOOK);
+    }
+}
+
+--------------------------------------------------------------------------------

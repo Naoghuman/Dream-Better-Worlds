@@ -105,14 +105,14 @@ public final class DreammapProvider implements IActionConfiguration, IRegisterAc
 //    }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in DreammapProvider");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane editor in DreammapProvider");
         
         this.tpEditor = tpEditor;
     }
     
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DreammapProvider");
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in DreammapProvider");
         
 //        this.registerOnActionOpenDreammapFromNavigation();
 //        this.registerOnActionOpenDreammapFormWizard();

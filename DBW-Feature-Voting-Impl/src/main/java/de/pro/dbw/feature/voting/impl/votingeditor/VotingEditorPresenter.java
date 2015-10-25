@@ -31,7 +31,7 @@ public class VotingEditorPresenter implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize VotingEditorPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingEditorPresenter");
         
 //        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'VotingEditor.fxml'."; // NOI18N
     }

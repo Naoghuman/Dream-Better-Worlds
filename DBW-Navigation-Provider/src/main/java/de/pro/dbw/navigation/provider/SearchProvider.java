@@ -21,10 +21,12 @@ import de.pro.dbw.base.component.impl.extendedtab.ExtendedTab;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.search.impl.searchnavigation.SearchNavigationView;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Tab;
@@ -34,7 +36,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class SearchProvider implements IActionConfiguration, IRegisterActions {
+public class SearchProvider implements IActionConfiguration, INavigationConfiguration, IRegisterActions {
     
     private static SearchProvider instance = null;
     
@@ -59,11 +61,12 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
 
     public void register(TabPane tpNavigationLeft, TabPane tbEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in SearchProvider");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft, tbEditor in SearchProvider");
         
         this.tbEditor = tbEditor;
         
-        final Tab tab = new Tab("Search"); // XXX properties
+        final String tabName = PropertiesFacade.INSTANCE.getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__SEARCH);
+        final Tab tab = new Tab(tabName);
         tab.setClosable(false);
         tab.setContent(searchNavigationView.getView());
         
@@ -73,7 +76,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in SearchProvider");
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in SearchProvider");
         
         this.registerOnActionSearchInDreams();
         this.registerOnActionSearchInReflections();
@@ -81,7 +84,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionSearchInDreams() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SEARCH_IN__DREAMS,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -90,7 +93,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionSearchInReflections() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SEARCH_IN__REFLECTIONS,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -99,7 +102,7 @@ public class SearchProvider implements IActionConfiguration, IRegisterActions {
     }
     
     private void registerOnActionSearchInTipsOfTheNight() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();

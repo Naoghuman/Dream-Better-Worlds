@@ -42,16 +42,16 @@ public class DateConverter implements IDateConverter {
     }
     
     public Long convertDateTimeToLong(String dateTime, String pattern) {
-        LoggerFacade.getDefault().debug(DateConverter.class, String.format(
-                    "Convert %s with %s to Long", dateTime, pattern)); // NOI18N
+        LoggerFacade.INSTANCE.debug(DateConverter.class, String.format(
+                    "Convert %s with %s to Long", dateTime, pattern));
         
         try {
             final DateFormat formatter = new SimpleDateFormat(pattern);
             final Date converted = (Date) formatter.parse(dateTime);
             return converted.getTime();
         } catch (ParseException pe) {
-            LoggerFacade.getDefault().error(DateConverter.class, String.format(
-                    "Can't convert %s with %s to Long", dateTime, pattern), pe); // NOI18N
+            LoggerFacade.INSTANCE.error(DateConverter.class, String.format(
+                    "Can't convert %s with %s to Long", dateTime, pattern), pe);
         }
         
         return 0L;

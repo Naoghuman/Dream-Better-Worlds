@@ -34,5 +34,6 @@ public interface IDefaultIdConfiguration {
     public static final Long FILE__WELCOME__DEFAULT_ID            = -28_07_1967_1600L;
     
     public static final Long SEARCH__DREAM__DEFAULT_ID            = -28_07_1967_2000L;
+    public static final Long SEARCH__DREAM__DEFAULT_ID              = -28_07_1967_010_000L;
     
 }

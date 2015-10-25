@@ -21,16 +21,18 @@ import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
+import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.file.dream.impl.dream.DreamPresenter;
 import de.pro.dbw.file.dream.impl.dream.DreamView;
-import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentView;
+import de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardView;
 import de.pro.dbw.core.sql.provider.SqlProvider;
-import de.pro.dbw.file.dream.impl.dreamwizardcontent.DreamWizardContentPresenter;
+import de.pro.dbw.file.dream.impl.dreamwizard.DreamWizardPresenter;
 import de.pro.lib.action.api.ActionFacade;
 import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
@@ -46,7 +48,7 @@ import javafx.scene.layout.HBox;
  * @author PRo
  */
 public final class DreamProvider implements IActionConfiguration, IDefaultIdConfiguration, 
-        IUtilConfiguration, IRegisterActions
+        IDialogConfiguration, IUtilConfiguration, IRegisterActions
 {
     private static DreamProvider instance = null;
     
@@ -69,14 +71,14 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in DreamProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane editor in DreamProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in DreamProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in DreamProvider"); // NOI18N
         
         this.registerOnActionCreateNewDream();
         this.registerOnActionCreateNewFastDream();
@@ -84,7 +86,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     private void registerOnActionCreateNewDream() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__CREATE_NEW_DREAM,
                 (ActionEvent ae) -> {
                     this.show();
@@ -92,7 +94,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     private void registerOnActionCreateNewFastDream() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__CREATE_NEW_FAST_DREAM,
                 (ActionEvent ae) -> {
                     this.showDreamWizard();
@@ -100,7 +102,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     }
     
     private void registerOnActionOpenDreamFromNavigation() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__OPEN_DREAM__FROM_NAVIGATION,
                 (ActionEvent ae) -> {
                     final ActionTransferModel transferModel = (ActionTransferModel) ae.getSource();
@@ -205,7 +207,7 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
     private void showDreamSaveDialog(
             DreamPresenter dreamPresenter, Long idToRemove
     ) {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show Save Dream Dialog"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show Save Dream Dialog"); // NOI18N
         
         final ActionTransferModel transferModel = new ActionTransferModel();
         transferModel.setActionKey(ACTION__REMOVE_FILE_FROM_EDITOR);
@@ -216,21 +218,23 @@ public final class DreamProvider implements IActionConfiguration, IDefaultIdConf
                     dreamPresenter.onActionSave();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.getDefault().handle(transferModel);
+                    ActionFacade.INSTANCE.handle(transferModel);
                 },
                 (ActionEvent ae) -> { // No
                     dreamPresenter.onActionRefresh();
                     
                     DialogProvider.getDefault().hide();
-                    ActionFacade.getDefault().handle(transferModel);
+                    ActionFacade.INSTANCE.handle(transferModel);
                 });
     }
     
     public void showDreamWizard() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Show Dream Wizard"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show Dream Wizard"); // NOI18N
         
-        final DreamWizardContentView contentView = new DreamWizardContentView();
-        final DreamWizardContentPresenter contentPresenter = contentView.getRealPresenter();
-        DialogProvider.getDefault().show("Dream Wizard", contentView.getView(), contentPresenter.getSize()); // NOI18N
+        final DreamWizardView view = new DreamWizardView();
+        final DreamWizardPresenter presenter = view.getRealPresenter();
+        final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__DREAM_WIZARD);
+        DialogProvider.getDefault().show(title, view.getView(), presenter.getSize());
     }
+    
 }

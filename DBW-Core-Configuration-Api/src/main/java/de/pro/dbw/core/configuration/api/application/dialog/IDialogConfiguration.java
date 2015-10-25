@@ -23,6 +23,7 @@ import java.awt.Dimension;
  * @author PRo
  */
 public interface IDialogConfiguration {
+    
     // TODO all sizes are in the format 16:9
     public Dimension SIZE__W200_H300 = new Dimension(200, 300);
     
@@ -31,5 +32,15 @@ public interface IDialogConfiguration {
     public Dimension SIZE__W495_H330 = new Dimension(495, 330);
     public Dimension SIZE__W495_H414 = new Dimension(495, 414);
     public Dimension SIZE__W875_H359 = new Dimension(875, 359);
+    
+    public static final String KEY__DIALOG_TITLE__ABOUT = "key.dialog.title.about"; // NOI18N
+    public static final String KEY__DIALOG_TITLE__DELETE = "key.dialog.title.delete"; // NOI18N
+    public static final String KEY__DIALOG_TITLE__DREAM_WIZARD = "key.dialog.title.dreamwizard"; // NOI18N
+    public static final String KEY__DIALOG_TITLE__REFLECTION_WIZARD = "key.dialog.title.reflectionwizard"; // NOI18N
+    public static final String KEY__DIALOG_TITLE__SAVE = "key.dialog.title.save"; // NOI18N
+    public static final String KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT = "key.dialog.title.tipofthenight"; // NOI18N
+    public static final String KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT_EDITOR = "key.dialog.title.tipofthenighteditor"; // NOI18N
+    
+    public static final String DIALOG__RESOURCE_BUNDLE = "/de/pro/dbw/dialog/provider/DialogProvider.properties"; // NOI18N
     
 }

@@ -44,7 +44,7 @@ public class SearchInTipsOfTheNightPresenter implements Initializable, IActionCo
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize SearchInTipsOfTheNightPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize SearchInTipsOfTheNightPresenter"); // NOI18N
         
         assert (vBox != null) : "fx:id=\"vBox\" was not injected: check your FXML file 'SearchInTipsOfTheNight.fxml'."; // NOI18N
     
@@ -67,7 +67,7 @@ public class SearchInTipsOfTheNightPresenter implements Initializable, IActionCo
     }
     
     public void onActionSearchInTipsOfTheNight() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action search in Tip of the Nights"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action search in Tip of the Nights"); // NOI18N
         
         /*
         TODO
@@ -93,7 +93,7 @@ public class SearchInTipsOfTheNightPresenter implements Initializable, IActionCo
         transferModel.setActionKey(ACTION__SEARCH_IN__TIPS_OF_THE_NIGHT);
         transferModel.setObject(model);
         
-        ActionFacade.getDefault().handle(transferModel);
+        ActionFacade.INSTANCE.handle(transferModel);
     }
     
 }

@@ -40,7 +40,7 @@ public class ExtendedTextFieldPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize ExtendedTextFieldPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ExtendedTextFieldPresenter"); // NOI18N
     
         assert (checkBox != null)  : "fx:id=\"checkBox\" was not injected: check your FXML file 'ExtendedTextField.fxml'."; // NOI18N
         assert (label != null)     : "fx:id=\"label\" was not injected: check your FXML file 'ExtendedTextField.fxml'."; // NOI18N

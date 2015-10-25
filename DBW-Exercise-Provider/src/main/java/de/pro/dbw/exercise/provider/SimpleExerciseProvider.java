@@ -48,14 +48,14 @@ public class SimpleExerciseProvider implements IActionConfiguration, IRegisterAc
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane editor in SimpleExerciseProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane editor in SimpleExerciseProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in SimpleExerciseProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in SimpleExerciseProvider"); // NOI18N
         
     }
     

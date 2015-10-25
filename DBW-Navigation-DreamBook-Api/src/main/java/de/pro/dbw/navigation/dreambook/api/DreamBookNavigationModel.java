@@ -16,6 +16,7 @@
  */
 package de.pro.dbw.navigation.dreambook.api;
 
+import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
 import javafx.scene.Parent;
 
@@ -29,6 +30,7 @@ public class DreamBookNavigationModel implements Comparable<DreamBookNavigationM
     private Long idToOpen = null;
     private Long generationTime = null;
     private String actionKey = null;
+    private String title = null;
     private Parent view = null;
     
     public DreamBookNavigationModel() {
@@ -69,6 +71,14 @@ public class DreamBookNavigationModel implements Comparable<DreamBookNavigationM
         
         hasPrefixNew = UtilProvider.getDefault().getDateConverter().isAfter(-3, generationTime);
     }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Parent getView() {
         return view;
@@ -80,6 +90,21 @@ public class DreamBookNavigationModel implements Comparable<DreamBookNavigationM
     
     @Override
     public int compareTo(DreamBookNavigationModel other) {
+        final String dateTimeOther = UtilProvider.getDefault().getDateConverter()
+                .convertLongToDateTime(other.getGenerationTime(), IDateConverter.PATTERN__DATETIME);
+        final String dateTimeThis = UtilProvider.getDefault().getDateConverter()
+                .convertLongToDateTime(this.getGenerationTime(), IDateConverter.PATTERN__DATETIME);
+        
+        int compare = dateTimeOther.compareTo(dateTimeThis);
+        if (compare != 0) {
+            return compare;
+        }
+        
+        compare = this.getTitle().compareTo(other.getTitle());
+        if (compare != 0) {
+            return compare;
+        }
+        
         return Long.compare(other.getGenerationTime(), this.getGenerationTime());
     }
     

@@ -17,8 +17,6 @@
 package de.pro.dbw.navigation.dreambook.impl.listview.dreamelement;
 
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
-import static de.pro.dbw.core.configuration.api.application.IApplicationConfiguration.DBW__RESOURCE_BUNDLE;
-import static de.pro.dbw.core.configuration.api.application.IApplicationConfiguration.KEY__APPLICATION__PREFIX_NEW;
 import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
@@ -43,7 +41,7 @@ public class DreamElementPresenter implements Initializable, IApplicationConfigu
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().trace(this.getClass(), "Initialize DreamElementPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.trace(this.getClass(), "Initialize DreamElementPresenter"); // NOI18N
         
         assert (lDream != null)          : "fx:id=\"lDream\" was not injected: check your FXML file 'DreamElement.fxml'."; // NOI18N
         assert (lGenerationTime != null) : "fx:id=\"lGenerationTime\" was not injected: check your FXML file 'DreamElement.fxml'."; // NOI18N
@@ -51,12 +49,12 @@ public class DreamElementPresenter implements Initializable, IApplicationConfigu
     }
     
     public void configure(Boolean hasPrefixNew, Long generationTime, String title) {
-        LoggerFacade.getDefault().trace(this.getClass(), "Configure DreamElementPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.trace(this.getClass(), "Configure DreamElementPresenter"); // NOI18N
 
         lPrefix.setVisible(hasPrefixNew);
         lPrefix.setManaged(hasPrefixNew);
         lPrefix.setText(hasPrefixNew ?
-                PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW)
+                PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, KEY__APPLICATION__PREFIX_NEW)
                 : SIGN__EMPTY);
         
         lGenerationTime.setText(UtilProvider.getDefault().getDateConverter().convertLongToDateTime(

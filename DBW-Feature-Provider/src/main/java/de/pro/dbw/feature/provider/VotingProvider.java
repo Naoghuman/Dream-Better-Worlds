@@ -46,7 +46,7 @@ public class VotingProvider {
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpEditor in VotingProvider");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpEditor in VotingProvider");
         
         this.tpEditor = tpEditor;
     }

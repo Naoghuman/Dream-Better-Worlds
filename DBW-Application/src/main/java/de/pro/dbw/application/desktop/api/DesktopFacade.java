@@ -61,7 +61,7 @@ public final class DesktopFacade {
     }
 
     public void onActionSaveMultiFiles() {
-        LoggerFacade.getDefault().debug(this.getClass(), "On action save Multi Files"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action save Multi Files"); // NOI18N
         
         final DesktopPresenter presenter = view.getRealPresenter();
         presenter.onActionSaveMultiFiles();

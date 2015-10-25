@@ -34,18 +34,18 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
         System.out.println("XXX DreamBetterWorlds.init() remove lib joda-time");
         System.out.println("XXX DreamBetterWorlds.init() look why the generated jar not work (application will not start with doubleclick)");
         
-        PropertiesFacade.getDefault().register(DBW__RESOURCE_BUNDLE);
+        PropertiesFacade.INSTANCE.register(DBW__RESOURCE_BUNDLE);
         
         final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
         final String message = this.getProperty(KEY__APPLICATION__MESSAGE_WELCOME);
-        LoggerFacade.getDefault().message(borderSign, 80, message);
+        LoggerFacade.INSTANCE.message(borderSign, 80, message);
         
         final Boolean dropPreferencesFileAtStart = Boolean.FALSE;
-        PreferencesFacade.getDefault().init(dropPreferencesFileAtStart);
+        PreferencesFacade.INSTANCE.init(dropPreferencesFileAtStart);
         
         System.out.println("XXX DreamBetterWorlds.init() remove TestDatabase.createTestData()");
 //        TestDatabase.createTestData();
-        DatabaseFacade.getDefault().register(this.getProperty(KEY__APPLICATION__DATABASE));
+        DatabaseFacade.INSTANCE.register(this.getProperty(KEY__APPLICATION__DATABASE));
         System.out.println("XXX DreamBetterWorlds.init() -> JavaFX+JPA+Serialization=https://gist.github.com/james-d/e485ac525c71e20bb453");
     
         BaseProvider.getDefault().getJobProvider().start();
@@ -53,10 +53,8 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
 
     @Override
     public void start(Stage stage) throws Exception {
-        final Double width = PreferencesFacade.getDefault().getDouble(
-                PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
-        final Double height = PreferencesFacade.getDefault().getDouble(
-                PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
+        final Double width = PreferencesFacade.INSTANCE.getDouble(PREF__DBW_WIDTH, PREF__DBW_WIDTH__DEFAULT_VALUE);
+        final Double height = PreferencesFacade.INSTANCE.getDouble(PREF__DBW_HEIGHT, PREF__DBW_HEIGHT__DEFAULT_VALUE);
         final Scene scene = new Scene(DesktopFacade.getDefault().getDesktop(), width, height);
         final String uriStylesheet = this.getClass().getResource(CSS__DREAM_BETTER_WORLDS).toExternalForm();
         scene.getStylesheets().add(uriStylesheet);
@@ -78,7 +76,7 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
     }
     
     private void checkShowAtStart() {
-        LoggerFacade.getDefault().info(this.getClass(), "Check show at start");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Check show at start");
     
         final PauseTransition pt = new PauseTransition(DBW__LITTLE_DELAY__DURATION_250);
         pt.setOnFinished((ActionEvent event) -> {
@@ -88,7 +86,7 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
     }
     
     private String getProperty(String propertyKey) {
-        return PropertiesFacade.getDefault().getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
+        return PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE, propertyKey);
     }
     
     private void onCloseRequest() {
@@ -120,11 +118,11 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
     private void shutdownApplication() {
         BaseProvider.getDefault().getJobProvider().stop();
         Injector.forgetAll();
-        DatabaseFacade.getDefault().shutdown();
+        DatabaseFacade.INSTANCE.shutdown();
         
         final char borderSign = this.getProperty(KEY__APPLICATION__BORDER_SIGN).charAt(0);
         final String message = this.getProperty(KEY__APPLICATION__MESSAGE_GOODBYE);
-        LoggerFacade.getDefault().message(borderSign, 80, message);
+        LoggerFacade.INSTANCE.message(borderSign, 80, message);
     
         final PauseTransition pt = new PauseTransition(DBW__LITTLE_DELAY__DURATION_125);
         pt.setOnFinished((ActionEvent event) -> {

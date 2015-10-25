@@ -68,7 +68,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize HistoryNavigationPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize HistoryNavigationPresenter");
         
         assert (lDreamCount != null)       : "fx:id=\"lDreamCount\" was not injected: check your FXML file 'HistoryNavigation.fxml'."; // NOI18N
         assert (lvNavigation != null)      : "fx:id=\"lvNavigation\" was not injected: check your FXML file 'HistoryNavigation.fxml'."; // NOI18N
@@ -79,7 +79,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     }
     
     private void initializeHistoryListView() {
-        LoggerFacade.getDefault().info(this.getClass(), "Initialize navigation history"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize navigation history"); // NOI18N
         
         lvNavigation.getStylesheets().addAll(this.getClass().getResource(CSS__HISTORY_NAVIGATION).toExternalForm());
         lvNavigation.getItems().clear();
@@ -114,7 +114,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
                 transferModel.setActionKey(model.getActionKey());
                 transferModel.setLong(model.getIdToOpen());
                 
-                ActionFacade.getDefault().handle(transferModel);
+                ActionFacade.INSTANCE.handle(transferModel);
             }
         });
     }
@@ -207,7 +207,7 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     }
     
     public void refresh() {
-        LoggerFacade.getDefault().info(this.getClass(), "Refresh History-Navigation");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Refresh History-Navigation");
         
         // Load data from db
         final List<DreamModel> dreamModels = SqlProvider.getDefault().getHistoryNavigationSqlProvider().findAllDreams(-30);
@@ -246,13 +246,13 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in HistoryNavigationPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in HistoryNavigationPresenter"); // NOI18N
         
         this.registerOnActionRefreshHistoryNavigation();
     }
 
     private void registerOnActionRefreshHistoryNavigation() {
-        ActionFacade.getDefault().register(
+        ActionFacade.INSTANCE.register(
                 ACTION__REFRESH_NAVIGATION__HISTORY,
                 (ActionEvent ae) -> {
                     this.refresh();
@@ -262,28 +262,29 @@ public class HistoryNavigationPresenter implements Initializable, IActionConfigu
     private void showElementsInListView(List<ParentElementView> parentElementViews, List<ChildElementView> childElementViews) {
         lvNavigation.getItems().clear();
         
-        for (ParentElementView parentElementView : parentElementViews) {
-            final HistoryNavigationModel parentHistoryNavigationModel = new HistoryNavigationModel();
-            parentHistoryNavigationModel.setView(parentElementView.getView());
-            lvNavigation.getItems().add(parentHistoryNavigationModel);
+        for (ParentElementView parentView : parentElementViews) {
+            final HistoryNavigationModel parentModel = new HistoryNavigationModel();
+            parentModel.setView(parentView.getView());
+            lvNavigation.getItems().add(parentModel);
 
             int size = 0;
-            for (ChildElementView childElementView : childElementViews) {
-                if (!parentElementView.getRealPresenter().getDate().equals(childElementView.getRealPresenter().getDate())) {
+            for (ChildElementView childView : childElementViews) {
+                final ChildElementPresenter childPresenter = childView.getRealPresenter();
+                if (!parentView.getRealPresenter().getDate().equals(childPresenter.getDate())) {
                     continue;
                 }
                 
-                final HistoryNavigationModel childHistoryNavigationModel = new HistoryNavigationModel();
-                childHistoryNavigationModel.setActionKey(childElementView.getRealPresenter().getActionKey());
-                childHistoryNavigationModel.setGenerationTime(childElementView.getRealPresenter().getGenerationTime());
-                childHistoryNavigationModel.setIdToOpen(childElementView.getRealPresenter().getIdToOpen());
-                childHistoryNavigationModel.setView(childElementView.getView());
+                final HistoryNavigationModel childModel = new HistoryNavigationModel();
+                childModel.setActionKey(childPresenter.getActionKey());
+                childModel.setGenerationTime(childPresenter.getGenerationTime());
+                childModel.setIdToOpen(childPresenter.getIdToOpen());
+                childModel.setView(childView.getView());
                 
-                lvNavigation.getItems().add(childHistoryNavigationModel);
+                lvNavigation.getItems().add(childModel);
                 ++size;
             }
             
-            final ParentElementPresenter parentElementPresenter = parentElementView.getRealPresenter();
+            final ParentElementPresenter parentElementPresenter = parentView.getRealPresenter();
             parentElementPresenter.setSize(size);
         }
     }

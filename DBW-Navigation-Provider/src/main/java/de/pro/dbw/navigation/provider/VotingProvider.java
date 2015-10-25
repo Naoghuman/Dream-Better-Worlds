@@ -17,9 +17,11 @@
 package de.pro.dbw.navigation.provider;
 
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
+import de.pro.dbw.core.configuration.api.navigation.INavigationConfiguration;
 import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationPresenter;
 import de.pro.dbw.navigation.voting.impl.votingnavigation.VotingNavigationView;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -27,7 +29,7 @@ import javafx.scene.control.TabPane;
  *
  * @author PRo
  */
-public class VotingProvider implements IRegisterActions {
+public class VotingProvider implements INavigationConfiguration, IRegisterActions {
     
     private static VotingProvider instance = null;
     
@@ -50,9 +52,10 @@ public class VotingProvider implements IRegisterActions {
     }
     
     public void register(TabPane tpNavigationLeft) {
-        LoggerFacade.getDefault().info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane tpNavigationLeft in VotingProvider"); // NOI18N
         
-        final Tab tab = new Tab("Voting"); // XXX properties
+        final String tabName = PropertiesFacade.INSTANCE.getProperty(NAVIGATION__RESOURCE_BUNDLE, KEY__NAVIGATION_TAB__VOTING);
+        final Tab tab = new Tab(tabName);
         tab.setClosable(false);
         tab.setContent(votingNavigationView.getView());
         tpNavigationLeft.getTabs().add(tab);
@@ -62,7 +65,7 @@ public class VotingProvider implements IRegisterActions {
 
     @Override
     public void registerActions() {
-        LoggerFacade.getDefault().debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in VotingProvider"); // NOI18N
         
         final VotingNavigationPresenter presenter = votingNavigationView.getRealPresenter();
         presenter.registerActions();

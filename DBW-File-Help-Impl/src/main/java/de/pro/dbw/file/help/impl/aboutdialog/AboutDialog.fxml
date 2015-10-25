@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.file.help.impl.aboutdialog.AboutDialogPresenter">
+    <children>
+        <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox alignment="TOP_CENTER">
+                    <children>
+                        <Label text="Dream Better Worlds">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Label>
+                        <Label text="v0.1.2" />
+                    </children>
+                </VBox>
+                <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                    <tabs>
+                        <Tab closable="false" text="Program">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                                            <children>
+                                                <Label text="Program" />
+                                                <Label text="Dream Better Worlds">
+                                                    <padding>
+                                                        <Insets left="14.0" />
+                                                    </padding>
+                                                </Label>
+                                                <Label text="Version" />
+                                                <Label text="0.1.2">
+                                                    <padding>
+                                                        <Insets left="14.0" />
+                                                    </padding>
+                                                </Label>
+                                                <Label text="Copyright (c)" />
+                                                <Label text="2014 - 2015">
+                                                    <padding>
+                                                        <Insets left="14.0" />
+                                                    </padding>
+                                                </Label>
+                                                <Label text="Developer" />
+                                                <Label text="Peter Rogge (Naoghuman)">
+                                                    <padding>
+                                                        <Insets left="14.0" />
+                                                    </padding>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab closable="false" disable="true" text="Libraries">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                        <Tab disable="true" text="License">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <HBox alignment="TOP_RIGHT" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onActionClose" prefWidth="64.0" text="Close" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
