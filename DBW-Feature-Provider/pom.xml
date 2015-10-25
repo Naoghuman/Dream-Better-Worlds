@@ -37,6 +37,11 @@
             <artifactId>DBW-Feature-Voting-Impl</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DBW-Core-Configuration-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     
 </project>
