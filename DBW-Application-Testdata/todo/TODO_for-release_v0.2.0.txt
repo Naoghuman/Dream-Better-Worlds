@@ -2,8 +2,15 @@
 TODO for release v0.2.0
 --------------------------------------------------------------------------------
 - (v) Save changes as new branch 'prototype-application-testdata'
-- Database should be created in modul DBW-Application and not in modul 
+- (v) Database should be created in modul DBW-Application and not in modul 
   DBW-Application-Testdata
+   - (v) Check move TestdataApplication.java to modul DBW-Application. So when I 
+     start the TestdataApplication.java there then I have access on the right
+     database.
+      - (v) if okay tweak gitignore from DBW-Application-Testdata
+   - (v) Add TestdataFacade to de.pro.dbw.application.testdata.api
+- 
+
 
 Bug für die TODOs?
 HowToMergeBranchesInNetBeansIDE.md

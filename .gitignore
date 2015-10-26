@@ -4,8 +4,6 @@
 /DBW-Application/resources/
 /DBW-Application/Preferences.properties
 /DBW-Application/target/
-/DBW-Application-Testdata/database/
-/DBW-Application-Testdata/log/
 /DBW-Application-Testdata/target/
 /DBW-Base-Component-Api/target/
 /DBW-Base-Component-Impl/target/
