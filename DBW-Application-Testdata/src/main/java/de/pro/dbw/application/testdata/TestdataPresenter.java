@@ -21,9 +21,12 @@ import de.pro.dbw.application.testdata.entity.dream.DreamView;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightView;
 import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCellModel;
 import de.pro.dbw.application.testdata.service.SequentialThreadFactory;
+import de.pro.dbw.core.configuration.api.application.testdata.ITestdataConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
+import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +34,8 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -47,12 +52,13 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  *
  * @author PRo
  */
-public class TestdataPresenter implements Initializable {
+public class TestdataPresenter implements Initializable, ITestdataConfiguration {
     
     private static final String ENTITY_SUFFIX = "Model"; // NOI18N
     
@@ -180,23 +186,40 @@ public class TestdataPresenter implements Initializable {
         return model;
     }
     
+    private String getProperty(String propertyKey) {
+        return PropertiesFacade.INSTANCE.getProperty(DBW__RESOURCE_BUNDLE__TESTDATA, propertyKey);
+    }
+    
     public void onActionCreateTestdata() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "On action create Testdata"); // NOI18N
-       
-        /*
-        TODO
-         - get data from TestdataConfiguration (should db deleted)
-            - if yes,
-               - then create pause-transition to delete the old db
-               - then create pause-transition to create new db
-         - get data from all active entities
-            - create for all data a pause-transition to create the testdata
-         - add all pause-transitions to sequential-transition
-        */
-//        if (testdataConfigurationPresenter.shouldDeleteDatabase()) {
-//            // delete old db and create new db
-//        }
-//        tabTestdataPresenter.startTestdataGeneration();
+
+        final SequentialTransition sequentialTransition = new SequentialTransition();
+        if (cbDeleteDatabase.isSelected()) {
+            final PauseTransition ptDropDatabase = new PauseTransition();
+            ptDropDatabase.setDuration(Duration.ZERO);
+            ptDropDatabase.setOnFinished((ActionEvent event) -> {
+                LoggerFacade.INSTANCE.debug(this.getClass(), "Drop database"); // NOI18N
+                DatabaseFacade.INSTANCE.drop(this.getProperty(KEY__APPLICATION__DATABASE));
+            });
+            sequentialTransition.getChildren().add(ptDropDatabase);
+        }
+        
+        final PauseTransition ptRegisterDatabase = new PauseTransition();
+        ptRegisterDatabase.setDuration(Duration.millis(250.0d));
+        ptRegisterDatabase.setOnFinished((ActionEvent event) -> {
+            LoggerFacade.INSTANCE.debug(this.getClass(), "Register database"); // NOI18N
+            DatabaseFacade.INSTANCE.register(this.getProperty(KEY__APPLICATION__DATABASE));
+        });
+        sequentialTransition.getChildren().add(ptRegisterDatabase);
+        
+        final PauseTransition ptCreateTestdata = new PauseTransition();
+        ptCreateTestdata.setDuration(Duration.millis(250.0d));
+        ptCreateTestdata.setOnFinished((ActionEvent event) -> {
+            this.startTestdataGeneration();
+        });
+        sequentialTransition.getChildren().add(ptCreateTestdata);
+        
+        sequentialTransition.playFromStart();
     }
     
     private void onActionRefresh() {
@@ -251,25 +274,22 @@ public class TestdataPresenter implements Initializable {
         sequentialExecutorService.awaitTermination(2, TimeUnit.SECONDS);
     }
     
-    /*
     public void startTestdataGeneration() {
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Register database"); // NOI18N
-        DatabaseFacade.INSTANCE.getDatabase().register(this.getProperty(KEY__APPLICATION__DATABASE));
-        
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Start with generation from Testdata..."); // NOI18N
-        LoggerFacade.INSTANCE.getLogger().deactivate(Boolean.TRUE);
+//        
+//        LoggerFacade.INSTANCE.debug(this.getClass(), "Start with generation from Testdata..."); // NOI18N
+//        LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
         
 //        parallelExecutorService = Executors.newFixedThreadPool(2, new ParallelThreadFactory());
 //        this.startTestdataGenerationForEntityDream();
 //        this.startTestdataGenerationForEntityTipOfTheNight();
         
-        this.startTestdataGenerationForEntityDream();
-        this.startTestdataGenerationForEntityTipOfTheNight();
+//        this.startTestdataGenerationForEntityDream();
+//        this.startTestdataGenerationForEntityTipOfTheNight();
         
-//        LoggerFacade.getDefault().deactivate(Boolean.FALSE);
-        LoggerFacade.INSTANCE.getLogger().debug(this.getClass(), "Ready with generation from Testdata..."); // NOI18N
+//        LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
+//        LoggerFacade.INSTANCE.debug(this.getClass(), "Ready with generation from Testdata..."); // NOI18N
     }
-    
+    /*
     private void startTestdataGenerationForEntityDream() {
         final DreamService service = new DreamService(DreamModel.class.getName());
         service.setExecutor(sequentialExecutorService);
