@@ -16,14 +16,19 @@
  */
 package de.pro.dbw.application.testdata.entity.tipofthenight;
 
+import de.pro.dbw.application.testdata.entity.EntityHelper;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.util.Callback;
 
 /**
  *
@@ -31,21 +36,19 @@ import javafx.scene.control.ProgressBar;
  */
 public class TipOfTheNightPresenter implements Initializable {
     
-//    private static final String PROPERTY__TIP_OF_THE_NIGHT = ".tipofthenight"; // NOI18N
-    
-    @FXML private ComboBox cbTipOfTheNight;
-    @FXML private Label lProgressTipOfTheNight;
-    @FXML private Label lProgressInformationTipOfTheNight;
-    @FXML private ProgressBar pbTipOfTheNight;
+    @FXML private ComboBox cbEnityTipOfTheNight;
+    @FXML private Label lProgressBarInformation;
+    @FXML private Label lProgressBarPercentInformation;
+    @FXML private ProgressBar pbEnityTipOfTheNight;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TipOfTheNightPresenter");
         
-        assert (cbTipOfTheNight != null)        : "fx:id=\"cbTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
-        assert (lProgressTipOfTheNight != null) : "fx:id=\"lProgressTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
-        assert (lProgressInformationTipOfTheNight != null) : "fx:id=\"lProgressInformationTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
-        assert (pbTipOfTheNight != null)        : "fx:id=\"pbTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
+        assert (cbEnityTipOfTheNight != null)           : "fx:id=\"cbEnityTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
+        assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
+        assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
+        assert (pbEnityTipOfTheNight != null)           : "fx:id=\"pbEnityTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
     
         this.initializeComboBox();
     }
@@ -53,6 +56,50 @@ public class TipOfTheNightPresenter implements Initializable {
     private void initializeComboBox() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox");
         
+        cbEnityTipOfTheNight.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
+        cbEnityTipOfTheNight.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+
+            @Override
+            public ListCell<Integer> call(ListView<Integer> param) {
+                return new ListCell<Integer>() {
+
+                        @Override
+                        protected void updateItem(Integer item, boolean empty) {
+                            super.updateItem(item, empty);
+                            
+                            if (item == null) {
+                                super.setText(null);
+                                return;
+                            }
+                            
+                            super.setText("" + item);
+                        }
+                    };
+            }
+        });
+        
+        cbEnityTipOfTheNight.getSelectionModel().selectFirst();
+    }
+    
+    public Label getProgressBarPercentInformation() {
+        return lProgressBarPercentInformation;
+    }
+
+    public int getSaveMaxEntities() {
+        Integer saveMaxEntitites = (Integer) cbEnityTipOfTheNight.getSelectionModel().getSelectedItem();
+        if (saveMaxEntitites == null) {
+            saveMaxEntitites = 0;
+        }
+        
+        return saveMaxEntitites;
+    }
+    
+    public DoubleProperty progressPropertyFromEntityDream() {
+        return pbEnityTipOfTheNight.progressProperty();
+    }
+    
+    public void setProgressBarInformation(String message) {
+        lProgressBarInformation.setText(message);
     }
     
 }

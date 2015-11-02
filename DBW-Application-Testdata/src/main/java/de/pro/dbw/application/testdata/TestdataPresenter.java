@@ -17,10 +17,14 @@
 package de.pro.dbw.application.testdata;
 
 import com.airhacks.afterburner.views.FXMLView;
+import de.pro.dbw.application.testdata.entity.dream.DreamPresenter;
 import de.pro.dbw.application.testdata.entity.dream.DreamView;
+import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightPresenter;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightView;
 import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCellModel;
+import de.pro.dbw.application.testdata.service.DreamService;
 import de.pro.dbw.application.testdata.service.SequentialThreadFactory;
+import de.pro.dbw.application.testdata.service.TipOfTheNightService;
 import de.pro.dbw.core.configuration.api.application.testdata.ITestdataConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
@@ -137,6 +141,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     private CheckBoxListCellModel getCheckBoxListCellModel(final String key) {
         final CheckBoxListCellModel model = new CheckBoxListCellModel();
         model.setName(key.substring(0, key.length() - ENTITY_SUFFIX.length()));
+        model.setId(key);
         model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             // Selected
             if (newValue) {
@@ -213,7 +218,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         sequentialTransition.getChildren().add(ptRegisterDatabase);
         
         final PauseTransition ptCreateTestdata = new PauseTransition();
-        ptCreateTestdata.setDuration(Duration.millis(250.0d));
+        ptCreateTestdata.setDuration(Duration.millis(500.0d));
         ptCreateTestdata.setOnFinished((ActionEvent event) -> {
             this.startTestdataGeneration();
         });
@@ -275,40 +280,57 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     public void startTestdataGeneration() {
-//        
-//        LoggerFacade.INSTANCE.debug(this.getClass(), "Start with generation from Testdata..."); // NOI18N
-//        LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Start with Testdata generation..."); // NOI18N
+//        LoggerFacade.INSTANCE.deactivate(Boolean.TRUE); // XXX move to xy-service
         
 //        parallelExecutorService = Executors.newFixedThreadPool(2, new ParallelThreadFactory());
-//        this.startTestdataGenerationForEntityDream();
-//        this.startTestdataGenerationForEntityTipOfTheNight();
         
-//        this.startTestdataGenerationForEntityDream();
-//        this.startTestdataGenerationForEntityTipOfTheNight();
+        for (Object item : lvEntities.getItems()) {
+            if (!(item instanceof CheckBoxListCellModel)) {
+                continue;
+            }
+
+            final CheckBoxListCellModel checkBoxListCellModel = (CheckBoxListCellModel) item;
+            if (!checkBoxListCellModel.isSelected()) {
+                continue;
+            }
+            
+            this.configureServiceForEntityDream(checkBoxListCellModel.getId());
+            this.configureServiceForEntityTipOfTheNight(checkBoxListCellModel.getId());
+        }
         
-//        LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
-//        LoggerFacade.INSTANCE.debug(this.getClass(), "Ready with generation from Testdata..."); // NOI18N
+//        LoggerFacade.INSTANCE.deactivate(Boolean.FALSE); // XXX move to xy-service
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Ready with Testdata generation..."); // NOI18N
     }
-    /*
-    private void startTestdataGenerationForEntityDream() {
+
+    private void configureServiceForEntityDream(String id) {
+        if (id.equals(DreamModel.class.getSimpleName())) {
+            return;
+        }
+            
         final DreamService service = new DreamService(DreamModel.class.getName());
+        final DreamPresenter presenter = (DreamPresenter) ENTITIES.get(DreamModel.class.getSimpleName()).getPresenter();
+        service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
-        service.bind(extendedProgressBarPresenterForDream, 2500);
-        service.setOnStart("Start with generation from Testdata with entity Dream..."); // NOI18N
-        service.setOnSucceeded("Ready with generation from Testdata with entity Dream..."); // NOI18N
+        service.setOnStart("Start with testdata generation from entity Dream..."); // NOI18N
+        service.setOnSucceeded("Ready with testdata generation from entity Dream..."); // NOI18N
         
         service.start();
     }
     
-    private void startTestdataGenerationForEntityTipOfTheNight() {
+    private void configureServiceForEntityTipOfTheNight(String id) {
+        if (id.equals(TipOfTheNightModel.class.getSimpleName())) {
+            return;
+        }
+          
         final TipOfTheNightService service = new TipOfTheNightService(TipOfTheNightModel.class.getName());
+        final TipOfTheNightPresenter presenter = (TipOfTheNightPresenter) ENTITIES.get(TipOfTheNightModel.class.getSimpleName()).getPresenter();
+        service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
-        service.bind(extendedProgressBarPresenterForTipOfTheNight, 1500);
-        service.setOnStart("Start with generation from Testdata with entity TipOfTheNight..."); // NOI18N
-        service.setOnSucceeded("Ready with generation from Testdata with entity TipOfTheNight..."); // NOI18N
+        service.setOnStart("Start with testdata generation from entity TipOfTheNight..."); // NOI18N
+        service.setOnSucceeded("Ready with testdata generation from entity TipOfTheNight..."); // NOI18N
         
         service.start();
     }
-    */
     
 }

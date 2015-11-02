@@ -1,15 +1,10 @@
 --------------------------------------------------------------------------------
 TODO for release v0.2.0
 --------------------------------------------------------------------------------
-- (v) Save changes as new branch 'prototype-application-testdata'
-- (v) Database should be created in modul DBW-Application and not in modul 
-  DBW-Application-Testdata
-   - (v) Check move TestdataApplication.java to modul DBW-Application. So when I 
-     start the TestdataApplication.java there then I have access on the right
-     database.
-      - (v) if okay tweak gitignore from DBW-Application-Testdata
-   - (v) Add TestdataFacade to de.pro.dbw.application.testdata.api
-- 
+
+- falsche entity wird generiert, wenn eine entity deaktiviert ist
+- reseten der vorherigen einstellungen, wenn erneut create geklickt wird.
+- delete db funktioniert nicht, wenn erneut create gedrückt wird.
 
 
 Bug für die TODOs?
@@ -19,5 +14,10 @@ Conflict
 * Click the `Review` button.
 * The `Git` console will be open which shows all files with a conflict.
 * Go through every file (double click) and resolve the conflict.
+
+Error
+ - DreamBook
+    - Falsche Reihenfolge. Sollte nach neuester Traum (long) ganz oben sortiert sein.
+    - Performance: Dauert zu lange bis alle Träume geladen werden.
 
 --------------------------------------------------------------------------------

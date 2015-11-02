@@ -20,6 +20,7 @@ import de.pro.dbw.application.testdata.entity.EntityHelper;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -35,19 +36,19 @@ import javafx.util.Callback;
  */
 public class DreamPresenter implements Initializable {
     
-    @FXML private ComboBox cbDream;
-    @FXML private Label lProgressDream;
-    @FXML private Label lProgressInformationDream;
-    @FXML private ProgressBar pbDream;
+    @FXML private ComboBox cbEntityDream;
+    @FXML private Label lProgressBarInformation;
+    @FXML private Label lProgressBarPercentInformation;
+    @FXML private ProgressBar pbEntityDream;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize DreamPresenter");
         
-        assert (cbDream != null)        : "fx:id=\"cbDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
-        assert (lProgressDream != null) : "fx:id=\"lProgressDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
-        assert (lProgressInformationDream != null) : "fx:id=\"lProgressInformationDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
-        assert (pbDream != null)        : "fx:id=\"pbDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
+        assert (cbEntityDream != null)                  : "fx:id=\"cbEntityDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
+        assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
+        assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
+        assert (pbEntityDream != null)                  : "fx:id=\"pbEntityDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
     
         this.initializeComboBox();
     }
@@ -55,8 +56,8 @@ public class DreamPresenter implements Initializable {
     private void initializeComboBox() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox");
         
-        cbDream.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
-        cbDream.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+        cbEntityDream.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
+        cbEntityDream.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
 
             @Override
             public ListCell<Integer> call(ListView<Integer> param) {
@@ -77,7 +78,28 @@ public class DreamPresenter implements Initializable {
             }
         });
         
-        cbDream.getSelectionModel().selectFirst();
+        cbEntityDream.getSelectionModel().selectFirst();
+    }
+    
+    public Label getProgressBarPercentInformation() {
+        return lProgressBarPercentInformation;
+    }
+
+    public int getSaveMaxEntities() {
+        Integer saveMaxEntitites = (Integer) cbEntityDream.getSelectionModel().getSelectedItem();
+        if (saveMaxEntitites == null) {
+            saveMaxEntitites = 0;
+        }
+        
+        return saveMaxEntitites;
+    }
+    
+    public DoubleProperty progressPropertyFromEntityDream() {
+        return pbEntityDream.progressProperty();
+    }
+    
+    public void setProgressBarInformation(String message) {
+        lProgressBarInformation.setText(message);
     }
     
 }

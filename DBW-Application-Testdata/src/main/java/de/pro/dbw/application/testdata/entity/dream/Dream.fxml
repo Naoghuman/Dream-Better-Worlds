@@ -25,12 +25,12 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label text="Persist entity Dream">
+                        <Label text="Storage counter for entity Dream">
                             <VBox.margin>
                                 <Insets left="14.0" />
                             </VBox.margin>
                         </Label>
-                        <ComboBox fx:id="cbDream" prefWidth="150.0">
+                        <ComboBox fx:id="cbEntityDream" prefWidth="150.0">
                             <VBox.margin>
                                 <Insets left="14.0" />
                             </VBox.margin>
@@ -47,15 +47,15 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label text="Process for entity Dream">
+                        <Label text="Process form entity Dream">
                             <VBox.margin>
                                 <Insets left="14.0" />
                             </VBox.margin>
                         </Label>
                         <StackPane alignment="TOP_LEFT">
                             <children>
-                                <ProgressBar fx:id="pbDream" prefHeight="25.0" prefWidth="300.0" progress="0.0" />
-                                <Label fx:id="lProgressInformationDream" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" text="0%" StackPane.alignment="CENTER_LEFT">
+                                <ProgressBar fx:id="pbEntityDream" prefHeight="25.0" prefWidth="300.0" progress="0.0" />
+                                <Label fx:id="lProgressBarPercentInformation" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" text="0%" StackPane.alignment="CENTER_LEFT">
                            <StackPane.margin>
                               <Insets />
                            </StackPane.margin></Label>
@@ -64,7 +64,7 @@
                                 <Insets left="14.0" />
                             </VBox.margin>
                         </StackPane>
-                        <Label fx:id="lProgressDream" text="&lt;Process Information&gt;">
+                        <Label fx:id="lProgressBarInformation" text="&lt;Process Information&gt;">
                             <VBox.margin>
                                 <Insets left="14.0" />
                             </VBox.margin>

@@ -30,6 +30,16 @@ public class CheckBoxListCellModel {
     private final BooleanProperty selectedProperty = new SimpleBooleanProperty();
     private final StringProperty name = new SimpleStringProperty();
     
+    private String id = null;
+    
+    public final String getId() {
+        return id;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public final boolean isSelected() {
         return this.selectedProperty().get();
     }
