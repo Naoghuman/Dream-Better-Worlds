@@ -18,14 +18,12 @@ package de.pro.dbw.application.testdata.service;
 
 import de.pro.dbw.application.testdata.entity.dream.DreamPresenter;
 import de.pro.dbw.application.testdata.service.loremipsum.LoremIpsum;
-import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.database.api.ICrudService;
 import de.pro.lib.logger.api.LoggerFacade;
-import java.util.List;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.beans.binding.Bindings;
@@ -82,9 +80,9 @@ public class DreamService extends Service<Void> {
     }
     
     private long createGenerationTime() {
-        final long now = System.currentTimeMillis();
         final String startTime = "01-01-2010"; // TODO create combobox where user can change the time-period
         final long convertedStartTime = UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(startTime, IDateConverter.PATTERN__DATE);
+        final long now = System.currentTimeMillis();
         final long timePeriod = now - convertedStartTime;
         final long generationTime = now - UtilProvider.getDefault().getDateConverter().getLongInPeriodFromNowTo(timePeriod);
         
@@ -103,12 +101,13 @@ public class DreamService extends Service<Void> {
                 final ICrudService crudService = DatabaseFacade.INSTANCE.getCrudService(entityName);
                 crudService.beginTransaction();
 
-                List<DreamModel> dreamModels = SqlProvider.getDefault().getDreamSqlProvider().findAll();
-                System.out.println(" ---- " + entityName); // XXX create logger, then disable logger
-                System.out.println("   before: dreams found: " + dreamModels.size());
-                System.out.println("   saveMaxEntities: " + saveMaxEntities);
-                long id = -1_000_000_000L + dreamModels.size();
-                for (int i = 0; i < saveMaxEntities; i++) {
+                long count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
+            	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " before testdata generation."); // NOI18N
+            	LoggerFacade.INSTANCE.debug(this.getClass(), "Create " + saveMaxEntities + " dreams as testdata..."); // NOI18N
+		LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
+
+                long id = -1_000_000_000L + count;
+                for (int i = 1; i <= saveMaxEntities; i++) {
                     final DreamModel model = new DreamModel();
                     model.setGenerationTime(DreamService.this.createGenerationTime());
                     model.setDescription(LoremIpsum.getDefault().getDescription());
@@ -117,7 +116,7 @@ public class DreamService extends Service<Void> {
                     model.setText(LoremIpsum.getDefault().getText());
                     
                     crudService.create(model, false);
-                    updateProgress(i, saveMaxEntities);
+                    updateProgress(i - 1, saveMaxEntities);
                     
                     if (i % 5000 == 0) {
                         crudService.commitTransaction();
@@ -127,9 +126,9 @@ public class DreamService extends Service<Void> {
 
                 crudService.commitTransaction();
                 
-                // XXX active logger, then log
-                dreamModels = SqlProvider.getDefault().getDreamSqlProvider().findAll();
-                System.out.println("   after: dreams found: " + dreamModels.size());
+		LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
+                count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
+            	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " dreams after testdata generation."); // NOI18N
 
                 return null;
             }
@@ -145,32 +144,31 @@ public class DreamService extends Service<Void> {
             LoggerFacade.INSTANCE.debug(this.getClass(), onSucceededMessage);
             
             presenter.setProgressBarInformation(onSucceededMessage);
-            presenter.getProgressBarPercentInformation().textProperty().unbind();
-            presenter.getProgressBarPercentInformation().setText("100%"); // NOI18N
         });
     }
 
     @Override
     public void start() {
-        final SequentialTransition st = new SequentialTransition();
+        final SequentialTransition sequentialTransition = new SequentialTransition();
         
-        PauseTransition pt = new PauseTransition();
-        pt.setDuration(Duration.millis(250.0d));
-        pt.setOnFinished((ActionEvent event) -> {
+        final PauseTransition ptProgressBarInformation = new PauseTransition();
+        ptProgressBarInformation.setDuration(Duration.millis(250.0d));
+        ptProgressBarInformation.setOnFinished((ActionEvent event) -> {
             LoggerFacade.INSTANCE.debug(this.getClass(), onStartMessage);
             
             presenter.setProgressBarInformation(onStartMessage);
         });
-        st.getChildren().add(pt);
+        sequentialTransition.getChildren().add(ptProgressBarInformation);
         
-        pt = new PauseTransition();
-        pt.setDuration(Duration.millis(1000.0d));
-        pt.setOnFinished((ActionEvent event) -> {
+        final PauseTransition ptStart = new PauseTransition();
+        ptStart.setDuration(Duration.millis(1000.0d));
+        ptStart.setOnFinished((ActionEvent event) -> {
             super.start();
         });
-        st.getChildren().add(pt);
+        sequentialTransition.getChildren().add(ptStart);
         
-        st.playFromStart();
+        sequentialTransition.playFromStart();
     }
     
 }
+
