@@ -281,7 +281,6 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     
     public void startTestdataGeneration() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "Start with Testdata generation..."); // NOI18N
-//        LoggerFacade.INSTANCE.deactivate(Boolean.TRUE); // XXX move to xy-service
         
 //        parallelExecutorService = Executors.newFixedThreadPool(2, new ParallelThreadFactory());
         
@@ -299,12 +298,11 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
             this.configureServiceForEntityTipOfTheNight(checkBoxListCellModel.getId());
         }
         
-//        LoggerFacade.INSTANCE.deactivate(Boolean.FALSE); // XXX move to xy-service
         LoggerFacade.INSTANCE.debug(this.getClass(), "Ready with Testdata generation..."); // NOI18N
     }
 
     private void configureServiceForEntityDream(String id) {
-        if (id.equals(DreamModel.class.getSimpleName())) {
+        if (!id.equals(DreamModel.class.getSimpleName())) {
             return;
         }
             
@@ -319,7 +317,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     private void configureServiceForEntityTipOfTheNight(String id) {
-        if (id.equals(TipOfTheNightModel.class.getSimpleName())) {
+        if (!id.equals(TipOfTheNightModel.class.getSimpleName())) {
             return;
         }
           
@@ -334,3 +332,4 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
 }
+
