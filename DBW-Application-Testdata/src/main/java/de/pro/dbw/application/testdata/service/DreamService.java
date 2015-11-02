@@ -144,6 +144,11 @@ public class DreamService extends Service<Void> {
             LoggerFacade.INSTANCE.debug(this.getClass(), onSucceededMessage);
             
             presenter.setProgressBarInformation(onSucceededMessage);
+            
+            if (!presenter.getProgressBarPercentInformation().getText().equals("100%")) { // NOI18N
+                presenter.getProgressBarPercentInformation().textProperty().unbind();
+                presenter.getProgressBarPercentInformation().setText("100%"); // NOI18N
+            }
         });
     }
 
