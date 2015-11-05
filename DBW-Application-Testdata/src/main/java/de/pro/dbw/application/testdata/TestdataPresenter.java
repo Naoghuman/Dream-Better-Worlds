@@ -21,6 +21,7 @@ import de.pro.dbw.application.testdata.entity.dream.DreamPresenter;
 import de.pro.dbw.application.testdata.entity.dream.DreamView;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightPresenter;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightView;
+import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCell;
 import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCellModel;
 import de.pro.dbw.application.testdata.service.DreamService;
 import de.pro.dbw.application.testdata.service.SequentialThreadFactory;
@@ -41,6 +42,8 @@ import java.util.concurrent.TimeUnit;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -53,7 +56,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -68,15 +70,18 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     
     private static final Map<String, FXMLView> ENTITIES = FXCollections.observableHashMap();
     
+    private final BooleanProperty disableProperty = new SimpleBooleanProperty(Boolean.FALSE);
+    
     @FXML private Button bCreateTestdata;
     @FXML private AnchorPane apDialogLayer;
     @FXML private CheckBox cbDeleteDatabase;
+    @FXML private CheckBox cbSelectAll;
     @FXML private ListView lvEntities;
     @FXML private TabPane tpEntities;
     @FXML private TabPane tpTestdata;
     @FXML private VBox vbEntities;
     
-    private ExecutorService parallelExecutorService;
+//    private ExecutorService parallelExecutorService;
     private ExecutorService sequentialExecutorService;
     
     @Override
@@ -86,6 +91,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         assert (bCreateTestdata != null)  : "fx:id=\"bCreateTestdata\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (apDialogLayer != null)    : "fx:id=\"apDialogLayer\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (cbDeleteDatabase != null) : "fx:id=\"cbDeleteDatabase\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
+        assert (cbSelectAll != null)      : "fx:id=\"cbSelectAll\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (lvEntities != null)       : "fx:id=\"lvEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (tpEntities != null)       : "fx:id=\"tpEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (tpTestdata != null)       : "fx:id=\"tpTestdata\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
@@ -116,10 +122,12 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         
         final DreamView dreamView = new DreamView();
         dreamView.getView().setId(DreamModel.class.getSimpleName());
+        dreamView.getRealPresenter().bind(disableProperty);
         ENTITIES.put(DreamModel.class.getSimpleName(), dreamView);
         
         final TipOfTheNightView tipOfTheNightView = new TipOfTheNightView();
         tipOfTheNightView.getView().setId(TipOfTheNightModel.class.getSimpleName());
+        tipOfTheNightView.getRealPresenter().bind(disableProperty);
         ENTITIES.put(TipOfTheNightModel.class.getSimpleName(), tipOfTheNightView);
     }
     
@@ -129,13 +137,38 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
 //        lvEntities.getStylesheets().addAll(this.getClass().getResource(CSS__TAG_CATEGORY_CHOOSER).toExternalForm());
 //        lvEntities.getItems().clear();
 
-        lvEntities.setCellFactory(CheckBoxListCell.forListView(CheckBoxListCellModel::selectedProperty));
+        lvEntities.setCellFactory(CheckBoxListCell.forListView(CheckBoxListCellModel::selectedProperty, disableProperty));
     }
     
     private void initializeProcesses() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize Processes"); // NOI18N
         
         sequentialExecutorService = Executors.newFixedThreadPool(1, new SequentialThreadFactory());
+    }
+    
+    public void cleanUpAfterServices() {
+        LoggerFacade.INSTANCE.info(this.getClass(), "Clean up after testdata generation"); // NOI18N
+
+        DatabaseFacade.INSTANCE.shutdown();
+        
+        disableProperty.setValue(Boolean.FALSE);
+        
+        cbDeleteDatabase.disableProperty().unbind();
+        cbSelectAll.disableProperty().unbind();
+        bCreateTestdata.disableProperty().unbind();
+    }
+
+    private void disableComponents() {
+        LoggerFacade.INSTANCE.info(this.getClass(), "Disable the components"); // NOI18N
+    
+        cbDeleteDatabase.disableProperty().bind(disableProperty);
+        cbSelectAll.disableProperty().bind(disableProperty);
+        bCreateTestdata.disableProperty().bind(disableProperty);
+        
+        // CheckBoxes in ListView are binded through the initialization in ListView
+        // XyPresenter (ComboBoxes) are binded through the initialization in Entities
+        
+        disableProperty.setValue(Boolean.TRUE);
     }
     
     private CheckBoxListCellModel getCheckBoxListCellModel(final String key) {
@@ -199,9 +232,16 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         LoggerFacade.INSTANCE.debug(this.getClass(), "On action create Testdata"); // NOI18N
 
         final SequentialTransition sequentialTransition = new SequentialTransition();
+        final PauseTransition ptDeactivateComponents = new PauseTransition();
+        ptDeactivateComponents.setDuration(Duration.ZERO);
+        ptDeactivateComponents.setOnFinished((ActionEvent event) -> {
+            this.disableComponents();
+        });
+        sequentialTransition.getChildren().add(ptDeactivateComponents);
+        
         if (cbDeleteDatabase.isSelected()) {
             final PauseTransition ptDropDatabase = new PauseTransition();
-            ptDropDatabase.setDuration(Duration.ZERO);
+            ptDropDatabase.setDuration(Duration.millis(100.0d));
             ptDropDatabase.setOnFinished((ActionEvent event) -> {
                 LoggerFacade.INSTANCE.debug(this.getClass(), "Drop database"); // NOI18N
                 DatabaseFacade.INSTANCE.drop(this.getProperty(KEY__APPLICATION__DATABASE));
@@ -218,7 +258,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         sequentialTransition.getChildren().add(ptRegisterDatabase);
         
         final PauseTransition ptCreateTestdata = new PauseTransition();
-        ptCreateTestdata.setDuration(Duration.millis(500.0d));
+        ptCreateTestdata.setDuration(Duration.millis(250.0d));
         ptCreateTestdata.setOnFinished((ActionEvent event) -> {
             this.startTestdataGeneration();
         });
@@ -284,6 +324,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         
 //        parallelExecutorService = Executors.newFixedThreadPool(2, new ParallelThreadFactory());
         
+        final List<String> activeEntities = FXCollections.observableArrayList();
         for (Object item : lvEntities.getItems()) {
             if (!(item instanceof CheckBoxListCellModel)) {
                 continue;
@@ -294,41 +335,62 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
                 continue;
             }
             
-            this.configureServiceForEntityDream(checkBoxListCellModel.getId());
-            this.configureServiceForEntityTipOfTheNight(checkBoxListCellModel.getId());
+            activeEntities.add(checkBoxListCellModel.getId());
+        }
+        
+        /**
+         * The last service need to do:
+         *  - activate all components again for the next round,
+         *  - shutdown the database
+         *  - unbind components
+         */
+        final String lastActiveService = activeEntities.get(activeEntities.size() - 1);
+        for (String entityName : activeEntities) {
+            this.configureServiceForEntityDream(entityName, lastActiveService);
+            this.configureServiceForEntityTipOfTheNight(entityName, lastActiveService);
         }
         
         LoggerFacade.INSTANCE.debug(this.getClass(), "Ready with Testdata generation..."); // NOI18N
     }
 
-    private void configureServiceForEntityDream(String id) {
-        if (!id.equals(DreamModel.class.getSimpleName())) {
+    private void configureServiceForEntityDream(String entityName, String lastActiveService) {
+        if (!entityName.equals(DreamModel.class.getSimpleName())) {
             return;
         }
-            
+        
         final DreamService service = new DreamService(DreamModel.class.getName());
         final DreamPresenter presenter = (DreamPresenter) ENTITIES.get(DreamModel.class.getSimpleName()).getPresenter();
         service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
         service.setOnStart("Start with testdata generation from entity Dream..."); // NOI18N
-        service.setOnSucceeded("Ready with testdata generation from entity Dream..."); // NOI18N
+        
+        service.setOnSuccededAfterService(
+                this.getTestdataPresenter(entityName, lastActiveService),
+                "Ready with testdata generation from entity Dream..."); // NOI18N
         
         service.start();
     }
     
-    private void configureServiceForEntityTipOfTheNight(String id) {
-        if (!id.equals(TipOfTheNightModel.class.getSimpleName())) {
+    private void configureServiceForEntityTipOfTheNight(String entityName, String lastActiveService) {
+        if (!entityName.equals(TipOfTheNightModel.class.getSimpleName())) {
             return;
         }
-          
+        
         final TipOfTheNightService service = new TipOfTheNightService(TipOfTheNightModel.class.getName());
         final TipOfTheNightPresenter presenter = (TipOfTheNightPresenter) ENTITIES.get(TipOfTheNightModel.class.getSimpleName()).getPresenter();
         service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
         service.setOnStart("Start with testdata generation from entity TipOfTheNight..."); // NOI18N
-        service.setOnSucceeded("Ready with testdata generation from entity TipOfTheNight..."); // NOI18N
+        
+        service.setOnSuccededAfterService(
+                this.getTestdataPresenter(entityName, lastActiveService),
+                "Ready with testdata generation from entity TipOfTheNight..."); // NOI18N
         
         service.start();
+    }
+    
+    private TestdataPresenter getTestdataPresenter(String entityName, String lastActiveService) {
+        return entityName.equals(lastActiveService) ? this : null;
     }
     
 }

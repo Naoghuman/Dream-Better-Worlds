@@ -21,7 +21,7 @@
                            <children>
                               <ToolBar minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                                  <items>
-                                    <CheckBox mnemonicParsing="false" onAction="#onActionSelectAll" text="Select all entitites" />
+                                    <CheckBox fx:id="cbSelectAll" mnemonicParsing="false" onAction="#onActionSelectAll" text="Select all entitites" />
                                  </items>
                                  <VBox.margin>
                                     <Insets />

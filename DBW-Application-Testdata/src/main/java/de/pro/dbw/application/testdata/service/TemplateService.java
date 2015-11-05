@@ -16,9 +16,9 @@
  */
 package de.pro.dbw.application.testdata.service;
 
+import de.pro.dbw.application.testdata.TestdataPresenter;
 import de.pro.dbw.application.testdata.entity.dream.DreamPresenter;
 import de.pro.dbw.application.testdata.service.loremipsum.LoremIpsum;
-import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.util.api.IDateConverter;
 import de.pro.dbw.util.provider.UtilProvider;
@@ -140,7 +140,7 @@ public class TemplateService extends Service<Void> {
         this.onStartMessage = onStartMessage;
     }
     
-    public void setOnSucceeded(String onSucceededMessage) {
+    public void setOnSuccededAfterService(TestdataPresenter testdataPresenter, String onSucceededMessage) {
         super.setOnSucceeded((WorkerStateEvent t) -> {
             LoggerFacade.INSTANCE.debug(this.getClass(), onSucceededMessage);
             
@@ -149,6 +149,10 @@ public class TemplateService extends Service<Void> {
             if (!presenter.getProgressBarPercentInformation().getText().equals("100%")) { // NOI18N
                 presenter.getProgressBarPercentInformation().textProperty().unbind();
                 presenter.getProgressBarPercentInformation().setText("100%"); // NOI18N
+            }
+            
+            if (testdataPresenter != null) {
+                testdataPresenter.cleanUpAfterServices();
             }
         });
     }

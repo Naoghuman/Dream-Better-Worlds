@@ -16,6 +16,7 @@
  */
 package de.pro.dbw.application.testdata.service;
 
+import de.pro.dbw.application.testdata.TestdataPresenter;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightPresenter;
 import de.pro.dbw.application.testdata.service.loremipsum.LoremIpsum;
 import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
@@ -138,7 +139,7 @@ public class TipOfTheNightService extends Service<Void> {
         this.onStartMessage = onStartMessage;
     }
     
-    public void setOnSucceeded(String onSucceededMessage) {
+    public void setOnSuccededAfterService(TestdataPresenter testdataPresenter, String onSucceededMessage) {
         super.setOnSucceeded((WorkerStateEvent t) -> {
             LoggerFacade.INSTANCE.debug(this.getClass(), onSucceededMessage);
             
@@ -147,6 +148,10 @@ public class TipOfTheNightService extends Service<Void> {
             if (!presenter.getProgressBarPercentInformation().getText().equals("100%")) { // NOI18N
                 presenter.getProgressBarPercentInformation().textProperty().unbind();
                 presenter.getProgressBarPercentInformation().setText("100%"); // NOI18N
+            }
+            
+            if (testdataPresenter != null) {
+                testdataPresenter.cleanUpAfterServices();
             }
         });
     }

@@ -20,6 +20,7 @@ import de.pro.dbw.application.testdata.entity.EntityHelper;
 import de.pro.lib.logger.api.LoggerFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,6 +80,11 @@ public class DreamPresenter implements Initializable {
         });
         
         cbEntityDream.getSelectionModel().selectFirst();
+    }
+
+    public void bind(BooleanProperty disableProperty) {
+        cbEntityDream.disableProperty().unbind();
+        cbEntityDream.disableProperty().bind(disableProperty);
     }
     
     public Label getProgressBarPercentInformation() {

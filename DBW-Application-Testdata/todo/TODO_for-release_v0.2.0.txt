@@ -2,11 +2,6 @@
 TODO for release v0.2.0
 --------------------------------------------------------------------------------
 
-- falsche entity wird generiert, wenn eine entity deaktiviert ist
-- reseten der vorherigen einstellungen, wenn erneut create geklickt wird.
-- delete db funktioniert nicht, wenn erneut create gedrückt wird.
-
-
 Bug für die TODOs?
 HowToMergeBranchesInNetBeansIDE.md
 Conflict
@@ -15,9 +10,5 @@ Conflict
 * The `Git` console will be open which shows all files with a conflict.
 * Go through every file (double click) and resolve the conflict.
 
-Error
- - DreamBook
-    - Falsche Reihenfolge. Sollte nach neuester Traum (long) ganz oben sortiert sein.
-    - Performance: Dauert zu lange bis alle Träume geladen werden.
 
 --------------------------------------------------------------------------------
