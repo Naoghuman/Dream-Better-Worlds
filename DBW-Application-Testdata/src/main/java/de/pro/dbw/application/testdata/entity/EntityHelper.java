@@ -25,6 +25,8 @@ import javafx.collections.FXCollections;
  */
 public class EntityHelper {
     
+    private static final List<Integer> QUANTITY_ENTITIES = FXCollections.observableArrayList();
+    
     private static EntityHelper instance = null;
     
     public static EntityHelper getDefault() {
@@ -35,8 +37,6 @@ public class EntityHelper {
         return instance;
     }
     
-    private static final List<Integer> QUANTITY_ENTITIES = FXCollections.observableArrayList();
-    
     private EntityHelper() { 
         this.initialize();
     }
@@ -46,10 +46,6 @@ public class EntityHelper {
     }
 
     private void initializeQuantityEntities() {
-        QUANTITY_ENTITIES.add(0);
-        QUANTITY_ENTITIES.add(10);
-        QUANTITY_ENTITIES.add(25);
-        QUANTITY_ENTITIES.add(50);
         QUANTITY_ENTITIES.add(100);
         QUANTITY_ENTITIES.add(250);
         QUANTITY_ENTITIES.add(500);
