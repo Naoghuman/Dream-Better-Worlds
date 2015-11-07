@@ -14,20 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.util.api;
+package de.pro.dbw.application.testdata.api;
+
+import de.pro.dbw.application.testdata.TestdataPresenter;
+import de.pro.dbw.application.testdata.TestdataView;
+import javafx.scene.Parent;
 
 /**
  *
  * @author PRo
  */
-public interface IDateConverter {
+public enum TestdataFacade {
     
-    public static final String PATTERN__DATE = "MM-dd-yyyy"; // NOI18N
-    public static final String PATTERN__DATE__COMMENT = "EEEE, MMM d yyyy"; // NOI18N
-    public static final String PATTERN__DATE__HISTORY = "EEEE, MMM d yyyy"; // NOI18N
-    public static final String PATTERN__DATETIME = "MM-dd-yyyy HH:mm:ss"; // NOI18N
-    public static final String PATTERN__GENERATIONTIME = "MM-dd-yyyy  HH:mm:ss"; // NOI18N
-    public static final String PATTERN__TIME = "HH:mm:ss"; // NOI18N
-    public static final String PATTERN__TIME_IS_EMPTY = "00:00:00"; // NOI18N
+    INSTANCE;
+    
+    private TestdataPresenter testdataPresenter = null;
+    private TestdataView view = null;
+    
+    private TestdataFacade() {
+        this.initialize();
+    }
+    
+    private void initialize() {
+        view = new TestdataView();
+        testdataPresenter = view.getRealPresenter();
+    }
+    
+    public void shutdown() throws InterruptedException {
+        testdataPresenter.shutdown();
+    }
+    
+    public Parent getView() {
+        return view.getView();
+    }
     
 }

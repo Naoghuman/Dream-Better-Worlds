@@ -14,20 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.util.api;
+package de.pro.dbw.application.testdata.api;
 
 /**
  *
  * @author PRo
  */
-public interface IDateConverter {
+public interface IProgress {
     
-    public static final String PATTERN__DATE = "MM-dd-yyyy"; // NOI18N
-    public static final String PATTERN__DATE__COMMENT = "EEEE, MMM d yyyy"; // NOI18N
-    public static final String PATTERN__DATE__HISTORY = "EEEE, MMM d yyyy"; // NOI18N
-    public static final String PATTERN__DATETIME = "MM-dd-yyyy HH:mm:ss"; // NOI18N
-    public static final String PATTERN__GENERATIONTIME = "MM-dd-yyyy  HH:mm:ss"; // NOI18N
-    public static final String PATTERN__TIME = "HH:mm:ss"; // NOI18N
-    public static final String PATTERN__TIME_IS_EMPTY = "00:00:00"; // NOI18N
+    public static final Double INDETERMINATE = -1.0d;
+    public static final Double NO_PROGRESS = 0.0d;
     
 }

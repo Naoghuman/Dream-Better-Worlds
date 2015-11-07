@@ -1,0 +1,14 @@
+--------------------------------------------------------------------------------
+TODO for release v0.2.0
+--------------------------------------------------------------------------------
+
+Bug für die TODOs?
+HowToMergeBranchesInNetBeansIDE.md
+Conflict
+* Happens during the Merge a conflict then the warning popup `Resolve Conflicts` will be shown.
+* Click the `Review` button.
+* The `Git` console will be open which shows all files with a conflict.
+* Go through every file (double click) and resolve the conflict.
+
+
+--------------------------------------------------------------------------------

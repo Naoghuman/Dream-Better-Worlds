@@ -175,6 +175,7 @@
     
     <modules>
         <module>DBW-Application</module>
+        <module>DBW-Application-Testdata</module>
         <module>DBW-Base-Component-Api</module>
         <module>DBW-Base-Component-Impl</module>
         <module>DBW-Base-Jobs-Impl</module>

@@ -14,20 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.util.api;
+package de.pro.dbw.application.testdata.entity.dream;
+
+import com.airhacks.afterburner.views.FXMLView;
 
 /**
  *
  * @author PRo
  */
-public interface IDateConverter {
+public class DreamView extends FXMLView {
     
-    public static final String PATTERN__DATE = "MM-dd-yyyy"; // NOI18N
-    public static final String PATTERN__DATE__COMMENT = "EEEE, MMM d yyyy"; // NOI18N
-    public static final String PATTERN__DATE__HISTORY = "EEEE, MMM d yyyy"; // NOI18N
-    public static final String PATTERN__DATETIME = "MM-dd-yyyy HH:mm:ss"; // NOI18N
-    public static final String PATTERN__GENERATIONTIME = "MM-dd-yyyy  HH:mm:ss"; // NOI18N
-    public static final String PATTERN__TIME = "HH:mm:ss"; // NOI18N
-    public static final String PATTERN__TIME_IS_EMPTY = "00:00:00"; // NOI18N
+    public DreamPresenter getRealPresenter() {
+        return (DreamPresenter) this.getPresenter();
+    }
     
 }
