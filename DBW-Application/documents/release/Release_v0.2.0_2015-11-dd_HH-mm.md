@@ -26,6 +26,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.0`.
 
 #### Bug
 #90 [DreamBook] Wrong default sorting in ListView.
+#51 [Testdata] Create info with warning about db and time.
 
 
 #### Refactoring
