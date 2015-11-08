@@ -14,6 +14,8 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.0`.
 #### New
 * New internal `TestdataApplication` which allows the developer to create testdata 
   for every entity in `Dream-Better-Worlds` from 100 to 100.000.
+#81 [Documents] Integrate Coding_Rules_for_View.txt (afterburner.fx) in CodingRulesForView.md.
+
 
 
 #### Enhancement
