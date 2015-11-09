@@ -26,7 +26,6 @@ public class DreamBookNavigationView extends FXMLView {
     public DreamBookNavigationPresenter getRealPresenter() {
         return (DreamBookNavigationPresenter) super.getPresenter();
     }
-    
 }
 ```
 
@@ -38,6 +37,7 @@ NetBeansIDE-AfterburnerFX-Plugin<a name="Plugin" />
   the file generation in **convention** with the library [afterburner.fx] in a 
   [JavaFX] project.
 * More information about the plugin can be found on the [project page] in GitHub.
+
 
 
 [//]: # (Links)

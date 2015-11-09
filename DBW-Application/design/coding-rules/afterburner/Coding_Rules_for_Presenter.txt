@@ -1,7 +1,0 @@
---------------------------------------------------------------------------------
-CODING RULES FOR [PACKAGENAME]PRESENTER
---------------------------------------------------------------------------------
-[PACKAGENAME].properties
-Access properties in [PACKAGENAME]Presenter see Coding_Rules_for_Properties.txt.
-
---------------------------------------------------------------------------------
