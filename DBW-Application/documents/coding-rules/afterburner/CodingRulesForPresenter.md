@@ -1,7 +1,6 @@
 Coding Rules for Presenter (Afterburner)
 ===
 
-
 The class **[CLASSNAME=PACKAGENAME]Presenter** implements Initializable. The 
 class is binded to the **[CLASSNAME=PACKAGENAME].fxml** file. That means all 
 defined variables in the .fxml file with id should be injected in the presenter
