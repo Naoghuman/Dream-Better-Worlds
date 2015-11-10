@@ -22,10 +22,11 @@ Preparation<a name="Preparation" />
 
 * The project is in a state to release :) .
 * Remove the commentary in the `pom.xml` from the child-modul `DBW-Application`.
-    - `Pre-releases` mustn't comment out because they have no executable jar.
-* Update `pom.xml`from the parent-modul `Dream-Better-Worlds` to the new version.
-* Navigate in explorer into the folder from the updated `pom.xml` descripted in
-  the previous step.
+    * `Pre-releases` mustn't comment out because they have no executable jar.
+* Update the `pom.xml` from the parent-modul `Dream-Better-Worlds` to the new 
+  version.
+* Navigate in the explorer into the folder from the updated `pom.xml` descripted 
+  in the previous step.
 * Open the `CommandLine` with `Shift + right click`.
 * In the `CommandLine` execute `mvn versions:update-child-modules`.
 * `Build with Dependencies` the project so that the application can start.
