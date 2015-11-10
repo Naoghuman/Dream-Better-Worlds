@@ -7,7 +7,8 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.0`.
   With the new class `TestdataApplication.java` in the modul `DBW-Application` the 
   developer can create testdata for every entity in `Dream-Better-Worlds` from 
   100 to 100.000.
-* Other point
+* Also the `Coding Rules` in convention with the library `afterburner.fx` are 
+  rewritten from .txt to .md files.
 
 
 
