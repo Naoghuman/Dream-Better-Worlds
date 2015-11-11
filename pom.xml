@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.pro</groupId>
     <artifactId>Dream-Better-Worlds</artifactId>
-    <version>0.1.4</version> <!-- -SNAPSHOT -->
+    <version>0.2.0</version> <!-- -SNAPSHOT -->
     <packaging>pom</packaging>
     <name>Dream-Better-Worlds</name>
     <inceptionYear>2014</inceptionYear>
@@ -175,6 +175,7 @@
     
     <modules>
         <module>DBW-Application</module>
+        <module>DBW-Application-Testdata</module>
         <module>DBW-Base-Component-Api</module>
         <module>DBW-Base-Component-Impl</module>
         <module>DBW-Base-Jobs-Impl</module>

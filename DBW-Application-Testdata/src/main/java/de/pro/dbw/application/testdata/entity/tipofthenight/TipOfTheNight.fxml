@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="215.0" prefWidth="360.0" style="-fx-background-color: aquamarine;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightPresenter">
+    <children>
+        <VBox layoutX="14.0" layoutY="22.0" spacing="7.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <children>
+                <Label text="Entity TipOfTheNight">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Label>
+                <VBox spacing="2.0">
+                    <children>
+                        <Label text="Configuration">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Label>
+                        <Label text="Storage counter for entity TipOfTheNight">
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cbEnityTipOfTheNight" prefWidth="150.0">
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </ComboBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="14.0" />
+                    </VBox.margin>
+                </VBox>
+                <VBox spacing="2.0">
+                    <children>
+                        <Label text="Processes">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Process form entity TipOfTheNight">
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </Label>
+                        <StackPane alignment="TOP_LEFT">
+                            <children>
+                                <ProgressBar fx:id="pbEnityTipOfTheNight" prefHeight="25.0" prefWidth="300.0" progress="0.0" />
+                                <Label fx:id="lProgressBarPercentInformation" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" text="0%" />
+                            </children>
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </StackPane>
+                        <Label fx:id="lProgressBarInformation" text="&lt;Process Information&gt;">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="14.0" />
+                    </VBox.margin>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

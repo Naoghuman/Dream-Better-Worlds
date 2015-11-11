@@ -26,6 +26,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.Random;
 import org.joda.time.MutableDateTime;
 
 /**
@@ -33,6 +34,8 @@ import org.joda.time.MutableDateTime;
  * @author PRo
  */
 public class DateConverter implements IDateConverter {
+    
+    private static final Random RANDOM = new Random();
     
     public Long addDays(int days) {
         final MutableDateTime mdtNow = MutableDateTime.now();
@@ -43,7 +46,7 @@ public class DateConverter implements IDateConverter {
     
     public Long convertDateTimeToLong(String dateTime, String pattern) {
         LoggerFacade.INSTANCE.debug(DateConverter.class, String.format(
-                    "Convert %s with %s to Long", dateTime, pattern));
+                    "Convert %s with %s to Long", dateTime, pattern)); // NOI18N
         
         try {
             final DateFormat formatter = new SimpleDateFormat(pattern);
@@ -51,7 +54,7 @@ public class DateConverter implements IDateConverter {
             return converted.getTime();
         } catch (ParseException pe) {
             LoggerFacade.INSTANCE.error(DateConverter.class, String.format(
-                    "Can't convert %s with %s to Long", dateTime, pattern), pe);
+                    "Can't convert %s with %s to Long", dateTime, pattern), pe); // NOI18N
         }
         
         return 0L;
@@ -60,6 +63,20 @@ public class DateConverter implements IDateConverter {
     public String convertLongToDateTime(Long millis, String pattern) {
         final MutableDateTime mdt = new MutableDateTime(millis);
         return mdt.toString(pattern);
+    }
+    
+    public long getLongInPeriodFromNowTo(Long startTime) {
+        if (startTime <=0) {
+            throw new IllegalArgumentException("startTime must be positive"); // NOI18N
+        }
+        
+        long bits, val;
+        do {
+           bits = (RANDOM.nextLong() << 1) >>> 1;
+           val = bits % startTime;
+        } while (bits - val + (startTime - 1) < 0L);
+        
+        return val;
     }
     
     public Boolean isAfter(int days, Long time) {

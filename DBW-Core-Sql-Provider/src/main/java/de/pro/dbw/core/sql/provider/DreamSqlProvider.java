@@ -16,15 +16,18 @@
  */
 package de.pro.dbw.core.sql.provider;
 
+import de.pro.dbw.core.configuration.api.file.dream.IDreamConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.lib.database.api.DatabaseFacade;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
  *
  * @author PRo
  */
-public class DreamSqlProvider {
+public class DreamSqlProvider implements IDreamConfiguration {
     
     private static DreamSqlProvider instance = null;
     
@@ -54,6 +57,19 @@ public class DreamSqlProvider {
     
     public void delete(Long idToDelete) {
         DatabaseFacade.INSTANCE.getCrudService().delete(DreamModel.class, idToDelete);
+    }
+    
+    /**
+     * ATTENTION: Can be slow.
+     * 
+     * @return List from all dreams. 
+     */
+    public List<DreamModel> findAll() {
+        final List<DreamModel> allTipsOfTheNight = DatabaseFacade.INSTANCE.getCrudService()
+                .findByNamedQuery(DreamModel.class, NAMED_QUERY__NAME__FIND_ALL);
+        Collections.sort(allTipsOfTheNight);
+        
+        return allTipsOfTheNight;
     }
     
     public DreamModel findById(Long dreamId) {

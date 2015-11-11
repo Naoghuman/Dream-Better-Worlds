@@ -69,7 +69,8 @@ Post-Processing<a name="PostProcessing" />
   to implement. If yes, implement them.
 * Perform the action `Build with Dependencies`.
 * Project is running?
-* `Commit` and `push` the changes to [GitHub].
+* Right click on the project and perform the action `Git/Remote/Push to Upstream` 
+  to push the changes to [GitHub].
 
 
 
