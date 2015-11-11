@@ -30,15 +30,16 @@ Release Notes<a name="ReleaseNotes" />
 
 ### Current release<a name="CurrentRelease" />
 
-Current pre-release is `v0.1.3` which contains following points:
-* The main focus in this release is the documentation. Extended the ReadMe.md
-  with serveral document from the area 'Technical Informations' and 'Technical 
-  documents'.
-* Internal will now .properties files be used für the names in dialogs and tabs.
-* A bug will be fixed which concerns the sorting in DreamBook and History.
+Current pre-release is `v0.2.0` which contains following points:
+* The main focus in this release is the new functionality for testdata generation. 
+  With the new class `TestdataApplication.java` in the modul `DBW-Application` the 
+  developer can create testdata for every entity in `Dream-Better-Worlds` from 
+  100 to 100.000.
+* Also the `Coding Rules` in convention with the library `afterburner.fx` are 
+  rewritten from .txt to .md files.
 
 Detailed information about the current pre-release can be found here:
-* [Release v0.1.3 (2015-08-09 10:00)]
+* [Release v0.2.0 (2015-11-11 17:20)]
 
 
 ### Overview releases in Dream-Better-Worlds<a name="OverviewReleasesInDreamBetterWorlds" />
@@ -130,4 +131,4 @@ Contact<a name="Contact" />
 [Project page from Lib-Properties]:https://github.com/Naoghuman/lib-properties
 [Project page from Lib-Resources]:https://github.com/Naoghuman/lib-resources
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
-[Release v0.1.3 (2015-08-09 10:00)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.1.3
+[Release v0.2.0 (2015-11-11 17:20)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.2.0
