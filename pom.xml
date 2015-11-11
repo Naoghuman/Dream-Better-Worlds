@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.pro</groupId>
     <artifactId>Dream-Better-Worlds</artifactId>
-    <version>0.2.0</version> <!-- -SNAPSHOT -->
+    <version>0.2.1-SNAPSHOT</version> <!-- -SNAPSHOT -->
     <packaging>pom</packaging>
     <name>Dream-Better-Worlds</name>
     <inceptionYear>2014</inceptionYear>
