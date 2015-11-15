@@ -25,6 +25,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 
 #### Refactoring
+#94 [Refactoring] Use the Builders from commons-lang for equals(), compare() and hash().
 
 
 
@@ -33,7 +34,6 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 
 [//]: # (Issues which will be integrated in this release)
-#94 [Refactoring] Use the Builders from commons-lang for equals(), compare() and hash().
 #93 [Testdata] Integrate Stopwatch for logging the time from testdata generation.
 #92 [Testdata] Integrate entity ReflectionModel into the testdata generation.
 #89 [Documents] Check links in ReadMe because some doesn't work.

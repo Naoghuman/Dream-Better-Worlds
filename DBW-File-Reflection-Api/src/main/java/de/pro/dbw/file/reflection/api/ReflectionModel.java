@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.List;
-import java.util.Objects;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
@@ -51,6 +50,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  *
@@ -297,55 +300,45 @@ public class ReflectionModel implements Comparable<ReflectionModel>, Externaliza
     
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Long.hashCode(this.getId());
-        return hash;
+        return new HashCodeBuilder(17, 37)
+                .append(this.getId())
+                .append(this.getGenerationTime())
+                .toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
+        if (obj == null || obj == this) {
             return false;
         }
+        
         if (this.getClass() != obj.getClass()) {
             return false;
         }
+        
         final ReflectionModel other = (ReflectionModel) obj;
-        if (!Objects.equals(this.getId(), other.getId())) {
-            return false;
-        }
-        
-        if (!Objects.equals(this.getGenerationTime(), other.getGenerationTime())) {
-            return false;
-        }
-        
-        return true;
+        return new EqualsBuilder()
+                .append(this.getId(), other.getId())
+                .append(this.getGenerationTime(), other.getGenerationTime())
+                .isEquals();
     }
     
     @Override
     public int compareTo(ReflectionModel other) {
-        int compareTo = Long.compare(other.getGenerationTime(), this.getGenerationTime());
-        if (compareTo != 0) {
-            return compareTo;
-        }
-        compareTo = other.getTitle().compareTo(this.getTitle());
-        if (compareTo != 0) {
-            return compareTo;
-        }
-        
-        return Long.compare(other.getId(), this.getId());
+        return new CompareToBuilder()
+                .append(other.getGenerationTime(), this.getGenerationTime())
+                .append(other.getTitle(), this.getTitle())
+                .append(other.getId(), this.getId())
+                .toComparison();
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Reflection ["); // NOI18N
-        sb.append("id=").append(this.getId()); // NOI18N
-        sb.append(", title=").append(this.getTitle()); // NOI18N
-        sb.append(", generationtime=").append(this.getGenerationTime()); // NOI18N
-        sb.append("]"); // NOI18N
-        
-        return sb.toString();
+        return new ToStringBuilder(this)
+                .append("id", this.getId()) // NOI18N
+                .append("title", this.getTitle()) // NOI18N
+                .append("generationtime", this.getGenerationTime()) // NOI18N
+                .toString();
     }
 
     @Override
