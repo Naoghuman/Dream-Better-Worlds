@@ -19,15 +19,19 @@ package de.pro.dbw.application.testdata;
 import com.airhacks.afterburner.views.FXMLView;
 import de.pro.dbw.application.testdata.entity.dream.DreamPresenter;
 import de.pro.dbw.application.testdata.entity.dream.DreamView;
+import de.pro.dbw.application.testdata.entity.reflection.ReflectionPresenter;
+import de.pro.dbw.application.testdata.entity.reflection.ReflectionView;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightPresenter;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightView;
 import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCell;
 import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCellModel;
 import de.pro.dbw.application.testdata.service.DreamService;
+import de.pro.dbw.application.testdata.service.ReflectionService;
 import de.pro.dbw.application.testdata.service.SequentialThreadFactory;
 import de.pro.dbw.application.testdata.service.TipOfTheNightService;
 import de.pro.dbw.core.configuration.api.application.testdata.ITestdataConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
+import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -124,6 +128,11 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         dreamView.getView().setId(DreamModel.class.getSimpleName());
         dreamView.getRealPresenter().bind(disableProperty);
         ENTITIES.put(DreamModel.class.getSimpleName(), dreamView);
+        
+        final ReflectionView reflectionView = new ReflectionView();
+        reflectionView.getView().setId(ReflectionModel.class.getSimpleName());
+        reflectionView.getRealPresenter().bind(disableProperty);
+        ENTITIES.put(ReflectionModel.class.getSimpleName(), reflectionView);
         
         final TipOfTheNightView tipOfTheNightView = new TipOfTheNightView();
         tipOfTheNightView.getView().setId(TipOfTheNightModel.class.getSimpleName());
@@ -347,6 +356,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         final String lastActiveService = activeEntities.get(activeEntities.size() - 1);
         for (String entityName : activeEntities) {
             this.configureServiceForEntityDream(entityName, lastActiveService);
+            this.configureServiceForEntityReflection(entityName, lastActiveService);
             this.configureServiceForEntityTipOfTheNight(entityName, lastActiveService);
         }
         
@@ -367,6 +377,24 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         service.setOnSuccededAfterService(
                 this.getTestdataPresenter(entityName, lastActiveService),
                 "Ready with testdata generation from entity Dream..."); // NOI18N
+        
+        service.start();
+    }
+
+    private void configureServiceForEntityReflection(String entityName, String lastActiveService) {
+        if (!entityName.equals(ReflectionModel.class.getSimpleName())) {
+            return;
+        }
+        
+        final ReflectionService service = new ReflectionService(ReflectionModel.class.getName());
+        final ReflectionPresenter presenter = (ReflectionPresenter) ENTITIES.get(ReflectionModel.class.getSimpleName()).getPresenter();
+        service.bind(presenter);
+        service.setExecutor(sequentialExecutorService);
+        service.setOnStart("Start with testdata generation from entity Reflection..."); // NOI18N
+        
+        service.setOnSuccededAfterService(
+                this.getTestdataPresenter(entityName, lastActiveService),
+                "Ready with testdata generation from entity Reflection..."); // NOI18N
         
         service.start();
     }

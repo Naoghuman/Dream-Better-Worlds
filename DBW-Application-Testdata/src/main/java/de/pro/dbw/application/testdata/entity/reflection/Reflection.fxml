@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="228.0" prefWidth="404.0" style="-fx-background-color: aliceblue;" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="de.pro.dbw.application.testdata.entity.reflection.ReflectionPresenter">
+    <stylesheets>
+        <URL value="@Reflection.css" />
+    </stylesheets>
+    <children>
+        <VBox layoutX="100.0" layoutY="23.0" spacing="7.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <children>
+                <Label text="Entity Reflection">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <VBox spacing="2.0">
+                    <children>
+                        <Label text="Configuration">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Storage counter for entity Reflection">
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cbEntityReflection" prefWidth="150.0">
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </ComboBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="14.0" />
+                    </VBox.margin>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0">
+                    <children>
+                        <Label text="Processes">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Process form entity Reflection">
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </Label>
+                        <StackPane alignment="TOP_LEFT">
+                            <children>
+                                <ProgressBar fx:id="pbEntityReflection" prefHeight="25.0" prefWidth="300.0" progress="0.0" />
+                                <Label fx:id="lProgressBarPercentInformation" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" text="0%" StackPane.alignment="CENTER_LEFT">
+                                    <StackPane.margin>
+                                        <Insets />
+                                    </StackPane.margin>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                        </StackPane>
+                        <Label fx:id="lProgressBarInformation" text="&lt;Process Information&gt;">
+                            <VBox.margin>
+                                <Insets left="14.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="14.0" />
+                    </VBox.margin>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

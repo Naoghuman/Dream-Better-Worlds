@@ -44,7 +44,7 @@ public class TipOfTheNightPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TipOfTheNightPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TipOfTheNightPresenter"); // NOI18N
         
         assert (cbEnityTipOfTheNight != null)           : "fx:id=\"cbEnityTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
         assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
@@ -55,7 +55,7 @@ public class TipOfTheNightPresenter implements Initializable {
     }
 
     private void initializeComboBox() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox"); // NOI18N
         
         cbEnityTipOfTheNight.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
         cbEnityTipOfTheNight.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
@@ -73,7 +73,7 @@ public class TipOfTheNightPresenter implements Initializable {
                                 return;
                             }
                             
-                            super.setText("" + item);
+                            super.setText("" + item); // NOI18N
                         }
                     };
             }

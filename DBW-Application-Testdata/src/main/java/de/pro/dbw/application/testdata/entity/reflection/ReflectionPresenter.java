@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.application.testdata.entity.dream;
+package de.pro.dbw.application.testdata.entity.reflection;
 
 import de.pro.dbw.application.testdata.entity.EntityHelper;
 import de.pro.lib.logger.api.LoggerFacade;
@@ -35,21 +35,25 @@ import javafx.util.Callback;
  *
  * @author PRo
  */
-public class DreamPresenter implements Initializable {
+public class ReflectionPresenter implements Initializable {
     
-    @FXML private ComboBox cbEntityDream;
+    @FXML private ComboBox cbEntityReflection;
     @FXML private Label lProgressBarInformation;
     @FXML private Label lProgressBarPercentInformation;
-    @FXML private ProgressBar pbEntityDream;
+    @FXML private ProgressBar pbEntityReflection;
 
+    private ResourceBundle resources = null;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize DreamPresenter"); // NOI18N
         
-        assert (cbEntityDream != null)                  : "fx:id=\"cbEntityDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
-        assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
-        assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
-        assert (pbEntityDream != null)                  : "fx:id=\"pbEntityDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
+        this.resources = resources;
+        
+        assert (cbEntityReflection != null)             : "fx:id=\"cbEntityReflection\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (pbEntityReflection != null)             : "fx:id=\"pbEntityReflection\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
     
         this.initializeComboBox();
     }
@@ -57,8 +61,8 @@ public class DreamPresenter implements Initializable {
     private void initializeComboBox() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox"); // NOI18N
         
-        cbEntityDream.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
-        cbEntityDream.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+        cbEntityReflection.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
+        cbEntityReflection.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
 
             @Override
             public ListCell<Integer> call(ListView<Integer> param) {
@@ -79,12 +83,12 @@ public class DreamPresenter implements Initializable {
             }
         });
         
-        cbEntityDream.getSelectionModel().selectFirst();
+        cbEntityReflection.getSelectionModel().selectFirst();
     }
 
     public void bind(BooleanProperty disableProperty) {
-        cbEntityDream.disableProperty().unbind();
-        cbEntityDream.disableProperty().bind(disableProperty);
+        cbEntityReflection.disableProperty().unbind();
+        cbEntityReflection.disableProperty().bind(disableProperty);
     }
     
     public Label getProgressBarPercentInformation() {
@@ -92,7 +96,7 @@ public class DreamPresenter implements Initializable {
     }
 
     public int getSaveMaxEntities() {
-        Integer saveMaxEntitites = (Integer) cbEntityDream.getSelectionModel().getSelectedItem();
+        Integer saveMaxEntitites = (Integer) cbEntityReflection.getSelectionModel().getSelectedItem();
         if (saveMaxEntitites == null) {
             saveMaxEntitites = 0;
         }
@@ -100,8 +104,8 @@ public class DreamPresenter implements Initializable {
         return saveMaxEntitites;
     }
     
-    public DoubleProperty progressPropertyFromEntityDream() {
-        return pbEntityDream.progressProperty();
+    public DoubleProperty progressPropertyFromEntityReflection() {
+        return pbEntityReflection.progressProperty();
     }
     
     public void setProgressBarInformation(String message) {
