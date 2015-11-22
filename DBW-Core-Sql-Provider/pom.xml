@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>de.pro</groupId>
+            <artifactId>DBW-Feature-Voting-Api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.pro</groupId>
             <artifactId>DBW-File-Dream-Api</artifactId>
             <version>${project.version}</version>
         </dependency>

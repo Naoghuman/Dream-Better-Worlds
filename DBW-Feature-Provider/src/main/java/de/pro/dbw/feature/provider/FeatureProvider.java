@@ -16,14 +16,16 @@
  */
 package de.pro.dbw.feature.provider;
 
+import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.scene.control.TabPane;
 
 /**
  *
  * @author PRo
  */
-public class FeatureProvider {
+public class FeatureProvider implements IRegisterActions {
     
     private static FeatureProvider instance = null;
     
@@ -42,7 +44,7 @@ public class FeatureProvider {
     }
     
     private void initialize() {
-        
+        PropertiesFacade.INSTANCE.register(IFeatureProvider.FEATURE_PROVIDER__RESOURCE_BUNDLE);
     }
     
     public TagProvider getTagProvider() {
@@ -59,6 +61,13 @@ public class FeatureProvider {
         this.tpEditor = tpEditor;
         
         VotingProvider.getDefault().register(tpEditor);
+    }
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in FeatureProvider"); // NOI18N
+        
+        VotingProvider.getDefault().registerActions();
     }
     
 }

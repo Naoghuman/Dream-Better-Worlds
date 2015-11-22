@@ -54,4 +54,8 @@ public class SqlProvider {
         return TipOfTheNightSqlProvider.getDefault();
     }
     
+    public VotingSqlProvider getVotingSqlProvider() {
+        return VotingSqlProvider.getDefault();
+    }
+    
 }

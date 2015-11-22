@@ -19,9 +19,15 @@
                         <MenuItem mnemonicParsing="false" onAction="#onActionCreateNewFileReflection" text="Reflection" />
                             </items>
                         </Menu>
+                        <Menu mnemonicParsing="false" text="Extras">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#onActionShowVotingWizard" text="Voting Wizard" />
+                          </items>
+                        </Menu>
                         <Menu mnemonicParsing="false" text="Configuration">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#onActionShowTipOfTheNightEditor" text="Tip of the Night" />
+                                <MenuItem mnemonicParsing="false" onAction="#onActionShowVotingEditor" text="Voting Editor" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Help">

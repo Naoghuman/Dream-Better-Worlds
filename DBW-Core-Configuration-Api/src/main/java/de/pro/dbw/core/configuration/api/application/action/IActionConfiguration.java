@@ -38,6 +38,7 @@ public interface IActionConfiguration {
     public static final String ACTION__OPEN_REFLECTION__FROM_NAVIGATION = "ACTION__OPEN_REFLECTION__FROM_NAVIGATION"; // NOI18N
     public static final String ACTION__OPEN_VOTING__FROM_NAVIGATION = "ACTION__OPEN_VOTING__FROM_NAVIGATION"; // NOI18N
     
+    public static final String ACTION__REFRESH_ = "ACTION__REFRESH_"; // NOI18N
     public static final String ACTION__REFRESH_NAVIGATION__DREAMBOOK = "ACTION__REFRESH_NAVIGATION__DREAMBOOK"; // NOI18N
     public static final String ACTION__REFRESH_NAVIGATION__DREAMMAP = "ACTION__REFRESH_NAVIGATION__DREAMMAP"; // NOI18N
     public static final String ACTION__REFRESH_NAVIGATION__HISTORY = "ACTION__REFRESH_NAVIGATION__HISTORY"; // NOI18N
@@ -63,5 +64,7 @@ public interface IActionConfiguration {
     public static final String ACTION__SHOW_SEARCH_IN_DREAMS = "ACTION__SHOW_SEARCH_IN_DREAMS"; // NOI18N
     public static final String ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR = "ACTION__SHOW_TIP_OF_THE_NIGHT__EDITOR"; // NOI18N
     public static final String ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW = "ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW"; // NOI18N
+    public static final String ACTION__SHOW_VOTING__EDITOR = "ACTION__SHOW_VOTING__EDITOR"; // NOI18N
+    public static final String ACTION__SHOW_VOTING__WIZARD = "ACTION__SHOW_VOTING__WIZARD"; // NOI18N
     
 }

@@ -14,26 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.voting.impl.votingeditor;
-
-import de.pro.lib.logger.api.LoggerFacade;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+package de.pro.dbw.feature.voting.api;
 
 /**
  *
  * @author PRo
  */
-public class VotingEditorPresenter implements Initializable {
+public class ActiveVotingModel {
+    /*
+    PARAMETER
+     - id
+     - voting-model-id
+     - list<long> votings
     
-//    @FXML private Button bNo;
+    METHODS
+     - hasVoted(): boolean
+        - check if in votings this day
+     - isActive(): boolean
+        - return true if today >= FromDate && today <= toDate
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingEditorPresenter");
-        
-//        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
-    }
-    
+    */
 }

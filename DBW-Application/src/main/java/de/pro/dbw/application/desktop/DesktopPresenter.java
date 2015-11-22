@@ -23,10 +23,12 @@ import de.pro.dbw.core.configuration.api.application.util.IUtilConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
 import de.pro.dbw.exercise.provider.ExerciseProvider;
 import de.pro.dbw.feature.provider.FeatureProvider;
+import de.pro.dbw.feature.voting.api.EVotingEditorMode;
 import de.pro.dbw.file.provider.FileProvider;
 import de.pro.dbw.navigation.provider.NavigationProvider;
 import de.pro.dbw.tool.provider.ToolProvider;
 import de.pro.lib.action.api.ActionFacade;
+import de.pro.lib.action.api.ActionTransferModel;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
 import java.net.URL;
@@ -276,12 +278,29 @@ public class DesktopPresenter implements Initializable, IActionConfiguration,
         
         ActionFacade.INSTANCE.handle(ACTION__SHOW_TIP_OF_THE_NIGHT__WINDOW);
     }
+    
+    public void onActionShowVotingEditor() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show Voting Editor"); // NOI18N
+        
+        final ActionTransferModel model = new ActionTransferModel();
+        model.setActionKey(ACTION__SHOW_VOTING__EDITOR);
+        model.setObject(EVotingEditorMode.OPEN_FROM_MENU);
+        
+        ActionFacade.INSTANCE.handle(model);
+    }
+    
+    public void onActionShowVotingWizard() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show Voting Wizard"); // NOI18N
+        
+        ActionFacade.INSTANCE.handle(ACTION__SHOW_VOTING__WIZARD);
+    }
 
     @Override
     public void registerActions() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in DesktopPresenter"); // NOI18N
         
         ExerciseProvider.getDefault().registerActions();
+        FeatureProvider.getDefault().registerActions();
         FileProvider.getDefault().registerActions();
         NavigationProvider.getDefault().registerActions();
         ToolProvider.getDefault().registerActions();

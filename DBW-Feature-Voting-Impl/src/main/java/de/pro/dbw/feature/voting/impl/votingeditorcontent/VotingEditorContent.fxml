@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="330.0" prefWidth="495.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.feature.voting.impl.votingeditorcontent.VotingEditorContentPresenter">
+   <children>
+      <HBox layoutX="70.0" layoutY="120.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" HBox.hgrow="NEVER">
+               <children>
+                  <Label text="Existing Votings" />
+                  <ListView fx:id="lvExistingVotings" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="TOP_RIGHT" spacing="10.0">
+                     <children>
+                        <Button fx:id="bNew" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionNew" prefWidth="64.0" text="New" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Title" />
+                  <TextField fx:id="tfTitle" />
+                  <Label text="Tags">
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Description">
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+                  <TextArea fx:id="taDescription" prefHeight="128.0" wrapText="true" />
+                  <Pane VBox.vgrow="ALWAYS" />
+                  <HBox alignment="TOP_RIGHT" spacing="10.0">
+                     <children>
+                        <Button fx:id="bSave" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionSave" prefWidth="64.0" text="Save" />
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionClose" prefWidth="64.0" text="Close" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

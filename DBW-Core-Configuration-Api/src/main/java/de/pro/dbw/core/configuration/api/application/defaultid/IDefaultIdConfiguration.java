@@ -22,14 +22,16 @@ package de.pro.dbw.core.configuration.api.application.defaultid;
  */
 public interface IDefaultIdConfiguration {
     
-    public static final Long FILE__DREAM__DEFAULT_ID                = -28_07_1967_000_000L;
-//    public static final Long DREAM_MAP_DEFAULT_ID                   = -28_07_1967_001_000L;
-    public static final Long FILE__EXERCISE__DEFAULT_ID             = -28_07_1967_002_000L;
-    public static final Long FILE__REFLECTION__DEFAULT_ID           = -28_07_1967_003_000L;
-    public static final Long FILE__REFLECTION_COMMENT__DEFAULT_ID   = -28_07_1967_004_000L;
-    public static final Long FILE__TIP_OF_THE_NIGHT__DEFAULT_ID     = -28_07_1967_005_000L;
-    public static final Long FILE__WELCOME__DEFAULT_ID              = -28_07_1967_006_000L;
+    public static final Long FEATURE__VOTING__DEFAULT_ID            = -28_07_1967_000_000L;
     
-    public static final Long SEARCH__DREAM__DEFAULT_ID              = -28_07_1967_010_000L;
+    public static final Long FILE__DREAM__DEFAULT_ID                = -28_07_1967_001_000L;
+//    public static final Long DREAM_MAP_DEFAULT_ID                   = -28_07_1967_001_000L;
+    public static final Long FILE__EXERCISE__DEFAULT_ID             = -28_07_1967_001_100L;
+    public static final Long FILE__REFLECTION__DEFAULT_ID           = -28_07_1967_001_200L;
+    public static final Long FILE__REFLECTION_COMMENT__DEFAULT_ID   = -28_07_1967_001_300L;
+    public static final Long FILE__TIP_OF_THE_NIGHT__DEFAULT_ID     = -28_07_1967_001_400L;
+    public static final Long FILE__WELCOME__DEFAULT_ID              = -28_07_1967_001_500L;
+    
+    public static final Long SEARCH__DREAM__DEFAULT_ID              = -28_07_1967_002_000L;
     
 }

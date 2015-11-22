@@ -14,26 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.voting.impl.votingchooser;
+package de.pro.dbw.feature.voting.impl.listview.votingelement;
 
-import de.pro.lib.logger.api.LoggerFacade;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import com.airhacks.afterburner.views.FXMLView;
 
 /**
  *
  * @author PRo
  */
-public class VotingChooserPresenter implements Initializable {
+public class VotingElementView extends FXMLView {
     
-//    @FXML private Button bNo;
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingChooserPresenter");
-        
-//        assert (bNo != null)      : "fx:id=\"bNo\" was not injected: check your FXML file 'DeleteDialog.fxml'."; // NOI18N
+    public VotingElementPresenter getRealPresenter() {
+        return (VotingElementPresenter) this.getPresenter();
     }
     
 }

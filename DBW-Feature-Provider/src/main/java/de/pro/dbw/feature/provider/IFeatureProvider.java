@@ -14,18 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.voting.impl.votingeditor;
-
-import com.airhacks.afterburner.views.FXMLView;
+package de.pro.dbw.feature.provider;
 
 /**
  *
  * @author PRo
  */
-public class VotingEditorView extends FXMLView {
-    
-    public VotingEditorPresenter getRealPresenter() {
-        return (VotingEditorPresenter) this.getPresenter();
-    }
+interface IFeatureProvider {
+   
+    public static final String FEATURE_PROVIDER__RESOURCE_BUNDLE = "/de/pro/dbw/feature/provider/FeatureProvider.properties"; // NOI18N
     
 }

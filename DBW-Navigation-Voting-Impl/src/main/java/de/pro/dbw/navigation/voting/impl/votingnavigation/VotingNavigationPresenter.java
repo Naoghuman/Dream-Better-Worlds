@@ -16,7 +16,6 @@
  */
 package de.pro.dbw.navigation.voting.impl.votingnavigation;
 
-import de.pro.dbw.base.component.api.VotingComponentModel;
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
 import de.pro.dbw.core.configuration.api.application.action.IRegisterActions;
@@ -119,16 +118,6 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
 //            bShowDream.setDisable(newValue == null);
 //        });
     }
-    
-    private void refreshVotingNavigation() {
-        final PauseTransition pt = new PauseTransition();
-        pt.setDuration(REFRESH_AFTER_100_MILLIS);
-        pt.setOnFinished((ActionEvent event) -> {
-            this.refresh();
-        });
-        
-        pt.playFromStart();
-    }
 
     public void refresh() {
         Platform.runLater(() -> {
@@ -146,8 +135,8 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
 //                model.setView(votingComponent);
                 
 //                models.add(model);
-                models.add(this.testDataVotingIsActiveAndNotVoted());
-                models.add(this.testDataVotingIsActiveAndIsVoted());
+//                models.add(this.testDataVotingIsActiveAndNotVoted());
+//                models.add(this.testDataVotingIsActiveAndIsVoted());
 //            }
             
 //            Collections.sort(models);
@@ -155,6 +144,16 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
             lvNavigation.getItems().clear();
             lvNavigation.getItems().addAll(models);
         });
+    }
+    
+    private void refreshVotingNavigation() {
+        final PauseTransition pt = new PauseTransition();
+        pt.setDuration(REFRESH_AFTER_100_MILLIS);
+        pt.setOnFinished((ActionEvent event) -> {
+            this.refresh();
+        });
+        
+        pt.playFromStart();
     }
 
     @Override
@@ -177,43 +176,45 @@ public class VotingNavigationPresenter implements Initializable, IActionConfigur
     }
     
     // XXX Remove it
-    private VotingNavigationModel testDataVotingIsActiveAndNotVoted() {
-        final VotingComponentModel vcm = new VotingComponentModel();
-        vcm.setId(UtilProvider.getDefault().getDateConverter().addDays(-7));
-        vcm.setGenerationTime(UtilProvider.getDefault().getDateConverter().addDays(-7));
-        vcm.setFromDate(UtilProvider.getDefault().getDateConverter().addDays(-7));
-        vcm.setToDate(UtilProvider.getDefault().getDateConverter().addDays(+7));
-        vcm.setTitle("Voting 1");
-        
-        final VotingNavigationModel model = new VotingNavigationModel();
-        model.setActionKey(ACTION__OPEN_VOTING__FROM_NAVIGATION);
-        model.setIdToOpen(vcm.getId());
-        model.setGenerationTime(vcm.getGenerationTime());
-
-        final Parent votingComponent = BaseProvider.getDefault().getComponentProvider().getVotingComponent(vcm);
-        model.setView(votingComponent);
-                
-        return model;
-    }
+//    private VotingNavigationModel testDataVotingIsActiveAndNotVoted() {
+//        final VotingComponentModel vcm = new VotingComponentModel();
+//        vcm.setId(UtilProvider.getDefault().getDateConverter().addDays(-7));
+//        vcm.setGenerationTime(UtilProvider.getDefault().getDateConverter().addDays(-7));
+//        vcm.setFromDate(UtilProvider.getDefault().getDateConverter().addDays(-7));
+//        vcm.setMode(EVotingComponentMode.EDITOR);
+//        vcm.setToDate(UtilProvider.getDefault().getDateConverter().addDays(+7));
+//        vcm.setTitle("Voting 1");
+//        
+//        final VotingNavigationModel model = new VotingNavigationModel();
+//        model.setActionKey(ACTION__OPEN_VOTING__FROM_NAVIGATION);
+//        model.setIdToOpen(vcm.getId());
+//        model.setGenerationTime(vcm.getGenerationTime());
+//
+//        final Parent votingComponent = BaseProvider.getDefault().getComponentProvider().getVotingComponent(vcm);
+//        model.setView(votingComponent);
+//                
+//        return model;
+//    }
     
     // XXX Remove it
-    private VotingNavigationModel testDataVotingIsActiveAndIsVoted() {
-        final VotingComponentModel vcm = new VotingComponentModel();
-        vcm.setId(UtilProvider.getDefault().getDateConverter().addDays(-3));
-        vcm.setGenerationTime(UtilProvider.getDefault().getDateConverter().addDays(-3));
-        vcm.setFromDate(UtilProvider.getDefault().getDateConverter().addDays(-3));
-        vcm.setToDate(UtilProvider.getDefault().getDateConverter().addDays(+10));
-        vcm.setTitle("Voting 2");
-        
-        final VotingNavigationModel model = new VotingNavigationModel();
-        model.setActionKey(ACTION__OPEN_VOTING__FROM_NAVIGATION);
-        model.setIdToOpen(vcm.getId());
-        model.setGenerationTime(vcm.getGenerationTime());
-
-        final Parent votingComponent = BaseProvider.getDefault().getComponentProvider().getVotingComponent(vcm);
-        model.setView(votingComponent);
-                
-        return model;
-    }
+//    private VotingNavigationModel testDataVotingIsActiveAndIsVoted() {
+//        final VotingComponentModel vcm = new VotingComponentModel();
+//        vcm.setId(UtilProvider.getDefault().getDateConverter().addDays(-3));
+//        vcm.setGenerationTime(UtilProvider.getDefault().getDateConverter().addDays(-3));
+//        vcm.setFromDate(UtilProvider.getDefault().getDateConverter().addDays(-3));
+//        vcm.setMode(EVotingComponentMode.EDITOR);
+//        vcm.setToDate(UtilProvider.getDefault().getDateConverter().addDays(+10));
+//        vcm.setTitle("Voting 2");
+//        
+//        final VotingNavigationModel model = new VotingNavigationModel();
+//        model.setActionKey(ACTION__OPEN_VOTING__FROM_NAVIGATION);
+//        model.setIdToOpen(vcm.getId());
+//        model.setGenerationTime(vcm.getGenerationTime());
+//
+//        final Parent votingComponent = BaseProvider.getDefault().getComponentProvider().getVotingComponent(vcm);
+//        model.setView(votingComponent);
+//                
+//        return model;
+//    }
     
 }

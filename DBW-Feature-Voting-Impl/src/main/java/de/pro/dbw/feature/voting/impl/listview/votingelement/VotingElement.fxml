@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="apVotingComponent" prefHeight="128.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.feature.voting.impl.listview.votingelement.VotingElementPresenter">
+    <children>
+        <VBox layoutX="27.0" layoutY="-14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="lTitle" text="&lt;Name from Voting&gt;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lActiveDuring" text="&lt;Active during&gt;">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+                <VBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="TOP_CENTER">
+                            <children>
+                                <Label fx:id="lVotingChoose" text="&lt;VotingChoose&gt;" />
+                            </children>
+                        </HBox>
+                        <Slider fx:id="sVoting" blockIncrement="1.0" majorTickUnit="2.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" />
+                    </children>
+                </VBox>
+                <HBox alignment="TOP_RIGHT" spacing="10.0">
+                    <children>
+                        <Button fx:id="bShow" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionShow" prefWidth="64.0" text="Show" />
+                        <Button fx:id="bVote" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionVote" prefWidth="64.0" text="Vote" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
