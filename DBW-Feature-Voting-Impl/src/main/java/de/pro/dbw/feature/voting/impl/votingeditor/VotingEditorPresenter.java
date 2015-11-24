@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.voting.impl.votingeditorcontent;
+package de.pro.dbw.feature.voting.impl.votingeditor;
 
 import de.pro.dbw.core.configuration.api.application.IApplicationConfiguration;
 import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfiguration;
@@ -51,7 +51,7 @@ import javafx.scene.control.TextField;
  *
  * @author PRo
  */
-public class VotingEditorContentPresenter implements Initializable, IApplicationConfiguration,
+public class VotingEditorPresenter implements Initializable, IApplicationConfiguration,
         IDefaultIdConfiguration, IDialogSize, IUtilConfiguration
 {    
     @FXML private Button bNew;
@@ -66,13 +66,13 @@ public class VotingEditorContentPresenter implements Initializable, IApplication
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingEditorContentPresenter"); // NOI18N
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingEditorPresenter"); // NOI18N
         
-        assert (bNew != null)              : "fx:id=\"bNew\" was not injected: check your FXML file 'VotingEditorContent.fxml'."; // NOI18N
-        assert (bSave != null)             : "fx:id=\"bSave\" was not injected: check your FXML file 'VotingEditorContent.fxml'."; // NOI18N
-        assert (lvExistingVotings != null) : "fx:id=\"lvExistingVotings\" was not injected: check your FXML file 'VotingEditorContent.fxml'."; // NOI18N
-        assert (taDescription != null)     : "fx:id=\"taDescription\" was not injected: check your FXML file 'VotingEditorContent.fxml'."; // NOI18N
-        assert (tfTitle != null)           : "fx:id=\"tfTitle\" was not injected: check your FXML file 'VotingEditorContent.fxml'."; // NOI18N
+        assert (bNew != null)              : "fx:id=\"bNew\" was not injected: check your FXML file 'VotingEditor.fxml'."; // NOI18N
+        assert (bSave != null)             : "fx:id=\"bSave\" was not injected: check your FXML file 'VotingEditor.fxml'."; // NOI18N
+        assert (lvExistingVotings != null) : "fx:id=\"lvExistingVotings\" was not injected: check your FXML file 'VotingEditor.fxml'."; // NOI18N
+        assert (taDescription != null)     : "fx:id=\"taDescription\" was not injected: check your FXML file 'VotingEditor.fxml'."; // NOI18N
+        assert (tfTitle != null)           : "fx:id=\"tfTitle\" was not injected: check your FXML file 'VotingEditor.fxml'."; // NOI18N
     
         this.initializeButtons();
         this.initializeDescription();
@@ -98,7 +98,7 @@ public class VotingEditorContentPresenter implements Initializable, IApplication
     private void initializeListView() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize ListView in Voting Editor"); // NOI18N
 
-        lvExistingVotings.getStylesheets().addAll(this.getClass().getResource("VotingEditorContent.css").toExternalForm()); // NOI18N
+        lvExistingVotings.getStylesheets().addAll(this.getClass().getResource("VotingEditor.css").toExternalForm()); // NOI18N
         lvExistingVotings.getItems().clear();
         
         lvExistingVotings.setCellFactory((list) -> {

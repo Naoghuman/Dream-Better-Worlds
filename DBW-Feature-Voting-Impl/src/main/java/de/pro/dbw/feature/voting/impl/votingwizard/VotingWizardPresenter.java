@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.voting.impl.votingwizardcontent;
+package de.pro.dbw.feature.voting.impl.votingwizard;
 
 import de.pro.dbw.base.provider.BaseProvider;
 import de.pro.dbw.core.configuration.api.application.action.IActionConfiguration;
@@ -52,7 +52,7 @@ import javafx.util.Callback;
  *
  * @author PRo
  */
-public class VotingWizardContentPresenter implements Initializable, IActionConfiguration,
+public class VotingWizardPresenter implements Initializable, IActionConfiguration,
         IDialogSize, INavigationConfiguration
 {
     @FXML private Button bAdd;
@@ -65,15 +65,15 @@ public class VotingWizardContentPresenter implements Initializable, IActionConfi
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingWizardContentPresenter");
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize VotingWizardPresenter");
         
-        assert (bAdd != null)    : "fx:id=\"bAdd\" was not injected: check your FXML file 'VotingWizardContent.fxml'."; // NOI18N
-        assert (bRemove != null) : "fx:id=\"bRemove\" was not injected: check your FXML file 'VotingWizardContent.fxml'."; // NOI18N
-        assert (bSave != null)   : "fx:id=\"bSave\" was not injected: check your FXML file 'VotingWizardContent.fxml'."; // NOI18N
-        assert (cbAvailableVotings != null) : "fx:id=\"cbAvailableVotings\" was not injected: check your FXML file 'VotingWizardContent.fxml'."; // NOI18N
-        assert (dpFrom != null)  : "fx:id=\"dpFrom\" was not injected: check your FXML file 'VotingWizardContent.fxml'."; // NOI18N
-        assert (dpTo != null)    : "fx:id=\"dpTo\" was not injected: check your FXML file 'VotingWizardContent.fxml'."; // NOI18N
-        assert (lvActiveVotings != null)    : "fx:id=\"lvActiveVotings\" was not injected: check your FXML file 'VotingWizardContent.fxml'."; // NOI18N
+        assert (bAdd != null)    : "fx:id=\"bAdd\" was not injected: check your FXML file 'VotingWizard.fxml'."; // NOI18N
+        assert (bRemove != null) : "fx:id=\"bRemove\" was not injected: check your FXML file 'VotingWizard.fxml'."; // NOI18N
+        assert (bSave != null)   : "fx:id=\"bSave\" was not injected: check your FXML file 'VotingWizard.fxml'."; // NOI18N
+        assert (cbAvailableVotings != null) : "fx:id=\"cbAvailableVotings\" was not injected: check your FXML file 'VotingWizard.fxml'."; // NOI18N
+        assert (dpFrom != null)  : "fx:id=\"dpFrom\" was not injected: check your FXML file 'VotingWizard.fxml'."; // NOI18N
+        assert (dpTo != null)    : "fx:id=\"dpTo\" was not injected: check your FXML file 'VotingWizard.fxml'."; // NOI18N
+        assert (lvActiveVotings != null)    : "fx:id=\"lvActiveVotings\" was not injected: check your FXML file 'VotingWizard.fxml'."; // NOI18N
     
         this.initializeButtons();
         this.initializeComboBox();
@@ -133,7 +133,7 @@ public class VotingWizardContentPresenter implements Initializable, IActionConfi
          - init listview with votingcomponentmodel
          - load all active votings from db in listview
         */
-        lvActiveVotings.getStylesheets().addAll(this.getClass().getResource("VotingWizardContent.css").toExternalForm()); // NOI18N
+        lvActiveVotings.getStylesheets().addAll(this.getClass().getResource("VotingWizard.css").toExternalForm()); // NOI18N
         lvActiveVotings.getItems().clear();
         
 //        lvActiveVotings.setCellFactory(new Callback<ListView<VotingComponentModel>, ListCell<VotingComponentModel>>() {

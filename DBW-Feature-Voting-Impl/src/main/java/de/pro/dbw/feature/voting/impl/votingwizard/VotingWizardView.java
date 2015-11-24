@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.feature.voting.impl.votingeditorcontent;
+package de.pro.dbw.feature.voting.impl.votingwizard;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -22,10 +22,10 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author PRo
  */
-public class VotingEditorContentView extends FXMLView {
+public class VotingWizardView extends FXMLView {
     
-    public VotingEditorContentPresenter getRealPresenter() {
-        return (VotingEditorContentPresenter) this.getPresenter();
+    public VotingWizardPresenter getRealPresenter() {
+        return (VotingWizardPresenter) this.getPresenter();
     }
     
 }
