@@ -35,6 +35,7 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
+import org.apache.commons.lang.time.StopWatch;
 
 /**
  *
@@ -106,6 +107,9 @@ public class DreamService extends Service<Void> {
             	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " before testdata generation."); // NOI18N
             	LoggerFacade.INSTANCE.debug(this.getClass(), "Create " + saveMaxEntities + " dreams as testdata..."); // NOI18N
 		LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
+                
+                final StopWatch stopWatch = new StopWatch();
+                stopWatch.start();
 
                 long id = -1_000_000_000L + count;
                 for (int i = 1; i <= saveMaxEntities; i++) {
@@ -119,7 +123,7 @@ public class DreamService extends Service<Void> {
                     crudService.create(model, false);
                     updateProgress(i - 1, saveMaxEntities);
                     
-                    if (i % 5000 == 0) {
+                    if (i % 250 == 0) {
                         crudService.commitTransaction();
                         crudService.beginTransaction();
                     }
@@ -128,6 +132,11 @@ public class DreamService extends Service<Void> {
                 crudService.commitTransaction();
                 
 		LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
+                
+                stopWatch.split();
+                LoggerFacade.INSTANCE.debug(this.getClass(), "  - Need " + stopWatch.toSplitString() + " to generate them..."); // NOI18N
+                stopWatch.stop();
+                
                 count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
             	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " dreams after testdata generation."); // NOI18N
 
