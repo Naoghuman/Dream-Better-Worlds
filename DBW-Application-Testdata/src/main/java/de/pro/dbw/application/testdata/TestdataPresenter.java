@@ -23,12 +23,12 @@ import de.pro.dbw.application.testdata.entity.reflection.ReflectionPresenter;
 import de.pro.dbw.application.testdata.entity.reflection.ReflectionView;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightPresenter;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightView;
-import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCell;
-import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCellModel;
 import de.pro.dbw.application.testdata.service.DreamService;
 import de.pro.dbw.application.testdata.service.ReflectionService;
 import de.pro.dbw.application.testdata.service.SequentialThreadFactory;
 import de.pro.dbw.application.testdata.service.TipOfTheNightService;
+import de.pro.dbw.base.component.api.listview.checkbox.CheckBoxListCell;
+import de.pro.dbw.base.component.api.listview.checkbox.CheckBoxListCellModel;
 import de.pro.dbw.core.configuration.api.application.testdata.ITestdataConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
@@ -184,6 +184,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         final CheckBoxListCellModel model = new CheckBoxListCellModel();
         model.setName(key.substring(0, key.length() - ENTITY_SUFFIX.length()));
         model.setId(key);
+        
         model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             // Selected
             if (newValue) {

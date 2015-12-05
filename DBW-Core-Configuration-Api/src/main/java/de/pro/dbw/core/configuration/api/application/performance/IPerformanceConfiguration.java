@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.pro.dbw.core.configuration.api.application.testdata;
+package de.pro.dbw.core.configuration.api.application.performance;
 
 import javafx.util.Duration;
 
@@ -22,16 +22,16 @@ import javafx.util.Duration;
  *
  * @author PRo
  */
-public interface ITestdataConfiguration {
+public interface IPerformanceConfiguration {
     
     public static final Duration DBW__LITTLE_DELAY__DURATION_125 = Duration.millis(125.0d);
     
-    public static final String DBW__RESOURCE_BUNDLE__TESTDATA = "/de/pro/dbw/application/testdata/TestdataApplication.properties"; // NOI18N
+    public static final String DBW__RESOURCE_BUNDLE__PERFORMANCE = "/de/pro/dbw/application/performance/PerformanceApplication.properties"; // NOI18N
     
     public static final String KEY__APPLICATION__DATABASE = "application.database"; // NOI18N
-    public static final String KEY__APPLICATION_TESTDATA__BORDER_SIGN = "application.testdata.border.sign"; // NOI18N
-    public static final String KEY__APPLICATION_TESTDATA__MESSAGE_START = "application.testdata.message.start"; // NOI18N
-    public static final String KEY__APPLICATION_TESTDATA__MESSAGE_STOP = "application.testdata.message.stop"; // NOI18N
-    public static final String KEY__APPLICATION_TESTDATA__TITLE = "application.testdata.title"; // NOI18N
+    public static final String KEY__APPLICATION_PERFORMANCE__BORDER_SIGN = "application.performance.border.sign"; // NOI18N
+    public static final String KEY__APPLICATION_PERFORMANCE__MESSAGE_START = "application.performance.message.start"; // NOI18N
+    public static final String KEY__APPLICATION_PERFORMANCE__MESSAGE_STOP = "application.performance.message.stop"; // NOI18N
+    public static final String KEY__APPLICATION_PERFORMANCE__TITLE = "application.performance.title"; // NOI18N
    
 }
