@@ -85,6 +85,8 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     @FXML private TabPane tpTestdata;
     @FXML private VBox vbEntities;
     
+    private boolean triggerOnActionSelectAll = Boolean.TRUE;
+    
 //    private ExecutorService parallelExecutorService;
     private ExecutorService sequentialExecutorService;
     
@@ -185,6 +187,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         model.setName(key.substring(0, key.length() - ENTITY_SUFFIX.length()));
         model.setId(key);
         
+        // Add or remove entity configuration
         model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             // Selected
             if (newValue) {
@@ -207,6 +210,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
             }
         });
         
+        // Button 'Create' testdata
         model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             // Selected
             if (newValue) {
@@ -229,6 +233,63 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
             }
 
             bCreateTestdata.setDisable(disable);
+        });
+        
+        // Check 'Select all' button
+        model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            final boolean isSelectAll = cbSelectAll.isSelected();
+            
+            // Selected
+            if (newValue) {
+                if (isSelectAll) {
+                    return;
+                }
+                
+                boolean allEntitiesCheckBoxesAreSelected = Boolean.TRUE;
+                for (Object item : lvEntities.getItems()) {
+                    if (!(item instanceof CheckBoxListCellModel)) {
+                        continue;
+                    }
+
+                    final CheckBoxListCellModel checkBoxListCellModel = (CheckBoxListCellModel) item;
+                    if (!checkBoxListCellModel.isSelected()) {
+                        allEntitiesCheckBoxesAreSelected = Boolean.FALSE;
+                        break;
+                    }
+                }
+                
+                if (allEntitiesCheckBoxesAreSelected) {
+                    triggerOnActionSelectAll = Boolean.FALSE;
+                    cbSelectAll.setSelected(Boolean.TRUE);
+                    triggerOnActionSelectAll = Boolean.TRUE;
+                }
+                
+                return;
+            }
+            
+            // Don't selected
+            if (!isSelectAll) {
+                return;
+            }
+             
+            boolean allEntitiesCheckBoxesAreSelected = Boolean.TRUE;
+            for (Object item : lvEntities.getItems()) {
+                if (!(item instanceof CheckBoxListCellModel)) {
+                    continue;
+                }
+
+                final CheckBoxListCellModel checkBoxListCellModel = (CheckBoxListCellModel) item;
+                if (!checkBoxListCellModel.isSelected()) {
+                    allEntitiesCheckBoxesAreSelected = Boolean.FALSE;
+                    break;
+                }
+            }
+
+            if (!allEntitiesCheckBoxesAreSelected) {
+                triggerOnActionSelectAll = Boolean.FALSE;
+                cbSelectAll.setSelected(Boolean.FALSE);
+                triggerOnActionSelectAll = Boolean.TRUE;
+            }
         });
         
         return model;
@@ -306,6 +367,10 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     public void onActionSelectAll(ActionEvent ae) {
+        if (!triggerOnActionSelectAll) {
+            return;
+        }
+        
         LoggerFacade.INSTANCE.info(this.getClass(), "On action select all"); // NOI18N
         
         if (!(ae.getSource() instanceof CheckBox)) {
