@@ -38,6 +38,7 @@ import javafx.util.Callback;
 public class DreamPresenter implements Initializable {
     
     @FXML private ComboBox cbEntityDream;
+    @FXML private ComboBox cbQuantityTimePeriod;
     @FXML private Label lProgressBarInformation;
     @FXML private Label lProgressBarPercentInformation;
     @FXML private ProgressBar pbEntityDream;
@@ -47,15 +48,16 @@ public class DreamPresenter implements Initializable {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize DreamPresenter"); // NOI18N
         
         assert (cbEntityDream != null)                  : "fx:id=\"cbEntityDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
+        assert (cbQuantityTimePeriod != null)           : "fx:id=\"cbQuantityTimePeriod\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
         assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
         assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
         assert (pbEntityDream != null)                  : "fx:id=\"pbEntityDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
     
-        this.initializeComboBox();
+        this.initializeComboBoxes();
     }
 
-    private void initializeComboBox() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox"); // NOI18N
+    private void initializeComboBoxes() {
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBoxes"); // NOI18N
         
         cbEntityDream.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
         cbEntityDream.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
@@ -80,11 +82,38 @@ public class DreamPresenter implements Initializable {
         });
         
         cbEntityDream.getSelectionModel().selectFirst();
+        
+        cbQuantityTimePeriod.getItems().addAll(EntityHelper.getDefault().getQuantityTimePeriods());
+        cbQuantityTimePeriod.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+
+            @Override
+            public ListCell<Integer> call(ListView<Integer> param) {
+                return new ListCell<Integer>() {
+
+                        @Override
+                        protected void updateItem(Integer item, boolean empty) {
+                            super.updateItem(item, empty);
+                            
+                            if (item == null) {
+                                super.setText(null);
+                                return;
+                            }
+                            
+                            super.setText("" + item); // NOI18N
+                        }
+                    };
+            }
+        });
+        
+        cbQuantityTimePeriod.getSelectionModel().selectFirst();
     }
 
     public void bind(BooleanProperty disableProperty) {
         cbEntityDream.disableProperty().unbind();
         cbEntityDream.disableProperty().bind(disableProperty);
+        
+        cbQuantityTimePeriod.disableProperty().unbind();
+        cbQuantityTimePeriod.disableProperty().bind(disableProperty);
     }
     
     public Label getProgressBarPercentInformation() {
@@ -98,6 +127,15 @@ public class DreamPresenter implements Initializable {
         }
         
         return saveMaxEntitites;
+    }
+
+    public int getTimePeriod() {
+        Integer timePeriod = (Integer) cbQuantityTimePeriod.getSelectionModel().getSelectedItem();
+        if (timePeriod == null) {
+            timePeriod = 0;
+        }
+        
+        return timePeriod;
     }
     
     public DoubleProperty progressPropertyFromEntityDream() {

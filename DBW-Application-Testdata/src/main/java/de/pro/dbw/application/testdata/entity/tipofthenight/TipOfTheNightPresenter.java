@@ -38,6 +38,7 @@ import javafx.util.Callback;
 public class TipOfTheNightPresenter implements Initializable {
     
     @FXML private ComboBox cbEnityTipOfTheNight;
+    @FXML private ComboBox cbQuantityTimePeriod;
     @FXML private Label lProgressBarInformation;
     @FXML private Label lProgressBarPercentInformation;
     @FXML private ProgressBar pbEnityTipOfTheNight;
@@ -47,14 +48,15 @@ public class TipOfTheNightPresenter implements Initializable {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize TipOfTheNightPresenter"); // NOI18N
         
         assert (cbEnityTipOfTheNight != null)           : "fx:id=\"cbEnityTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
+        assert (cbQuantityTimePeriod != null)           : "fx:id=\"cbQuantityTimePeriod\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
         assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
         assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
         assert (pbEnityTipOfTheNight != null)           : "fx:id=\"pbEnityTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNight.fxml'."; // NOI18N
     
-        this.initializeComboBox();
+        this.initializeComboBoxes();
     }
 
-    private void initializeComboBox() {
+    private void initializeComboBoxes() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox"); // NOI18N
         
         cbEnityTipOfTheNight.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
@@ -80,11 +82,38 @@ public class TipOfTheNightPresenter implements Initializable {
         });
         
         cbEnityTipOfTheNight.getSelectionModel().selectFirst();
+        
+        cbQuantityTimePeriod.getItems().addAll(EntityHelper.getDefault().getQuantityTimePeriods());
+        cbQuantityTimePeriod.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+
+            @Override
+            public ListCell<Integer> call(ListView<Integer> param) {
+                return new ListCell<Integer>() {
+
+                        @Override
+                        protected void updateItem(Integer item, boolean empty) {
+                            super.updateItem(item, empty);
+                            
+                            if (item == null) {
+                                super.setText(null);
+                                return;
+                            }
+                            
+                            super.setText("" + item); // NOI18N
+                        }
+                    };
+            }
+        });
+        
+        cbQuantityTimePeriod.getSelectionModel().selectFirst();
     }
 
     public void bind(BooleanProperty disableProperty) {
         cbEnityTipOfTheNight.disableProperty().unbind();
         cbEnityTipOfTheNight.disableProperty().bind(disableProperty);
+        
+        cbQuantityTimePeriod.disableProperty().unbind();
+        cbQuantityTimePeriod.disableProperty().bind(disableProperty);
     }
     
     public Label getProgressBarPercentInformation() {
@@ -98,6 +127,15 @@ public class TipOfTheNightPresenter implements Initializable {
         }
         
         return saveMaxEntitites;
+    }
+
+    public int getTimePeriod() {
+        Integer timePeriod = (Integer) cbQuantityTimePeriod.getSelectionModel().getSelectedItem();
+        if (timePeriod == null) {
+            timePeriod = 0;
+        }
+        
+        return timePeriod;
     }
     
     public DoubleProperty progressPropertyFromEntityDream() {

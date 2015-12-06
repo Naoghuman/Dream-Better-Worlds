@@ -38,6 +38,7 @@ import javafx.util.Callback;
 public class ReflectionPresenter implements Initializable {
     
     @FXML private ComboBox cbEntityReflection;
+    @FXML private ComboBox cbQuantityTimePeriod;
     @FXML private Label lProgressBarInformation;
     @FXML private Label lProgressBarPercentInformation;
     @FXML private ProgressBar pbEntityReflection;
@@ -51,15 +52,16 @@ public class ReflectionPresenter implements Initializable {
         this.resources = resources;
         
         assert (cbEntityReflection != null)             : "fx:id=\"cbEntityReflection\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (cbQuantityTimePeriod != null)           : "fx:id=\"cbQuantityTimePeriod\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (pbEntityReflection != null)             : "fx:id=\"pbEntityReflection\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
     
-        this.initializeComboBox();
+        this.initializeComboBoxes();
     }
 
-    private void initializeComboBox() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBox"); // NOI18N
+    private void initializeComboBoxes() {
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBoxes"); // NOI18N
         
         cbEntityReflection.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
         cbEntityReflection.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
@@ -84,11 +86,38 @@ public class ReflectionPresenter implements Initializable {
         });
         
         cbEntityReflection.getSelectionModel().selectFirst();
+        
+        cbQuantityTimePeriod.getItems().addAll(EntityHelper.getDefault().getQuantityTimePeriods());
+        cbQuantityTimePeriod.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+
+            @Override
+            public ListCell<Integer> call(ListView<Integer> param) {
+                return new ListCell<Integer>() {
+
+                        @Override
+                        protected void updateItem(Integer item, boolean empty) {
+                            super.updateItem(item, empty);
+                            
+                            if (item == null) {
+                                super.setText(null);
+                                return;
+                            }
+                            
+                            super.setText("" + item); // NOI18N
+                        }
+                    };
+            }
+        });
+        
+        cbQuantityTimePeriod.getSelectionModel().selectFirst();
     }
 
     public void bind(BooleanProperty disableProperty) {
         cbEntityReflection.disableProperty().unbind();
         cbEntityReflection.disableProperty().bind(disableProperty);
+        
+        cbQuantityTimePeriod.disableProperty().unbind();
+        cbQuantityTimePeriod.disableProperty().bind(disableProperty);
     }
     
     public Label getProgressBarPercentInformation() {
@@ -102,6 +131,15 @@ public class ReflectionPresenter implements Initializable {
         }
         
         return saveMaxEntitites;
+    }
+
+    public int getTimePeriod() {
+        Integer timePeriod = (Integer) cbQuantityTimePeriod.getSelectionModel().getSelectedItem();
+        if (timePeriod == null) {
+            timePeriod = 0;
+        }
+        
+        return timePeriod;
     }
     
     public DoubleProperty progressPropertyFromEntityReflection() {

@@ -43,9 +43,13 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class TipOfTheNightService extends Service<Void> {
     
+    private final long now = System.currentTimeMillis();
+    
     private final DoubleProperty entityProperty = new SimpleDoubleProperty(0.0d);
     
     private int saveMaxEntities = 0;
+    private int timePeriod = 0;
+    private long convertedTimePeriod = 0L;
     
     private TipOfTheNightPresenter presenter = null;
     private String entityName = null;
@@ -59,6 +63,14 @@ public class TipOfTheNightService extends Service<Void> {
         this.presenter = presenter;
         
         saveMaxEntities = presenter.getSaveMaxEntities();
+        timePeriod = presenter.getTimePeriod();
+        
+        String startTime = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, IDateConverter.PATTERN__DATE);
+        int year = Integer.parseInt(startTime.substring(6)) - timePeriod;
+        startTime = startTime.substring(0, 6) + year;
+        
+        final long convertedStartTime = UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(startTime, IDateConverter.PATTERN__DATE);
+        convertedTimePeriod = now - convertedStartTime;
         
         entityProperty.unbind();
         entityProperty.setValue(0);
@@ -82,11 +94,7 @@ public class TipOfTheNightService extends Service<Void> {
     }
     
     private long createGenerationTime() {
-        final String startTime = "01-01-2010"; // TODO create combobox where user can change the time-period
-        final long convertedStartTime = UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(startTime, IDateConverter.PATTERN__DATE);
-        final long now = System.currentTimeMillis();
-        final long timePeriod = now - convertedStartTime;
-        final long generationTime = now - UtilProvider.getDefault().getDateConverter().getLongInPeriodFromNowTo(timePeriod);
+        final long generationTime = now - UtilProvider.getDefault().getDateConverter().getLongInPeriodFromNowTo(convertedTimePeriod);
         
         return generationTime;
     }
@@ -101,7 +109,7 @@ public class TipOfTheNightService extends Service<Void> {
             @Override
             protected Void call() throws Exception {
                 final ICrudService crudService = DatabaseFacade.INSTANCE.getCrudService(entityName);
-                crudService.beginTransaction();
+//                crudService.beginTransaction();
 
                 long count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
             	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " before testdata generation."); // NOI18N
@@ -113,6 +121,8 @@ public class TipOfTheNightService extends Service<Void> {
 
                 long id = -1_000_000_000L + count;
                 for (int i = 1; i <= saveMaxEntities; i++) {
+                    crudService.beginTransaction();
+                    
                     final TipOfTheNightModel model = new TipOfTheNightModel();
                     model.setGenerationTime(TipOfTheNightService.this.createGenerationTime());
                     model.setId(id++);
@@ -122,13 +132,14 @@ public class TipOfTheNightService extends Service<Void> {
                     crudService.create(model, false);
                     updateProgress(i - 1, saveMaxEntities);
                     
-                    if (i % 250 == 0) {
-                        crudService.commitTransaction();
-                        crudService.beginTransaction();
-                    }
+                    crudService.commitTransaction();
+//                    if (i % 250 == 0) {
+//                        crudService.commitTransaction();
+//                        crudService.beginTransaction();
+//                    }
                 }
 
-                crudService.commitTransaction();
+//                crudService.commitTransaction();
                 
 		LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
                 
