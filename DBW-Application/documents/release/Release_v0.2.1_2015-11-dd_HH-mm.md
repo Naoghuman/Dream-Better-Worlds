@@ -31,6 +31,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 
 #### Refactoring
+#99 [Testdata] Refactore the time output for the hole generation.
 #94 [Refactoring] Use the Builders from commons-lang for equals(), compare() and hash().
 
 

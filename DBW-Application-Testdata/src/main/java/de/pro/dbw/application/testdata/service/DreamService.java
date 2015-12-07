@@ -108,18 +108,13 @@ public class DreamService extends Service<Void> {
             
             @Override
             protected Void call() throws Exception {
-                final ICrudService crudService = DatabaseFacade.INSTANCE.getCrudService(entityName);
-//                crudService.beginTransaction();
-
-                long count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
-            	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " before testdata generation."); // NOI18N
-            	LoggerFacade.INSTANCE.debug(this.getClass(), "Create " + saveMaxEntities + " dreams as testdata..."); // NOI18N
-		LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
+                LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
                 
                 final StopWatch stopWatch = new StopWatch();
                 stopWatch.start();
-
-                long id = -1_000_000_000L + count;
+                
+                final ICrudService crudService = DatabaseFacade.INSTANCE.getCrudService(entityName);
+                long id = -1_000_000_000L + DatabaseFacade.INSTANCE.getCrudService().count(entityName);
                 for (int i = 1; i <= saveMaxEntities; i++) {
                     crudService.beginTransaction();
                     
@@ -134,23 +129,13 @@ public class DreamService extends Service<Void> {
                     updateProgress(i - 1, saveMaxEntities);
                     
                     crudService.commitTransaction();
-//                    if (i % 25 == 0) {
-//                        crudService.commitTransaction();
-//                        crudService.beginTransaction();
-//                    }
                 }
-
-//                crudService.commitTransaction();
                 
-		LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
-                
+                LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
                 stopWatch.split();
-                LoggerFacade.INSTANCE.debug(this.getClass(), "  - Need " + stopWatch.toSplitString() + " to generate them..."); // NOI18N
-                stopWatch.stop();
+                LoggerFacade.INSTANCE.debug(this.getClass(), "  + " + stopWatch.toSplitString() + " for " + saveMaxEntities + " Dreams."); // NOI18N
+		stopWatch.stop();
                 
-                count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
-            	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " dreams after testdata generation."); // NOI18N
-
                 return null;
             }
         };
@@ -184,8 +169,6 @@ public class DreamService extends Service<Void> {
         final PauseTransition ptProgressBarInformation = new PauseTransition();
         ptProgressBarInformation.setDuration(Duration.millis(250.0d));
         ptProgressBarInformation.setOnFinished((ActionEvent event) -> {
-            LoggerFacade.INSTANCE.debug(this.getClass(), onStartMessage);
-            
             presenter.setProgressBarInformation(onStartMessage);
         });
         sequentialTransition.getChildren().add(ptProgressBarInformation);

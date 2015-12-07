@@ -63,6 +63,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import org.apache.commons.lang.time.StopWatch;
 
 /**
  *
@@ -158,7 +159,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     public void cleanUpAfterServices() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Clean up after testdata generation"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Clean up after testdata generation"); // NOI18N
 
         DatabaseFacade.INSTANCE.shutdown();
         
@@ -167,6 +168,8 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         cbDeleteDatabase.disableProperty().unbind();
         cbSelectAll.disableProperty().unbind();
         bCreateTestdata.disableProperty().unbind();
+        
+        LoggerFacade.INSTANCE.debug(this.getClass(), "##### Ready with Testdata generation..."); // NOI18N
     }
 
     private void disableComponents() {
@@ -312,7 +315,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         
         if (cbDeleteDatabase.isSelected()) {
             final PauseTransition ptDropDatabase = new PauseTransition();
-            ptDropDatabase.setDuration(Duration.millis(100.0d));
+            ptDropDatabase.setDuration(Duration.millis(50.0d));
             ptDropDatabase.setOnFinished((ActionEvent event) -> {
                 LoggerFacade.INSTANCE.debug(this.getClass(), "Drop database"); // NOI18N
                 DatabaseFacade.INSTANCE.drop(this.getProperty(KEY__APPLICATION__DATABASE));
@@ -321,7 +324,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         }
         
         final PauseTransition ptRegisterDatabase = new PauseTransition();
-        ptRegisterDatabase.setDuration(Duration.millis(250.0d));
+        ptRegisterDatabase.setDuration(Duration.millis(150.0d));
         ptRegisterDatabase.setOnFinished((ActionEvent event) -> {
             LoggerFacade.INSTANCE.debug(this.getClass(), "Register database"); // NOI18N
             DatabaseFacade.INSTANCE.register(this.getProperty(KEY__APPLICATION__DATABASE));
@@ -329,7 +332,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         sequentialTransition.getChildren().add(ptRegisterDatabase);
         
         final PauseTransition ptCreateTestdata = new PauseTransition();
-        ptCreateTestdata.setDuration(Duration.millis(250.0d));
+        ptCreateTestdata.setDuration(Duration.millis(150.0d));
         ptCreateTestdata.setOnFinished((ActionEvent event) -> {
             this.startTestdataGeneration();
         });
@@ -395,9 +398,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     public void startTestdataGeneration() {
-        LoggerFacade.INSTANCE.debug(this.getClass(), "Start with Testdata generation..."); // NOI18N
-        
-//        parallelExecutorService = Executors.newFixedThreadPool(2, new ParallelThreadFactory());
+        LoggerFacade.INSTANCE.debug(this.getClass(), "##### Start with Testdata generation..."); // NOI18N
         
         final List<String> activeEntities = FXCollections.observableArrayList();
         for (Object item : lvEntities.getItems()) {
@@ -425,8 +426,6 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
             this.configureServiceForEntityReflection(entityName, lastActiveService);
             this.configureServiceForEntityTipOfTheNight(entityName, lastActiveService);
         }
-        
-        LoggerFacade.INSTANCE.debug(this.getClass(), "Ready with Testdata generation..."); // NOI18N
     }
 
     private void configureServiceForEntityDream(String entityName, String lastActiveService) {
@@ -439,7 +438,6 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
         service.setOnStart("Start with testdata generation from entity Dream..."); // NOI18N
-        
         service.setOnSuccededAfterService(
                 this.getTestdataPresenter(entityName, lastActiveService),
                 "Ready with testdata generation from entity Dream..."); // NOI18N
@@ -457,7 +455,6 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
         service.setOnStart("Start with testdata generation from entity Reflection..."); // NOI18N
-        
         service.setOnSuccededAfterService(
                 this.getTestdataPresenter(entityName, lastActiveService),
                 "Ready with testdata generation from entity Reflection..."); // NOI18N
@@ -475,7 +472,6 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
         service.setOnStart("Start with testdata generation from entity TipOfTheNight..."); // NOI18N
-        
         service.setOnSuccededAfterService(
                 this.getTestdataPresenter(entityName, lastActiveService),
                 "Ready with testdata generation from entity TipOfTheNight..."); // NOI18N

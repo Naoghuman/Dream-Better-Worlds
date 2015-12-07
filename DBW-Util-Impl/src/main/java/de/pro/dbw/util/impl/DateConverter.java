@@ -45,7 +45,7 @@ public class DateConverter implements IDateConverter {
     }
     
     public Long convertDateTimeToLong(String dateTime, String pattern) {
-        LoggerFacade.INSTANCE.debug(DateConverter.class, String.format(
+        LoggerFacade.INSTANCE.trace(DateConverter.class, String.format(
                     "Convert %s with %s to Long", dateTime, pattern)); // NOI18N
         
         try {
