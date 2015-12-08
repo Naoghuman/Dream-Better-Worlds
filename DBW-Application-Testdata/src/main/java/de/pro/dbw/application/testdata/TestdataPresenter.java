@@ -29,12 +29,14 @@ import de.pro.dbw.application.testdata.service.SequentialThreadFactory;
 import de.pro.dbw.application.testdata.service.TipOfTheNightService;
 import de.pro.dbw.base.component.api.listview.checkbox.CheckBoxListCell;
 import de.pro.dbw.base.component.api.listview.checkbox.CheckBoxListCellModel;
+import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.core.configuration.api.application.testdata.ITestdataConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
 import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import de.pro.lib.properties.api.PropertiesFacade;
 import java.net.URL;
 import java.util.List;
@@ -63,13 +65,12 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import org.apache.commons.lang.time.StopWatch;
 
 /**
  *
  * @author PRo
  */
-public class TestdataPresenter implements Initializable, ITestdataConfiguration {
+public class TestdataPresenter implements Initializable, IPreferencesConfiguration, ITestdataConfiguration {
     
     private static final String ENTITY_SUFFIX = "Model"; // NOI18N
     
@@ -104,6 +105,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         assert (tpTestdata != null)       : "fx:id=\"tpTestdata\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (vbEntities != null)       : "fx:id=\"vbEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
     
+        this.initializeDeleteDatabase();
         this.initializeDesktopSplitPane();
         this.initializeDialogLayer();
         this.initializeEntities();
@@ -111,6 +113,15 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         this.initializeProcesses();
         
         this.onActionRefresh();
+    }
+    
+    private void initializeDeleteDatabase() {
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize delete Database"); // NOI18N
+    
+        final Boolean isSelectedDeleteDatabase = PreferencesFacade.INSTANCE.getBoolean(
+                PREF__TESTDATA__IS_SELECTED_DELETE_DATABASE,
+                PREF__TESTDATA__IS_SELECTED_DELETE_DATABASE__DEFAULT_VALUE);
+        cbDeleteDatabase.setSelected(isSelectedDeleteDatabase);
     }
     
     private void initializeDesktopSplitPane() {
@@ -339,6 +350,12 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         sequentialTransition.getChildren().add(ptCreateTestdata);
         
         sequentialTransition.playFromStart();
+    }
+    
+    public void onActionDeleteDatabase() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action delete Database"); // NOI18N
+        
+        PreferencesFacade.INSTANCE.putBoolean(PREF__TESTDATA__IS_SELECTED_DELETE_DATABASE, cbDeleteDatabase.isSelected());
     }
     
     private void onActionRefresh() {

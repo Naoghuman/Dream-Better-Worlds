@@ -17,7 +17,9 @@
 package de.pro.dbw.application.testdata.entity.dream;
 
 import de.pro.dbw.application.testdata.entity.EntityHelper;
+import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
@@ -35,9 +37,9 @@ import javafx.util.Callback;
  *
  * @author PRo
  */
-public class DreamPresenter implements Initializable {
+public class DreamPresenter implements Initializable, IPreferencesConfiguration {
     
-    @FXML private ComboBox cbEntityDream;
+    @FXML private ComboBox cbQuantityEntities;
     @FXML private ComboBox cbQuantityTimePeriod;
     @FXML private Label lProgressBarInformation;
     @FXML private Label lProgressBarPercentInformation;
@@ -47,7 +49,7 @@ public class DreamPresenter implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize DreamPresenter"); // NOI18N
         
-        assert (cbEntityDream != null)                  : "fx:id=\"cbEntityDream\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
+        assert (cbQuantityEntities != null)             : "fx:id=\"cbQuantityEntities\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
         assert (cbQuantityTimePeriod != null)           : "fx:id=\"cbQuantityTimePeriod\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
         assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
         assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'Dream.fxml'."; // NOI18N
@@ -59,8 +61,8 @@ public class DreamPresenter implements Initializable {
     private void initializeComboBoxes() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBoxes"); // NOI18N
         
-        cbEntityDream.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
-        cbEntityDream.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+        cbQuantityEntities.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
+        cbQuantityEntities.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
 
             @Override
             public ListCell<Integer> call(ListView<Integer> param) {
@@ -81,7 +83,10 @@ public class DreamPresenter implements Initializable {
             }
         });
         
-        cbEntityDream.getSelectionModel().selectFirst();
+        final Integer quantityEntities = PreferencesFacade.INSTANCE.getInt(
+                PREF__TESTDATA__QUANTITY_ENTITIES__DREAM,
+                PREF__TESTDATA__QUANTITY_ENTITIES__DREAM__DEFAULT_VALUE);
+        cbQuantityEntities.getSelectionModel().select(quantityEntities);
         
         cbQuantityTimePeriod.getItems().addAll(EntityHelper.getDefault().getQuantityTimePeriods());
         cbQuantityTimePeriod.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
@@ -105,12 +110,15 @@ public class DreamPresenter implements Initializable {
             }
         });
         
-        cbQuantityTimePeriod.getSelectionModel().selectFirst();
+        final Integer quantityTimePeriod = PreferencesFacade.INSTANCE.getInt(
+                PREF__TESTDATA__QUANTITY_TIMEPERIOD__DREAM,
+                PREF__TESTDATA__QUANTITY_TIMEPERIOD__DREAM__DEFAULT_VALUE);
+        cbQuantityTimePeriod.getSelectionModel().select(quantityTimePeriod);
     }
 
     public void bind(BooleanProperty disableProperty) {
-        cbEntityDream.disableProperty().unbind();
-        cbEntityDream.disableProperty().bind(disableProperty);
+        cbQuantityEntities.disableProperty().unbind();
+        cbQuantityEntities.disableProperty().bind(disableProperty);
         
         cbQuantityTimePeriod.disableProperty().unbind();
         cbQuantityTimePeriod.disableProperty().bind(disableProperty);
@@ -121,7 +129,7 @@ public class DreamPresenter implements Initializable {
     }
 
     public int getSaveMaxEntities() {
-        Integer saveMaxEntitites = (Integer) cbEntityDream.getSelectionModel().getSelectedItem();
+        Integer saveMaxEntitites = (Integer) cbQuantityEntities.getSelectionModel().getSelectedItem();
         if (saveMaxEntitites == null) {
             saveMaxEntitites = 0;
         }
@@ -136,6 +144,20 @@ public class DreamPresenter implements Initializable {
         }
         
         return timePeriod;
+    }
+    
+    public void onActionQuantityEntities() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Quantity Entities"); // NOI18N
+        
+        final Integer quantityEntities = (Integer) cbQuantityEntities.getSelectionModel().getSelectedItem();
+        PreferencesFacade.INSTANCE.putInt(PREF__TESTDATA__QUANTITY_ENTITIES__DREAM, quantityEntities);
+    }
+    
+    public void onActionQuantityTimePeriod() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Quantity TimePeriod"); // NOI18N
+        
+        final Integer quantityTimePeriod = (Integer) cbQuantityTimePeriod.getSelectionModel().getSelectedItem();
+        PreferencesFacade.INSTANCE.putInt(PREF__TESTDATA__QUANTITY_TIMEPERIOD__DREAM, quantityTimePeriod);
     }
     
     public DoubleProperty progressPropertyFromEntityDream() {

@@ -86,6 +86,11 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>Lib-Preferences</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>Lib-Properties</artifactId>
             <type>jar</type>
         </dependency>

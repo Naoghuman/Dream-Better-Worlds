@@ -43,7 +43,7 @@
                                     <Font size="14.0" />
                                  </font>
                                     </Label>
-                                    <ComboBox fx:id="cbEnityTipOfTheNight" prefWidth="150.0">
+                                    <ComboBox fx:id="cbQuantityEntities" onAction="#onActionQuantityEntities" prefWidth="150.0">
                                         <VBox.margin>
                                             <Insets />
                                         </VBox.margin>
@@ -60,7 +60,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <ComboBox fx:id="cbQuantityTimePeriod" prefWidth="150.0">
+                              <ComboBox fx:id="cbQuantityTimePeriod" onAction="#onActionQuantityTimePeriod" prefWidth="150.0">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>

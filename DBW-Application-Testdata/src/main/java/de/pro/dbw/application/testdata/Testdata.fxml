@@ -50,7 +50,6 @@
                                         <ToolBar minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
                                             <items>
                                                 <Button fx:id="bCreateTestdata" disable="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionCreateTestdata" prefWidth="64.0" text="Create" />
-                                                <Label text="Attention! Creating many entities takes some time. Please be patient :) ." />
                                             </items>
                                             <padding>
                                                 <Insets left="14.0" />
@@ -63,7 +62,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <CheckBox fx:id="cbDeleteDatabase" mnemonicParsing="false" text="Delete existing Database">
+                                                <CheckBox fx:id="cbDeleteDatabase" mnemonicParsing="false" onAction="#onActionDeleteDatabase" text="Delete existing Database">
                                                     <VBox.margin>
                                                         <Insets left="14.0" />
                                                     </VBox.margin>

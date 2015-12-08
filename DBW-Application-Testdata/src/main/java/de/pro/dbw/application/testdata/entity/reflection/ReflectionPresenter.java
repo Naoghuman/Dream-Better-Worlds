@@ -17,7 +17,9 @@
 package de.pro.dbw.application.testdata.entity.reflection;
 
 import de.pro.dbw.application.testdata.entity.EntityHelper;
+import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
@@ -35,9 +37,9 @@ import javafx.util.Callback;
  *
  * @author PRo
  */
-public class ReflectionPresenter implements Initializable {
+public class ReflectionPresenter implements Initializable, IPreferencesConfiguration {
     
-    @FXML private ComboBox cbEntityReflection;
+    @FXML private ComboBox cbQuantityEntities;
     @FXML private ComboBox cbQuantityTimePeriod;
     @FXML private Label lProgressBarInformation;
     @FXML private Label lProgressBarPercentInformation;
@@ -51,7 +53,7 @@ public class ReflectionPresenter implements Initializable {
         
         this.resources = resources;
         
-        assert (cbEntityReflection != null)             : "fx:id=\"cbEntityReflection\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
+        assert (cbQuantityEntities != null)             : "fx:id=\"cbQuantityEntities\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (cbQuantityTimePeriod != null)           : "fx:id=\"cbQuantityTimePeriod\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (lProgressBarInformation != null)        : "fx:id=\"lProgressBarInformation\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
         assert (lProgressBarPercentInformation != null) : "fx:id=\"lProgressBarPercentInformation\" was not injected: check your FXML file 'Reflection.fxml'."; // NOI18N
@@ -63,8 +65,8 @@ public class ReflectionPresenter implements Initializable {
     private void initializeComboBoxes() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize ComboBoxes"); // NOI18N
         
-        cbEntityReflection.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
-        cbEntityReflection.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+        cbQuantityEntities.getItems().addAll(EntityHelper.getDefault().getQuantityEntities());
+        cbQuantityEntities.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
 
             @Override
             public ListCell<Integer> call(ListView<Integer> param) {
@@ -85,7 +87,10 @@ public class ReflectionPresenter implements Initializable {
             }
         });
         
-        cbEntityReflection.getSelectionModel().selectFirst();
+        final Integer quantityEntities = PreferencesFacade.INSTANCE.getInt(
+                PREF__TESTDATA__QUANTITY_ENTITIES__REFLECTION,
+                PREF__TESTDATA__QUANTITY_ENTITIES__REFLECTION__DEFAULT_VALUE);
+        cbQuantityEntities.getSelectionModel().select(quantityEntities);
         
         cbQuantityTimePeriod.getItems().addAll(EntityHelper.getDefault().getQuantityTimePeriods());
         cbQuantityTimePeriod.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
@@ -109,12 +114,15 @@ public class ReflectionPresenter implements Initializable {
             }
         });
         
-        cbQuantityTimePeriod.getSelectionModel().selectFirst();
+        final Integer quantityTimePeriod = PreferencesFacade.INSTANCE.getInt(
+                PREF__TESTDATA__QUANTITY_TIMEPERIOD__REFLECTION,
+                PREF__TESTDATA__QUANTITY_TIMEPERIOD__REFLECTION__DEFAULT_VALUE);
+        cbQuantityTimePeriod.getSelectionModel().select(quantityTimePeriod);
     }
 
     public void bind(BooleanProperty disableProperty) {
-        cbEntityReflection.disableProperty().unbind();
-        cbEntityReflection.disableProperty().bind(disableProperty);
+        cbQuantityEntities.disableProperty().unbind();
+        cbQuantityEntities.disableProperty().bind(disableProperty);
         
         cbQuantityTimePeriod.disableProperty().unbind();
         cbQuantityTimePeriod.disableProperty().bind(disableProperty);
@@ -125,7 +133,7 @@ public class ReflectionPresenter implements Initializable {
     }
 
     public int getSaveMaxEntities() {
-        Integer saveMaxEntitites = (Integer) cbEntityReflection.getSelectionModel().getSelectedItem();
+        Integer saveMaxEntitites = (Integer) cbQuantityEntities.getSelectionModel().getSelectedItem();
         if (saveMaxEntitites == null) {
             saveMaxEntitites = 0;
         }
@@ -140,6 +148,20 @@ public class ReflectionPresenter implements Initializable {
         }
         
         return timePeriod;
+    }
+    
+    public void onActionQuantityEntities() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Quantity Entities"); // NOI18N
+        
+        final Integer quantityEntities = (Integer) cbQuantityEntities.getSelectionModel().getSelectedItem();
+        PreferencesFacade.INSTANCE.putInt(PREF__TESTDATA__QUANTITY_ENTITIES__REFLECTION, quantityEntities);
+    }
+    
+    public void onActionQuantityTimePeriod() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action Quantity TimePeriod"); // NOI18N
+        
+        final Integer quantityTimePeriod = (Integer) cbQuantityTimePeriod.getSelectionModel().getSelectedItem();
+        PreferencesFacade.INSTANCE.putInt(PREF__TESTDATA__QUANTITY_TIMEPERIOD__REFLECTION, quantityTimePeriod);
     }
     
     public DoubleProperty progressPropertyFromEntityReflection() {
