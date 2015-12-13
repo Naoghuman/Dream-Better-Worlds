@@ -51,11 +51,10 @@ Merge<a name="Merge" />
 Conflict<a name="Conflict" />
 ---
 
-* Happens during the [Merge](#Merge) a `conflict` then a warning popup will be
-  shown in [NetBeans IDE].
-* Click the `TODO Name? Review` button.
-* A new side `TODO Name? Merge conflicts` will be open which shows all files with a 
-  `conflict`.
+* Happens during the [Merge](#Merge) a `conflict` then the warning popup 
+  `Resolve Conflicts` will be shown.
+* Click the `Review` button.
+* The `Git` console will be open which shows all files with a conflict.
 * Go through every file (double click) and resolve the `conflict`.
 
 
