@@ -3,8 +3,10 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 
 #### Summary
-* Point
-* Other point
+* The main focus in this pre-release is on `Performance` in `Testdata` generation. 
+  Now its takes only 5.5sec for 100.000 entities instead 50sec.
+* For the planed (in the next pre-release) enhancement `Performance in the Gui` 
+  a new module `DBW-Application-Performance` is created with basic functionalities.
 
 
 
@@ -45,6 +47,3 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 
 [//]: # (Issues which will be integrated in this release)
-#85 [Documents] Integrate Coding_Rules_for_Properties.txt (general) in CodingRulesForProperties.md.
-#84 [Documents] Integrate Coding_Rules_for_Entities.txt (general) in CodingRulesForEntities.md.
-#83 [Documents] Integrate Coding_Rules_for_CSS.txt (general) in CodingRulesForCSS.md.

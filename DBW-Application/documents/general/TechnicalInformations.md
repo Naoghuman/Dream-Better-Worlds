@@ -30,16 +30,14 @@ Release Notes<a name="ReleaseNotes" />
 
 ### Current release<a name="CurrentRelease" />
 
-Current pre-release is `v0.2.0` which contains following points:
-* The main focus in this release is the new functionality for testdata generation. 
-  With the new class `TestdataApplication.java` in the modul `DBW-Application` the 
-  developer can create testdata for every entity in `Dream-Better-Worlds` from 
-  100 to 100.000.
-* Also the `Coding Rules` in convention with the library `afterburner.fx` are 
-  rewritten from .txt to .md files.
+Current pre-release is `v0.2.1` which contains following points:
+* The main focus in this pre-release is on `Performance` in `Testdata` generation. 
+  Now its takes only 5.5sec for 100.000 entities instead 50sec.
+* For the planed (in the next pre-release) enhancement `Performance in the Gui` 
+  a new module `DBW-Application-Performance` is created with basic functionalities.
 
 Detailed information about the current pre-release can be found here:
-* [Release v0.2.0 (2015-11-11 17:20)]
+* [Release v0.2.1 (2015-12-13 02:45)]
 
 
 ### Overview releases in Dream-Better-Worlds<a name="OverviewReleasesInDreamBetterWorlds" />
@@ -131,4 +129,4 @@ Contact<a name="Contact" />
 [Project page from Lib-Properties]:https://github.com/Naoghuman/lib-properties
 [Project page from Lib-Resources]:https://github.com/Naoghuman/lib-resources
 [Overview from all releases in Dream-Better-Worlds]:https://github.com/Naoghuman/Dream-Better-Worlds/releases
-[Release v0.2.0 (2015-11-11 17:20)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.2.0
+[Release v0.2.1 (2015-12-13 02:45)]:https://github.com/Naoghuman/Dream-Better-Worlds/releases/tag/v0.2.1
