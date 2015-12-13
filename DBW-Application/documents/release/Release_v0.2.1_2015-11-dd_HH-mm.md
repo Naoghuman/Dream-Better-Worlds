@@ -30,6 +30,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 #### Bug
 #89 [Documents] Check links in ReadMe because some doesn't work.
+#78 [Documents] Resolve TODOs in HowToMergeBranchesInNetBeans.md.
 
 
 
