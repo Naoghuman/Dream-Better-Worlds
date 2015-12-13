@@ -15,6 +15,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 
 #### Enhancement
+#100 [Testdata] Add ScrollPane to the editor area.
 #96 [Testdata] Enhance the entities with a combobox for timeperiod.
 #93 [Testdata] Integrate Stopwatch for logging the time from testdata generation.
 #92 [Testdata] Integrate entity ReflectionModel into the testdata generation.
@@ -42,7 +43,6 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.2.1`.
 
 
 [//]: # (Issues which will be integrated in this release)
-#100 [Testdata] Add ScrollPane to the editor area.
 #89 [Documents] Check links in ReadMe because some doesn't work.
 #85 [Documents] Integrate Coding_Rules_for_Properties.txt (general) in CodingRulesForProperties.md.
 #84 [Documents] Integrate Coding_Rules_for_Entities.txt (general) in CodingRulesForEntities.md.

@@ -60,6 +60,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
@@ -83,6 +84,7 @@ public class TestdataPresenter implements Initializable, IPreferencesConfigurati
     @FXML private CheckBox cbDeleteDatabase;
     @FXML private CheckBox cbSelectAll;
     @FXML private ListView lvEntities;
+    @FXML private ScrollPane spEntities;
     @FXML private TabPane tpEntities;
     @FXML private TabPane tpTestdata;
     @FXML private VBox vbEntities;
@@ -101,6 +103,7 @@ public class TestdataPresenter implements Initializable, IPreferencesConfigurati
         assert (cbDeleteDatabase != null) : "fx:id=\"cbDeleteDatabase\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (cbSelectAll != null)      : "fx:id=\"cbSelectAll\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (lvEntities != null)       : "fx:id=\"lvEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
+        assert (spEntities != null)       : "fx:id=\"spEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (tpEntities != null)       : "fx:id=\"tpEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (tpTestdata != null)       : "fx:id=\"tpTestdata\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (vbEntities != null)       : "fx:id=\"vbEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
