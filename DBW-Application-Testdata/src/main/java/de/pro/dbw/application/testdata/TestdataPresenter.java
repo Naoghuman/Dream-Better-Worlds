@@ -19,18 +19,24 @@ package de.pro.dbw.application.testdata;
 import com.airhacks.afterburner.views.FXMLView;
 import de.pro.dbw.application.testdata.entity.dream.DreamPresenter;
 import de.pro.dbw.application.testdata.entity.dream.DreamView;
+import de.pro.dbw.application.testdata.entity.reflection.ReflectionPresenter;
+import de.pro.dbw.application.testdata.entity.reflection.ReflectionView;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightPresenter;
 import de.pro.dbw.application.testdata.entity.tipofthenight.TipOfTheNightView;
-import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCell;
-import de.pro.dbw.application.testdata.listview.checkbox.CheckBoxListCellModel;
 import de.pro.dbw.application.testdata.service.DreamService;
+import de.pro.dbw.application.testdata.service.ReflectionService;
 import de.pro.dbw.application.testdata.service.SequentialThreadFactory;
 import de.pro.dbw.application.testdata.service.TipOfTheNightService;
+import de.pro.dbw.base.component.api.listview.checkbox.CheckBoxListCell;
+import de.pro.dbw.base.component.api.listview.checkbox.CheckBoxListCellModel;
+import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.core.configuration.api.application.testdata.ITestdataConfiguration;
 import de.pro.dbw.file.dream.api.DreamModel;
+import de.pro.dbw.file.reflection.api.ReflectionModel;
 import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import de.pro.lib.properties.api.PropertiesFacade;
 import java.net.URL;
 import java.util.List;
@@ -54,6 +60,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
@@ -64,7 +71,7 @@ import javafx.util.Duration;
  *
  * @author PRo
  */
-public class TestdataPresenter implements Initializable, ITestdataConfiguration {
+public class TestdataPresenter implements Initializable, IPreferencesConfiguration, ITestdataConfiguration {
     
     private static final String ENTITY_SUFFIX = "Model"; // NOI18N
     
@@ -77,9 +84,12 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     @FXML private CheckBox cbDeleteDatabase;
     @FXML private CheckBox cbSelectAll;
     @FXML private ListView lvEntities;
+    @FXML private ScrollPane spEntities;
     @FXML private TabPane tpEntities;
     @FXML private TabPane tpTestdata;
     @FXML private VBox vbEntities;
+    
+    private boolean triggerOnActionSelectAll = Boolean.TRUE;
     
 //    private ExecutorService parallelExecutorService;
     private ExecutorService sequentialExecutorService;
@@ -93,10 +103,12 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         assert (cbDeleteDatabase != null) : "fx:id=\"cbDeleteDatabase\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (cbSelectAll != null)      : "fx:id=\"cbSelectAll\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (lvEntities != null)       : "fx:id=\"lvEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
+        assert (spEntities != null)       : "fx:id=\"spEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (tpEntities != null)       : "fx:id=\"tpEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (tpTestdata != null)       : "fx:id=\"tpTestdata\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
         assert (vbEntities != null)       : "fx:id=\"vbEntities\" was not injected: check your FXML file 'TestdataPresenter.fxml'."; // NOI18N
     
+        this.initializeDeleteDatabase();
         this.initializeDesktopSplitPane();
         this.initializeDialogLayer();
         this.initializeEntities();
@@ -104,6 +116,15 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         this.initializeProcesses();
         
         this.onActionRefresh();
+    }
+    
+    private void initializeDeleteDatabase() {
+        LoggerFacade.INSTANCE.info(this.getClass(), "Initialize delete Database"); // NOI18N
+    
+        final Boolean isSelectedDeleteDatabase = PreferencesFacade.INSTANCE.getBoolean(
+                PREF__TESTDATA__IS_SELECTED_DELETE_DATABASE,
+                PREF__TESTDATA__IS_SELECTED_DELETE_DATABASE__DEFAULT_VALUE);
+        cbDeleteDatabase.setSelected(isSelectedDeleteDatabase);
     }
     
     private void initializeDesktopSplitPane() {
@@ -124,6 +145,11 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         dreamView.getView().setId(DreamModel.class.getSimpleName());
         dreamView.getRealPresenter().bind(disableProperty);
         ENTITIES.put(DreamModel.class.getSimpleName(), dreamView);
+        
+        final ReflectionView reflectionView = new ReflectionView();
+        reflectionView.getView().setId(ReflectionModel.class.getSimpleName());
+        reflectionView.getRealPresenter().bind(disableProperty);
+        ENTITIES.put(ReflectionModel.class.getSimpleName(), reflectionView);
         
         final TipOfTheNightView tipOfTheNightView = new TipOfTheNightView();
         tipOfTheNightView.getView().setId(TipOfTheNightModel.class.getSimpleName());
@@ -147,7 +173,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     public void cleanUpAfterServices() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Clean up after testdata generation"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Clean up after testdata generation"); // NOI18N
 
         DatabaseFacade.INSTANCE.shutdown();
         
@@ -156,6 +182,8 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         cbDeleteDatabase.disableProperty().unbind();
         cbSelectAll.disableProperty().unbind();
         bCreateTestdata.disableProperty().unbind();
+        
+        LoggerFacade.INSTANCE.debug(this.getClass(), "##### Ready with Testdata generation..."); // NOI18N
     }
 
     private void disableComponents() {
@@ -175,6 +203,8 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         final CheckBoxListCellModel model = new CheckBoxListCellModel();
         model.setName(key.substring(0, key.length() - ENTITY_SUFFIX.length()));
         model.setId(key);
+        
+        // Add or remove entity configuration
         model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             // Selected
             if (newValue) {
@@ -197,6 +227,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
             }
         });
         
+        // Button 'Create' testdata
         model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             // Selected
             if (newValue) {
@@ -221,6 +252,63 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
             bCreateTestdata.setDisable(disable);
         });
         
+        // Check 'Select all' button
+        model.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            final boolean isSelectAll = cbSelectAll.isSelected();
+            
+            // Selected
+            if (newValue) {
+                if (isSelectAll) {
+                    return;
+                }
+                
+                boolean allEntitiesCheckBoxesAreSelected = Boolean.TRUE;
+                for (Object item : lvEntities.getItems()) {
+                    if (!(item instanceof CheckBoxListCellModel)) {
+                        continue;
+                    }
+
+                    final CheckBoxListCellModel checkBoxListCellModel = (CheckBoxListCellModel) item;
+                    if (!checkBoxListCellModel.isSelected()) {
+                        allEntitiesCheckBoxesAreSelected = Boolean.FALSE;
+                        break;
+                    }
+                }
+                
+                if (allEntitiesCheckBoxesAreSelected) {
+                    triggerOnActionSelectAll = Boolean.FALSE;
+                    cbSelectAll.setSelected(Boolean.TRUE);
+                    triggerOnActionSelectAll = Boolean.TRUE;
+                }
+                
+                return;
+            }
+            
+            // Don't selected
+            if (!isSelectAll) {
+                return;
+            }
+             
+            boolean allEntitiesCheckBoxesAreSelected = Boolean.TRUE;
+            for (Object item : lvEntities.getItems()) {
+                if (!(item instanceof CheckBoxListCellModel)) {
+                    continue;
+                }
+
+                final CheckBoxListCellModel checkBoxListCellModel = (CheckBoxListCellModel) item;
+                if (!checkBoxListCellModel.isSelected()) {
+                    allEntitiesCheckBoxesAreSelected = Boolean.FALSE;
+                    break;
+                }
+            }
+
+            if (!allEntitiesCheckBoxesAreSelected) {
+                triggerOnActionSelectAll = Boolean.FALSE;
+                cbSelectAll.setSelected(Boolean.FALSE);
+                triggerOnActionSelectAll = Boolean.TRUE;
+            }
+        });
+        
         return model;
     }
     
@@ -241,7 +329,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         
         if (cbDeleteDatabase.isSelected()) {
             final PauseTransition ptDropDatabase = new PauseTransition();
-            ptDropDatabase.setDuration(Duration.millis(100.0d));
+            ptDropDatabase.setDuration(Duration.millis(50.0d));
             ptDropDatabase.setOnFinished((ActionEvent event) -> {
                 LoggerFacade.INSTANCE.debug(this.getClass(), "Drop database"); // NOI18N
                 DatabaseFacade.INSTANCE.drop(this.getProperty(KEY__APPLICATION__DATABASE));
@@ -250,7 +338,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         }
         
         final PauseTransition ptRegisterDatabase = new PauseTransition();
-        ptRegisterDatabase.setDuration(Duration.millis(250.0d));
+        ptRegisterDatabase.setDuration(Duration.millis(150.0d));
         ptRegisterDatabase.setOnFinished((ActionEvent event) -> {
             LoggerFacade.INSTANCE.debug(this.getClass(), "Register database"); // NOI18N
             DatabaseFacade.INSTANCE.register(this.getProperty(KEY__APPLICATION__DATABASE));
@@ -258,13 +346,19 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         sequentialTransition.getChildren().add(ptRegisterDatabase);
         
         final PauseTransition ptCreateTestdata = new PauseTransition();
-        ptCreateTestdata.setDuration(Duration.millis(250.0d));
+        ptCreateTestdata.setDuration(Duration.millis(150.0d));
         ptCreateTestdata.setOnFinished((ActionEvent event) -> {
             this.startTestdataGeneration();
         });
         sequentialTransition.getChildren().add(ptCreateTestdata);
         
         sequentialTransition.playFromStart();
+    }
+    
+    public void onActionDeleteDatabase() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action delete Database"); // NOI18N
+        
+        PreferencesFacade.INSTANCE.putBoolean(PREF__TESTDATA__IS_SELECTED_DELETE_DATABASE, cbDeleteDatabase.isSelected());
     }
     
     private void onActionRefresh() {
@@ -296,6 +390,10 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     public void onActionSelectAll(ActionEvent ae) {
+        if (!triggerOnActionSelectAll) {
+            return;
+        }
+        
         LoggerFacade.INSTANCE.info(this.getClass(), "On action select all"); // NOI18N
         
         if (!(ae.getSource() instanceof CheckBox)) {
@@ -320,9 +418,7 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
     }
     
     public void startTestdataGeneration() {
-        LoggerFacade.INSTANCE.debug(this.getClass(), "Start with Testdata generation..."); // NOI18N
-        
-//        parallelExecutorService = Executors.newFixedThreadPool(2, new ParallelThreadFactory());
+        LoggerFacade.INSTANCE.debug(this.getClass(), "##### Start with Testdata generation..."); // NOI18N
         
         final List<String> activeEntities = FXCollections.observableArrayList();
         for (Object item : lvEntities.getItems()) {
@@ -347,10 +443,9 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         final String lastActiveService = activeEntities.get(activeEntities.size() - 1);
         for (String entityName : activeEntities) {
             this.configureServiceForEntityDream(entityName, lastActiveService);
+            this.configureServiceForEntityReflection(entityName, lastActiveService);
             this.configureServiceForEntityTipOfTheNight(entityName, lastActiveService);
         }
-        
-        LoggerFacade.INSTANCE.debug(this.getClass(), "Ready with Testdata generation..."); // NOI18N
     }
 
     private void configureServiceForEntityDream(String entityName, String lastActiveService) {
@@ -363,10 +458,26 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
         service.setOnStart("Start with testdata generation from entity Dream..."); // NOI18N
-        
         service.setOnSuccededAfterService(
                 this.getTestdataPresenter(entityName, lastActiveService),
                 "Ready with testdata generation from entity Dream..."); // NOI18N
+        
+        service.start();
+    }
+
+    private void configureServiceForEntityReflection(String entityName, String lastActiveService) {
+        if (!entityName.equals(ReflectionModel.class.getSimpleName())) {
+            return;
+        }
+        
+        final ReflectionService service = new ReflectionService(ReflectionModel.class.getName());
+        final ReflectionPresenter presenter = (ReflectionPresenter) ENTITIES.get(ReflectionModel.class.getSimpleName()).getPresenter();
+        service.bind(presenter);
+        service.setExecutor(sequentialExecutorService);
+        service.setOnStart("Start with testdata generation from entity Reflection..."); // NOI18N
+        service.setOnSuccededAfterService(
+                this.getTestdataPresenter(entityName, lastActiveService),
+                "Ready with testdata generation from entity Reflection..."); // NOI18N
         
         service.start();
     }
@@ -381,7 +492,6 @@ public class TestdataPresenter implements Initializable, ITestdataConfiguration 
         service.bind(presenter);
         service.setExecutor(sequentialExecutorService);
         service.setOnStart("Start with testdata generation from entity TipOfTheNight..."); // NOI18N
-        
         service.setOnSuccededAfterService(
                 this.getTestdataPresenter(entityName, lastActiveService),
                 "Ready with testdata generation from entity TipOfTheNight..."); // NOI18N

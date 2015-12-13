@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.pro</groupId>
         <artifactId>Dream-Better-Worlds</artifactId>
-        <version>0.2.0</version>
+        <version>0.2.1</version>
     </parent>
     <artifactId>DBW-File-Dream-Api</artifactId>
     <packaging>jar</packaging>
@@ -27,6 +27,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DBW-Core-Configuration-Api</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     

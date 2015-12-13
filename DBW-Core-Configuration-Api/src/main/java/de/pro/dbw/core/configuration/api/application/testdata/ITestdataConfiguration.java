@@ -26,7 +26,7 @@ public interface ITestdataConfiguration {
     
     public static final Duration DBW__LITTLE_DELAY__DURATION_125 = Duration.millis(125.0d);
     
-    public static final String DBW__RESOURCE_BUNDLE__TESTDATA = "/de/pro/dbw/application/testdata/TestDataApplication.properties"; // NOI18N
+    public static final String DBW__RESOURCE_BUNDLE__TESTDATA = "/de/pro/dbw/application/testdata/TestdataApplication.properties"; // NOI18N
     
     public static final String KEY__APPLICATION__DATABASE = "application.database"; // NOI18N
     public static final String KEY__APPLICATION_TESTDATA__BORDER_SIGN = "application.testdata.border.sign"; // NOI18N

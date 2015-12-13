@@ -26,6 +26,7 @@ import javafx.collections.FXCollections;
 public class EntityHelper {
     
     private static final List<Integer> QUANTITY_ENTITIES = FXCollections.observableArrayList();
+    private static final List<Integer> QUANTITY_TIMEPERIOD = FXCollections.observableArrayList();
     
     private static EntityHelper instance = null;
     
@@ -43,6 +44,7 @@ public class EntityHelper {
     
     private void initialize() {
         this.initializeQuantityEntities();
+        this.initializeQuantityTimePeriod();
     }
 
     private void initializeQuantityEntities() {
@@ -64,9 +66,27 @@ public class EntityHelper {
         QUANTITY_ENTITIES.add(75000);
         QUANTITY_ENTITIES.add(100000);
     }
+
+    private void initializeQuantityTimePeriod() {
+        QUANTITY_TIMEPERIOD.add(1);
+        QUANTITY_TIMEPERIOD.add(2);
+        QUANTITY_TIMEPERIOD.add(3);
+        QUANTITY_TIMEPERIOD.add(4);
+        QUANTITY_TIMEPERIOD.add(5);
+        QUANTITY_TIMEPERIOD.add(10);
+        QUANTITY_TIMEPERIOD.add(15);
+        QUANTITY_TIMEPERIOD.add(20);
+        QUANTITY_TIMEPERIOD.add(25);
+        QUANTITY_TIMEPERIOD.add(50);
+        QUANTITY_TIMEPERIOD.add(75);
+    }
     
     public List<Integer> getQuantityEntities() {
         return QUANTITY_ENTITIES;
+    }
+    
+    public List<Integer> getQuantityTimePeriods() {
+        return QUANTITY_TIMEPERIOD;
     }
     
 }

@@ -4,6 +4,7 @@
 /DBW-Application/resources/
 /DBW-Application/Preferences.properties
 /DBW-Application/target/
+/DBW-Application-Performance/target/
 /DBW-Application-Testdata/target/
 /DBW-Base-Component-Api/target/
 /DBW-Base-Component-Impl/target/
@@ -42,9 +43,9 @@
 /DBW-Navigation-Provider/target/
 /DBW-Navigation-Voting-Api/target/
 /DBW-Navigation-Voting-Impl/target/
+/DBW-Tool-Timer-Api/target/
+/DBW-Tool-Timer-Impl/target/
+/DBW-Tool-Provider/target/
 /DBW-Util-Api/target/
 /DBW-Util-Impl/target/
 /DBW-Util-Provider/target/
-/DBW-Tool-Provider/target/
-/DBW-Tool-Timer-Api/target/
-/DBW-Tool-Timer-Impl/target/

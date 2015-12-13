@@ -18,6 +18,10 @@ package de.pro.dbw.navigation.dreambook.api;
 
 import de.pro.dbw.util.provider.UtilProvider;
 import javafx.scene.Parent;
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 
@@ -88,24 +92,46 @@ public class DreamBookNavigationModel implements Comparable<DreamBookNavigationM
     }
     
     @Override
-    public int compareTo(DreamBookNavigationModel other) {
-        int compare = Long.compare(other.getGenerationTime(), this.getGenerationTime());
-        if (compare != 0) {
-            return compare;
-        }
-        
-        compare = this.getTitle().compareTo(other.getTitle());
-        
-        return compare;
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(this.getIdToOpen())
+                .append(this.getGenerationTime())
+                .toHashCode();
     }
 
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("generation-time=").append(this.getGenerationTime()); // NOI18N
-        sb.append(", title=").append(this.getTitle()); // NOI18N
+    public boolean equals(Object obj) {
+        if (obj == null || obj == this) {
+            return false;
+        }
         
-        return sb.toString();
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final DreamBookNavigationModel other = (DreamBookNavigationModel) obj;
+        return new EqualsBuilder()
+                .append(this.getIdToOpen(), other.getIdToOpen())
+                .append(this.getGenerationTime(), other.getGenerationTime())
+                .isEquals();
+    }
+    
+    @Override
+    public int compareTo(DreamBookNavigationModel other) {
+        return new CompareToBuilder()
+                .append(other.getGenerationTime(), this.getGenerationTime())
+                .append(other.getTitle(), this.getTitle())
+                .append(other.getIdToOpen(), this.getIdToOpen())
+                .toComparison();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("idToOpen", this.getIdToOpen()) // NOI18N
+                .append("title", this.getTitle()) // NOI18N
+                .append("generationtime", this.getGenerationTime()) // NOI18N
+                .toString();
     }
     
 }

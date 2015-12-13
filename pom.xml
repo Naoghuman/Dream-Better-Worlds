@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.pro</groupId>
     <artifactId>Dream-Better-Worlds</artifactId>
-    <version>0.2.0</version> <!-- -SNAPSHOT -->
+    <version>0.2.1</version> <!-- -SNAPSHOT -->
     <packaging>pom</packaging>
     <name>Dream-Better-Worlds</name>
     <inceptionYear>2014</inceptionYear>
@@ -143,6 +143,11 @@
             </dependency>
         
             <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
                 <groupId>com.airhacks</groupId>
                 <artifactId>afterburner.fx</artifactId>
                 <version>1.6.2</version>
@@ -175,6 +180,7 @@
     
     <modules>
         <module>DBW-Application</module>
+        <module>DBW-Application-Performance</module>
         <module>DBW-Application-Testdata</module>
         <module>DBW-Base-Component-Api</module>
         <module>DBW-Base-Component-Impl</module>

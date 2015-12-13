@@ -21,6 +21,7 @@ import de.pro.dbw.application.testdata.api.TestdataFacade;
 import de.pro.dbw.core.configuration.api.application.testdata.ITestdataConfiguration;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -44,6 +45,9 @@ public class TestdataApplication extends Application implements ITestdataConfigu
         final String message = this.getProperty(KEY__APPLICATION_TESTDATA__MESSAGE_START);
         final String title = this.getProperty(KEY__APPLICATION_TESTDATA__TITLE);
         LoggerFacade.INSTANCE.message(borderSign, 80, message + title);
+        
+        final Boolean dropPreferencesFileAtStart = Boolean.FALSE;
+        PreferencesFacade.INSTANCE.init(dropPreferencesFileAtStart);
     }
 
     @Override

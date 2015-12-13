@@ -36,6 +36,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  *
@@ -161,24 +165,44 @@ public class ReflectionCommentModel implements Comparable<ReflectionCommentModel
     }
     
     @Override
-    public int compareTo(ReflectionCommentModel other) {
-        int compareTo = Long.compare(other.getGenerationTime(), this.getGenerationTime());
-        if (compareTo != 0) {
-            return compareTo;
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(this.getId())
+                .append(this.getGenerationTime())
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || obj == this) {
+            return false;
         }
         
-        return Long.compare(other.getId(), this.getId());
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final ReflectionCommentModel other = (ReflectionCommentModel) obj;
+        return new EqualsBuilder()
+                .append(this.getId(), other.getId())
+                .append(this.getGenerationTime(), other.getGenerationTime())
+                .isEquals();
+    }
+    
+    @Override
+    public int compareTo(ReflectionCommentModel other) {
+        return new CompareToBuilder()
+                .append(other.getGenerationTime(), this.getGenerationTime())
+                .append(other.getId(), this.getId())
+                .toComparison();
     }
     
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("ReflectionComment ["); // NOI18N
-        sb.append("id=").append(this.getId()); // NOI18N
-        sb.append(", generationtime=").append(this.getGenerationTime()); // NOI18N
-        sb.append("]"); // NOI18N
-        
-        return sb.toString();
+        return new ToStringBuilder(this)
+                .append("id", this.getId()) // NOI18N
+                .append("generationtime", this.getGenerationTime()) // NOI18N
+                .toString();
     }
 
     @Override

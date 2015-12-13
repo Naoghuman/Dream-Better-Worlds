@@ -35,6 +35,7 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
+import org.apache.commons.lang.time.StopWatch;
 
 /**
  *
@@ -42,9 +43,13 @@ import javafx.util.Duration;
  */
 public class DreamService extends Service<Void> {
     
+    private final long now = System.currentTimeMillis();
+    
     private final DoubleProperty entityProperty = new SimpleDoubleProperty(0.0d);
     
     private int saveMaxEntities = 0;
+    private int timePeriod = 0;
+    private long convertedTimePeriod = 0L;
     
     private DreamPresenter presenter = null;
     private String entityName = null;
@@ -58,6 +63,14 @@ public class DreamService extends Service<Void> {
         this.presenter = presenter;
         
         saveMaxEntities = presenter.getSaveMaxEntities();
+        timePeriod = presenter.getTimePeriod();
+        
+        String startTime = UtilProvider.getDefault().getDateConverter().convertLongToDateTime(now, IDateConverter.PATTERN__DATE);
+        int year = Integer.parseInt(startTime.substring(6)) - timePeriod;
+        startTime = startTime.substring(0, 6) + year;
+        
+        final long convertedStartTime = UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(startTime, IDateConverter.PATTERN__DATE);
+        convertedTimePeriod = now - convertedStartTime;
         
         entityProperty.unbind();
         entityProperty.setValue(0);
@@ -81,11 +94,7 @@ public class DreamService extends Service<Void> {
     }
     
     private long createGenerationTime() {
-        final String startTime = "01-01-2010"; // TODO create combobox where user can change the time-period
-        final long convertedStartTime = UtilProvider.getDefault().getDateConverter().convertDateTimeToLong(startTime, IDateConverter.PATTERN__DATE);
-        final long now = System.currentTimeMillis();
-        final long timePeriod = now - convertedStartTime;
-        final long generationTime = now - UtilProvider.getDefault().getDateConverter().getLongInPeriodFromNowTo(timePeriod);
+        final long generationTime = now - UtilProvider.getDefault().getDateConverter().getLongInPeriodFromNowTo(convertedTimePeriod);
         
         return generationTime;
     }
@@ -99,16 +108,16 @@ public class DreamService extends Service<Void> {
             
             @Override
             protected Void call() throws Exception {
+                LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
+                
+                final StopWatch stopWatch = new StopWatch();
+                stopWatch.start();
+                
                 final ICrudService crudService = DatabaseFacade.INSTANCE.getCrudService(entityName);
-                crudService.beginTransaction();
-
-                long count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
-            	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " before testdata generation."); // NOI18N
-            	LoggerFacade.INSTANCE.debug(this.getClass(), "Create " + saveMaxEntities + " dreams as testdata..."); // NOI18N
-		LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
-
-                long id = -1_000_000_000L + count;
+                long id = -1_000_000_000L + DatabaseFacade.INSTANCE.getCrudService().count(entityName);
                 for (int i = 1; i <= saveMaxEntities; i++) {
+                    crudService.beginTransaction();
+                    
                     final DreamModel model = new DreamModel();
                     model.setGenerationTime(DreamService.this.createGenerationTime());
                     model.setDescription(LoremIpsum.getDefault().getDescription());
@@ -119,18 +128,14 @@ public class DreamService extends Service<Void> {
                     crudService.create(model, false);
                     updateProgress(i - 1, saveMaxEntities);
                     
-                    if (i % 5000 == 0) {
-                        crudService.commitTransaction();
-                        crudService.beginTransaction();
-                    }
+                    crudService.commitTransaction();
                 }
-
-                crudService.commitTransaction();
                 
-		LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
-                count = DatabaseFacade.INSTANCE.getCrudService().count(entityName);
-            	LoggerFacade.INSTANCE.debug(this.getClass(), "Found " + count + " dreams after testdata generation."); // NOI18N
-
+                LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
+                stopWatch.split();
+                LoggerFacade.INSTANCE.debug(this.getClass(), "  + " + stopWatch.toSplitString() + " for " + saveMaxEntities + " Dreams."); // NOI18N
+		stopWatch.stop();
+                
                 return null;
             }
         };
@@ -164,8 +169,6 @@ public class DreamService extends Service<Void> {
         final PauseTransition ptProgressBarInformation = new PauseTransition();
         ptProgressBarInformation.setDuration(Duration.millis(250.0d));
         ptProgressBarInformation.setOnFinished((ActionEvent event) -> {
-            LoggerFacade.INSTANCE.debug(this.getClass(), onStartMessage);
-            
             presenter.setProgressBarInformation(onStartMessage);
         });
         sequentialTransition.getChildren().add(ptProgressBarInformation);

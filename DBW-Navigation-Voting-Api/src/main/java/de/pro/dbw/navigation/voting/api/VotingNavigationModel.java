@@ -17,6 +17,10 @@
 package de.pro.dbw.navigation.voting.api;
 
 import javafx.scene.Parent;
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  *
@@ -71,8 +75,44 @@ public class VotingNavigationModel implements Comparable<VotingNavigationModel> 
     }
     
     @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(this.getIdToOpen())
+                .append(this.getGenerationTime())
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || obj == this) {
+            return false;
+        }
+        
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final VotingNavigationModel other = (VotingNavigationModel) obj;
+        return new EqualsBuilder()
+                .append(this.getIdToOpen(), other.getIdToOpen())
+                .append(this.getGenerationTime(), other.getGenerationTime())
+                .isEquals();
+    }
+    
+    @Override
     public int compareTo(VotingNavigationModel other) {
-        return Long.compare(other.getGenerationTime(), this.getGenerationTime());
+        return new CompareToBuilder()
+                .append(other.getGenerationTime(), this.getGenerationTime())
+                .append(other.getIdToOpen(), this.getIdToOpen())
+                .toComparison();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("idToOpen", this.getIdToOpen()) // NOI18N
+                .append("generationtime", this.getGenerationTime()) // NOI18N
+                .toString();
     }
     
 }
