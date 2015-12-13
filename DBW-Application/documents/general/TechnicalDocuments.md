@@ -16,8 +16,8 @@ Content
     * [Coding Rules for Properties (Afterburner)](#CodingRulesForPropertiesAfterburner)
     * [Coding Rules for View (Afterburner)](#CodingRulesForViewAfterburner)
 * [How To ...](#HowTo)
-    * [How to clone other branches then master with NetBeans IDE](#HowToCloneOtherBranchesThenMasterWithNetBeansIDE)
-    * [How to merge branches in NetBeans IDE](#HowToMergeBranchesInNetBeansIDE)
+    * [How to clone other branches then master with NetBeans](#HowToCloneOtherBranchesThenMasterWithNetBeans)
+    * [How to merge branches in NetBeans](#HowToMergeBranchesInNetBeans)
     * [How to release](#HowToRelease)
 * [Templates](#Templates)
 * [Additional Informations](#AdditionalInformations)
@@ -82,16 +82,16 @@ How To ...<a name="HowTo" />
 ---
 
 
-### How to clone other branches then master with NetBeans IDE<a name="HowToCloneOtherBranchesThenMasterWithNetBeansIDE" />
+### How to clone other branches then master with NetBeans<a name="HowToCloneOtherBranchesThenMasterWithNetBeans" />
 * This file describes the steps how to `clone` other branches then the `master` 
   branch with [NetBeans IDE].
-* For more informations see [HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md].
+* For more informations see [HowToCloneOtherBranchesThenMasterWithNetBeans.md].
 
 
-### How to merge branches in NetBeansIDE<a name="HowToMergeBranchesInNetBeansIDE" />
+### How to merge branches in NetBeans<a name="HowToMergeBranchesInNetBeans" />
 * This file describes the steps how to `merge` branches from [GitHub] in the 
   [NetBeans IDE].
-* For more informations see [HowToMergeBranchesInNetBeansIDE.md].
+* For more informations see [HowToMergeBranchesInNetBeans.md].
 
 
 ### How to release<a name="HowToRelease" />
@@ -141,8 +141,8 @@ Additional Informations<a name="AdditionalInformations" />
 [CodingRulesForViewAfterburner.md]:./../coding-rules/afterburner/CodingRulesForView.md
 
 [GitHub]:https://github.com/
-[HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md]:./../howto/HowToCloneOtherBranchesThenMasterWithNetBeansIDE.md
-[HowToMergeBranchesInNetBeansIDE.md]:./../howto/HowToMergeBranchesInNetBeansIDE.md
+[HowToCloneOtherBranchesThenMasterWithNetBeans.md]:./../howto/HowToCloneOtherBranchesThenMasterWithNetBeans.md
+[HowToMergeBranchesInNetBeans.md]:./../howto/HowToMergeBranchesInNetBeans.md
 [HowToRelease.md]:./../howto/HowToRelease.md
 [NetBeans IDE]:https://netbeans.org/
 [Material Design Guidelines]:https://www.google.com/design/spec/material-design/introduction.html
