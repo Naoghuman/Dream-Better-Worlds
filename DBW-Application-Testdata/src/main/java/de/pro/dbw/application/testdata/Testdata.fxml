@@ -47,7 +47,7 @@
                             <content>
                                 <VBox spacing="14.0">
                                     <children>
-                                        <ToolBar minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
+                                        <ToolBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
                                             <items>
                                                 <Button fx:id="bCreateTestdata" disable="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionCreateTestdata" prefWidth="64.0" text="Create" />
                                             </items>
