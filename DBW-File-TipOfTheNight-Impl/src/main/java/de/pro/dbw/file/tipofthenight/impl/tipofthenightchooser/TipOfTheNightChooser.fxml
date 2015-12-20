@@ -18,14 +18,16 @@
                     <children>
                         <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                                      <Label fx:id="lTitle" text="title">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font></Label>
-                           </children>
-                        </HBox>
+                                <Label fx:id="lTitle" text="&lt;title&gt;" VBox.vgrow="NEVER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lNumber" text="&lt;nr&gt;">
+                           <VBox.margin>
+                              <Insets left="14.0" />
+                           </VBox.margin>
+                        </Label>
                                 <TextArea fx:id="taTipOfTheNight" editable="false" wrapText="true" VBox.vgrow="ALWAYS" />
                                 <HBox alignment="CENTER_LEFT">
                                     <children>

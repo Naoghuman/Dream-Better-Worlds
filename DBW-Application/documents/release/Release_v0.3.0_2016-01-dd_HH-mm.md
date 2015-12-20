@@ -13,6 +13,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.3.0`.
 
 
 #### Enhancement
+#106 [TipOfTheNight] Add number to the shown tip in TipOfTheNightChooser.
 
 
 
@@ -36,7 +37,6 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.3.0`.
 [//]: # (Issues which will be integrated in this release)
 #108 [Documents] Create new document PerformanceCheck.md.
 #107 [Documents] Create new document TestdataGeneration.md.
-#106 [TipOfTheNight] Add number to the shown tip in TipOfTheNightChooser.
 #105 [Performance] Add overview document for the performance in the in the particular components.
 #104 [Performance] Integrate TipOfTheNightChooser into the tab for the entity 'TipOfTheNight'.
 #103 [Screenshots] Add screenshots from the application into the ReadMe.md.

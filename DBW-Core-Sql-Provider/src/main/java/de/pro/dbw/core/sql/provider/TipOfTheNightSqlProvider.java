@@ -41,6 +41,9 @@ public class TipOfTheNightSqlProvider implements ITipOfTheNightConfiguration {
     
     private TipOfTheNightSqlProvider() {}
     
+    public long count() {
+        return DatabaseFacade.INSTANCE.getCrudService().count(TipOfTheNightModel.class.getSimpleName());
+    }
     
     public void createOrUpdate(TipOfTheNightModel model, Long defaultId) {
         if (Objects.equals(model.getId(), defaultId)) {

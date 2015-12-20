@@ -21,6 +21,7 @@ import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
 import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
+import java.awt.BorderLayout;
 import java.net.URL;
 import java.util.List;
 import java.util.Random;
@@ -45,9 +46,11 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     @FXML private Button bRandom;
     @FXML private CheckBox cbShowAtStart;
     @FXML private ImageView ivBackground;
+    @FXML private Label lNumber;
     @FXML private Label lTitle;
     @FXML private TextArea taTipOfTheNight;
     
+    private long count = 0L;
     private int index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
     
     @Override
@@ -58,38 +61,13 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         assert (bRandom != null)         : "fx:id=\"bRandom\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
         assert (cbShowAtStart != null)   : "fx:id=\"cbShowAtStart\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
         assert (ivBackground != null)    : "fx:id=\"ivBackground\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
+        assert (lNumber != null)         : "fx:id=\"lNumber\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
         assert (lTitle != null)          : "fx:id=\"lTitle\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
         assert (taTipOfTheNight != null) : "fx:id=\"taTipOfTheNight\" was not injected: check your FXML file 'TipOfTheNightChooser.fxml'."; // NOI18N
     
         this.initialize();
     }
-    /*
-    ----------------------------------------------------------------------------
-    TODO
-    - Button Tag(Category here).
-       - Öffnet den TagChooserDialog mit max 1 Auswahl.
-       - Klick auf einen hinzugefügte Tag im Dialog öffnet die Tag-Navigation 
-         mit der Selektion von diesen Tag.
     
-     - Test 0 tips
-        - Buttons sind deaktiviert
-     - Test 1, 2 tips
-        - Ein tip = buttons deaktiviert, mehr tips buttons sind aktiv
-     - Test viele tips
-    
-     - Default TipsOfTheNight von mir.
-        - User kann die löschen, editieren?
-        - Wenn löschen, sollte dann im Dialog ein Hinweis stehen, dass der
-          User eigene über ... generieren kann.
-    
-    ----------------------------------------------------------------------------
-    unittest in lib-database-objectdb
-     - model wo teilweise parameter lädt (test parameter wo weggelassen werden 
-       müssen null=true sein?)
-     - neue version mit lib-logger
-
-    ----------------------------------------------------------------------------
-    */
     private void initialize() {
         LoggerFacade.INSTANCE.info(this.getClass(), "Initialize Tip of the Night presenter"); // NOI18N
         
@@ -100,12 +78,22 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     }
     
     private void initializeIndex() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize Tip of the Night index"); // NOI18N
+        
         index = PreferencesFacade.INSTANCE.getInt(
                 PREF__TIP_OF_THE_NIGHT_INDEX,
                 PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE);
+        
+        count = SqlProvider.getDefault().getTipOfTheNightProvider().count();
+        if (index >= count) {
+            index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
+            PreferencesFacade.INSTANCE.putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
+        }
     }
     
     private void initializeShowAtStart() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Initialize show Tip of the Night as start"); // NOI18N
+        
         final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getBoolean(
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT__DEFAULT_VALUE);
@@ -188,27 +176,29 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
             return;
         }
         
-        this.showCurrentTipOfTheNight(model);
-    }
-    
-    private void showCurrentTipOfTheNight(TipOfTheNightModel model) {
-        LoggerFacade.INSTANCE.debug(this.getClass(), "Show TipOfTheNight: " + model.getTitle()); // NOI18N
-    
-        lTitle.setText(model.getTitle());
-        taTipOfTheNight.setText(model.getText());
-        
-        bNext.setDisable(Boolean.FALSE);
-        bRandom.setDisable(Boolean.FALSE);
+        this.showTipOfTheNight(model);
     }
     
     private void showNoTipOfTheNight() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "No TipOfTheNights are created"); // NOI18N
     
         lTitle.setText(null);
+        lNumber.setText(null);
         taTipOfTheNight.setText(null);
         
         bNext.setDisable(Boolean.TRUE);
         bRandom.setDisable(Boolean.TRUE);
+    }
+    
+    private void showTipOfTheNight(TipOfTheNightModel model) {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Show TipOfTheNight: " + model.getTitle()); // NOI18N
+    
+        lTitle.setText(model.getTitle());
+        lNumber.setText("Tip " + (index + 1) + " / " + count); // NOI18N
+        taTipOfTheNight.setText(model.getText());
+        
+        bNext.setDisable(Boolean.FALSE);
+        bRandom.setDisable(Boolean.FALSE);
     }
     
     private void showTipOfTheNightAtStart() {
