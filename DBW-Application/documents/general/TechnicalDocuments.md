@@ -156,5 +156,5 @@ Additional Informations<a name="AdditionalInformations" />
 [HowToRelease.md]:./../howto/HowToRelease.md
 [NetBeans IDE]:https://netbeans.org/
 [Material Design Guidelines]:https://www.google.com/design/spec/material-design/introduction.html
-[PerformanceCheck.md]./../performance/PerformanceCheck.md
+[PerformanceCheck.md]:./../performance/PerformanceCheck.md
 [Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:./../release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
