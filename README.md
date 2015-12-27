@@ -62,6 +62,7 @@ The document [TechnicalDocuments.md] contains following sections:
     * [How to clone other branches then master with NetBeans]
     * [How to merge branches in NetBeans]
     * [How to release]
+* [Performance Check]
 * [Templates]
 * [Additional Informations]
     * [aim42 Method Guide]
@@ -105,5 +106,6 @@ The document [TechnicalDocuments.md] contains following sections:
 [How to clone other branches then master with NetBeans]:DBW-Application/documents/general/TechnicalDocuments.md#HowToCloneOtherBranchesThenMasterWithNetBeans
 [How to merge branches in NetBeans]:DBW-Application/documents/general/TechnicalDocuments.md#HowToMergeBranchesInNetBeans
 [How to release]:DBW-Application/documents/general/TechnicalDocuments.md#HowToRelease
+[Performance Check]:DBW-Application/documents/performance/PerformanceCheck.md
 [TechnicalDocuments.md]:DBW-Application/documents/general/TechnicalDocuments.md
 [Templates]:DBW-Application/documents/general/TechnicalDocuments.md#Templates
