@@ -5,15 +5,13 @@ Performance Check
 Intention
 ===
 
-In this document I list a `Overview` from manuell `Performance Checks`. Over the 
-application `PerformanceApplication` in the module `DBW-Application` the single 
-views can shown. Every action in the view will logged the needed time when executed.
+The `PerformanceCheck` can be done during starting the class 
+`de.pro.dbw.application.PerformanceApplication.java` in the module `DBW-Application`.
 
-With the application `TestdataApplication` (in the same module / package) a 
-different count from entitites (100 - 100.000) can created.
+On the left side all `views` are shown where a `PerformanceCheck` can be done.
+Selection from a `view` will open the associated tab in `editor` area.
 
-So the intention is to show an overview from needed time per action and with 
-different filled tables.
+Also in this document an `Overview` from all `PerformanceCheck`s are shown.
 
 
 

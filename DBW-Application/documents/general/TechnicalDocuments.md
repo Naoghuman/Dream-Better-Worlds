@@ -19,6 +19,7 @@ Content
     * [How to clone other branches then master with NetBeans](#HowToCloneOtherBranchesThenMasterWithNetBeans)
     * [How to merge branches in NetBeans](#HowToMergeBranchesInNetBeans)
     * [How to release](#HowToRelease)
+* [Performance Check](#PerformanceCheck)
 * [Templates](#Templates)
 * [Additional Informations](#AdditionalInformations)
     * [aim42 Method Guide](#Aim42MethodGuide)
@@ -101,6 +102,15 @@ How To ...<a name="HowTo" />
 
 
 
+Performance Check<a name="PerformanceCheck" />
+---
+
+* [PerformanceCheck.md] describes how to `check` the `performance` in 
+  `Dream-Better-Worlds`. Additional an `overview` about all created performance
+  checks are shown.
+
+
+
 Templates<a name="Templates" />
 ---
 
@@ -146,4 +156,5 @@ Additional Informations<a name="AdditionalInformations" />
 [HowToRelease.md]:./../howto/HowToRelease.md
 [NetBeans IDE]:https://netbeans.org/
 [Material Design Guidelines]:https://www.google.com/design/spec/material-design/introduction.html
+[PerformanceCheck.md]./../performance/PerformanceCheck.md
 [Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md]:./../release/Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md
