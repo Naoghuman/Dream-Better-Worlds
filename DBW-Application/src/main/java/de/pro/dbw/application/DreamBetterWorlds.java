@@ -43,8 +43,6 @@ public class DreamBetterWorlds extends Application implements IApplicationConfig
         final Boolean dropPreferencesFileAtStart = Boolean.FALSE;
         PreferencesFacade.INSTANCE.init(dropPreferencesFileAtStart);
         
-        System.out.println("XXX DreamBetterWorlds.init() remove TestDatabase.createTestData()");
-//        TestDatabase.createTestData();
         DatabaseFacade.INSTANCE.register(this.getProperty(KEY__APPLICATION__DATABASE));
         System.out.println("XXX DreamBetterWorlds.init() -> JavaFX+JPA+Serialization=https://gist.github.com/james-d/e485ac525c71e20bb453");
     

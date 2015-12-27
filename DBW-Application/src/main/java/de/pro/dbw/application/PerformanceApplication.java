@@ -21,6 +21,7 @@ import de.pro.dbw.application.performance.api.PerformanceFacade;
 import de.pro.dbw.core.configuration.api.application.performance.IPerformanceConfiguration;
 import de.pro.lib.database.api.DatabaseFacade;
 import de.pro.lib.logger.api.LoggerFacade;
+import de.pro.lib.preferences.api.PreferencesFacade;
 import de.pro.lib.properties.api.PropertiesFacade;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -44,6 +45,11 @@ public class PerformanceApplication extends Application implements IPerformanceC
         final String message = this.getProperty(KEY__APPLICATION_PERFORMANCE__MESSAGE_START);
         final String title = this.getProperty(KEY__APPLICATION_PERFORMANCE__TITLE);
         LoggerFacade.INSTANCE.message(borderSign, 80, message + title);
+        
+        final Boolean dropPreferencesFileAtStart = Boolean.FALSE;
+        PreferencesFacade.INSTANCE.init(dropPreferencesFileAtStart);
+        
+        DatabaseFacade.INSTANCE.register(this.getProperty(KEY__APPLICATION__DATABASE));
     }
 
     @Override
@@ -65,11 +71,6 @@ public class PerformanceApplication extends Application implements IPerformanceC
     }
     
     private void onCloseRequest() {
-        final char borderSign = this.getProperty(KEY__APPLICATION_PERFORMANCE__BORDER_SIGN).charAt(0);
-        final String message = this.getProperty(KEY__APPLICATION_PERFORMANCE__MESSAGE_STOP);
-        final String title = this.getProperty(KEY__APPLICATION_PERFORMANCE__TITLE);
-        LoggerFacade.INSTANCE.message(borderSign, 80, message + title);
-        
         try {
             PerformanceFacade.INSTANCE.shutdown();
         } catch (InterruptedException e) {
@@ -77,6 +78,11 @@ public class PerformanceApplication extends Application implements IPerformanceC
         
         Injector.forgetAll();
         DatabaseFacade.INSTANCE.shutdown();
+        
+        final char borderSign = this.getProperty(KEY__APPLICATION_PERFORMANCE__BORDER_SIGN).charAt(0);
+        final String message = this.getProperty(KEY__APPLICATION_PERFORMANCE__MESSAGE_STOP);
+        final String title = this.getProperty(KEY__APPLICATION_PERFORMANCE__TITLE);
+        LoggerFacade.INSTANCE.message(borderSign, 80, message + title);
         
         final PauseTransition pt = new PauseTransition(DBW__LITTLE_DELAY__DURATION_125);
         pt.setOnFinished((ActionEvent event) -> {

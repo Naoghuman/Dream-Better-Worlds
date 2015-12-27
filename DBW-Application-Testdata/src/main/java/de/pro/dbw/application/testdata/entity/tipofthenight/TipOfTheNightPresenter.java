@@ -18,8 +18,6 @@ package de.pro.dbw.application.testdata.entity.tipofthenight;
 
 import de.pro.dbw.application.testdata.entity.EntityHelper;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
-import static de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration.PREF__TESTDATA__QUANTITY_ENTITIES__DREAM;
-import static de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration.PREF__TESTDATA__QUANTITY_ENTITIES__DREAM__DEFAULT_VALUE;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
 import java.net.URL;

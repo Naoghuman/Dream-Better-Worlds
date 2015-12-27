@@ -22,6 +22,7 @@ import de.pro.dbw.core.configuration.api.application.defaultid.IDefaultIdConfigu
 import de.pro.dbw.core.configuration.api.application.dialog.IDialogConfiguration;
 import de.pro.dbw.core.configuration.api.application.preferences.IPreferencesConfiguration;
 import de.pro.dbw.dialog.provider.DialogProvider;
+import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserPresenter;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEditorView;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenightchooser.TipOfTheNightChooserView;
 import de.pro.dbw.file.tipofthenight.impl.tipofthenighteditor.TipOfTheNightEditorPresenter;
@@ -63,7 +64,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     public void checkShowAtStartTipOfTheNight() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Check if TipOfTheNight should show at start"); // NOI18N
     
         final Boolean isShowAtStart = PreferencesFacade.INSTANCE.getBoolean(
                 PREF__SHOW_AT_START__TIP_OF_THE_NIGHT,
@@ -75,8 +76,18 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
         this.onActionShowTipOfTheNightWindow();
     }
     
+    public TipOfTheNightChooserView getTipOfTheNightChooserViewForPerformanceCheck() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Get TipOfTheNight view"); // NOI18N
+    
+        final TipOfTheNightChooserView view = new TipOfTheNightChooserView();
+        final TipOfTheNightChooserPresenter presenter = view.getRealPresenter();
+        presenter.prepareForPerformanceCheck();
+        
+        return view;
+    }
+    
     private void onActionShowTipOfTheNightEditor() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show TipOfTheNight editor"); // NOI18N
         
         final TipOfTheNightEditorView view = new TipOfTheNightEditorView();
         final TipOfTheNightEditorPresenter presenter = view.getRealPresenter();
@@ -85,11 +96,10 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     private void onActionShowTipOfTheNightWindow() {
-        LoggerFacade.INSTANCE.info(this.getClass(), "On action show TipOfTheNight window"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show TipOfTheNight window"); // NOI18N
     
         final Stage window = new Stage();
         window.initModality(Modality.NONE);
-//        window.initOwner(stage);
         window.setAlwaysOnTop(Boolean.FALSE);
         window.setResizable(Boolean.FALSE);
         final String title = PropertiesFacade.INSTANCE.getProperty(DIALOG__RESOURCE_BUNDLE, KEY__DIALOG_TITLE__TIP_OF_THE_NIGHT);
@@ -103,7 +113,7 @@ public class TipOfTheNightProvider implements IActionConfiguration, IDefaultIdCo
     }
     
     public void register(TabPane tpEditor) {
-        LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register TabPane editor in TipOfTheNightProvider"); // NOI18N
         
         this.tpEditor = tpEditor;
     }

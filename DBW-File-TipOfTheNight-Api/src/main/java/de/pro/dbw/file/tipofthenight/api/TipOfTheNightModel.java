@@ -55,6 +55,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
             name = ITipOfTheNightConfiguration.NAMED_QUERY__NAME__FIND_ALL,
             query = ITipOfTheNightConfiguration.NAMED_QUERY__QUERY__FIND_ALL),
     @NamedQuery(
+            name = ITipOfTheNightConfiguration.NAMED_QUERY__NAME__FIND_ALL_IDS,
+            query = ITipOfTheNightConfiguration.NAMED_QUERY__QUERY__FIND_ALL_IDS),
+    @NamedQuery(
             name = ITipOfTheNightConfiguration.NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY,
             query = ITipOfTheNightConfiguration.NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY)
 })

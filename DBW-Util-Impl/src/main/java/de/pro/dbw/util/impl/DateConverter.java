@@ -65,6 +65,13 @@ public class DateConverter implements IDateConverter {
         return mdt.toString(pattern);
     }
     
+    public String convertLongToDateTimeForPerformance(Long millis, String pattern) {
+        final MutableDateTime mdt = new MutableDateTime(millis);
+        mdt.addHours(-1);
+        
+        return mdt.toString(pattern);
+    }
+    
     public long getLongInPeriodFromNowTo(Long startTime) {
         if (startTime <=0) {
             throw new IllegalArgumentException("startTime must be positive"); // NOI18N

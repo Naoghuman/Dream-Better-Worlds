@@ -59,12 +59,24 @@ public class TipOfTheNightSqlProvider implements ITipOfTheNightConfiguration {
         DatabaseFacade.INSTANCE.getCrudService().delete(TipOfTheNightModel.class, idToDelete);
     }
     
-    public List<TipOfTheNightModel> findAll() {
+    public List<TipOfTheNightModel> findAll() {// XXX remove
         final List<TipOfTheNightModel> allTipsOfTheNight = DatabaseFacade.INSTANCE.getCrudService()
                 .findByNamedQuery(TipOfTheNightModel.class, NAMED_QUERY__NAME__FIND_ALL);
         Collections.sort(allTipsOfTheNight);
         
         return allTipsOfTheNight;
+    }
+    
+    public List<Long> findAllIDs() {
+        final List<Long> allIDs = DatabaseFacade.INSTANCE.getCrudService()
+                .findByNamedQuery(Long.class, NAMED_QUERY__NAME__FIND_ALL_IDS);
+        Collections.sort(allIDs);
+        
+        return allIDs;
+    }
+    
+    public TipOfTheNightModel findByID(Long id) {
+        return DatabaseFacade.INSTANCE.getCrudService().findById(TipOfTheNightModel.class, id);
     }
     
 }

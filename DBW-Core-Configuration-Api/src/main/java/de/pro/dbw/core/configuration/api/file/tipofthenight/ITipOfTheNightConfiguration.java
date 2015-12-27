@@ -27,6 +27,9 @@ public interface ITipOfTheNightConfiguration {
     public static final String NAMED_QUERY__NAME__FIND_ALL = "TipOfTheNightModel.findAll"; // NOI18N
     public static final String NAMED_QUERY__QUERY__FIND_ALL = "SELECT t FROM TipOfTheNightModel t"; // NOI18N
     
+    public static final String NAMED_QUERY__NAME__FIND_ALL_IDS = "TipOfTheNightModel.findAllIDs"; // NOI18N
+    public static final String NAMED_QUERY__QUERY__FIND_ALL_IDS = "SELECT t.id FROM TipOfTheNightModel t"; // NOI18N
+    
     public static final String NAMED_QUERY__NAME__FIND_ALL_FOR_NAVIGATION_HISTORY = "TipOfTheNightModel.findAllForNavigationHistory"; // NOI18N
     public static final String NAMED_QUERY__QUERY__FIND_ALL_FOR_NAVIGATION_HISTORY = "SELECT t FROM TipOfTheNightModel t WHERE t.generationTime > :generationTime"; // NOI18N
     

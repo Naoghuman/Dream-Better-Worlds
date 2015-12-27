@@ -64,6 +64,10 @@ public class FileProvider implements IActionConfiguration, IRegisterActions {
         return SpecialMomentProvider.getDefault();
     }
     
+    public TipOfTheNightProvider getTipOfTheNightProvider() {
+        return TipOfTheNightProvider.getDefault();
+    }
+    
     public void register(TabPane tpEditor, TabPane tpNavigationRight) {
         LoggerFacade.INSTANCE.info(this.getClass(), "Register TabPanes tpEditor, tpNavigationRight in FileProvider"); // NOI18N
         

@@ -29,5 +29,6 @@ public interface IDateConverter {
     public static final String PATTERN__GENERATIONTIME = "MM-dd-yyyy  HH:mm:ss"; // NOI18N
     public static final String PATTERN__TIME = "HH:mm:ss"; // NOI18N
     public static final String PATTERN__TIME_IS_EMPTY = "00:00:00"; // NOI18N
-    
+    public static final String PATTERN__TIME_WITH_MILLIS = "HH:mm:ss.SSS"; // NOI18N
+
 }

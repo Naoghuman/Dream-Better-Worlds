@@ -21,7 +21,6 @@ import de.pro.dbw.file.tipofthenight.api.TipOfTheNightModel;
 import de.pro.dbw.core.sql.provider.SqlProvider;
 import de.pro.lib.logger.api.LoggerFacade;
 import de.pro.lib.preferences.api.PreferencesFacade;
-import java.awt.BorderLayout;
 import java.net.URL;
 import java.util.List;
 import java.util.Random;
@@ -35,12 +34,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import org.apache.commons.lang.time.StopWatch;
 
 /**
  *
  * @author PRo
  */
 public class TipOfTheNightChooserPresenter implements Initializable, IPreferencesConfiguration {
+    
+    private static final Random RANDOM = new Random();
     
     @FXML private Button bNext;
     @FXML private Button bRandom;
@@ -50,6 +52,7 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     @FXML private Label lTitle;
     @FXML private TextArea taTipOfTheNight;
     
+    private boolean performanceCheck = Boolean.FALSE;
     private long count = 0L;
     private int index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
     
@@ -110,10 +113,10 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
     
     public void onActionNext() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "On action Next"); // NOI18N
-    
-        final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
-        allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
-        if (allTipsOfTheNight.isEmpty()) {
+        
+        final List<Long> tipsOfTheNightIDs = FXCollections.observableArrayList();
+        tipsOfTheNightIDs.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAllIDs());
+        if (tipsOfTheNightIDs.isEmpty()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
             PreferencesFacade.INSTANCE.putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             this.show(null);
@@ -122,52 +125,97 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         }
         
         ++index;
-        if (index >= allTipsOfTheNight.size()) {
+        if (index >= tipsOfTheNightIDs.size()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
         }
         PreferencesFacade.INSTANCE.putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
         
-        this.show(allTipsOfTheNight.get(index));
+        final long tipOfTheNightModelId = tipsOfTheNightIDs.get(index);
+        final TipOfTheNightModel tipOfTheNightModel = SqlProvider.getDefault().getTipOfTheNightProvider().findByID(tipOfTheNightModelId);
+        this.show(tipOfTheNightModel);
+    }
+
+    public String onActionNextForPerformanceCheck() {
+        LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
+        
+        final StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        
+        performanceCheck = Boolean.TRUE;
+        this.onActionNext();
+        
+        stopWatch.split();
+        final String executedTime = stopWatch.toSplitString();
+        stopWatch.stop();
+        
+        LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
+        
+        return executedTime;
     }
     
     public void onActionRandom() {
         LoggerFacade.INSTANCE.debug(this.getClass(), "On action Random"); // NOI18N
         
-        final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
-        allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
-        if (allTipsOfTheNight.isEmpty()) {
+        final List<Long> tipsOfTheNightIDs = FXCollections.observableArrayList();
+        tipsOfTheNightIDs.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAllIDs());
+        if (tipsOfTheNightIDs.isEmpty()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
             PreferencesFacade.INSTANCE.putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             this.show(null);
             
             return;
         }
-        
-        if (allTipsOfTheNight.size() < 2) {
+
+        if (tipsOfTheNightIDs.size() < 2) {
             this.onActionNext();
             return;
         }
     
         final int oldIndex = index;
-        final Random random = new Random();
         do {
-           index = random.nextInt(allTipsOfTheNight.size()); 
+           index = RANDOM.nextInt(tipsOfTheNightIDs.size()); 
         }
         while (index == oldIndex);
         PreferencesFacade.INSTANCE.putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
         
-        this.show(allTipsOfTheNight.get(index));
+        final long tipOfTheNightModelId = tipsOfTheNightIDs.get(index);
+        final TipOfTheNightModel tipOfTheNightModel = SqlProvider.getDefault().getTipOfTheNightProvider().findByID(tipOfTheNightModelId);
+        this.show(tipOfTheNightModel);
+    }
+
+    public String onActionRandomForPerformanceCheck() {
+        LoggerFacade.INSTANCE.deactivate(Boolean.TRUE);
+        
+        final StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        
+        performanceCheck = Boolean.TRUE;
+        this.onActionRandom();
+        
+        stopWatch.split();
+        final String executedTime = stopWatch.toSplitString();
+        
+        LoggerFacade.INSTANCE.deactivate(Boolean.FALSE);
+        
+        return executedTime;
     }
     
     public void onActionShowAtStart() {
-        LoggerFacade.INSTANCE.debug(this.getClass(),
-                "On action show at start: " + cbShowAtStart.isSelected()); // NOI18N
+        LoggerFacade.INSTANCE.debug(this.getClass(), "On action show at start: " + cbShowAtStart.isSelected()); // NOI18N
     
         PreferencesFacade.INSTANCE.putBoolean(PREF__SHOW_AT_START__TIP_OF_THE_NIGHT, cbShowAtStart.isSelected());
     }
 
     public void prepareForPreview() {
         this.showNoTipOfTheNight();
+    }
+
+    public void prepareForPerformanceCheck() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Prepare for Performance check..."); // NOI18N
+    
+        bNext.setDisable(Boolean.TRUE);
+        bRandom.setDisable(Boolean.TRUE);
+        cbShowAtStart.setDisable(Boolean.TRUE);
     }
     
     private void show(TipOfTheNightModel model) {
@@ -194,30 +242,35 @@ public class TipOfTheNightChooserPresenter implements Initializable, IPreference
         LoggerFacade.INSTANCE.debug(this.getClass(), "Show TipOfTheNight: " + model.getTitle()); // NOI18N
     
         lTitle.setText(model.getTitle());
-        lNumber.setText("Tip " + (index + 1) + " / " + count); // NOI18N
+        lNumber.setText("Nr. " + (index + 1) + " / " + count); // NOI18N
         taTipOfTheNight.setText(model.getText());
         
-        bNext.setDisable(Boolean.FALSE);
-        bRandom.setDisable(Boolean.FALSE);
+        if (!performanceCheck) {
+            bNext.setDisable(Boolean.FALSE);
+            bRandom.setDisable(Boolean.FALSE);
+        }
     }
     
     private void showTipOfTheNightAtStart() {
-        final List<TipOfTheNightModel> allTipsOfTheNight = FXCollections.observableArrayList();
-        allTipsOfTheNight.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAll());
-        if (allTipsOfTheNight.isEmpty()) {
+        final List<Long> tipsOfTheNightIDs = FXCollections.observableArrayList();
+        tipsOfTheNightIDs.addAll(SqlProvider.getDefault().getTipOfTheNightProvider().findAllIDs());
+        
+        if (tipsOfTheNightIDs.isEmpty()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
+            PreferencesFacade.INSTANCE.putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
             this.show(null);
             
             return;
         }
         
-        if (index < 0 || index >= allTipsOfTheNight.size()) {
+        if (index < 0 || index >= tipsOfTheNightIDs.size()) {
             index = PREF__TIP_OF_THE_NIGHT_INDEX__DEFAULT_VALUE;
             PreferencesFacade.INSTANCE.putInt(PREF__TIP_OF_THE_NIGHT_INDEX, index);
         }
         
-        final TipOfTheNightModel model = allTipsOfTheNight.get(index);
-        this.show(model);
+        final long tipOfTheNightModelId = tipsOfTheNightIDs.get(index);
+        final TipOfTheNightModel tipOfTheNightModel = SqlProvider.getDefault().getTipOfTheNightProvider().findByID(tipOfTheNightModelId);
+        this.show(tipOfTheNightModel);
     }
     
 }

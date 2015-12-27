@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,11 +9,67 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="de.pro.dbw.application.performance.entity.tipofthenight.TipOfTheNightPresenter">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.pro.dbw.application.performance.entity.tipofthenight.TipOfTheNightPresenter">
     <stylesheets>
         <URL value="@TipOfTheNight.css" />
     </stylesheets>
-   <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="TipOfTheNight" />
-   </children>
+    <children>
+        <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <tabs>
+                <Tab closable="false" text="Chooser">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="7.0">
+                            <padding>
+                                <Insets bottom="14.0" top="14.0" />
+                            </padding>
+                            <children>
+                                <FlowPane fx:id="fpChooser" style="-fx-background-color: LIGHTBLUE" />
+                                <AnchorPane prefHeight="129.0" style="-fx-background-color: beige;">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" text="#onActionNext()">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="14.0" layoutY="34.0" text="Repeat with" />
+                                        <ComboBox fx:id="cbRepeatForChooserNext" layoutX="16.0" layoutY="51.0" prefWidth="150.0" />
+                                        <Label layoutX="178.0" layoutY="34.0" text="Interval" />
+                                        <ComboBox fx:id="cbIntervalForChooserNext" layoutX="178.0" layoutY="51.0" prefWidth="150.0" />
+                                        <Label layoutX="341.0" layoutY="34.0" text="Time" />
+                                        <Label fx:id="lInfoForChooserNext" layoutX="341.0" layoutY="55.0" text="=" />
+                                        <Button fx:id="bPerformanceCheckForChooserNext" layoutX="16.0" layoutY="90.0" mnemonicParsing="false" onAction="#onActionPerformanceCheckForChooserNext" prefWidth="150.0" text="Performance Check!" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutX="10.0" layoutY="24.0" prefHeight="129.0" style="-fx-background-color: cornsilk;">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" text="#onActionRandom()">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="14.0" layoutY="34.0" text="Repeat with" />
+                                        <ComboBox fx:id="cbRepeatForChooserRandom" layoutX="16.0" layoutY="51.0" prefWidth="150.0" />
+                                        <Label layoutX="178.0" layoutY="34.0" text="Interval" />
+                                        <ComboBox fx:id="cbIntervalForChooserRandom" layoutX="178.0" layoutY="51.0" prefWidth="150.0" />
+                                        <Label layoutX="341.0" layoutY="34.0" text="Time" />
+                                        <Label fx:id="lInfoForChooserRandom" layoutX="341.0" layoutY="55.0" text="=" />
+                                        <Button fx:id="bPerformanceCheckForChooserRandom" layoutX="16.0" layoutY="90.0" mnemonicParsing="false" onAction="#onActionPerformanceCheckForChooserRandom" prefWidth="150.0" text="Performance Check!" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Editor">
+                    <content>
+                        <VBox fx:id="vbEditor" prefHeight="200.0" prefWidth="100.0" spacing="7.0">
+                            <padding>
+                                <Insets bottom="14.0" top="14.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>
