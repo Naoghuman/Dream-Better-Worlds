@@ -7,7 +7,7 @@ Content
 ---
 
 * [Naming convention for the action methods](#NamingConvention)
-* [Register an action with the library Lib-Actions](#RegisterAnAction)
+* [Register an action with the library Lib-Action](#RegisterAnAction)
 * [Define actionkeys](#DefineActionKeys)
 * [Log events in action methods](#LogEventsInActions)
 
@@ -106,7 +106,7 @@ private String registerOnDynamicActionDeleteComment() {
 
 [//]: # (Links)
 [JavaFX]:http://docs.oracle.com/javase/8/javase-clienttechnologies.htm
-[Lib-Actions]:https://github.com/Naoghuman/lib-action
+[Lib-Action]:https://github.com/Naoghuman/lib-action
 [Maven]:http://maven.apache.org/
 
 
