@@ -6,10 +6,20 @@ Coding Rules for Actions (General)
 Content
 ---
 
+* [Library Lib-Action](#LibraryLibAction)
 * [Naming convention for the action methods](#NamingConvention)
-* [Register an action with the library Lib-Action](#RegisterAnAction)
-* [Define actionkeys](#DefineActionKeys)
+* [Register an action](#RegisterAnAction)
+* [Define an action key](#DefineActionKey)
 * [Log events in action methods](#LogEventsInActions)
+
+
+
+Library Lib-Action<a name="LibraryLibAction" />
+---
+
+* [Lib-Action] is a library for `easy` storing and accessing actions (EventHandler<ActionEvent>) 
+  in a [JavaFX] & [Maven] desktop application.
+* For more informatios see the ReadMe in the GitHub project [Lib-Action].
 
 
 
@@ -30,24 +40,18 @@ Naming convention for the action methods<a name="NamingConvention" />
 * onActionShowXy()
 * onActionRefreshXy()
 
-**Important:**
-
-All actions have there equivalent in the registerOnActionXy methods (see also next section).
-
+Every `onActionXy()` method have there equivalent in the `registerOnActionXy()` 
+method (see also next section).
 
 
-Register an action with the library [Lib-Action]<a name="RegisterAnAction" />
+Register an action<a name="RegisterAnAction" />
 ---
-
-* Lib-Action is a library for `easy` storing and accessing actions (EventHandler<ActionEvent>) in a [JavaFX] & [Maven] desktop application.
-* For more informatios see [Lib-Action].
-
 
 Example
 ```java
 private void registerOnActionCreateNewDream() {
 
-    ActionFacade.getDefault().register(
+    ActionFacade.INSTANCE.register(
             ACTION__CREATE_NEW_DREAM,
             (ActionEvent ae) -> {
                 this.show();
@@ -55,12 +59,51 @@ private void registerOnActionCreateNewDream() {
 }
 ```
 
+With the interface `IRegisterActions` the handling to register all actions can 
+be simplified:
+
+Example
+```java
+public final class DreamProvider implements ..., IRegisterActions {
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in DreamProvider"); // NOI18N
+        
+        this.registerOnActionCreateNewDream();
+        this.registerOnActionCreateNewFastDream();
+        this.registerOnActionOpenDreamFromNavigation();
+    }
+}
+```
+
+Example
+```java
+public class FileProvider implements ..., IRegisterActions {
+
+    @Override
+    public void registerActions() {
+        LoggerFacade.INSTANCE.debug(this.getClass(), "Register actions in FileProvider"); // NOI18N
+        
+        this.registerActionRemoveFileFromEditor();
+        this.registerActionSaveAllChangedFiles();
+        
+        DreamProvider.getDefault().registerActions();
+        DreammapProvider.getDefault().registerActions();
+        HelpProvider.getDefault().registerActions();
+        ReflectionProvider.getDefault().registerActions();
+        TipOfTheNightProvider.getDefault().registerActions();
+    }
+}
+```
 
 
-Define actionkeys<a name="DefineActionKeys" />
+
+Define an action key<a name="DefineActionKey" />
 ---
 
-Actionkeys are defined as String constants in the interface `IActionConfiguration` in the module `DBW-Core-Configuration-Api`.
+Action keys are defined as `String` constants in the interface `IActionConfiguration` 
+in the module `DBW-Core-Configuration-Api`.
 
 
 Example
@@ -70,6 +113,7 @@ public interface IActionConfiguration {
     public static final String ACTION__CREATE_NEW_DREAM = "ACTION__CREATE_NEW_DREAM"; // NOI18N
     public static final String ACTION__CREATE_NEW_FAST_DREAM = "ACTION__CREATE_NEW_FAST_DREAM"; // NOI18N
     public static final String ACTION__CREATE_NEW_FILE__REFLECTION = "ACTION__CREATE_NEW_FILE__REFLECTION"; // NOI18N
+
     public static final String ACTION__EDIT_FILE__REFLECTION = "ACTION__EDIT_FILE__REFLECTION"; // NOI18N
     ...
 }
@@ -80,10 +124,10 @@ public interface IActionConfiguration {
 Log events in action methods<a name="LogEventsInActions" />
 ---
 
-* Every from the following methods have a logger message in DEBUG mode.
-* For onActionXy() the message format is the same like the method name.
-* For registerActions() is the message format: "Register actions in Xy"
-* For registerOnDynamicActionXy is  the message format: "Register on dynamic action "
+Every from the following methods have a logger message in `DEBUG` mode.
+* For `onActionXy()` the message format is the same like the method name.
+* For `registerActions()` the message format is: "Register actions in Xy"
+* For `registerOnDynamicActionXy()` the message format is: "Register on dynamic action "
 
 
 Example

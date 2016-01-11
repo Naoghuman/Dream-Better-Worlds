@@ -14,6 +14,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.3.0`.
 
 
 #### Enhancement
+#112 [Documents] Extend the document CodingRulesForActions.md with new example.
 #106 [TipOfTheNight] Add number to the shown tip in TipOfTheNightChooser.
 #104 [Performance] Integrate TipOfTheNightChooser into the tab for the entity 'TipOfTheNight'.
 
@@ -38,7 +39,6 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.3.0`.
 
 
 [//]: # (Issues which will be integrated in this release)
-#112 [Documents] Extend the document CodingRulesForActions.md with new example.
 #107 [Documents] Create new document TestdataGeneration.md.
 #103 [Screenshots] Add screenshots from the application into the ReadMe.md.
 #102 [Documents] Add additional information in 'HowToRelease.md'.
