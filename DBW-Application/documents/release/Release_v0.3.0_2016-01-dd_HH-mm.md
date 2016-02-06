@@ -39,7 +39,7 @@ Welcome to `Dream-Better-Worlds` with the new pre-release `v0.3.0`.
 
 
 [//]: # (Issues which will be integrated in this release)
-#114 [Dependencies] Update the dependencies from lib-logger and lib-action.
+#114 [Dependencies] Update the dependencies from lib-logger and lib-action. 
 #107 [Documents] Create new document TestdataGeneration.md.
 #103 [Screenshots] Add screenshots from the application into the ReadMe.md.
 #102 [Documents] Add additional information in 'HowToRelease.md'.
